@@ -1,3 +1,7 @@
-@import "./base/reset";
-@import "./base/font";
-@import "./base/animations";
+@import "./base/_reset";
+@import "./base/_font";
+@import "./base/_animations";
+
+* {
+  font-family: 'Noto Sans KR', sans-serif;
+}
