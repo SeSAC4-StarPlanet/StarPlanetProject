@@ -8,6 +8,10 @@ import $ from "jquery";
 // scss import
 import "./landingPage.scss";
 
+// first, second page
+import FirstPage from "../../components/LandingPage/FirstPage/FirstPage";
+import SecondPage from "../../components/LandingPage/SecondPage/SecondPage";
+
 export const LandingPage = () => {
   $(() => {
     // 여기서 에러 발생할 수 있음. 해결방법 하단에 적어놨음.
@@ -34,8 +38,12 @@ export const LandingPage = () => {
 
   return (
     <div id="fullpage">
-      <div className="section">first page</div>
-      <div className="section">second page</div>
+      <div className="section">
+        <FirstPage />
+      </div>
+      <div className="section">
+        <SecondPage />
+      </div>
     </div>
   );
 };
