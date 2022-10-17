@@ -24,7 +24,6 @@ app.get('/', (req, res) => {
     res.send('Hello Express!');
 });
 
-
 // db.once('open', function () {
 //     console.log('DB Connected');
 // });
