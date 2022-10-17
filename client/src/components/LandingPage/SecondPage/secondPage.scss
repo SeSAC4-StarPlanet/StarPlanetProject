@@ -4,6 +4,42 @@
   background-size: cover;
   background-position: center;
 
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+
+  font-family: 'Noto Sans KR', sans-serif;
+
+  .second_page_content_wrapper {
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+
+    .second_page_text_wrapper {
+      color: #ffffff;
+      display: inline-block;
+      padding-right: 64px;
+
+      h2 {
+        margin: 0;
+        font-size: 36px;
+      }
+      .second_page_img_wrapper {
+      }
+      p {
+        line-height: 24px;
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+    .second_page_btn_wrapper {
+      color: #000;
+      display: inline-block;
+      vertical-align: text-bottom;
+    }
+  }
+}
+
+.fp-scroller {
+  height: 100%;
 }
