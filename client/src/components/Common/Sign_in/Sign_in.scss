@@ -1,0 +1,29 @@
+.Sign_in {
+  display: flex;
+  width: 40vw;
+  height: 50vh;
+  background-color: black;
+  opacity: 0.5;
+  border-radius: 15px 15px / 15px 15px;
+  margin: 0 atuo;
+  justify-content: center;
+}
+
+.Login_txt_box {
+  display: flex;
+  width: 40vw;
+  height: 10vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.Sign_in_section {
+  display: inline-block;
+  width: 40vw;
+  height: 20vh;
+}
+
+.Login_txt {
+  color: #fff;
+  font-size: 35px;
+}
