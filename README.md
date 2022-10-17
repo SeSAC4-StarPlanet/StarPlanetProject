@@ -19,18 +19,17 @@
 │   ├── .package-lock.json
 │   └── .package.json
 ├──server
-     |-- config
-     |-- node_modules
-     |-- package-lock.json
-     |-- package.json
-     `-- src
-          |-- controllers
-          |-- index.js
-          |-- middlewares
-          |-- models
-          |-- routes
-          `-- services
-
+│   ├── node_modules
+│   ├── config
+│   ├── src
+│   │   ├── controllers
+│   │   ├── middlewares
+│   │   ├── models
+│   │   ├── routes
+│   │   ├── services
+│   │   └── index.js
+│   ├── .package-lock.json
+│   └── .package.json
 └── README.md
 ``` 
 <br>
