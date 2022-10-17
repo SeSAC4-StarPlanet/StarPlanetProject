@@ -5,9 +5,15 @@ import "./styles/common.scss"
 import reportWebVitals from './reportWebVitals';
 import { LandingPage } from './pages/LandingPage/LandingPage';
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <>
-  <LandingPage/>
+    <LandingPage />
+    <Input_pw />
+    <Input_id />
+    <Sign_in />
+    <Login_Btn />
+    <Find_txt />
   </>
 );
 
