@@ -5,6 +5,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import  LandingPage  from "../../pages/LandingPage/LandingPage";
 import Sign_in from "../Common/Sign_in/Sign_in";
 
+// test component
+import JinseTest from "../Test/JinseTest/JinseTest";
+import SionTest from "../Test/SionTest/SionTest";
+
 const router = createBrowserRouter([
     {
       path: "/",
@@ -13,7 +17,16 @@ const router = createBrowserRouter([
     {     
     path: "/login",
     element: <Sign_in/>,
-}
+    },
+    {     
+    path: "/sionTest",
+    element: <SionTest/>,
+    },
+    {     
+    path: "/jinseTest",
+    element: <JinseTest/>,
+    },
+    
 ]);
 
 const Router = () => {
