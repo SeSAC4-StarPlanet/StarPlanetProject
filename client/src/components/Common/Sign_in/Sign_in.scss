@@ -1,29 +1,60 @@
-.Sign_in {
+.Sign_in_wrapper {
   display: flex;
-  width: 40vw;
-  height: 50vh;
+  flex-direction: column;
+  width: 600px;
+  height: 900px;
   background-color: black;
-  opacity: 0.5;
-  border-radius: 15px 15px / 15px 15px;
-  margin: 0 atuo;
-  justify-content: center;
+  align-items: center;
 }
-
-.Login_txt_box {
+.Sign_in_logo_wrapper {
   display: flex;
-  width: 40vw;
-  height: 10vh;
   align-items: center;
   justify-content: center;
+  width: 520px;
+  height: 200px;
+  img {
+    width: 200px;
+  }
 }
 
 .Sign_in_section {
   display: inline-block;
-  width: 40vw;
-  height: 20vh;
+  width: 520px;
+  height: 520px;
+  background-color: rgba(147, 147, 147, 0.1);
+}
+
+.Sign_in {
+  display: flex;
+  width: 520px;
+  height: 520px;
+  background: rgba(147, 147, 147, 0.1);
+  border-radius: 15px 15px / 15px 15px;
+  margin: 0 atuo;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Login_txt_box {
+  display: flex;
+  width: 392px;
+  height: 88px;
+  justify-content: center;
+  align-items: center;
 }
 
 .Login_txt {
   color: #fff;
   font-size: 35px;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.Sign_in_bottom {
+  display: flex;
+  color: #fff;
+  margin: 20px;
+  a {
+    margin: 0px 0px 0px 10px;
+    font-size: 13px;
+  }
 }

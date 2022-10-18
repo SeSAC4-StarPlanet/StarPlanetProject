@@ -1,0 +1,38 @@
+.input_pw_section {
+  display: inline-block;
+  width: 392px;
+  height: 88px;
+  margin: 20px 0px 50px 0px;
+}
+
+.input_pw_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 392px;
+  height: 88px;
+  background: rgba(0, 0, 0, 0);
+  border-radius: 15px 15px / 15px 15px;
+  border: #fff solid 2px;
+  padding: 10px;
+  box-sizing: border-box;
+  margin: 0px 0px 50px 0px;
+}
+
+.Input_pw {
+  background: rgba(0, 0, 0, 0);
+  border: none;
+  width: 300px;
+  padding: 10px;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 20px;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.input_pw_icon {
+  display: inline-block;
+  width: 20px;
+  margin: 10px;
+  color: white;
+}

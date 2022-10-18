@@ -1,0 +1,22 @@
+.Find_section {
+  display: inline-block;
+  img {
+    width: 30px;
+    height: 10px;
+  }
+}
+
+.Find_container {
+  display: flex;
+  width: 392px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.Find {
+  border: none;
+  background-color: none;
+  color: #fff;
+  font-family: "Noto Sans KR", sans-serif;
+}
