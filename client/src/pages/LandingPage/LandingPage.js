@@ -13,7 +13,7 @@ import image from "../../assets/img/LandingPage/fullimage.png";
 import FirstPage from "../../components/LandingPage/FirstPage/FirstPage";
 import SecondPage from "../../components/LandingPage/SecondPage/SecondPage";
 
-export const LandingPage = () => {
+const LandingPage = () => {
   useEffect(() => {
     $(() => {
       $("#fullpage").fullpage({
@@ -50,3 +50,5 @@ export const LandingPage = () => {
     </div>
   );
 };
+
+export default LandingPage;
