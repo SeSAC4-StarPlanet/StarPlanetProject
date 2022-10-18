@@ -1,19 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import "./styles/common.scss"
-import reportWebVitals from './reportWebVitals';
-import { LandingPage } from './pages/LandingPage/LandingPage';
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import "./styles/common.scss";
+import reportWebVitals from "./reportWebVitals";
+import { LandingPage } from "./pages/LandingPage/LandingPage";
+import Sign_in from "./components/Common/Sign_in/Sign_in";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <>
-    <LandingPage />
-    <Input_pw />
-    <Input_id />
+    {/* <LandingPage /> */}
     <Sign_in />
-    <Login_Btn />
-    <Find_txt />
   </>
 );
 
