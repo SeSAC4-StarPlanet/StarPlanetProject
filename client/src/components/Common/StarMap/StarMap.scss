@@ -1,5 +1,11 @@
-#c {
+.starMap_wrap {
+  position: absolute;
   width: 100%;
   height: 100%;
-  display: block;
+  #starMap {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+  }
 }
