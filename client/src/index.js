@@ -3,14 +3,16 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import "./styles/common.scss";
 import reportWebVitals from "./reportWebVitals";
-import { LandingPage } from "./pages/LandingPage/LandingPage";
+import LandingPage from "./pages/LandingPage/LandingPage";
 import Sign_in from "./components/Common/Sign_in/Sign_in";
+import Router from "./components/Router/Router";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <>
-    <LandingPage />
+    <Router />
     {/* <Sign_in /> */}
   </>
 );
