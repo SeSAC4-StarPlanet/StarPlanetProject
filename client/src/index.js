@@ -4,11 +4,14 @@ import "./index.css";
 import "./styles/common.scss";
 import reportWebVitals from "./reportWebVitals";
 import { LandingPage } from "./pages/LandingPage/LandingPage";
+import Sign_in from "./components/Common/Sign_in/Sign_in";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <>
-    <LandingPage />
+    {/* <LandingPage /> */}
+    <Sign_in />
   </>
 );
 
