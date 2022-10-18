@@ -5,7 +5,10 @@ import "./styles/common.scss";
 import reportWebVitals from "./reportWebVitals";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import Sign_in from "./components/Common/Sign_in/Sign_in";
+import Sign_up from "./components/Common/Sign_up/Sign_up";
+
 import Router from "./components/Router/Router";
+
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -14,6 +17,7 @@ root.render(
   <>
     <Router />
     {/* <Sign_in /> */}
+
   </>
 );
 

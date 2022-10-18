@@ -1,4 +1,4 @@
-.Sign_in_wrapper {
+.Sign_up_wrapper {
   display: flex;
   flex-direction: column;
   width: 600px;
@@ -6,7 +6,7 @@
   background-color: black;
   align-items: center;
 }
-.Sign_in_logo_wrapper {
+.Sign_up_logo_wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,25 +17,25 @@
   }
 }
 
-.Sign_in_section {
+.Sign_up_section {
   display: inline-block;
   width: 600px;
-  height: 550px;
+  height: 660px;
   background-color: rgba(147, 147, 147, 0.1);
 }
 
-.Sign_in {
+.Sign_up {
   display: flex;
   width: 600px;
   height: 100%;
-  background: blue;
+  background: red;
   border-radius: 15px 15px / 15px 15px;
   margin: 0 atuo;
   flex-direction: column;
   align-items: center;
 }
 
-.Sign_in_bottom {
+.Sign_up_bottom {
   display: flex;
   color: #fff;
   margin: 20px;
@@ -43,14 +43,4 @@
     margin: 0px 0px 0px 10px;
     font-size: 13px;
   }
-}
-
-.Sign_in_button_box {
-  margin: 5px 0px 0px 0px;
-}
-
-.Sign_in_error {
-  text-align: center;
-  color: red;
-  font-size: 18px;
 }

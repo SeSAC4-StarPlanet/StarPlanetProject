@@ -1,36 +1,38 @@
-.input_id_section {
+.Sign_up_input_section {
   display: inline-block;
   width: 392px;
-  height: 88px;
+  height: 58px;
+  margin: 5px;
 }
 
-.input_id_container {
+.Sign_up_input_container {
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 392px;
-  height: 88px;
+  height: 58px;
   background: rgba(0, 0, 0, 0);
   border-radius: 15px 15px / 15px 15px;
   border: #fff solid 2px;
-  padding: 10px;
+  padding: 15px;
   box-sizing: border-box;
 }
 
-.Input_id {
+.Sign_up_input {
   background: rgba(0, 0, 0, 0);
   border: none;
   width: 300px;
   padding: 10px;
   box-sizing: border-box;
   color: #fff;
-  font-size: 20px;
+  font-size: 15px;
   font-family: "Noto Sans KR", sans-serif;
 }
 
-.input_id_icon {
+.Sign_up_input_logo {
   display: inline-block;
-  width: 20px;
+  width: 40px;
   margin: 10px;
   color: #fff;
+  font-size: 10px;
 }
