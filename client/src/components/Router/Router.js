@@ -25,8 +25,7 @@ const router = createBrowserRouter([
     {     
     path: "/jinseTest",
     element: <JinseTest/>,
-    },
-    
+    }
 ]);
 
 const Router = () => {
