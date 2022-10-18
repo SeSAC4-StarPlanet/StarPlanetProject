@@ -10,8 +10,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <>
-    {/* <LandingPage /> */}
-    <Sign_in />
+    <LandingPage />
+    {/* <Sign_in /> */}
   </>
 );
 
