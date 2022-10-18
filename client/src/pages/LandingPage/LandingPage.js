@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 // fullpage library 설치
 import "fullpage.js/vendors/scrolloverflow";
@@ -8,36 +8,39 @@ import $ from "jquery";
 // scss import
 import "./landingPage.scss";
 
+import image from "../../assets/img/LandingPage/fullimage.png";
 // first, second page
 import FirstPage from "../../components/LandingPage/FirstPage/FirstPage";
 import SecondPage from "../../components/LandingPage/SecondPage/SecondPage";
 
-export const LandingPage = () => {
-  $(() => {
-    // 여기서 에러 발생할 수 있음. 해결방법 하단에 적어놨음.
-    $("#fullpage").fullpage({
-      scrollOverflow: true,
-      navigation: true,
-      scrollHorizontally: true,
-      showActiveTooltip: true,
-      scrollingSpeed: 800,
-      fitToSection: true,
-      fitToSectionDelay: 1200,
-      // 화면별 전환
-      afterLoad: function(index, anchorLink) {
-        if (anchorLink === 1) {
-          // 화면별 넣고 싶은 이벤트
-        } else if (anchorLink === 2) {
-          // 화면별 넣고 싶은 이벤트
-        } else if (anchorLink === 3) {
-          // 화면별 넣고 싶은 이벤트
+const LandingPage = () => {
+  useEffect(() => {
+    $(() => {
+      $("#fullpage").fullpage({
+        scrollOverflow: true,
+        navigation: true,
+        // scrollHorizontally: true,
+        // showActiveTooltip: true,
+        scrollingSpeed: 600,
+        // fitToSection: true,
+        // fitToSectionDelay: 1200,
+        // 화면별 전환
+        afterLoad: function(index, anchorLink) {
+          if (anchorLink === 1) {
+            // 화면별 넣고 싶은 이벤트
+          } else if (anchorLink === 2) {
+            // 화면별 넣고 싶은 이벤트
+          } else if (anchorLink === 3) {
+            // 화면별 넣고 싶은 이벤트
+          }
         }
-      }
+      });
     });
   });
 
   return (
     <div id="fullpage">
+      <img className="background" src={image} />
       <div className="section">
         <FirstPage />
       </div>
@@ -47,3 +50,5 @@ export const LandingPage = () => {
     </div>
   );
 };
+
+export default LandingPage;
