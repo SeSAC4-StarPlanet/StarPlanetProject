@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
-
-const iframePart = () => {
-  return {
-    __html: '<iframe src="/" width="100%" height="100%"></iframe>'
-  };
-};
+// import HTML from "./"
 
 const StarWarp = () => {
-  return <div dangerouslySetInnerHTML={iframePart} />;
+  var __html = require("./index.html");
+  var template = { __html: __html };
+  return <div dangerouslySetInnerHTML={template} />;
 };
 
 export default StarWarp;
