@@ -7,7 +7,7 @@ const JinseTest = () => {
     <div>
       <StarMap />
       <Sign_in />
-      {/* test */}
+      {/* 주석주석 */}
     </div>
   );
 };
