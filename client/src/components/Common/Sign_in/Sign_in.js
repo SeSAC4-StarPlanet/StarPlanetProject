@@ -2,22 +2,23 @@ import "./Sign_in.scss";
 import Button from "../../LandingPage/Button/Button";
 import Find_txt from "./Find/Find_txt";
 import Sign_in_input from "../Sign_in/Sign_in_input/Sign_in_input";
-import Main_Logo from "../../../assets/img/LandingPage/logo_main.svg";
 import Sign_in_header from "./Sign_in_header/Sign_in_header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 
-function Sign_in() {
+const Sign_in = () => {
   return (
     <div className="Sign_in_wrapper">
       <div className="Sign_in_section">
         <div className="Sign_in">
           <Sign_in_header text={"로그인"} />
           <Sign_in_input
+            type={"text"}
             text={<FontAwesomeIcon icon={faUser} />}
             placeholder={"아이디"}
           />
           <Sign_in_input
+            type={"password"}
             text={<FontAwesomeIcon icon={faKey} />}
             placeholder={"비밀번호"}
           />
@@ -38,6 +39,6 @@ function Sign_in() {
       {/* -----------------회원가입안내글----------------- */}
     </div>
   );
-}
+};
 
 export default Sign_in;
