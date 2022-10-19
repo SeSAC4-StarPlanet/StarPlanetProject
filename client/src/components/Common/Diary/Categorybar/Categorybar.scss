@@ -1,0 +1,26 @@
+.Categorybar_box {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 600px;
+  border: rgb(212, 212, 212) solid 1px;
+  margin: 0px;
+  border-radius: 0px 0px 0px 15px / 0px 0px 0px 15px;
+}
+.Category {
+  display: flex;
+  margin: 8px 0px 0px 10px;
+  box-sizing: border-box;
+  font-size: 13px;
+}
+
+.Category_icon {
+  margin: 5px;
+  color: rgb(12, 24, 108);
+}
+
+.Category_title {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
