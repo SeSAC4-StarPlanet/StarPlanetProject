@@ -10,11 +10,6 @@ import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 function Sign_in() {
   return (
     <div className="Sign_in_wrapper">
-      <div className="Sign_in_logo_wrapper">
-        <img src={Main_Logo} />
-      </div>
-      {/*-----------------로고-----------------*/}
-
       <div className="Sign_in_section">
         <div className="Sign_in">
           <Sign_in_header text={"로그인"} />

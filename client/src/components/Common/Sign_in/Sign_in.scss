@@ -1,34 +1,26 @@
 .Sign_in_wrapper {
   display: flex;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 30%);
   flex-direction: column;
-  width: 600px;
-  height: 900px;
-  background-color: black;
+  width: 50vw;
+  height: 65vh;
   align-items: center;
-}
-.Sign_in_logo_wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 520px;
-  height: 200px;
-  img {
-    width: 200px;
-  }
 }
 
 .Sign_in_section {
   display: inline-block;
-  width: 600px;
+  width: 500px;
   height: 550px;
   background-color: rgba(147, 147, 147, 0.1);
 }
 
 .Sign_in {
   display: flex;
-  width: 600px;
+  width: 500px;
   height: 100%;
-  background: blue;
+  background: rgba(93, 93, 93, 0.2);
   border-radius: 15px 15px / 15px 15px;
   margin: 0 atuo;
   flex-direction: column;
