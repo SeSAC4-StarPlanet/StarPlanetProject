@@ -1,5 +1,6 @@
 import React from "react";
-import "./jinseTest.scss";
+import "./Diary_main.scss";
+
 import Diary_content from "../../Common/Diary/Diary_content/Diary_content";
 import Categorybar from "../../Common/Diary/Categorybar/Categorybar";
 import Planet_name from "../../Common/Diary/Planet_name/Planet_name";
@@ -11,12 +12,12 @@ import {
   faBook,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Diary_main = () => {
+const Diary_main = ({ planetTitle }) => {
   return (
-    <div>
+    <div className="Main_wrapper">
       <div className="Main_container_top">
         <div className="Planet_name_box">
-          <Planet_name title={"행성이름"} />
+          <Planet_name title={planetTitle} />
         </div>
         <div className="Modify_title_box">
           <Planet_name title={"2022"} />
@@ -43,48 +44,52 @@ const Diary_main = () => {
         </div>
         <div className="Main_box">
           <div className="Diary_main_box">
-            <Diary_content
-              title={"2022-10-18 오늘 할 일"}
-              content1={"코딩공부하기"}
-              content2={"코딩공부하기"}
-              content3={"코딩공부하기"}
-              content4={"코딩공부하기"}
-            />
-            <Diary_content
-              title={"2022-10-18 오늘 할 일"}
-              content1={"코딩공부하기"}
-              content2={"코딩공부하기"}
-              content3={"코딩공부하기"}
-              content4={"코딩공부하기"}
-            />
-            <Diary_content
-              title={"2022-10-18 오늘 할 일"}
-              content1={"코딩공부하기"}
-              content2={"코딩공부하기"}
-              content3={"코딩공부하기"}
-              content4={"코딩공부하기"}
-            />
-            <Diary_content
-              title={"2022-10-18 오늘 할 일"}
-              content1={"코딩공부하기"}
-              content2={"코딩공부하기"}
-              content3={"코딩공부하기"}
-              content4={"코딩공부하기"}
-            />
-            <Diary_content
-              title={"2022-10-18 오늘 할 일"}
-              content1={"코딩공부하기"}
-              content2={"코딩공부하기"}
-              content3={"코딩공부하기"}
-              content4={"코딩공부하기"}
-            />
-            <Diary_content
-              title={"2022-10-18 오늘 할 일"}
-              content1={"코딩공부하기"}
-              content2={"코딩공부하기"}
-              content3={"코딩공부하기"}
-              content4={"코딩공부하기"}
-            />
+            <div>
+              <Diary_content
+                title={"2022-10-18 오늘 할 일"}
+                content1={"코딩공부하기"}
+                content2={"코딩공부하기"}
+                content3={"코딩공부하기"}
+                content4={"코딩공부하기"}
+              />
+              <Diary_content
+                title={"2022-10-18 오늘 할 일"}
+                content1={"코딩공부하기"}
+                content2={"코딩공부하기"}
+                content3={"코딩공부하기"}
+                content4={"코딩공부하기"}
+              />
+              <Diary_content
+                title={"2022-10-18 오늘 할 일"}
+                content1={"코딩공부하기"}
+                content2={"코딩공부하기"}
+                content3={"코딩공부하기"}
+                content4={"코딩공부하기"}
+              />
+            </div>
+            <div>
+              <Diary_content
+                title={"2022-10-18 오늘 할 일"}
+                content1={"코딩공부하기"}
+                content2={"코딩공부하기"}
+                content3={"코딩공부하기"}
+                content4={"코딩공부하기"}
+              />
+              <Diary_content
+                title={"2022-10-18 오늘 할 일"}
+                content1={"코딩공부하기"}
+                content2={"코딩공부하기"}
+                content3={"코딩공부하기"}
+                content4={"코딩공부하기"}
+              />
+              <Diary_content
+                title={"2022-10-18 오늘 할 일"}
+                content1={"코딩공부하기"}
+                content2={"코딩공부하기"}
+                content3={"코딩공부하기"}
+                content4={"코딩공부하기"}
+              />
+            </div>
           </div>
         </div>
       </div>
