@@ -1,3 +1,9 @@
+.Main_wrapper {
+  display: inline-block;
+  background-color: #fff;
+  position: absolute;
+}
+
 .Main_container {
   display: flex;
   width: 100%;
@@ -6,50 +12,51 @@
 }
 .Main_box {
   display: flex;
-  width: 800px;
-  height: 600px;
-  border: rgb(212, 212, 212) solid 1px;
-  background-color: #fff;
+  width: 902px;
+  max-width: 902px;
+  // border: rgb(212, 212, 212) solid 1px;
   border-radius: 0px 0px 15px 0px / 0px 0px 15px 0px;
+  border-left: 1px solid #f4f3f3;
 }
 
 .Diary_main_box {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  height: 600px;
   align-items: center;
 }
 
 .Categorybar_box {
   display: flex;
-  height: 600px;
 }
 
 .Main_container_top {
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 71px;
   justify-content: center;
 }
 
 .Planet_name_box {
   display: flex;
-  height: 50px;
   width: 200px;
-  border: rgb(212, 212, 212) solid 1px;
   border-radius: 15px 0px 0px 0px / 15px 0px 0px 0px;
   justify-content: center;
   align-items: center;
+  border-bottom: 1px solid #f4f3f3;
+  border-right: 1px solid #f4f3f3;
 }
 
 .Modify_title_box {
   display: flex;
-  height: 50px;
-  width: 800px;
-  border: rgb(212, 212, 212) solid 1px;
+  width: 902px;
   border-radius: 0px 15px 0px 0px / 0px 15px 0px 0px;
   align-items: center;
   padding: 0px 0px 0px 20px;
   box-sizing: border-box;
+  border-bottom: 1px solid #f4f3f3;
+}
+
+.Main_wrapper {
+  border-radius: 15px;
 }
