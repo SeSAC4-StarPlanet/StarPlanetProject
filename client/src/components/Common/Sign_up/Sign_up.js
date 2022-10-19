@@ -3,15 +3,11 @@ import Sign_up_input from "./Sign_up_input/Sign_up_input";
 import Main_Logo from "../../../assets/img/LandingPage/logo_main.svg";
 import Sign_up_header from "./Sign_up_header/Sign_up_header";
 import Button from "../../LandingPage/Button/Button";
+import "../Sign_in/Sign_in.scss";
 
 function Sign_up() {
   return (
     <div className="Sign_up_wrapper">
-      <div className="Sign_up_logo_wrapper">
-        <img src={Main_Logo} />
-      </div>
-      {/*-----------------로고-----------------*/}
-
       <div className="Sign_up_section">
         <div className="Sign_up">
           <Sign_up_header text={"회원가입"} />
@@ -21,7 +17,9 @@ function Sign_up() {
           <Sign_up_input text={"E-mail"} />
           <Sign_up_input text={"Tel"} />
           <Sign_up_input text={"NickName"} />
-          <Button text={"회원가입"} />
+          <div className="Sign_in_button_box">
+            <Button text={"회원가입"} />
+          </div>
         </div>
       </div>
     </div>
