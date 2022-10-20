@@ -3,8 +3,19 @@
   background-color: #fff;
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 55%;
   transform: translate(-50%, -50%);
+  border-radius: 15px;
+
+  .mainArrow {
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    top: -14px;
+    transform: rotate(45deg);
+  }
 }
 
 .Main_container {
@@ -34,6 +45,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  width: 200px;
+  margin: 0px;
 }
 
 .Main_container_top {
@@ -58,11 +71,8 @@
   width: 902px;
   border-radius: 0px 15px 0px 0px / 0px 15px 0px 0px;
   align-items: center;
-  padding: 0px 0px 0px 20px;
+  padding: 0px 62px;
   box-sizing: border-box;
   border-bottom: 1px solid #f4f3f3;
-}
-
-.Main_wrapper {
-  border-radius: 15px;
+  justify-content: space-between;
 }
