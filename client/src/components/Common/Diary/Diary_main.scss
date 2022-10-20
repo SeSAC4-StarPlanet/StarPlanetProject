@@ -30,7 +30,10 @@
 }
 
 .Categorybar_box {
+  justify-content: space-between;
+  position: relative;
   display: flex;
+  flex-direction: column;
 }
 
 .Main_container_top {

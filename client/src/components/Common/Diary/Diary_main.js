@@ -12,6 +12,8 @@ import {
   faBook,
 } from "@fortawesome/free-solid-svg-icons";
 import Category from "./Category/Category";
+import MemberBox from "./MemberBox/MemberBox";
+
 const Diary_main = ({ planetTitle }) => {
   return (
     <div className="Main_wrapper">
@@ -25,23 +27,12 @@ const Diary_main = ({ planetTitle }) => {
       </div>
       <div className="Main_container">
         <div className="Categorybar_box">
-          <Category />
-          {/* <Categorybar
-            icon={<FontAwesomeIcon icon={faImage} />}
-            category={"사진첩"}
-          />
-          <Categorybar
-            icon={<FontAwesomeIcon icon={faCalendarDays} />}
-            category={"일정"}
-          />
-          <Categorybar
-            icon={<FontAwesomeIcon icon={faBookmark} />}
-            category={"북마크"}
-          />
-          <Categorybar
-            icon={<FontAwesomeIcon icon={faBook} />}
-            category={"다이어리"}
-          /> */}
+          <div>
+            <Category />
+          </div>
+          <div>
+            <MemberBox />
+          </div>
         </div>
         <div className="Main_box">
           <div className="Diary_main_box">
