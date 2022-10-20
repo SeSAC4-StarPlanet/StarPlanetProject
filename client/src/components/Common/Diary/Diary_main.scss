@@ -3,9 +3,19 @@
   background-color: #fff;
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 55%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
+
+  .mainArrow {
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    top: -14px;
+    transform: rotate(45deg);
+  }
 }
 
 .Main_container {
@@ -35,6 +45,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  width: 200px;
+  margin: 0px;
 }
 
 .Main_container_top {

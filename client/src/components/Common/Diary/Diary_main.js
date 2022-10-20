@@ -11,6 +11,7 @@ import { FaPen } from "react-icons/fa";
 const Diary_main = ({ planetTitle }) => {
   return (
     <div className="Main_wrapper">
+      <div className="mainArrow" />
       <div className="Main_container_top">
         <div className="Planet_name_box">
           <Planet_name title={planetTitle} />
