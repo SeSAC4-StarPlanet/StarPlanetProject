@@ -10,6 +10,7 @@ import Collapse from "@mui/material/Collapse";
 
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
+
 // 아이콘
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -41,7 +42,6 @@ const Category = ({}) => {
         width: "100%",
         maxWidth: 360,
         bgcolor: "background.paper",
-        "& MuiListItemButton-root": { transition: "none" },
       }}
       component="nav"
     >
@@ -51,7 +51,11 @@ const Category = ({}) => {
           <FontAwesomeIcon icon={faImage} />
         </ListItemIcon>
         <ListItemText
-          primaryTypographyProps={{ fontSize: "15px", fontWeight: 500 }}
+          primaryTypographyProps={{
+            color: "#0D0783",
+            fontSize: "15px",
+            fontWeight: 500,
+          }}
           primary="사진첩"
         />
       </ListItemButton>
@@ -61,7 +65,11 @@ const Category = ({}) => {
           <FontAwesomeIcon icon={faCalendarDays} />
         </ListItemIcon>
         <ListItemText
-          primaryTypographyProps={{ fontSize: "15px", fontWeight: 500 }}
+          primaryTypographyProps={{
+            color: "#0D0783",
+            fontSize: "15px",
+            fontWeight: 500,
+          }}
           primary="일정"
         />
       </ListItemButton>
@@ -71,7 +79,11 @@ const Category = ({}) => {
           <FontAwesomeIcon icon={faBookmark} />
         </ListItemIcon>
         <ListItemText
-          primaryTypographyProps={{ fontSize: "15px", fontWeight: 500 }}
+          primaryTypographyProps={{
+            color: "#0D0783",
+            fontSize: "15px",
+            fontWeight: 500,
+          }}
           primary="북마크"
         />
       </ListItemButton>
@@ -81,7 +93,11 @@ const Category = ({}) => {
           <FontAwesomeIcon icon={faBook} />
         </ListItemIcon>
         <ListItemText
-          primaryTypographyProps={{ fontSize: "15px", fontWeight: 500 }}
+          primaryTypographyProps={{
+            color: "#0D0783",
+            fontSize: "15px",
+            fontWeight: 500,
+          }}
           primary="다이어리"
         />
         {open ? <ExpandLess /> : <ExpandMore />}
@@ -95,7 +111,11 @@ const Category = ({}) => {
               <FaList />
             </ListItemIcon>
             <ListItemText
-              primaryTypographyProps={{ fontSize: "13px", fontWeight: 500 }}
+              primaryTypographyProps={{
+                color: "#0D0783",
+                fontSize: "13px",
+                fontWeight: 500,
+              }}
               primary="버킷리스트"
             />
           </ListItemButton>
@@ -106,7 +126,11 @@ const Category = ({}) => {
               <FaList />
             </ListItemIcon>
             <ListItemText
-              primaryTypographyProps={{ fontSize: "13px", fontWeight: 500 }}
+              primaryTypographyProps={{
+                color: "#0D0783",
+                fontSize: "13px",
+                fontWeight: 500,
+              }}
               primary="한줄 일기"
             />
           </ListItemButton>
@@ -118,7 +142,11 @@ const Category = ({}) => {
               <FaList />
             </ListItemIcon>
             <ListItemText
-              primaryTypographyProps={{ fontSize: "13px", fontWeight: 500 }}
+              primaryTypographyProps={{
+                color: "#0D0783",
+                fontSize: "13px",
+                fontWeight: 500,
+              }}
               primary="추억 저장소"
             />
             {open_2 ? <ExpandLess /> : <ExpandMore />}
@@ -137,7 +165,11 @@ const Category = ({}) => {
                   <FaFolder />
                 </ListItemIcon>
                 <ListItemText
-                  primaryTypographyProps={{ fontSize: "11px", fontWeight: 500 }}
+                  primaryTypographyProps={{
+                    color: "#0D0783",
+                    fontSize: "11px",
+                    fontWeight: 500,
+                  }}
                   primary="2022"
                 />
               </ListItemButton>
@@ -153,7 +185,11 @@ const Category = ({}) => {
                   <FaFolder />
                 </ListItemIcon>
                 <ListItemText
-                  primaryTypographyProps={{ fontSize: "11px", fontWeight: 500 }}
+                  primaryTypographyProps={{
+                    color: "#0D0783",
+                    fontSize: "11px",
+                    fontWeight: 500,
+                  }}
                   primary="2019"
                 />
               </ListItemButton>
@@ -169,7 +205,11 @@ const Category = ({}) => {
                   <FaFolder />
                 </ListItemIcon>
                 <ListItemText
-                  primaryTypographyProps={{ fontSize: "11px", fontWeight: 500 }}
+                  primaryTypographyProps={{
+                    color: "#0D0783",
+                    fontSize: "11px",
+                    fontWeight: 500,
+                  }}
                   primary="2018"
                 />
               </ListItemButton>
