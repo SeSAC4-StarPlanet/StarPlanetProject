@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 // schema 
 userSchema = mongoose.Schema(
     {
-        userid: { type: String, required: true, unique: true },
+        user_id: { type: String, required: true, unique: true },
         // select : false -> DB에서 데이터 읽어올 떄 password는 읽어오지 않는다. 
         password: { type: String, required: true, select: false },
         name: { type: String, required: true },
