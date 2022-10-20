@@ -8,11 +8,11 @@ import StarWarp from "../../Common/StarWarp/StarWarp";
 import Diary_main from "../../Common/Diary/Diary_main";
 import Header from "../../Common/Diary/Header/Header";
 import SearchBar from "../../Common/Diary/SearchBar/SearchBar";
+import Selector from "../../Common/Diary/Selector/Selector";
 const SionTest = () => {
   return (
     <>
       <Header />
-      {/* <SearchBar /> */}
       <StarMap />
       <Diary_main planetTitle={"planetTitle"} />
     </>
