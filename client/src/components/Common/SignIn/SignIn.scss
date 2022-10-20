@@ -1,4 +1,4 @@
-.Sign_in_wrapper {
+.signInWrapper {
   display: flex;
   position: absolute;
   left: 50%;
@@ -9,7 +9,7 @@
   align-items: center;
 }
 
-.Sign_in_section {
+.signInSection {
   display: inline-block;
   width: 500px;
   height: 550px;
@@ -17,7 +17,7 @@
   border-radius: 15px 15px / 15px 15px;
 }
 
-.Sign_in {
+.signIn {
   display: flex;
   width: 500px;
   height: 100%;
@@ -28,7 +28,7 @@
   align-items: center;
 }
 
-.Sign_in_bottom {
+.signInBottom {
   display: flex;
   color: #fff;
   margin: 20px;
@@ -38,11 +38,11 @@
   }
 }
 
-.Sign_in_button_box {
+.signInButtonBox {
   margin: 20px 0px 0px 0px;
 }
 
-.Sign_in_error {
+.signInError {
   text-align: center;
   color: red;
   font-size: 18px;

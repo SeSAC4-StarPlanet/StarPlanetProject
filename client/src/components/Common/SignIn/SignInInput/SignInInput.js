@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./Sign_in_input.scss";
+import "./SignInInput.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
-const Sign_in_input = ({ type, text, placeholder, Btn }) => {
+const SignInInput = ({ type, text, placeholder, Btn }) => {
   const ref1 = useRef();
   const ref2 = useRef();
   const handleClick = () => {
@@ -44,4 +44,4 @@ const Sign_in_input = ({ type, text, placeholder, Btn }) => {
   );
 };
 
-export default Sign_in_input;
+export default SignInInput;

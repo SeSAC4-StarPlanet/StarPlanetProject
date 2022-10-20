@@ -1,0 +1,78 @@
+.signUpInputSection {
+  display: inline-block;
+  width: 392px;
+  height: 50vh;
+  margin: 5px;
+}
+
+.signUpInputContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 392px;
+  height: 8vh;
+  background: rgba(147, 147, 147, 0.1);
+  border-radius: 15px 15px / 15px 15px;
+  border: #fff solid 2px;
+  padding: 15px;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+
+.signUpInput {
+  border: none;
+  width: 300px;
+  height: 2vh;
+  padding: 10px;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 15px;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.signUpInputTitle {
+  display: inline-block;
+  width: 40px;
+  margin: 10px;
+  color: #fff;
+  font-size: 10px;
+}
+
+.errorMessageWrap {
+  height: 15px;
+  font-size: 14px;
+  color: rgb(182, 19, 19);
+  font-weight: 700;
+}
+.successMessageWrap {
+  height: 15px;
+  font-size: 14px;
+  color: rgb(7, 167, 20);
+  font-weight: 700;
+}
+
+.signInButtonBox {
+  width: 392px;
+  height: 50px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.signInButton {
+  width: 392px;
+  height: 50px;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 25px;
+  outline: 0;
+  margin: 10px 0px 0px 0px;
+}
+
+.signInButton:hover {
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
