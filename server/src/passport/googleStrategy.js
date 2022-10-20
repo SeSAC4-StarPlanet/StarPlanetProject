@@ -16,9 +16,7 @@ module.exports = new GoogleStrategy(
         //TODO 쿼리문손보기
 
         try {           // DB에서 사용자 검색
-            const exUser = await User.findOne({
-                where: { sns_id: profile.id, provider: 'google' },
-            });
+            const exUser = await User.findOne({ sns_id: profile.id, provider: 'google' });
 
             if (exUser) {
                 console.log('___google exUser', exUser);

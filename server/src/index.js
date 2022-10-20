@@ -65,7 +65,7 @@ const authRouter = require('./routes/auth');
 // const feedRouter = require('./routes/feed');
 
 app.use('/', routes);
-app.use('/auth', authRouter);
+app.use("/api/auth", require("./routes/api/auth"));
 
 // app.use((req, res, next) => {
 //     res.send(`${req.method} ${req.url} 라우터가 없습니다.`);
