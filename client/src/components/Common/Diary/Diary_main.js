@@ -4,7 +4,7 @@ import Diary_content from "../../Common/Diary/Diary_content/Diary_content";
 import Planet_name from "../../Common/Diary/Planet_name/Planet_name";
 import Category from "./Category/Category";
 import MemberBox from "./MemberBox/MemberBox";
-
+import Selector from "./Selector/Selector";
 import IconButton from "@mui/material/IconButton";
 import { FaPen } from "react-icons/fa";
 
@@ -33,6 +33,9 @@ const Diary_main = ({ planetTitle }) => {
           </div>
         </div>
         <div className="Main_box">
+          <div className="Diary_selector_box">
+            <Selector />
+          </div>
           <div className="Diary_main_box">
             <div>
               <Diary_content

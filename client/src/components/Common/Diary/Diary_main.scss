@@ -26,11 +26,16 @@
 }
 .Main_box {
   display: flex;
+  flex-direction: column;
   width: 902px;
   max-width: 902px;
-  // border: rgb(212, 212, 212) solid 1px;
   border-radius: 0px 0px 15px 0px / 0px 0px 15px 0px;
   border-left: 1px solid #f4f3f3;
+
+  .Diary_selector_box {
+    padding-left: 50px;
+    padding-top: 25px;
+  }
 }
 
 .Diary_main_box {
