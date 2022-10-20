@@ -11,7 +11,7 @@ import {
   faBookmark,
   faBook,
 } from "@fortawesome/free-solid-svg-icons";
-
+import Category from "./Category/Category";
 const Diary_main = ({ planetTitle }) => {
   return (
     <div className="Main_wrapper">
@@ -25,7 +25,8 @@ const Diary_main = ({ planetTitle }) => {
       </div>
       <div className="Main_container">
         <div className="Categorybar_box">
-          <Categorybar
+          <Category />
+          {/* <Categorybar
             icon={<FontAwesomeIcon icon={faImage} />}
             category={"사진첩"}
           />
@@ -40,7 +41,7 @@ const Diary_main = ({ planetTitle }) => {
           <Categorybar
             icon={<FontAwesomeIcon icon={faBook} />}
             category={"다이어리"}
-          />
+          /> */}
         </div>
         <div className="Main_box">
           <div className="Diary_main_box">
