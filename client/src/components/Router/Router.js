@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
+import axios from "axios";
 // page component
 import LandingPage from "../../pages/LandingPage/LandingPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
@@ -29,6 +29,12 @@ const router = createBrowserRouter([
 ]);
 
 const Router = () => {
+  const callApi = async () => {
+    axios.get("/api").then((res) => console.log(res.data.test));
+  };
+  useEffect(() => {
+    callApi();
+  }, []);
   return (
     <>
       <RouterProvider router={router} />
