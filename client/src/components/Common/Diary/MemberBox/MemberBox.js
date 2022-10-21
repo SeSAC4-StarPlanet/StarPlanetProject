@@ -37,7 +37,6 @@ const MemberBox = () => {
     >
       <ListItemButton
         sx={{
-          position: "fixed",
           width: "100%",
           maxWidth: "200px",
           zIndex: "3",
@@ -54,7 +53,7 @@ const MemberBox = () => {
         <ListItemIcon>{open ? <ExpandLess /> : <ExpandMore />}</ListItemIcon>
         <ListItemText primary={"멤버"}></ListItemText>
       </ListItemButton>
-      <div className="memberbox_space" />
+      {/* <div className="memberbox_space" /> */}
       <Collapse
         // sx={{ marginTop: "35px" }}
         in={open}

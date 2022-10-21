@@ -11,14 +11,12 @@ import SearchBar from "../../Common/Diary/SearchBar/SearchBar";
 import Selector from "../../Common/Diary/Selector/Selector";
 import Editor from "../../Common/Editor/Editor";
 import Writer from "../../Common/Diary/Writer/Writer";
+
+// 페이지
 import DiaryMain from "../../../pages/Diary/Main/DiaryMain";
+import DiaryWrite from "../../../pages/Diary/Write/DiaryWrite";
 const SionTest = () => {
   return (
-    // <div className="back">
-    //   <StarMap />
-    //   <Header />
-    //   <Writer />
-    // </div>
     <>
       <DiaryMain />
     </>

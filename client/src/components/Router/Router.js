@@ -4,7 +4,7 @@ import axios from "axios";
 // page component
 import LandingPage from "../../pages/LandingPage/LandingPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
-
+import DiaryWrite from "../../pages/Diary/Write/DiaryWrite";
 // test component
 import JinseTest from "../Test/JinseTest/JinseTest";
 import SionTest from "../Test/SionTest/SionTest";
@@ -25,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/jinseTest",
     element: <JinseTest />,
+  },
+  {
+    path: "/diary/write",
+    element: <DiaryWrite />,
   },
 ]);
 
