@@ -2,6 +2,8 @@ const passport = require('passport');
 const localStrategy = require('./localStrategy');
 const googleStrategy = require('./googleStrategy');
 const kakaoStrategy = require('./kakaoStrategy');
+const jwt = require('./jwtStrategy');
+
 const { User } = require('../models/User');
 
 
@@ -23,5 +25,6 @@ passport.deserializeUser((user_id, done) => {     // DB를 사용할 경우 여�
 passport.use(localStrategy);
 passport.use(googleStrategy);
 passport.use(kakaoStrategy);
+passport.use(jwt);
 
 module.exports = passport;

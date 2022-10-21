@@ -1,4 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy;
+
 const { User } = require('../models/User');
 const config = require('config');
 
@@ -25,17 +26,23 @@ module.exports = new LocalStrategy(
                     }
                 )
             } else {
+                console.log("*****Username invalid*****");
                 return done(null, false, { message: '아이디가 존재하지 않습니다.' });
-
-                const newUser = await User.create({
-                    email: profile._json && profile._json.email,
-                    name: profile.displayName,
-                    sns_id: profile.id,
-                    provider: 'google',
-                });
-                console.log('newUser', newUser);
-                done(null, newUser);
             }
+
+
+            // if (name == fakeUser.name) {
+            //     if (password == fakeUser.password) {
+            //         console.log("*****Login Success*****")
+            //         done(null, fakeUser);
+            //     } else {
+            //         console.log("*****Password Invalid*****");
+            //         done(null, false, { message: '비밀번호가 일치하지 않습니다.' });
+            //     }
+            // } else {
+            //     console.log("*****Username invalid*****");
+            //     done(null, false, { message: '사용자 이름이 존재하지 않습니다.' });
+            // }
         } catch (error) {
             console.error(error);
             done(error);
