@@ -39,21 +39,27 @@ const Diary_main = ({ planetTitle }) => {
           <div className="Diary_main_box">
             <div>
               <Diary_content
-                title={"2022-10-18 오늘 할 일"}
+                title={"오늘 할 일"}
+                writer={"염시온"}
+                date={"2022-01-01"}
                 content1={"코딩공부하기"}
                 content2={"코딩공부하기"}
                 content3={"코딩공부하기"}
                 content4={"코딩공부하기"}
               />
               <Diary_content
-                title={"2022-10-18 오늘 할 일"}
+                title={"오늘 할 일"}
+                writer={"염시온"}
+                date={"2022-01-01"}
                 content1={"코딩공부하기"}
                 content2={"코딩공부하기"}
                 content3={"코딩공부하기"}
                 content4={"코딩공부하기"}
               />
               <Diary_content
-                title={"2022-10-18 오늘 할 일"}
+                title={"오늘 할 일"}
+                writer={"염시온"}
+                date={"2022-01-01"}
                 content1={"코딩공부하기"}
                 content2={"코딩공부하기"}
                 content3={"코딩공부하기"}
@@ -62,21 +68,27 @@ const Diary_main = ({ planetTitle }) => {
             </div>
             <div>
               <Diary_content
-                title={"2022-10-18 오늘 할 일"}
+                title={"오늘 할 일"}
+                writer={"염시온"}
+                date={"2022-01-01"}
                 content1={"코딩공부하기"}
                 content2={"코딩공부하기"}
                 content3={"코딩공부하기"}
                 content4={"코딩공부하기"}
               />
               <Diary_content
-                title={"2022-10-18 오늘 할 일"}
+                title={"오늘 할 일"}
+                writer={"염시온"}
+                date={"2022-01-01"}
                 content1={"코딩공부하기"}
                 content2={"코딩공부하기"}
                 content3={"코딩공부하기"}
                 content4={"코딩공부하기"}
               />
               <Diary_content
-                title={"2022-10-18 오늘 할 일"}
+                title={"오늘 할 일"}
+                writer={"염시온"}
+                date={"2022-01-01"}
                 content1={"코딩공부하기"}
                 content2={"코딩공부하기"}
                 content3={"코딩공부하기"}
