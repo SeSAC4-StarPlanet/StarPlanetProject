@@ -9,7 +9,8 @@ import Diary_main from "../../Common/Diary/Diary_main";
 import Header from "../../Common/Diary/Header/Header";
 import SearchBar from "../../Common/Diary/SearchBar/SearchBar";
 import Selector from "../../Common/Diary/Selector/Selector";
-import Writer from "../../Common/Writer/Writer";
+import Editor from "../../Common/Editor/Editor";
+import Writer from "../../Common/Diary/Writer/Writer";
 const SionTest = () => {
   return (
     <div className="back">
@@ -22,10 +23,11 @@ const SionTest = () => {
         content3={"코딩공부하기"}
         content4={"코딩공부하기"}
       /> */}
-      <Writer />
-      {/* <Header />
+      {/* <Editor /> */}
       <StarMap />
-      <Diary_main planetTitle={"planetTitle"} /> */}
+      <Header />
+      <Writer />
+      {/* <Diary_main planetTitle={"planetTitle"} /> */}
     </div>
   );
 };

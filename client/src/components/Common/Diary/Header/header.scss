@@ -3,7 +3,7 @@
   height: 70px;
   background: transparent;
   border-bottom: 1px solid #cccaca;
-  position: absolute;
+  // position: absolute;
   top: 0;
   left: 0;
   z-index: 3;
@@ -14,6 +14,7 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    position: relative;
 
     .dairyHeaderLogoContainer {
       display: flex;
