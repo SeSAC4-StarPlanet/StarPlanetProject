@@ -1,9 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, forwardRef } from "react";
 import "./SignInInput.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-
-const SignInInput = ({ type, text, placeholder, Btn }) => {
+const User = {
+  user_id: "sesac",
+  email: "test@example.com",
+  hashed_password: "test2323@@@",
+};
+const SignInInput = ({ type, text, placeholder, onChange }) => {
   const ref1 = useRef();
   const ref2 = useRef();
   const handleClick = () => {
@@ -15,10 +19,12 @@ const SignInInput = ({ type, text, placeholder, Btn }) => {
     else ref2.current.hidden = true;
   };
 
+  const [user_id, setUser_Id] = useState("");
+  const [idError, setIdError] = useState(false);
   return (
-    <div className="input_section">
-      <div className="input_container">
-        <div className="input_icon" value={text}>
+    <div className="inputSection">
+      <div className="inputContainer">
+        <div className="inputIcon" value={text}>
           {text}
         </div>
         <input
@@ -26,7 +32,10 @@ const SignInInput = ({ type, text, placeholder, Btn }) => {
           className="Input"
           ref={ref1}
           defaultValue=""
-          onChange={changeInput}
+          onChange={(e) => {
+            changeInput(e);
+            onChange(e);
+          }}
           placeholder={placeholder}
         ></input>
         <button
@@ -44,4 +53,4 @@ const SignInInput = ({ type, text, placeholder, Btn }) => {
   );
 };
 
-export default SignInInput;
+export default forwardRef(SignInInput);

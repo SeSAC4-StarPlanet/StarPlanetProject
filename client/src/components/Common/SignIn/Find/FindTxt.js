@@ -1,7 +1,7 @@
 import React from "react";
-import "./Find_txt.scss";
+import "./FindTxt.scss";
 
-function Find_txt() {
+function FindTxt() {
   return (
     <div className="Find_section">
       <div className="Find_container">
@@ -13,4 +13,4 @@ function Find_txt() {
   );
 }
 
-export default Find_txt;
+export default FindTxt;
