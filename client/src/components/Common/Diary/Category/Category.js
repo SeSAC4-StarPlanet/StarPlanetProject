@@ -17,7 +17,7 @@ import {
   faImage,
   faCalendarDays,
   faBookmark,
-  faBook,
+  faBook
 } from "@fortawesome/free-solid-svg-icons";
 import { FaList, FaFolder } from "react-icons/fa";
 
@@ -41,62 +41,70 @@ const Category = ({}) => {
       sx={{
         width: "100%",
         maxWidth: 360,
-        bgcolor: "background.paper",
+        bgcolor: "background.paper"
       }}
       component="nav"
     >
       {/* 사진첩 */}
       <ListItemButton>
-        <ListItemIcon sx={{ color: "#0D0783", minWidth: "30px" }}>
+        <ListItemIcon
+          sx={{ color: "#0D0783", minWidth: "45px", fontSize: "25px" }}
+        >
           <FontAwesomeIcon icon={faImage} />
         </ListItemIcon>
         <ListItemText
           primaryTypographyProps={{
             color: "#0D0783",
             fontSize: "15px",
-            fontWeight: 500,
+            fontWeight: 500
           }}
           primary="사진첩"
         />
       </ListItemButton>
       {/* 일정 */}
       <ListItemButton>
-        <ListItemIcon sx={{ color: "#0D0783", minWidth: "30px" }}>
+        <ListItemIcon
+          sx={{ color: "#0D0783", minWidth: "45px", fontSize: "25px" }}
+        >
           <FontAwesomeIcon icon={faCalendarDays} />
         </ListItemIcon>
         <ListItemText
           primaryTypographyProps={{
             color: "#0D0783",
             fontSize: "15px",
-            fontWeight: 500,
+            fontWeight: 500
           }}
           primary="일정"
         />
       </ListItemButton>
       {/* 북마크 */}
       <ListItemButton>
-        <ListItemIcon sx={{ color: "#0D0783", minWidth: "30px" }}>
+        <ListItemIcon
+          sx={{ color: "#0D0783", minWidth: "45px", fontSize: "25px" }}
+        >
           <FontAwesomeIcon icon={faBookmark} />
         </ListItemIcon>
         <ListItemText
           primaryTypographyProps={{
             color: "#0D0783",
             fontSize: "15px",
-            fontWeight: 500,
+            fontWeight: 500
           }}
           primary="북마크"
         />
       </ListItemButton>
       {/* 다이어리 */}
       <ListItemButton onClick={handleClick}>
-        <ListItemIcon sx={{ color: "#0D0783", minWidth: "30px" }}>
+        <ListItemIcon
+          sx={{ color: "#0D0783", minWidth: "45px", fontSize: "25px" }}
+        >
           <FontAwesomeIcon icon={faBook} />
         </ListItemIcon>
         <ListItemText
           primaryTypographyProps={{
             color: "#0D0783",
             fontSize: "15px",
-            fontWeight: 500,
+            fontWeight: 500
           }}
           primary="다이어리"
         />
@@ -114,7 +122,7 @@ const Category = ({}) => {
               primaryTypographyProps={{
                 color: "#0D0783",
                 fontSize: "13px",
-                fontWeight: 500,
+                fontWeight: 500
               }}
               primary="버킷리스트"
             />
@@ -129,7 +137,7 @@ const Category = ({}) => {
               primaryTypographyProps={{
                 color: "#0D0783",
                 fontSize: "13px",
-                fontWeight: 500,
+                fontWeight: 500
               }}
               primary="한줄 일기"
             />
@@ -145,7 +153,7 @@ const Category = ({}) => {
               primaryTypographyProps={{
                 color: "#0D0783",
                 fontSize: "13px",
-                fontWeight: 500,
+                fontWeight: 500
               }}
               primary="추억 저장소"
             />
@@ -158,7 +166,7 @@ const Category = ({}) => {
                   height: "30px",
                   pl: 6,
                   fontSize: "11px",
-                  fontWeight: 500,
+                  fontWeight: 500
                 }}
               >
                 <ListItemIcon sx={{ color: "#0D0783", minWidth: "30px" }}>
@@ -168,7 +176,7 @@ const Category = ({}) => {
                   primaryTypographyProps={{
                     color: "#0D0783",
                     fontSize: "11px",
-                    fontWeight: 500,
+                    fontWeight: 500
                   }}
                   primary="2022"
                 />
@@ -178,7 +186,7 @@ const Category = ({}) => {
                   height: "30px",
                   pl: 6,
                   fontSize: "11px",
-                  fontWeight: 500,
+                  fontWeight: 500
                 }}
               >
                 <ListItemIcon sx={{ color: "#0D0783", minWidth: "30px" }}>
@@ -188,7 +196,7 @@ const Category = ({}) => {
                   primaryTypographyProps={{
                     color: "#0D0783",
                     fontSize: "11px",
-                    fontWeight: 500,
+                    fontWeight: 500
                   }}
                   primary="2019"
                 />
@@ -198,7 +206,7 @@ const Category = ({}) => {
                   height: "30px",
                   pl: 6,
                   fontSize: "11px",
-                  fontWeight: 500,
+                  fontWeight: 500
                 }}
               >
                 <ListItemIcon sx={{ color: "#0D0783", minWidth: "30px" }}>
@@ -208,7 +216,7 @@ const Category = ({}) => {
                   primaryTypographyProps={{
                     color: "#0D0783",
                     fontSize: "11px",
-                    fontWeight: 500,
+                    fontWeight: 500
                   }}
                   primary="2018"
                 />
