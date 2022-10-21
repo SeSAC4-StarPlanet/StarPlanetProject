@@ -5,14 +5,14 @@
   transform: translate(-50%, 30%);
   flex-direction: column;
   width: 50vw;
-  height: 65vh;
+  height: 50vh;
   align-items: center;
 }
 
 .signInSection {
   display: inline-block;
   width: 500px;
-  height: 550px;
+  height: 70vh;
   background-color: rgba(147, 147, 147, 0.1);
   border-radius: 15px 15px / 15px 15px;
 }
@@ -20,8 +20,8 @@
 .signIn {
   display: flex;
   width: 500px;
-  height: 100%;
-  background: rgba(93, 93, 93, 0.2);
+  height: 70vh;
+  background: rgba(147, 147, 147, 0.1);
   border-radius: 15px 15px / 15px 15px;
   margin: 0 auto;
   flex-direction: column;
@@ -31,7 +31,7 @@
 .signInBottom {
   display: flex;
   color: #fff;
-  margin: 20px;
+  margin: 5px;
   a {
     margin: 0px 0px 0px 10px;
     font-size: 13px;
@@ -39,11 +39,24 @@
 }
 
 .signInButtonBox {
+  display: flex;
+  bottom: 0;
   margin: 20px 0px 0px 0px;
+  button {
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .signInError {
   text-align: center;
   color: red;
   font-size: 18px;
+}
+
+.errorMessageWrap {
+  height: 15px;
+  font-size: 14px;
+  color: rgb(182, 19, 19);
+  font-weight: 700;
 }

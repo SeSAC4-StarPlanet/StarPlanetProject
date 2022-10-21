@@ -8,17 +8,17 @@ const User = {
 };
 
 const SignUpInput = () => {
-  const [id, setId] = useState("");
+  const [user_id, setUser_id] = useState("");
   const [pw, setPw] = useState("");
   const [pwCheck, setPwCheck] = useState("");
-  const [pwError, setPwError] = useState(false);
   const [email, setEmail] = useState("");
-
+  const [tel, setTel] = useState("");
   const [emailValid, setEmailValid] = useState(false);
+  const [pwError, setPwError] = useState(false);
   const [pwValid, setPwValid] = useState(false);
   const [idValid, setIdValid] = useState(false);
   const [notAllow, setNotAllow] = useState(true);
-
+  const [telValid, setTelValid] = useState(false);
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -27,9 +27,11 @@ const SignUpInput = () => {
     }
 
     console.log({
-      id,
+      user_id,
       pw,
       pwCheck,
+      email,
+      tel,
     });
   };
 
@@ -61,12 +63,22 @@ const SignUpInput = () => {
   };
 
   const handleId = (e) => {
-    setId(e.target.value);
+    setUser_id(e.target.value);
     const regex = /^(?=.*[a-z])(?=.*\d)[a-z\d]{3,20}$/;
     if (regex.test(e.target.value)) {
       setIdValid(true);
     } else {
       setIdValid(false);
+    }
+  };
+
+  const handleTel = (e) => {
+    setTel(e.target.value);
+    const regex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+    if (regex.test(e.target.value)) {
+      setTelValid(true);
+    } else {
+      setTelValid(false);
     }
   };
 
@@ -78,20 +90,18 @@ const SignUpInput = () => {
             <div className="signUpInputTitle">ID</div>
             <input
               placeholder="사용하실 아이디를 입력해주세요"
-              value={id}
+              value={user_id}
               onChange={handleId}
               className="signUpInput"
               type="text"
             ></input>
           </div>
           <div>
-            {!idValid && id.length > 0 ? (
+            {user_id != User.id ? (
+              <div className="errorMessageWrap">{""}</div>
+            ) : (
               <div className="errorMessageWrap">
                 중복된 아이디 입니다. 다른 아이디를 입력해주세요.
-              </div>
-            ) : (
-              <div className="successMessageWrap">
-                사용 가능한 아이디 입니다.
               </div>
             )}
           </div>
@@ -103,6 +113,7 @@ const SignUpInput = () => {
               value={pw}
               onChange={onChangePw}
               className="signUpInput"
+              required
             ></input>
           </div>
           <div className="errorMessageWrap">
@@ -117,6 +128,7 @@ const SignUpInput = () => {
             <input
               type="password"
               required
+              placeholder="영문, 숫자, 특수문자 포함 8자 이상"
               value={pwCheck}
               onChange={onChangePwChk}
               className="signUpInput"
@@ -133,7 +145,7 @@ const SignUpInput = () => {
             <div className="signUpInputTitle">E-mail</div>
             <input
               type="text"
-              placeholder="test@gmail.com"
+              placeholder="test@email.com"
               value={email}
               onChange={handleEmail}
               className="signUpInput"
@@ -146,7 +158,18 @@ const SignUpInput = () => {
           </div>
           <div className="signUpInputContainer">
             <div className="signUpInputTitle">Tel</div>
-            <input type="tel" className="signUpInput"></input>
+            <input
+              type="tel"
+              className="signUpInput"
+              value={tel}
+              onChange={handleTel}
+              placeholder={"010 - XXXX - XXXX"}
+            ></input>
+          </div>
+          <div className="errorMessageWrap">
+            {!telValid && tel.length > 0 && (
+              <div>정확한 전화번호를 입력해주세요.</div>
+            )}
           </div>
           <div className="signInButtonBox">
             <button className="signInButton">회원가입</button>

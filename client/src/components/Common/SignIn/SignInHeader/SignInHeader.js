@@ -1,7 +1,7 @@
 import React from "react";
 import "./SignInHeader.scss";
 
-const SignUpHeader = ({ text }) => {
+const SignInHeader = ({ text }) => {
   return (
     <div className="signInHeaderSection">
       <div className="signInHeader" value={text}>
@@ -11,4 +11,4 @@ const SignUpHeader = ({ text }) => {
   );
 };
 
-export default SignUpHeader;
+export default SignInHeader;
