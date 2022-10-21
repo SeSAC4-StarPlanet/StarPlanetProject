@@ -2,32 +2,32 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
-
+const path = require('path');
 const app = express();
 
 
 
 /* env */
 const config = require('config');
-const port = config.get('port') || 8000;
+// const port = config.get('port') || 8000;
 const dbConfig = config.get('db');
 const redisConfig = config.get('redis');
 const COOKIE_SECRET = config.get('COOKIE_SECRET');
 // const clientUrl = config.get('client');
 
 
-/* Cors */
-const cors = require('cors');
-const corsOptions = { origin: true, credentials: true }
-app.use(cors(corsOptions)); // app.use(cors({ origin: clientUrl }));
-
 
 
 //* middlewares */
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static('uploads'));
 app.use(cookieParser(COOKIE_SECRET));
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+/* Cors */
+const cors = require('cors');
+const corsOptions = { origin: true, credentials: true }
+app.use(cors(corsOptions)); // app.use(cors({ origin: clientUrl }));
 
 
 
@@ -60,9 +60,8 @@ app.use(session(sessionOption));
 
 
 /* passport */
-app.use(passport.initialize());
-app.use(passport.session());
-
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 
 
@@ -74,7 +73,10 @@ const authRouter = require('./routes/auth');
 // const feedRouter = require('./routes/feed');
 
 app.use('/', routes);
-app.use("/api/auth", require("./routes/auth"));
+app.use("/api/", function (req, res) {
+    res.send("test연결입니다~");
+});
+// app.use("/api/auth", require("./routes/auth"));
 
 
 app.use((req, res, next) => {
@@ -95,6 +97,11 @@ mongoose.connection.on('error', function (err) { console.log('DB ERROR : ', err)
 
 
 
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, '/client/build/index.html'));
+});
+
+const port = 8000;
 app.listen(port, () => {
     console.log(`Server start! port : ${port}`);
 });
