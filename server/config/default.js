@@ -11,6 +11,7 @@ module.exports = {
         REDIS_PASSWORD: 'grmoQtkOvvIZmNaeXQ8Krn3BTRAN5vmp'
     },
     COOKIE_SECRET: 'apple',
+    secretOrKey: 'JWT-SECRET-KEY',
     googleOAuth: {
         clientID: '771871776314-ltf65vkdl7uqkmmrp4si1nt93h859pdv.apps.googleusercontent.com',
         clientSecret: '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',
@@ -21,3 +22,4 @@ module.exports = {
         callbackURL: 'http://localhost:8000/auth/kakao/callback',
     }
 }
+

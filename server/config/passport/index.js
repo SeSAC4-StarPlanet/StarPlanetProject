@@ -4,7 +4,7 @@ const googleStrategy = require('./googleStrategy');
 const kakaoStrategy = require('./kakaoStrategy');
 const jwt = require('./jwtStrategy');
 
-const { User } = require('../models/User');
+const { User } = require('../../src/models/User');
 
 
 /* 쿠키/세션 serialize */
