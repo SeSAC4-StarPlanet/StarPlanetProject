@@ -11,6 +11,7 @@ import SearchBar from "../../Common/Diary/SearchBar/SearchBar";
 import Selector from "../../Common/Diary/Selector/Selector";
 import Editor from "../../Common/Editor/Editor";
 import Writer from "../../Common/Diary/Writer/Writer";
+import Read from "../../Common/Diary/Read/Read";
 
 // 페이지
 import DiaryMain from "../../../pages/Diary/Main/DiaryMain";
@@ -18,7 +19,12 @@ import DiaryWrite from "../../../pages/Diary/Write/DiaryWrite";
 const SionTest = () => {
   return (
     <>
-      <DiaryMain />
+      {/* <DiaryMain /> */}
+      <div className="back">
+        <StarMap />
+        <Header />
+        <Read />
+      </div>
     </>
   );
 };
