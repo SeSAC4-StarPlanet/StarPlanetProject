@@ -1,18 +1,19 @@
 import React from "react";
-import "./LoginPage.scss";
-import SignIn from "../../components/Common/SignIn/SignIn";
+import "./FindIdPage.scss";
 import StarMap from "../../components/Common/StarMap/StarMap";
 import Main_Logo from "../../assets/img/LandingPage/logo_main.svg";
-const LoginPage = () => {
+import FindId from "../../components/Common/FindId/FindId";
+
+const JinseTest = () => {
   return (
     <div>
       <StarMap />
-      <div className="signInLogoWrapper">
+      <div className="findIdLogoWrapper">
         <img src={Main_Logo} />
       </div>
-      <SignIn />
+      <FindId />
     </div>
   );
 };
 
-export default LoginPage;
+export default JinseTest;

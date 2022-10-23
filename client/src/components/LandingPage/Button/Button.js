@@ -1,12 +1,13 @@
 import React from "react";
 import "./button.scss";
 
-const Button = ({ text, mode }) => {
+const Button = ({ text, mode, value, onclick }) => {
   return (
     <div className="landing_btn_wrapper">
       <button
         className={"landing_btn " + (mode === "isRegister" ? "isRegister" : "")}
-        value={text}
+        value={value}
+        onClick={onclick}
       >
         {text}
       </button>
