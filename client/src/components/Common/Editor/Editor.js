@@ -1,14 +1,18 @@
-import React from "react";
-import "./writer.scss";
+import React, { useEffect } from "react";
+import "./editor.scss";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import axios from "axios";
 
-const Writer = () => {
+const Editor = () => {
+  useEffect(() => {
+    axios.get("/api").then(res => console.log(res.data));
+  });
   return (
     <div className="writer_wrapper">
       <CKEditor
         editor={ClassicEditor}
-        data="<p>Hello from CKEditor 5!</p>"
+        data=""
         onReady={editor => {
           // You can store the "editor" and use when it is needed.
           console.log("Editor is ready to use!", editor);
@@ -28,4 +32,4 @@ const Writer = () => {
   );
 };
 
-export default Writer;
+export default Editor;

@@ -1,4 +1,6 @@
+
 import React, { useEffect } from "react";
+
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import "./styles/common.scss";
@@ -6,6 +8,15 @@ import reportWebVitals from "./reportWebVitals";
 import Router from "./components/Router/Router";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
+// const callApi = async()=> {
+//   axios.get('/api').then((res)=> console.log(res.data.test));
+// }
+
+// useEffect(()=>{
+//   callApi();
+// }, []);
+
 
 root.render(
   <>

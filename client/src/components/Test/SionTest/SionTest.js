@@ -9,24 +9,23 @@ import Diary_main from "../../Common/Diary/Diary_main";
 import Header from "../../Common/Diary/Header/Header";
 import SearchBar from "../../Common/Diary/SearchBar/SearchBar";
 import Selector from "../../Common/Diary/Selector/Selector";
-import Writer from "../../Common/Writer/Writer";
+import Editor from "../../Common/Editor/Editor";
+import Writer from "../../Common/Diary/Writer/Writer";
+import Read from "../../Common/Diary/Read/Read";
+
+// 페이지
+import DiaryMain from "../../../pages/Diary/Main/DiaryMain";
+import DiaryWrite from "../../../pages/Diary/Write/DiaryWrite";
 const SionTest = () => {
   return (
-    <div className="back">
-      {/* <Diary_content
-        title={"오늘 할 일"}
-        writer={"염시온"}
-        date={"2022-01-01"}
-        content1={"코딩공부하기"}
-        content2={"코딩공부하기"}
-        content3={"코딩공부하기"}
-        content4={"코딩공부하기"}
-      /> */}
-      <Writer />
-      {/* <Header />
-      <StarMap />
-      <Diary_main planetTitle={"planetTitle"} /> */}
-    </div>
+    <>
+      {/* <DiaryMain /> */}
+      <div className="back">
+        <StarMap />
+        <Header />
+        <Read />
+      </div>
+    </>
   );
 };
 

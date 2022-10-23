@@ -15,8 +15,8 @@ module.exports = function (req, res, next) {
 
     //verify token
     try {
-        // token 유효성 확인 , token을 만들 때 설정한 secret key 값 : jwtSecret
-        const decoded = jwt.verify(token, "jwtSecret");
+        // token 유효성 확인 , token을 만들 때 설정한 secret key 값
+        const decoded = jwt.verify(token, 'JWT-SECRET-KEY');
         // req에 user 정보 생성
         req.user = decoded.user;
         next();
@@ -24,23 +24,3 @@ module.exports = function (req, res, next) {
         res.status(401).json({ msg: "Token is not valid" });
     }
 };
-
-
-// let auth = (req, res, next) => {
-//     let token = req.cookies.w_auth;
-
-//     User.findByToken(token, (err, user) => {
-//         if (err) throw err;
-//         if (!user)
-//             return res.json({
-//                 isAuth: false,
-//                 error: true
-//             });
-
-//         req.token = token;
-//         req.user = user;
-//         next();
-//     });
-// };
-
-// module.exports = { auth };
