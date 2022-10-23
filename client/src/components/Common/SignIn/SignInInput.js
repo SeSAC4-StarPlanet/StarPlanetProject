@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState, forwardRef } from "react";
-import "./SignInInput.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 const User = {
@@ -19,8 +18,6 @@ const SignInInput = ({ type, text, placeholder, onChange }) => {
     else ref2.current.hidden = true;
   };
 
-  const [user_id, setUser_Id] = useState("");
-  const [idError, setIdError] = useState(false);
   return (
     <div className="inputSection">
       <div className="inputContainer">
@@ -43,7 +40,7 @@ const SignInInput = ({ type, text, placeholder, onChange }) => {
           onClick={() => {
             handleClick();
           }}
-          className="input_icon"
+          className="inputIcon"
           hidden
         >
           <FontAwesomeIcon icon={faCircleXmark} />
@@ -53,4 +50,4 @@ const SignInInput = ({ type, text, placeholder, onChange }) => {
   );
 };
 
-export default forwardRef(SignInInput);
+export default SignInInput;

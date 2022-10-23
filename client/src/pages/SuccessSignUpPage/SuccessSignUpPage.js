@@ -1,18 +1,19 @@
 import React from "react";
-import "./LoginPage.scss";
-import SignIn from "../../components/Common/SignIn/SignIn";
+import "./SuccessSignUpPage.scss";
 import StarMap from "../../components/Common/StarMap/StarMap";
 import Main_Logo from "../../assets/img/LandingPage/logo_main.svg";
-const LoginPage = () => {
+import SuccessSignUp from "../../components/Common/SuccessSignUp/SuccessSignUp";
+
+const SuccessSignUpPage = () => {
   return (
     <div>
       <StarMap />
-      <div className="signInLogoWrapper">
+      <div className="successSignUpLogoWrapper">
         <img src={Main_Logo} />
       </div>
-      <SignIn />
+      <SuccessSignUp />
     </div>
   );
 };
 
-export default LoginPage;
+export default SuccessSignUpPage;

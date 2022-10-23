@@ -1,0 +1,99 @@
+html {
+  font-size: 10px;
+}
+
+.signUpLogoWrapper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 50rem;
+  height: 10rem;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  img {
+    width: 30rem;
+  }
+}
+
+.signUpWrapper {
+  display: flex;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 25%);
+  flex-direction: column;
+  width: 50rem;
+  height: 55rem;
+  align-items: center;
+}
+
+.signUpSection {
+  display: inline-block;
+  width: 50rem;
+  height: 55rem;
+  border-radius: 15px 15px / 15px 15px;
+  background: rgba(147, 147, 147, 0.1);
+}
+
+.signUp {
+  display: flex;
+  width: 50rem;
+  height: 55rem;
+  border-radius: 15px 15px / 15px 15px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signUpInputContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 40rem;
+  height: 6rem;
+  border-radius: 15px 15px / 15px 15px;
+  border: #fff solid 0.2rem;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.signUpInput {
+  border: none;
+  width: 33rem;
+  height: 2rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 1.5rem;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.signUpInputTitle {
+  display: inline-block;
+  width: 4rem;
+  margin: 0.5rem;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.errorMessageWrap {
+  width: 39rem;
+  height: 2rem;
+  font-size: 1.3rem;
+  color: rgb(182, 19, 19);
+  font-weight: 700;
+}
+
+.signUpHeaderSection {
+  display: flex;
+  width: 50rem;
+  height: 8rem;
+  margin: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.signUpHeader {
+  font-size: 3rem;
+  color: #fff;
+  font-family: "Noto Sans KR", sans-serif;
+}

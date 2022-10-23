@@ -1,5 +1,4 @@
 import React from "react";
-import "./SignUpHeader.scss";
 
 const SignUpHeader = ({ text }) => {
   return (

@@ -1,27 +1,35 @@
 import React, { useEffect, useState } from "react";
-import "./SignIn.scss";
-import Button from "../../LandingPage/Button/Button";
-import FindTxt from "./Find/FindTxt";
-import SignInInput from "./SignInInput/SignInInput";
-import SignInHeader from "./SignInHeader/SignInHeader";
+import Button from "./Button";
+import FindTxt from "./FindTxt";
+import SignInInput from "./SignInInput";
+import SignInHeader from "./SignInHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 const User = {
   user_id: "sesac",
   email: "test@example.com",
-  hashed_password: "test2323@@@",
+  hashed_password: "123@",
 };
 const SignIn = () => {
   const [user_id, setUser_Id] = useState("");
   const [idError, setIdError] = useState(false);
-  const handleId = (e) => {
-    setUser_Id(e.target.value);
-    console.log(user_id);
-    if (user_id !== User.user_id) {
-      console.log("바보");
+  const [pw, setPw] = useState("");
+  const [pwError, setPwError] = useState(false);
+
+  const handleLogin = (e) => {
+    if (user_id == User.user_id && pw == User.hashed_password) {
+      alert("로그인 성공");
     } else {
-      console.log("알라딘");
+      alert("아이디/비밀번호를 확인해주세요.");
     }
+  };
+
+  const handleIdOnchange = (e) => {
+    setUser_Id(e.target.value);
+  };
+
+  const handlePwOnchange = (e) => {
+    setPw(e.target.value);
   };
 
   return (
@@ -33,17 +41,18 @@ const SignIn = () => {
             type={"text"}
             text={<FontAwesomeIcon icon={faUser} />}
             value={user_id}
+            onChange={handleIdOnchange}
             placeholder={"아이디"}
-            onChange={handleId}
           />
           <SignInInput
             type={"password"}
             text={<FontAwesomeIcon icon={faKey} />}
+            value={pw}
             placeholder={"비밀번호"}
+            onChange={handlePwOnchange}
           />
-          <input onChange={handleId} />
           <br />
-          {idError && (
+          {idError && pwError && (
             <div className="errorMessageWrap">
               아이디/비밀번호를 확인해주세요.
             </div>
@@ -52,13 +61,20 @@ const SignIn = () => {
           <div>
             <FindTxt />
           </div>
-          <Button text={"로그인"} />
+
+          <a className="loginBtn" onClick={handleLogin}>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            START
+          </a>
         </div>
       </div>
       {/* -----------------로그인input----------------- */}
 
       <div className="signInBottom">
-        <h5>STARPL에 처음이신가요?</h5>
+        <span>STARPL에 처음이신가요?</span>
         <a>회원가입</a>
       </div>
 

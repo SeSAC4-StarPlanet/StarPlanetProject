@@ -1,13 +1,273 @@
-.Sign_in_logo_wrapper {
+html {
+  font-size: 10px;
+}
+
+.signInLogoWrapper {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  width: 50vw;
-  height: 18vh;
+  width: 50rem;
+  height: 10rem;
   position: absolute;
   left: 50%;
   transform: translate(-50%);
   img {
-    width: 15vw;
+    width: 30rem;
+  }
+}
+
+.signInWrapper {
+  display: flex;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 25%);
+  flex-direction: column;
+  width: 50rem;
+  height: 50rem;
+  align-items: center;
+}
+
+.signInSection {
+  display: inline-block;
+  width: 50rem;
+  height: 50rem;
+  border-radius: 15px 15px / 15px 15px;
+  background-color: rgba(147, 147, 147, 0.1);
+}
+
+.signIn {
+  display: flex;
+  width: 50rem;
+  height: 50rem;
+  border-radius: 15px 15px / 15px 15px;
+  flex-direction: column;
+  align-items: center;
+}
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 40rem;
+  height: 7rem;
+  border-radius: 15px 15px / 15px 15px;
+  border: #fff solid 0.2rem;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.Input {
+  border: none;
+  width: 33rem;
+  height: 2rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 1.5rem;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.signInHeaderSection {
+  display: flex;
+  width: 50rem;
+  height: 8rem;
+  margin: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.signInHeader {
+  font-size: 3rem;
+  color: #fff;
+  font-family: "Noto Sans KR", sans-serif;
+}
+.inputSection {
+  display: inline-block;
+  width: 40rem;
+  height: 7rem;
+  margin: 10px 0px 10px 0px;
+}
+
+.inputIcon {
+  width: 2rem;
+  margin: 0.2rem;
+  color: #fff;
+  font-size: 2rem;
+}
+
+.findSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50rem;
+}
+
+.findContainer {
+  display: flex;
+  width: 40rem;
+  height: 2rem;
+  margin: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.find {
+  border: none;
+  background-color: none;
+  color: #fff;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.signInBottom {
+  display: flex;
+  color: #fff;
+  margin: 0.5rem;
+  a {
+    margin: 0px 0px 0px 10px;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  span {
+    font-size: 1.3rem;
+  }
+}
+.signIn_Button {
+  .signInBtn {
+    width: 40rem;
+    height: 70rem;
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 24px;
+    outline: 0;
+    margin: 14px;
+    border-radius: 10px 10px / 10px 10px;
+  }
+
+  .signInBtn:hover {
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+  }
+
+  .isRegister {
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+  }
+
+  .isRegister:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+  }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
+
+.loginBtn {
+  position: relative;
+  display: inline-block;
+  padding: 1rem;
+  margin-top: 2rem;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+  letter-spacing: 0.5rem;
+  overflow: hidden;
+  font-size: 2rem;
+  width: 30rem;
+  text-align: center;
+  font-family: "Jua", sans-serif;
+  font-size: 5rem;
+}
+.loginBtn:hover {
+  background: #03e9f4;
+  color: #050801;
+  box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
+    0 0 200px #03e9f4;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+}
+.loginBtn:nth-child(1) {
+  filter: hue-rotate(270deg);
+}
+.loginBtn:nth-child(2) {
+  filter: hue-rotate(110deg);
+}
+a span {
+  position: absolute;
+  display: block;
+}
+a span:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #03e9f4);
+  animation: animate1 1s linear infinite;
+}
+@keyframes animate1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+a span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #03e9f4);
+  animation: animate2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+@keyframes animate2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+a span:nth-child(3) {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #03e9f4);
+  animation: animate3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+@keyframes animate3 {
+  0% {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+a span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #03e9f4);
+  animation: animate4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+@keyframes animate4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
   }
 }
