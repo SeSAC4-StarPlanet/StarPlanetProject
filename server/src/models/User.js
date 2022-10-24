@@ -15,7 +15,6 @@ const userSchema = new Schema({
     },
     token: { type: String },
     tokenExp: { type: Number },
-    createdAt: { type: Date, default: Date.now, immutable: true },
 }, {
     timestamps: true,
     toObject: { virtuals: true },

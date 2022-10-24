@@ -8,8 +8,8 @@ router.use("/", function (req, res) {
 });
 
 router.use("/auth", require("./auth"));
-router.use('/user'), require('./users');
-router.use('/diary', require('./diarys'));
+// router.use('/user'), require('./users');
+// router.use('/diary', require('./diarys'));
 
 
 module.exports = router;

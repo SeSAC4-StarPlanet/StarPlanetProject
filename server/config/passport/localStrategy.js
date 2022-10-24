@@ -1,7 +1,6 @@
 const LocalStrategy = require('passport-local').Strategy;
 
-const { User } = require('../models/User');
-const config = require('config');
+const { User } = require('../../src/models/User');
 
 // Username, password가 서버에 저장된 정보와 일치하는지 확인 후 로그인 승인
 module.exports = new LocalStrategy(

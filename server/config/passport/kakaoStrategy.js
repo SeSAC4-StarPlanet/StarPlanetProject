@@ -1,7 +1,6 @@
 const KakaoStrategy = require('passport-kakao').Strategy;
-const { User } = require('../models/User');
-const config = require('config');
-const kakaoOAuth = config.get('kakaoOAuth');
+const { User } = require('../../src/models/User');
+const kakaoOAuth = require('../default').kakaoOAuth;
 
 
 module.exports = new KakaoStrategy(

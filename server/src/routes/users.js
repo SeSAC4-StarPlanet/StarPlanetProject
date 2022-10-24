@@ -34,20 +34,18 @@ router.get("/:_id", (req, res) => {
 router.post("/", async (req, res) => {
     const { user_id, username, email, password } = req.body;
 
-    try {
-        // 유저id 비교하여 user가 이미 존재하는지 확인
+    try {    // 유저id 비교하여 user가 이미 존재하는지 확인
         let user = await User.findOne({ user_id: user_id });
-
         if (user) {
             return res.status(400).json({
-                errors: [{ msg: "User already exists" }]
+                errors: [{ msg: "User already exists" }]    //{ success:false, err }
             });
-        } else { // TODO 몽고디비 문법체크
+        } else {
             user = new User({ user_id, username, email, password });
 
             //! password 암호화
             const salt = await bcrypt.genSalt(10);
-            user.password = await bcrypt.hash(password, salt);
+            user.hashedPassword = await bcrypt.hash(password, salt);
             await user.save(); //db에 user 저장
 
             //! json web token 생성 및 response
