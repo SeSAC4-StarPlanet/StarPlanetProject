@@ -23,7 +23,7 @@ const SionTest = () => {
       <div className="back">
         <StarMap />
         <Header />
-        <Read />
+        <Writer />
       </div>
     </>
   );
