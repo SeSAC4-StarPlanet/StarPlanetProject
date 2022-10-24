@@ -16,6 +16,8 @@ import Read from "../../Common/Diary/Read/Read";
 // 페이지
 import DiaryMain from "../../../pages/Diary/Main/DiaryMain";
 import DiaryWrite from "../../../pages/Diary/Write/DiaryWrite";
+import Main from "../../Common/Album/Main/Main";
+
 const SionTest = () => {
   return (
     <>
@@ -23,7 +25,7 @@ const SionTest = () => {
       <div className="back">
         <StarMap />
         <Header />
-        <Writer />
+        <Main />
       </div>
     </>
   );
