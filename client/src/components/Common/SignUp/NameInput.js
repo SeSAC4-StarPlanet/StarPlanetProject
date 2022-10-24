@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 const NameInput = () => {
+  const [username, setusername] = useState("");
+
+  const handlename = (e) => {
+    setusername(e.target.value);
+  };
+
   return (
     <>
       <div className="signUpInputContainer">
@@ -9,6 +15,8 @@ const NameInput = () => {
           type="text"
           className="signUpInput"
           placeholder={"홍길동"}
+          onChange={handlename}
+          value={username}
         ></input>
       </div>
       <div>

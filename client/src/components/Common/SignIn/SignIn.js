@@ -5,19 +5,15 @@ import SignInInput from "./SignInInput";
 import SignInHeader from "./SignInHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
-const User = {
-  user_id: "sesac",
-  email: "test@example.com",
-  hashed_password: "123@",
-};
+
 const SignIn = () => {
-  const [user_id, setUser_Id] = useState("");
+  const [userID, setUser_Id] = useState("");
   const [idError, setIdError] = useState(false);
-  const [pw, setPw] = useState("");
+  const [hashedPW, setPw] = useState("");
   const [pwError, setPwError] = useState(false);
 
   const handleLogin = (e) => {
-    if (user_id == User.user_id && pw == User.hashed_password) {
+    if (userID) {
       alert("로그인 성공");
     } else {
       alert("아이디/비밀번호를 확인해주세요.");
@@ -40,14 +36,14 @@ const SignIn = () => {
           <SignInInput
             type={"text"}
             text={<FontAwesomeIcon icon={faUser} />}
-            value={user_id}
+            value={userID}
             onChange={handleIdOnchange}
             placeholder={"아이디"}
           />
           <SignInInput
             type={"password"}
             text={<FontAwesomeIcon icon={faKey} />}
-            value={pw}
+            value={hashedPW}
             placeholder={"비밀번호"}
             onChange={handlePwOnchange}
           />

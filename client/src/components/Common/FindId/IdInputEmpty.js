@@ -7,7 +7,7 @@ const User = {
 };
 
 const SignUpInput = () => {
-  const [user_id, setUser_id] = useState("");
+  const [userID, setUser_id] = useState("");
   const [idValid, setIdValid] = useState(false);
 
   const handleId = (e) => {
@@ -26,14 +26,14 @@ const SignUpInput = () => {
         <div className="signUpInputTitle">ID</div>
         <input
           placeholder="아이디를 입력해주세요"
-          value={user_id}
+          value={userID}
           onChange={handleId}
           className="signUpInput"
           type="text"
         ></input>
       </div>
       <div>
-        {user_id != User.id ? (
+        {userID != User.id ? (
           <div className="errorMessageWrap">{""}</div>
         ) : (
           <div className="errorMessageWrap">{""}</div>

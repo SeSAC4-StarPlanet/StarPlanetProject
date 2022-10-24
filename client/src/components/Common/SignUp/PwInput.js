@@ -1,22 +1,15 @@
 import React, { useEffect, useState } from "react";
 
-const User = {
-  id: "sesac",
-  email: "test@example.com",
-  pw: "test2323@@@",
-};
-
 const SignUpInput = () => {
-  const [user_id, setUser_id] = useState("");
-  const [pw, setPw] = useState("");
+  const [hashedPW, setPw] = useState("");
   const [pwCheck, setPwCheck] = useState("");
   const [pwError, setPwError] = useState(false);
 
-  const onChangePw = (e) => {
+  const onChangehashedPW = (e) => {
     setPw(e.target.value);
   };
   const onChangePwChk = (e) => {
-    setPwError(e.target.value !== pw);
+    setPwError(e.target.value !== hashedPW);
     setPwCheck(e.target.value);
   };
 
@@ -27,8 +20,8 @@ const SignUpInput = () => {
         <input
           type="password"
           placeholder="영문, 숫자, 특수문자 포함 8자 이상"
-          value={pw}
-          onChange={onChangePw}
+          value={hashedPW}
+          onChange={onChangehashedPW}
           className="signUpInput"
           required
         ></input>
