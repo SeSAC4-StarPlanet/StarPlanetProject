@@ -23,7 +23,7 @@ const SignUpPage = () => {
             <PwInput />
             <NameInput />
             <EmailInput />
-            <Button />
+            <Button text={"회원가입"} />
           </div>
         </div>
       </div>

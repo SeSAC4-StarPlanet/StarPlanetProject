@@ -1,18 +1,14 @@
-html {
-  font-size: 10px;
-}
-
 .signUpLogoWrapper {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  width: 50rem;
-  height: 10rem;
+  width: 30rem;
+  height: 8rem;
   position: absolute;
   left: 50%;
   transform: translate(-50%);
   img {
-    width: 30rem;
+    width: 15rem;
   }
 }
 
@@ -20,25 +16,27 @@ html {
   display: flex;
   position: absolute;
   left: 50%;
-  transform: translate(-50%, 25%);
+  transform: translate(-50%, 20%);
   flex-direction: column;
-  width: 50rem;
-  height: 55rem;
+  width: 30rem;
+  height: 36rem;
   align-items: center;
 }
 
 .signUpSection {
-  display: inline-block;
-  width: 50rem;
-  height: 55rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30rem;
+  height: 36rem;
   border-radius: 15px 15px / 15px 15px;
   background: rgba(147, 147, 147, 0.1);
 }
 
 .signUp {
   display: flex;
-  width: 50rem;
-  height: 55rem;
+  width: 30rem;
+  height: 5rem;
   border-radius: 15px 15px / 15px 15px;
   flex-direction: column;
   align-items: center;
@@ -48,44 +46,45 @@ html {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 40rem;
-  height: 6rem;
+  width: 25rem;
+  height: 3.5rem;
   border-radius: 15px 15px / 15px 15px;
   border: #fff solid 0.2rem;
-  padding: 1.5rem;
+  padding: 0.5rem;
   box-sizing: border-box;
 }
 
 .signUpInput {
   border: none;
-  width: 33rem;
+  width: 12.5rem;
   height: 2rem;
   padding: 1rem;
   box-sizing: border-box;
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-family: "Noto Sans KR", sans-serif;
 }
 
 .signUpInputTitle {
   display: inline-block;
-  width: 4rem;
+  width: 3rem;
   margin: 0.5rem;
   color: #fff;
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 .errorMessageWrap {
+  text-align: center;
   width: 39rem;
   height: 2rem;
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: rgb(182, 19, 19);
   font-weight: 700;
 }
 
 .signUpHeaderSection {
   display: flex;
-  width: 50rem;
+  width: 30rem;
   height: 8rem;
   margin: 0.5rem;
   justify-content: center;
@@ -93,7 +92,7 @@ html {
 }
 
 .signUpHeader {
-  font-size: 3rem;
+  font-size: 2rem;
   color: #fff;
   font-family: "Noto Sans KR", sans-serif;
 }

@@ -1,4 +1,3 @@
-import "./FindId.scss";
 import NameInput from "../../Common/SignUp/NameInput";
 import EmailInputEmpty from "./EmailInputEmpty";
 import Button from "../SignUp/Button";
@@ -14,7 +13,7 @@ const FindId = () => {
         <h3>회원가입시 기재하셨던 정보를 입력해주세요.</h3>
         <IdInputEmpty />
         <EmailInputEmpty />
-        <Button />
+        <Button text={"아이디 찾기"} />
       </div>
     </div>
   );
