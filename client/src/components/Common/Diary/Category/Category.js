@@ -48,7 +48,7 @@ const Category = ({}) => {
       {/* 사진첩 */}
       <ListItemButton>
         <ListItemIcon
-          sx={{ color: "#0D0783", minWidth: "45px", fontSize: "25px" }}
+          sx={{ color: "#0D0783", minWidth: "45px", fontSize: "20px" }}
         >
           <FontAwesomeIcon icon={faImage} />
         </ListItemIcon>
@@ -64,7 +64,7 @@ const Category = ({}) => {
       {/* 일정 */}
       <ListItemButton>
         <ListItemIcon
-          sx={{ color: "#0D0783", minWidth: "45px", fontSize: "25px" }}
+          sx={{ color: "#0D0783", minWidth: "45px", fontSize: "20px" }}
         >
           <FontAwesomeIcon icon={faCalendarDays} />
         </ListItemIcon>
@@ -80,7 +80,7 @@ const Category = ({}) => {
       {/* 북마크 */}
       <ListItemButton>
         <ListItemIcon
-          sx={{ color: "#0D0783", minWidth: "45px", fontSize: "25px" }}
+          sx={{ color: "#0D0783", minWidth: "45px", fontSize: "20px" }}
         >
           <FontAwesomeIcon icon={faBookmark} />
         </ListItemIcon>
@@ -96,7 +96,7 @@ const Category = ({}) => {
       {/* 다이어리 */}
       <ListItemButton onClick={handleClick}>
         <ListItemIcon
-          sx={{ color: "#0D0783", minWidth: "45px", fontSize: "25px" }}
+          sx={{ color: "#0D0783", minWidth: "45px", fontSize: "20px" }}
         >
           <FontAwesomeIcon icon={faBook} />
         </ListItemIcon>
@@ -113,7 +113,7 @@ const Category = ({}) => {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItemButton
-            sx={{ height: "30px", pl: 4, fontSize: "13px", fontWeight: 500 }}
+            sx={{ height: "30px", pl: 5, fontSize: "13px", fontWeight: 500 }}
           >
             <ListItemIcon sx={{ color: "#0D0783", minWidth: "30px" }}>
               <FaList />
@@ -128,7 +128,7 @@ const Category = ({}) => {
             />
           </ListItemButton>
           <ListItemButton
-            sx={{ height: "30px", pl: 4, fontSize: "13px", fontWeight: 500 }}
+            sx={{ height: "30px", pl: 5, fontSize: "13px", fontWeight: 500 }}
           >
             <ListItemIcon sx={{ color: "#0D0783", minWidth: "30px" }}>
               <FaList />
@@ -143,7 +143,7 @@ const Category = ({}) => {
             />
           </ListItemButton>
           <ListItemButton
-            sx={{ height: "30px", pl: 4, fontSize: "13px", fontWeight: 500 }}
+            sx={{ height: "30px", pl: 5, fontSize: "13px", fontWeight: 500 }}
             onClick={handleClick_2}
           >
             <ListItemIcon sx={{ color: "#0D0783", minWidth: "30px" }}>
@@ -164,7 +164,7 @@ const Category = ({}) => {
               <ListItemButton
                 sx={{
                   height: "30px",
-                  pl: 6,
+                  pl: 7,
                   fontSize: "11px",
                   fontWeight: 500
                 }}
@@ -184,7 +184,7 @@ const Category = ({}) => {
               <ListItemButton
                 sx={{
                   height: "30px",
-                  pl: 6,
+                  pl: 7,
                   fontSize: "11px",
                   fontWeight: 500
                 }}
@@ -204,7 +204,7 @@ const Category = ({}) => {
               <ListItemButton
                 sx={{
                   height: "30px",
-                  pl: 6,
+                  pl: 7,
                   fontSize: "11px",
                   fontWeight: 500
                 }}
