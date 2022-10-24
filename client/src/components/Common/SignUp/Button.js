@@ -18,7 +18,7 @@ const theme = createTheme({
   },
 });
 
-const Btn = () => {
+const Btn = ({ text }) => {
   return (
     <div className="btnBox">
       <ThemeProvider theme={theme}>
@@ -30,7 +30,7 @@ const Btn = () => {
             alert("clicked");
           }}
         >
-          로그인
+          {text}
         </Button>
       </ThemeProvider>
     </div>

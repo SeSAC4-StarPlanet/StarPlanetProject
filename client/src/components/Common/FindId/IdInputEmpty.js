@@ -25,7 +25,7 @@ const SignUpInput = () => {
       <div className="signUpInputContainer">
         <div className="signUpInputTitle">ID</div>
         <input
-          placeholder="사용하실 아이디를 입력해주세요"
+          placeholder="아이디를 입력해주세요"
           value={user_id}
           onChange={handleId}
           className="signUpInput"
