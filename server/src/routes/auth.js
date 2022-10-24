@@ -1,5 +1,5 @@
 const express = require('express');
-const passport = require('../../config/passport');
+const passport = require('../../config/passport');
 const jwt = require("jsonwebtoken");
 
 
@@ -101,7 +101,7 @@ router.get('/logout', (req, res) => {
 const secret = require('../../config/default').secretOrKey;
 function setUserToken(res, user) {
     user.type = 'JWT';
-    const token = jwt.sign(user, secret, {
+    const token = jwt.sign(user.toJSON(), secret, {
         expiresIn: '15m', // 만료시간 15분
         issuer: '토큰발급자',
     });
