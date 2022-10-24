@@ -4,17 +4,18 @@ const { Schema } = mongoose;
 
 /* Schema */
 const userSchema = new Schema({
-    user_id: { type: String, required: true, unique: true },
-    username: { type: String, required: true, index: 'hashed', default: 'name' },
+    userID: { type: String, required: true, unique: true, default: 'socialUser' },
+    hashedPW: { type: String },
+    username: { type: String, required: true },
     email: { type: String, trim: true },
-    hashedPassword: { type: String },
+    snsID: { type: String },
+    provider: { type: String, required: true, default: 'local' },
     meta: {
-        image: { type: String },
+        userImg: { type: String, default: 'default-profile.jpg' },
+        userInfo: { type: String },
         planet: { type: Array },
-        role: { type: Number, default: 0 }
     },
-    token: { type: String },
-    tokenExp: { type: Number },
+
 }, {
     timestamps: true,
     toObject: { virtuals: true },
@@ -28,8 +29,8 @@ userSchema
     .virtual('password')
     .set(function (password) {// password를 DB에 저장되지 않는 virtual 속성으로 정의
         this.salt = this.makeSalt();
-        this.hashedPassword = this.encryptPassword(password, this.salt);
-        console.log('hashedPassword 저장 : ' + this.hashedPassword);
+        this.hashedPW = this.encryptPassword(password, this.salt);
+        console.log('hashedPW 저장 : ' + this.hashedPW);
     })
 
 // virtuals
@@ -72,9 +73,9 @@ userSchema.method('encryptPassword', function (plainText, salt) {
     else { return crypto.createHmac('sha1', this.salt), update(plainText).digest('hex'); }
 });
 userSchema.method('makeSalt', function () { return Math.round(Date.now().valueOf() * Math.random) + ''; });
-userSchema.method('authenticate', function (password, salt, hashedPassword) {
-    if (salt) { return this.encryptPassword(password, salt) === hashedPassword; }
-    else { return this.encryptPassword(password, this.salt) === hashedPassword; }
+userSchema.method('authenticate', function (password, salt, hashedPW) {
+    if (salt) { return this.encryptPassword(password, salt) === hashedPW; }
+    else { return this.encryptPassword(password, this.salt) === hashedPW; }
 });
 
 userSchema.methods.generateJWT = function () {
@@ -88,9 +89,6 @@ userSchema.methods.generateJWT = function () {
         exp: parseInt(exp.getTime() / 1000),
     }, secret);
 };
-
-
-
 
 
 const User = mongoose.model('User', userSchema);
