@@ -1,9 +1,9 @@
 const express = require('express');
-const router = express.Router();
-
-const passport = require('../../config/passport/index.js');
+const passport = require('../../config/passport');
 const jwt = require("jsonwebtoken");
 
+
+const router = express.Router();
 
 
 router.get('/', (req, res) => {
@@ -51,7 +51,7 @@ router.post('/login', (req, res, next) => {
                 res.redirect("/auth");
             }
         });
-    })(req, res, next); // 미들웨어 내의 미들웨어에
+    })(req, res, next); // 미들웨어 내의 미들웨어
 });
 
 
@@ -98,7 +98,7 @@ router.get('/logout', (req, res) => {
 
 
 // jwt토큰 발급
-const secret = 'JWT-SECRET-KEY';
+const secret = require('../../config/default').secretOrKey;
 function setUserToken(res, user) {
     user.type = 'JWT';
     const token = jwt.sign(user, secret, {

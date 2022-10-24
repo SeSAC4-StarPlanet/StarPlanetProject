@@ -1,51 +1,33 @@
-html {
-  font-size: 10px;
-}
-
 .successSignUpLogoWrapper {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  width: 50rem;
-  height: 10rem;
+  width: 30rem;
+  height: 8rem;
   position: absolute;
   left: 50%;
   transform: translate(-50%);
   img {
-    width: 30rem;
+    width: 15rem;
   }
 }
 
-h1,
-h2,
-h3 {
-  color: #fff;
-}
-
-h2 {
-  margin-top: 5vh;
-  margin-bottom: 1vh;
-}
-
-h1 {
-  margin-bottom: 1vh;
-}
-
-h3 {
-  margin-top: 1vh;
-  margin-bottom: 1vh;
-}
-
-.successSignUpText {
+.successSignUpTextBox {
   display: flex;
   flex-direction: column;
   align-items: center;
+  div {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .successSignUpSection {
   display: inline-block;
-  width: 50rem;
-  height: 45rem;
+  width: 30rem;
+  height: 36rem;
   background-color: rgba(147, 147, 147, 0.1);
   border-radius: 15px 15px / 15px 15px;
 }
@@ -54,10 +36,10 @@ h3 {
   display: flex;
   position: absolute;
   left: 50%;
-  transform: translate(-50%, 30%);
+  transform: translate(-50%, 20%);
   flex-direction: column;
-  width: 50rem;
-  height: 45rem;
+  width: 30rem;
+  height: 36rem;
   align-items: center;
 }
 
@@ -70,11 +52,11 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50rem;
+  width: 30rem;
   height: 5rem;
   margin: 5vh 0vw 5vh 0vw;
   box-sizing: border-box;
 }
 .successSignUpImg > img {
-  width: 40rem;
+  width: 20rem;
 }

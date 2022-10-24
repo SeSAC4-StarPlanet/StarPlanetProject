@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Button from "./Button";
+
 import FindTxt from "./FindTxt";
 import SignInInput from "./SignInInput";
 import SignInHeader from "./SignInHeader";
@@ -74,8 +74,8 @@ const SignIn = () => {
       {/* -----------------로그인input----------------- */}
 
       <div className="signInBottom">
-        <span>STARPL에 처음이신가요?</span>
-        <a>회원가입</a>
+        <div>STARPL에 처음이신가요?</div>
+        <span onClick={() => alert("clicked")}>회원가입</span>
       </div>
 
       {/* -----------------회원가입안내글----------------- */}
