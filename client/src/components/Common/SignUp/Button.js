@@ -22,14 +22,7 @@ const Btn = ({ text }) => {
   return (
     <div className="btnBox">
       <ThemeProvider theme={theme}>
-        <Button
-          variant="contained"
-          color="neutral"
-          size="large"
-          onClick={() => {
-            alert("clicked");
-          }}
-        >
+        <Button variant="contained" color="neutral" size="large">
           {text}
         </Button>
       </ThemeProvider>

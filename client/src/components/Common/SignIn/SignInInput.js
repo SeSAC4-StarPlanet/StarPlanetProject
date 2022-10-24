@@ -1,11 +1,7 @@
 import React, { useEffect, useRef, useState, forwardRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-const User = {
-  user_id: "sesac",
-  email: "test@example.com",
-  hashed_password: "test2323@@@",
-};
+
 const SignInInput = ({ type, text, placeholder, onChange }) => {
   const ref1 = useRef();
   const ref2 = useRef();
