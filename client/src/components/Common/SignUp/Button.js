@@ -18,11 +18,16 @@ const theme = createTheme({
   },
 });
 
-const Btn = ({ text }) => {
+const Btn = ({ text, onClick }) => {
   return (
     <div className="btnBox">
       <ThemeProvider theme={theme}>
-        <Button variant="contained" color="neutral" size="large">
+        <Button
+          variant="contained"
+          color="neutral"
+          size="large"
+          onClick={onClick}
+        >
           {text}
         </Button>
       </ThemeProvider>

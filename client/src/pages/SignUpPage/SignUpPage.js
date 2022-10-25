@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import "./SignUpPage.scss";
 import StarMap from "../../components/Common/StarMap/StarMap";
 import Main_Logo from "../../assets/img/LandingPage/logo_main.svg";
@@ -11,11 +11,23 @@ import Button from "../../components/Common/SignUp/Button";
 import axios from "axios";
 
 const SignUpPage = () => {
-  const sesac = () => {
+  const [userID, setuserID] = useState("");
+  const [hashedPW, setPW] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setusername] = useState("");
+
+  const handleForm = () => {
     axios
-      .post("http://localhost:8000/api/user")
+      .post("http://localhost:8000/api/user", {
+        withCredentials: true,
+        userID: userID,
+        hashedPW: hashedPW,
+        email: email,
+        username: username,
+      })
       .then((res) => console.log(res.data));
   };
+
   return (
     <div>
       <StarMap />
@@ -24,14 +36,40 @@ const SignUpPage = () => {
       </div>
       <div className="signUpWrapper">
         <div className="signUpSection">
-          <div className="signUp">
-            <SignUpHeader text={"회원가입"} />
-            <IdInput />
-            <PwInput />
-            <NameInput />
-            <EmailInput />
-            <Button onClick={() => {}} text={"회원가입"} />
-          </div>
+          <form>
+            <div className="signUp">
+              <SignUpHeader text={"회원가입"} />
+              <IdInput
+                value={userID}
+                onChange={(e) => {
+                  setuserID(e.target.value);
+                  console.log(e.target.value);
+                }}
+              />
+              <PwInput
+                value={hashedPW}
+                onChange={(e) => {
+                  setPW(e.target.value);
+                  console.log(e.target.value);
+                }}
+              />
+              <NameInput
+                value={username}
+                onChange={(e) => {
+                  setusername(e.target.value);
+                  console.log(e.target.value);
+                }}
+              />
+              <EmailInput
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  console.log(e.target.value);
+                }}
+              />
+              <Button onClick={handleForm} text={"회원가입"} />
+            </div>
+          </form>
         </div>
       </div>
     </div>
