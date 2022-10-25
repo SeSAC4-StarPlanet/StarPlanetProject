@@ -18,7 +18,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors({ origin: true, credentials: true })); // app.use(cors({ origin: clientUrl }));
+app.use(cors({ credentials: true, origin: "http://localhost:3000" })); // app.use(cors({ origin: clientUrl }));
 app.use(cookieParser(config.COOKIE_SECRET));
 
 /* Redis */

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SignUpInput = () => {
+const SignUpInput = ({ value, onChange }) => {
   const [userID, setuserID] = useState("");
   const [idValid, setIdValid] = useState(false);
 
@@ -20,14 +20,14 @@ const SignUpInput = () => {
         <div className="signUpInputTitle">ID</div>
         <input
           placeholder="사용하실 아이디를 입력해주세요"
-          value={userID}
-          onChange={handleId}
+          value={value}
+          onChange={(handleId, onChange)}
           className="signUpInput"
           type="text"
         ></input>
       </div>
       <div>
-        {userID ? (
+        {value ? (
           <div className="errorMessageWrap">{""}</div>
         ) : (
           <div className="errorMessageWrap">

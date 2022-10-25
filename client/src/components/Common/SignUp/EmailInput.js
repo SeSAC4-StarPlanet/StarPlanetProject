@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const EmailInput = () => {
+const EmailInput = ({ value, onChange }) => {
   const [email, setEmail] = useState("");
   const [emailValid, setEmailValid] = useState(false);
 
@@ -22,8 +22,8 @@ const EmailInput = () => {
         <input
           type="text"
           placeholder="test@email.com"
-          value={email}
-          onChange={handleEmail}
+          value={value}
+          onChange={(handleEmail, onChange)}
           className="signUpInput"
         ></input>
       </div>
