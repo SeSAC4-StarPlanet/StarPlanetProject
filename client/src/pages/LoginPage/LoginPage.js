@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FindTxt from "../../components/Common/SignIn/FindTxt";
 import SignInInput from "../../components/Common/SignIn/SignInInput";
 import SignInHeader from "../../components/Common/SignIn/SignInHeader";
@@ -32,6 +32,10 @@ const SignIn = () => {
         console.log("An error occurred:", err.response);
       });
   };
+
+  useEffect(() => {
+    console.log("rendering~");
+  }, []);
 
   return (
     <div>

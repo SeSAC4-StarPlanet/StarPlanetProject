@@ -9,6 +9,7 @@ import SuccessSignUpPage from "../../pages/SuccessSignUpPage/SuccessSignUpPage";
 import FindIdPage from "../../pages/FindIdPage/FindIdPage";
 import ResetPw1Page from "../../pages/ResetPw1Page/ResetPw1Page";
 import ResetPw2Page from "../../pages/ResetPw2Page/ResetPw2Page";
+import ModifyPage from "../../pages/ModifyPage/ModifyPage";
 import DiaryWrite from "../../pages/Diary/Write/DiaryWrite";
 
 // test component
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: "/resetPw2",
     element: <ResetPw2Page />,
+  },
+  {
+    path: "/modifyInfo",
+    element: <ModifyPage />,
   },
   {
     path: "/sionTest",
