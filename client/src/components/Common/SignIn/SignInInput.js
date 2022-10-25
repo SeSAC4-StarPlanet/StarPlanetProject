@@ -1,14 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
 const SignInInput = ({ type, text, placeholder, onChange, value }) => {
   const ref1 = useRef();
   const ref2 = useRef();
-  const [userID, setUser_Id] = useState("");
-  const [idError, setIdError] = useState(false);
-  const [hashedPW, setPw] = useState("");
-  const [pwError, setPwError] = useState(false);
 
   const handleClick = () => {
     ref1.current.value = "";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FindTxt from "../../components/Common/SignIn/FindTxt";
 import SignInInput from "../../components/Common/SignIn/SignInInput";
 import SignInHeader from "../../components/Common/SignIn/SignInHeader";
@@ -6,6 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 import StarMap from "../../components/Common/StarMap/StarMap";
 import Main_Logo from "../../assets/img/LandingPage/logo_main.svg";
+import SocialBtn from "../../components/Common/SignIn/SocialBtn";
+import Naver_Btn from "../../assets/img/LoginBtn/naverBtn.png";
+import Kakao_Btn from "../../assets/img/LoginBtn/kakaoBtn.png";
+import Google_Btn from "../../assets/img/LoginBtn/googleBtn.png";
 import "./LoginPage.scss";
 import axios from "axios";
 
@@ -18,12 +22,12 @@ const SignIn = () => {
       alert("아이디와 비밀번호를 입력해주세요");
       return;
     }
-    axios
-      .post("http://localhost:8000/api/user/login", {
-        withCredentials: true,
-        userID: userID,
-        hashedPW: hashedPW,
-      })
+    axios({
+      method: "post",
+      url: "http://localhost:8000/api/auth/login",
+      header: { withCredentials: true },
+      data: { userID: userID, hashedPW: hashedPW },
+    })
       .then((res) => {
         console.log("Well done!");
         console.log("User token", res.data.jwt);
@@ -74,6 +78,13 @@ const SignIn = () => {
               <span></span>
               START
             </a>
+
+            <div className="socialBtn">
+              <SocialBtn src={Naver_Btn} />
+              <SocialBtn src={Kakao_Btn} />
+              <SocialBtn src={Google_Btn} />
+              <SocialBtn src={Naver_Btn} />
+            </div>
           </div>
         </div>
 
