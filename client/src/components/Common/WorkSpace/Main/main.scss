@@ -1,19 +1,48 @@
 .PlanetSelector {
+  .planetWrapper {
+    cursor: pointer;
+    width: 40vw;
+    height: 40vh;
+    // background-color: white;
+    margin: 0 auto;
+    margin-bottom: 150px;
+    margin-top: 150px;
+    display: flex;
+    justify-content: center;
+
+    .textWrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      .planetName {
+        font-size: 10vh;
+        font-weight: 500;
+      }
+      .planetCreatedDate {
+        text-align: center;
+        font-size: 2vh;
+      }
+    }
+  }
   // 궤도
   #circle-orbit-container {
-    position: relative;
+    position: absolute;
     width: 500px;
     height: 500px;
     left: 50%;
-    transform: translateX(-50%);
+    top: 50%;
+    transform: translate(-50%, -50%);
+
     #inner-orbit {
       position: absolute;
       width: 500px;
-      height: 500px;
-      //   border: 2px #ffffff solid;
+      height: 500px; //   border: 2px #ffffff solid;
       border-radius: 100%;
       -webkit-animation: spin-right 10s linear infinite;
       animation: spin-right 10s linear infinite;
+
       .inner-orbit-cirlces {
         position: absolute;
         top: 62px;
