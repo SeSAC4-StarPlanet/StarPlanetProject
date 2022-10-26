@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import FindTxt from "../../components/Common/SignIn/FindTxt";
 import SignInInput from "../../components/Common/SignIn/SignInInput";
 import SignInHeader from "../../components/Common/SignIn/SignInHeader";
@@ -17,7 +17,7 @@ const SignIn = () => {
   const [userID, setuserId] = useState("");
   const [hashedPW, setPw] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = useCallback(e => {
     if (userID === "" || hashedPW === "") {
       alert("아이디와 비밀번호를 입력해주세요");
       return;
@@ -29,13 +29,14 @@ const SignIn = () => {
       data: { userID: userID, hashedPW: hashedPW },
     })
       .then((res) => {
+
         console.log("Well done!");
         console.log("User token", res.data.jwt);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log("An error occurred:", err.response);
       });
-  };
+  });
 
   return (
     <div>
@@ -51,7 +52,7 @@ const SignIn = () => {
               type={"text"}
               text={<FontAwesomeIcon icon={faUser} />}
               value={userID}
-              onChange={(e) => {
+              onChange={e => {
                 setuserId(e.target.value);
                 console.log(e.target.value);
               }}
@@ -62,7 +63,7 @@ const SignIn = () => {
               text={<FontAwesomeIcon icon={faKey} />}
               value={hashedPW}
               placeholder={"비밀번호"}
-              onChange={(e) => {
+              onChange={e => {
                 setPw(e.target.value);
                 console.log(e.target.value);
               }}
@@ -72,10 +73,10 @@ const SignIn = () => {
             </div>
 
             <a className="loginBtn" onClick={handleLogin}>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
+              <span />
+              <span />
+              <span />
+              <span />
               START
             </a>
 
