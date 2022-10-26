@@ -15,6 +15,7 @@ import DiaryWrite from "../../pages/Diary/Write/DiaryWrite";
 // test component
 import JinseTest from "../Test/JinseTest/JinseTest";
 import SionTest from "../Test/SionTest/SionTest";
+import MakePlanetPage from "../../pages/MakePlanetPage/MakePlanetPage";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
     element: <ModifyPage />,
   },
   {
+    path: "/makePlanet",
+    element: <MakePlanetPage />,
+  },
+  {
     path: "/sionTest",
     element: <SionTest />,
   },
@@ -65,12 +70,12 @@ const router = createBrowserRouter([
 ]);
 
 const Router = () => {
-  const callApi = async () => {
-    axios.get("/api").then((res) => console.log(res.data.test));
-  };
-  useEffect(() => {
-    callApi();
-  }, []);
+  // const callApi = async () => {
+  //   axios.get("/api").then((res) => console.log(res.data.test));
+  // };
+  // useEffect(() => {
+  //   callApi();
+  // }, []);
   return (
     <>
       <RouterProvider router={router} />

@@ -27,7 +27,7 @@ const SignUpInput = ({ value, onChange }) => {
         ></input>
       </div>
       <div>
-        {value ? (
+        {value || value == "" ? (
           <div className="errorMessageWrap">{""}</div>
         ) : (
           <div className="errorMessageWrap">
