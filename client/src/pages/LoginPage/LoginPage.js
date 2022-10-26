@@ -26,10 +26,10 @@ const SignIn = () => {
       method: "post",
       url: "http://localhost:8000/api/auth/login",
       header: { withCredentials: true },
-      data: { userID: userID, hashedPW: hashedPW },
+      data: { userID: userID, hashedPW: hashedPW }
     })
-      .then((res) => {
-        console.log(res.data);
+      .then(res => {
+        console.log(res);
         console.log("User token", res.data.jwt);
       })
       .catch(err => {
