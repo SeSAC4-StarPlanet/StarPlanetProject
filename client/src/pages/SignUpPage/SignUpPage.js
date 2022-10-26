@@ -17,15 +17,19 @@ const SignUpPage = () => {
   const [username, setusername] = useState("");
 
   const handleForm = () => {
-    axios
-      .post("http://localhost:8000/api/user", {
-        withCredentials: true,
+    axios({
+      method: "post",
+      url: "http://localhost:8000/api/user",
+      header: { withCredentials: true },
+      data: {
         userID: userID,
         hashedPW: hashedPW,
         email: email,
         username: username,
-      })
-      .then((res) => console.log(res.data));
+      },
+    })
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -67,8 +71,8 @@ const SignUpPage = () => {
                   console.log(e.target.value);
                 }}
               />
-              <Button onClick={handleForm} text={"회원가입"} />
             </div>
+            <Button onClick={handleForm} text={"회원가입"} />
           </form>
         </div>
       </div>
