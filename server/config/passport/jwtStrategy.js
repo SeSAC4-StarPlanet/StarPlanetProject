@@ -12,10 +12,9 @@ module.exports = new JWTStrategy({
 }, async (payload, done) => {
     console.log("payload");
     try {         // palyload의 id값으로 유저의 데이터 조회 ( id까지 저장한다면 )
-        console.log("payload");
         const exUser = await User.findOne({ userID: payload.id })
         if (exUser) { done(null, exUser); return; }
-        else done(null, false, { reason: '올바르지 않은 인증정보입니다.' });  // 유저 데이터가 없을 경우 에러 표시å
+        else done(null, false, { reason: '올바르지 않은 인증정보입니다.' });  // 유저 데이터가 없을 경우 에러 표시
     } catch (error) {
         console.error(error);
         done(error);

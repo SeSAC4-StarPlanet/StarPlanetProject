@@ -27,18 +27,18 @@ router.get("/:_id", (req, res) => {
   });
 });
 
+
+
 //! 회원 가입
 // router.post('/', controller.createUser);
 router.post("/", async (req, res) => {
 
   try {    // 유저id 비교하여 user가 이미 존재하는지 확인
-
+    console.log('req.body: ', req.body);
     let user = await User.findOne({ userID: req.body.userID });
 
     if (user) {
-      return res.status(400).json({
-        errors: [{ msg: "User already exists" }], //{ success:false, err }
-      });
+      return res.status(400).json({ errors: "User already exists" });
     } else {
       user = new User({
         userID: req.body.userID,
@@ -46,21 +46,15 @@ router.post("/", async (req, res) => {
         username: req.body.username,
         email: req.body.email,
       })
+      // TODO
+      user.save((err, user) => {
+        if (err) return res.json(err);
+        res.json(user);
+      })
 
-      // const salt = await bcrypt.genSalt(10);
-      // user.hashedPW = await bcrypt.hash(hashedPW, salt);
-      // await user.save(); //db에 user 저장
-
-      //! json web token 생성 및 response
-      const payload = { user: { id: user.userID } };
-      jwt.sign(payload, secret, { expiresIn: "30m" }, (err, token) => {
-        if (err) throw err;
-        console.log(token);
-        res.send({ token });
-      });
     }
-  } catch {
-    console.error(error.message);
+  } catch (error) {
+    console.error(error);
     res.status(500).send("server Error");
   }
 });
