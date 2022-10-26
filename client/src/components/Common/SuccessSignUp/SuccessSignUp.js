@@ -14,7 +14,9 @@ const SuccessSignUp = () => {
           <div className="successSignUpImg">
             <img src={Main_Logo} />
           </div>
-          <h3>로그인 후 서비스를 이용하세요.</h3>
+          <div className="successSignupText2">
+            로그인 후 서비스를 이용하세요.
+          </div>
           <SuccessSignUpBtn />
         </div>
       </div>

@@ -20,7 +20,7 @@ const theme = createTheme({
 
 const ModifyButton = ({ text, onClick, color }) => {
   return (
-    <div className="btnBox">
+    <div className="modifyBtnBox">
       <ThemeProvider theme={theme}>
         <Button
           sx={{ width: 120, margin: 1 }}
