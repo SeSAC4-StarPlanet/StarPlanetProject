@@ -4,11 +4,8 @@ const kakaoStrategy = require('./passport/kakaoStrategy');
 const localStrategy = require('./passport/localStrategy');
 const jwt = require('./passport/jwtStrategy');
 
-const { User } = require('../src/models/User');
-
 
 /* 쿠키/세션 serialize */
-
 
 // 로그인 성공시 실행 - 서버세션(req.session)에 사용자식별자 저장
 passport.serializeUser((user, done) => {

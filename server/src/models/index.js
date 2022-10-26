@@ -1,14 +1,30 @@
-const userSchema = require('./User');
-const diarySchema = require('./Diary');
+const mongoose = require('mongoose');
 
+const config = require("../../config/default");
 
+const connect = () => {
 
-exports.createUser = async (user) => {
-    const ret = await userSchema.create({ ...user });
-    return ret || {};
+    mongoose.connect(config.db.MONGO_URI, {
+        dbName: 'starplanet',
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    }, (error) => {
+        if (error) {
+            console.log('"DB ERROR', error);
+        } else {
+            console.log('DB Connected');
+        }
+    });
 }
 
-exports.createDiary = async (diary) => {
-    const ret = await diarySchema.create({ ...diary });
-    return ret || {};
-}
+
+mongoose.connection.on('disconnected', () => {
+    console.error('"DB Disconneced, Reconnect...');
+    connect();
+});
+
+module.exports = connect;
+
+
+
+

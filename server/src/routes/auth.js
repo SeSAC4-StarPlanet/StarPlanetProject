@@ -2,7 +2,6 @@ const express = require('express');
 const passport = require('../../config/passport');
 const jwt = require("jsonwebtoken");
 
-
 const router = express.Router();
 
 
@@ -33,21 +32,29 @@ router.get('/auth', passport.authenticate('jwt', { session: false }),
 
 //! 로그인
 router.get('/login', (req, res) => {
+    console.log('get:/auth/login');
+
     if (req.query.loginError != null) console.log("***** Error : ", req.query.loginError, "*****");
-    res.render('login');
+    res.send(req.query.loginError);
 })
 router.post('/login', (req, res, next) => {
+    console.log('req.body', req.body);
+
     passport.authenticate('local', (authError, user, svrError) => {  // 사용자 인증
+
         // 지정전략(strategy)를 사용해 로그인에 성공/실패할경우 이동할 경로와 메시지 설정
-
-        if (authError) return next(authError);  // 클라이언트 에러시 (이메일 또는 비밀번호 틀렸을 때)
-        if (!user) return res.redirect(`/auth/login?loginError=${svrError.message}`);
-
+        console.log('passport authenticate');
+        if (authError) next(authError);  // 클라이언트 에러시 (이메일 또는 비밀번호 틀렸을 때)
+        if (!user) {
+            console.log('!user', user);
+            return res.redirect(`/auth/login?loginError=${svrError.message}`);
+        }
         // 로그인 성공시 user에 회원정보 있음 req.login으로 passport 로그인
         return req.login(user, { session: false }, (passportError) => {    // jwt 토큰 이용시 session 사용 종료
             if (passportError || !user) return next(passportError);
             else {
                 setUserToken(res, req.user);
+                console.log('setUserToken');
                 res.redirect("/auth");
             }
         });
