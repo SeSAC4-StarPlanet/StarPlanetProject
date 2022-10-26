@@ -7,7 +7,7 @@ const kakaoOAuth = require('../default').kakaoOAuth;
 module.exports = new KakaoStrategy(
     {
         clientID: kakaoOAuth.clientID,
-        callbackURL: '/auth/kakao/callback',
+        callbackURL: kakaoOAuth.callbackURL,
     },
     async (accessToken, refreshToken, profile, done) => {
         console.info('___new KakaoStrategy()');

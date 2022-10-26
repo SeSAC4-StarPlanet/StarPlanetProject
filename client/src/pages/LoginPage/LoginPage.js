@@ -28,9 +28,8 @@ const SignIn = () => {
       header: { withCredentials: true },
       data: { userID: userID, hashedPW: hashedPW }
     })
-      .then(res => {
-        console.log(res);
-        console.log("User token", res.data.jwt);
+      .then((res) => {
+        console.log("User token", res.data);
       })
       .catch(err => {
         console.log("An error occurred:", err.response);

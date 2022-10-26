@@ -1,8 +1,10 @@
 const passport = require('passport');
 const googleStrategy = require('./passport/googleStrategy');
+const naverStrategy = require('./passport/naverStrategy');
 const kakaoStrategy = require('./passport/kakaoStrategy');
 const localStrategy = require('./passport/localStrategy');
 const jwt = require('./passport/jwtStrategy');
+const { pass } = require('./passport/naverStrategy');
 
 
 /* 쿠키/세션 serialize */
@@ -22,6 +24,7 @@ passport.deserializeUser(async (userID, done) => {
 
 passport.use(localStrategy);
 passport.use(googleStrategy);
+passport.use(naverStrategy);
 passport.use(kakaoStrategy);
 passport.use(jwt);
 

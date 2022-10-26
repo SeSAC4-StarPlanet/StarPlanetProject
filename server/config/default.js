@@ -23,4 +23,9 @@ module.exports = {
     clientID: "adeb39a802c3fcea5a92750470fc1654",
     callbackURL: "http://localhost:8000/auth/kakao/callback",
   },
+  naverOAuth: {
+    clientID: "0RvcoZRNN7oNbU0APw_k",
+    clientSecret: "mxeSP8ZQRD",
+    callbackURL: "http://localhost:8000/auth/naver/callback",
+  },
 };

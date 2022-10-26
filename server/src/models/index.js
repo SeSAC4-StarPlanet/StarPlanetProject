@@ -19,7 +19,7 @@ const connect = () => {
 
 
 mongoose.connection.on('disconnected', () => {
-    console.error('"DB Disconneced, Reconnect...');
+    console.error('"DB Disconnected, Reconnecting...');
     connect();
 });
 
