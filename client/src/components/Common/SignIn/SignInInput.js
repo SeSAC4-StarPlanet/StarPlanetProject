@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
-const SignInInput = ({ type, text, placeholder, onChange, value }) => {
+const SignInInput = ({ type, text, placeholder, setData, value }) => {
   const ref1 = useRef();
   const ref2 = useRef();
 
@@ -27,7 +27,7 @@ const SignInInput = ({ type, text, placeholder, onChange, value }) => {
           ref={ref1}
           onChange={(e) => {
             changeInput(e);
-            onChange(e);
+            setData(e.target.value);
           }}
           value={value}
           placeholder={placeholder}
@@ -36,6 +36,7 @@ const SignInInput = ({ type, text, placeholder, onChange, value }) => {
           ref={ref2}
           onClick={() => {
             handleClick();
+            setData("");
           }}
           className="inputIcon"
           hidden

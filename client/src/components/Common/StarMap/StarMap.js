@@ -4,14 +4,14 @@ import "./StarMap.scss";
 
 const StarMap = () => {
   useEffect(() => {
-    const getRandomParticelPos = particleCount => {
+    const getRandomParticelPos = (particleCount) => {
       const arr = new Float32Array(particleCount * 3);
       for (let i = 0; i < particleCount; i++) {
         arr[i] = (Math.random() - 0.5) * 10;
       }
       return arr;
     };
-    const resizeRendererToDisplaySize = renderer => {
+    const resizeRendererToDisplaySize = (renderer) => {
       const canvas = renderer.domElement;
       const width = canvas.clientWidth;
       const height = canvas.clientHeight;
@@ -27,7 +27,7 @@ const StarMap = () => {
     // mouse
     let mouseX = 0;
     let mouseY = 0;
-    document.addEventListener("mousemove", e => {
+    document.addEventListener("mousemove", (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
     });
@@ -56,7 +56,7 @@ const StarMap = () => {
       // Geometry
       const geometrys = [
         new THREE.BufferGeometry(),
-        new THREE.BufferGeometry()
+        new THREE.BufferGeometry(),
       ];
 
       geometrys[0].setAttribute(
@@ -77,7 +77,7 @@ const StarMap = () => {
           map: loader.load(
             "https://raw.githubusercontent.com/Kuntal-Das/textures/main/sp1.png"
           ),
-          transparent: true
+          transparent: true,
           // color: "#ff0000"
         }),
         new THREE.PointsMaterial({
@@ -85,9 +85,9 @@ const StarMap = () => {
           map: loader.load(
             "https://raw.githubusercontent.com/Kuntal-Das/textures/main/sp2.png"
           ),
-          transparent: true
+          transparent: true,
           // color: "#0000ff"
-        })
+        }),
       ];
 
       const starsT1 = new THREE.Points(geometrys[0], materials[0]);
@@ -95,7 +95,7 @@ const StarMap = () => {
       scene.add(starsT1);
       scene.add(starsT2);
 
-      const render = time => {
+      const render = (time) => {
         // time *= 0.001; //in seconds
 
         if (resizeRendererToDisplaySize(renderer)) {
@@ -119,7 +119,7 @@ const StarMap = () => {
       requestAnimationFrame(render);
     };
     main();
-  });
+  }, []);
 
   return (
     <div className="starMap_wrap">
