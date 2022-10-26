@@ -14,6 +14,8 @@ import DiaryWrite from "../../pages/Diary/Write/DiaryWrite";
 import WorkSpaceMain from "../../pages/WorkSpace/Main/WorkSpaceMain";
 import DiaryMain from "../../pages/Diary/Main/DiaryMain";
 import DiaryRead from "../../pages/Diary/Read/DiaryRead";
+import AlbumIndividual from "../../pages/Album/Individual/AlbumIndividual";
+import AlbumMain from "../../pages/Album/Main/AlbumMain";
 // test component
 import JinseTest from "../Test/JinseTest/JinseTest";
 import SionTest from "../Test/SionTest/SionTest";
@@ -73,6 +75,14 @@ const router = createBrowserRouter([
   },{
     path: "/workspace/main",
     element: <WorkSpaceMain />,
+  },
+  ,{
+    path: "/album/main",
+    element: <AlbumMain />,
+  },
+  ,{
+    path: "/album/individual",
+    element: <AlbumIndividual />,
   },
 ]);
 

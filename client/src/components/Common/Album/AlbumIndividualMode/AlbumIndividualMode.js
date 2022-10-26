@@ -1,5 +1,5 @@
 import React from "react";
-import "./albumMain.scss";
+import "./AlbumIndividualMode.scss";
 
 import Title from "../Title/Title";
 import Selector from "../Selector/Selector";
