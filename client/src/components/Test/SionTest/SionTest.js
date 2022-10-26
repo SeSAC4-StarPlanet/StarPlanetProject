@@ -12,7 +12,7 @@ import Selector from "../../Common/Diary/Selector/Selector";
 import Editor from "../../Common/Editor/Editor";
 import Writer from "../../Common/Diary/Writer/Writer";
 import Read from "../../Common/Diary/Read/Read";
-import AlbumMain from "../../Common/Album/AlbumIndividualMode/AlbumIndividualMode"
+import AlbumMain from "../../Common/Album/AlbumMain/AlbumMain";
 // 페이지
 import DiaryMain from "../../../pages/Diary/Main/DiaryMain";
 import DiaryWrite from "../../../pages/Diary/Write/DiaryWrite";
@@ -32,6 +32,7 @@ const SionTest = () => {
         <div className="back">
         <StarMap />
         <Header />
+
         {/* <NewPlanetBtn/> */}
         <Frame planetTitle={"sion"} content={<AlbumMain/>}/>
         </div>

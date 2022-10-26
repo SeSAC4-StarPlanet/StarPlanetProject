@@ -3,7 +3,7 @@ import "./SocialBtn.scss";
 
 export default function SocialBtn({ src }) {
   return (
-    <div className="btnBox">
+    <div className="socialBtnBox">
       <img src={src}></img>
     </div>
   );

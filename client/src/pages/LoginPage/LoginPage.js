@@ -51,10 +51,7 @@ const SignIn = () => {
               type={"text"}
               text={<FontAwesomeIcon icon={faUser} />}
               value={userID}
-              onChange={e => {
-                setuserId(e.target.value);
-                console.log(e.target.value);
-              }}
+              setData={setuserId}
               placeholder={"아이디"}
             />
             <SignInInput
@@ -62,10 +59,7 @@ const SignIn = () => {
               text={<FontAwesomeIcon icon={faKey} />}
               value={hashedPW}
               placeholder={"비밀번호"}
-              onChange={e => {
-                setPw(e.target.value);
-                console.log(e.target.value);
-              }}
+              setData={setPw}
             />
             <div>
               <FindTxt />
