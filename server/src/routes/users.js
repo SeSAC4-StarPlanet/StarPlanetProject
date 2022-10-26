@@ -1,13 +1,12 @@
 const express = require("express");
 const router = express.Router();
-
 const User = require("../models/User");
 const controller = require("../controllers/user");
 
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
 const secret = require("../../config/default").secretOrKey;
+
 
 // 모든 회원 조회
 router.get("/", (req, res) => {
@@ -31,23 +30,26 @@ router.get("/:_id", (req, res) => {
 //! 회원 가입
 // router.post('/', controller.createUser);
 router.post("/", async (req, res) => {
-  const { userID, username, email, hashedPW } = req.body;
-  console.log("req.body:", req.body);
-  try {
-    // 유저id 비교하여 user가 이미 존재하는지 확인
-    let user = await User.findOne({ userID: userID });
-    console.log("user:", user);
+
+  try {    // 유저id 비교하여 user가 이미 존재하는지 확인
+
+    let user = await User.findOne({ userID: req.body.userID });
+
     if (user) {
       return res.status(400).json({
         errors: [{ msg: "User already exists" }], //{ success:false, err }
       });
     } else {
-      user = new User({ userID, username, email, hashedPW });
+      user = new User({
+        userID: req.body.userID,
+        hashedPW: req.body.hashedPW,
+        username: req.body.username,
+        email: req.body.email,
+      })
 
-      //! password 암호화
-      const salt = await bcrypt.genSalt(10);
-      user.hashedPW = await bcrypt.hash(hashedPW, salt);
-      await user.save(); //db에 user 저장
+      // const salt = await bcrypt.genSalt(10);
+      // user.hashedPW = await bcrypt.hash(hashedPW, salt);
+      // await user.save(); //db에 user 저장
 
       //! json web token 생성 및 response
       const payload = { user: { id: user.userID } };
@@ -62,6 +64,7 @@ router.post("/", async (req, res) => {
     res.status(500).send("server Error");
   }
 });
+
 
 // 회원 정보수정
 router.put("/:_id", (req, res) => {
@@ -84,6 +87,7 @@ router.put("/:_id", (req, res) => {
       });
     });
 });
+
 
 // 회원 탈퇴
 router.delete("/:_id", (req, res) => {

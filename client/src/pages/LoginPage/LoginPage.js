@@ -19,13 +19,12 @@ const SignIn = () => {
       return;
     }
     axios
-      .post("http://localhost:8000/api/user/login", {
-        withCredentials: true,
+      .post("http://localhost:8000/api/auth/login", {
         userID: userID,
         hashedPW: hashedPW,
       })
       .then((res) => {
-        console.log("Well done!");
+        console.log(res.data);
         console.log("User token", res.data.jwt);
       })
       .catch((err) => {
