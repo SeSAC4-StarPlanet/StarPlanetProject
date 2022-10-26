@@ -1,23 +1,26 @@
 const LocalStrategy = require('passport-local').Strategy;
 
 const { User } = require('../../src/models/User');
+const bcrypt = require('bcrypt');
 
 // UserID, password가 서버에 저장된 정보와 일치하는지 확인 후 로그인 승인
 module.exports = new LocalStrategy(
     {
-        userIDField: 'userID',
-        passwordField: 'password',
-        session: true,
-        passReqToCallback: true,
+        usernameField: 'userID',
+        passwordField: 'hashedPW'
     },
-    async (userID, password, done) => {    // verify
-        try {           // DB에서 사용자 검색
-            const exUser = await User.findOne({
-                userID: userID, provider: 'local'
-            });
+    async (username, password, done) => {    // verify
+        try {
+            console.log('passport-local: ', username, password);
 
-            if (userID == exUser.userID) {
-                if (password == exUser.hashedPW) {
+            // DB에서 사용자 검색
+            const exUser = await User.findOne({ userID: username });
+            console.log('exUser', exUser);
+            if (username == exUser.userID) {
+
+                // 비밀번호 체크
+                // const result = await bcrypt.compare(password, exUser.hashedPW);
+                if (exUser) {
                     console.log("*****Login Success*****")
                     done(null, exUser);
                 } else {

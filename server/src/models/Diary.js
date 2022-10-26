@@ -1,13 +1,56 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+
 /* Schema */
-const diarySchema = new Schema({
-    userId: { type: String, required: true },
-    title: { type: String, required: true },
+const RecommentSchema = new Schema({
+    writer: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    text: String,
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+});
+
+const CommentSchema = new Schema({
+    writer: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    text: String,
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+});
+
+const DiarySchema = new Schema({
+    writer: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    title: { type: String },
     content: { type: String },
     image: { type: String },
-    createdAt: { type: Date, default: Date.now, immutable: true },
-}, { versionKey: false });
+    tags: { type: Array },
+    bookmark: { type: Number },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+    comments: {
+        type: [CommentSchema],
+        default: {
+            recomments: {
+                type: [RecommentSchema]
+            }
+        }
+    }
+});
 
-module.exports = mongoose.model('diary', diarySchema);
+const Diary = mongoose.model('Diary', DiarySchema);
+
+module.exports = { Diary };

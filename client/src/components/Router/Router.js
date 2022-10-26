@@ -11,7 +11,9 @@ import ResetPw1Page from "../../pages/ResetPw1Page/ResetPw1Page";
 import ResetPw2Page from "../../pages/ResetPw2Page/ResetPw2Page";
 import ModifyPage from "../../pages/ModifyPage/ModifyPage";
 import DiaryWrite from "../../pages/Diary/Write/DiaryWrite";
-
+import WorkSpaceMain from "../../pages/WorkSpace/Main/WorkSpaceMain";
+import DiaryMain from "../../pages/Diary/Main/DiaryMain";
+import DiaryRead from "../../pages/Diary/Read/DiaryRead";
 // test component
 import JinseTest from "../Test/JinseTest/JinseTest";
 import SionTest from "../Test/SionTest/SionTest";
@@ -66,6 +68,16 @@ const router = createBrowserRouter([
   {
     path: "/diary/write",
     element: <DiaryWrite />,
+  },
+  {
+    path: "/diary/main",
+    element: <DiaryMain />,
+  },{
+    path: "/diary/Read",
+    element: <DiaryRead />,
+  },{
+    path: "/workspace/main",
+    element: <WorkSpaceMain />,
   },
 ]);
 
