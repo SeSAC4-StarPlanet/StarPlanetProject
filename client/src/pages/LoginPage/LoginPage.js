@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import FindTxt from "../../components/Common/SignIn/FindTxt";
 import SignInInput from "../../components/Common/SignIn/SignInInput";
 import SignInHeader from "../../components/Common/SignIn/SignInHeader";
@@ -6,6 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 import StarMap from "../../components/Common/StarMap/StarMap";
 import Main_Logo from "../../assets/img/LandingPage/logo_main.svg";
+import SocialBtn from "../../components/Common/SignIn/SocialBtn";
+import Naver_Btn from "../../assets/img/LoginBtn/naverBtn.png";
+import Kakao_Btn from "../../assets/img/LoginBtn/kakaoBtn.png";
+import Google_Btn from "../../assets/img/LoginBtn/googleBtn.png";
 import "./LoginPage.scss";
 import axios from "axios";
 
@@ -13,24 +17,25 @@ const SignIn = () => {
   const [userID, setuserId] = useState("");
   const [hashedPW, setPw] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = useCallback(e => {
     if (userID === "" || hashedPW === "") {
       alert("아이디와 비밀번호를 입력해주세요");
       return;
     }
-    axios
-      .post("http://localhost:8000/api/auth/login", {
-        userID: userID,
-        hashedPW: hashedPW,
-      })
+    axios({
+      method: "post",
+      url: "http://localhost:8000/api/auth/login",
+      header: { withCredentials: true },
+      data: { userID: userID, hashedPW: hashedPW },
+    })
       .then((res) => {
         console.log(res.data);
         console.log("User token", res.data.jwt);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log("An error occurred:", err.response);
       });
-  };
+  });
 
   return (
     <div>
@@ -46,7 +51,7 @@ const SignIn = () => {
               type={"text"}
               text={<FontAwesomeIcon icon={faUser} />}
               value={userID}
-              onChange={(e) => {
+              onChange={e => {
                 setuserId(e.target.value);
                 console.log(e.target.value);
               }}
@@ -57,7 +62,7 @@ const SignIn = () => {
               text={<FontAwesomeIcon icon={faKey} />}
               value={hashedPW}
               placeholder={"비밀번호"}
-              onChange={(e) => {
+              onChange={e => {
                 setPw(e.target.value);
                 console.log(e.target.value);
               }}
@@ -67,12 +72,19 @@ const SignIn = () => {
             </div>
 
             <a className="loginBtn" onClick={handleLogin}>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
+              <span />
+              <span />
+              <span />
+              <span />
               START
             </a>
+
+            <div className="socialBtn">
+              <SocialBtn src={Naver_Btn} />
+              <SocialBtn src={Kakao_Btn} />
+              <SocialBtn src={Google_Btn} />
+              <SocialBtn src={Naver_Btn} />
+            </div>
           </div>
         </div>
 
