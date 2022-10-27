@@ -1,8 +1,11 @@
 const express = require('express');
+const router = express.Router();
+
 const passport = require('../../config/passport');
 const jwt = require("jsonwebtoken");
+const secret = require('../../config/default').secretOrKey;
+const { verifyToken } = require('../middlewares/authorization');
 
-const router = express.Router();
 
 
 router.get('/', (req, res) => {
@@ -16,11 +19,10 @@ router.get('/', (req, res) => {
     }
 });
 
-
-//! passport-jwt를 이용해 인증을 시도할 경우 (인증 확인)
+//! passport-jwt 미들웨어 (인증 확인)
 router.get('/auth', passport.authenticate('jwt', { session: false }),
     async (req, res, next) => {
-        console.log("passport-jwt 인증 시도");
+        console.log("hi");
         try {
             res.json({ result: true });
         } catch (error) {
@@ -30,6 +32,7 @@ router.get('/auth', passport.authenticate('jwt', { session: false }),
     }
 );
 
+
 //! 로그인
 router.get('/login', (req, res) => {
     console.log('get:/auth/login');
@@ -37,11 +40,9 @@ router.get('/login', (req, res) => {
     if (req.query.loginError != null) console.log("***** Error : ", req.query.loginError, "*****");
     res.send(req.query.loginError);
 })
+
 router.post('/login', (req, res, next) => {
-    console.log('req.body', req.body);
-
     passport.authenticate('local', (authError, user, svrError) => {  // 사용자 인증
-
         // 지정전략(strategy)를 사용해 로그인에 성공/실패할경우 이동할 경로와 메시지 설정
         console.log('passport authenticate');
         if (authError) next(authError);  // 클라이언트 에러시 (이메일 또는 비밀번호 틀렸을 때)
@@ -53,9 +54,9 @@ router.post('/login', (req, res, next) => {
         return req.login(user, { session: false }, (passportError) => {    // jwt 토큰 이용시 session 사용 종료
             if (passportError || !user) return next(passportError);
             else {
-                setUserToken(res, req.user);
-                console.log('setUserToken');
-                res.redirect("/auth");
+                const token = setUserToken(res, req.user);
+                console.log('setUserToken: ', token);
+                res.status(201).json({ result: 'ok', token });
             }
         });
     })(req, res, next); // 미들웨어 내의 미들웨어
@@ -64,33 +65,35 @@ router.post('/login', (req, res, next) => {
 
 // 구글 간편로그인
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-router.get(
-    '/google/callback',
-    passport.authenticate('google', {
-        failureRedirect: '/auth',
-    }),
+router.get('/google/callback', passport.authenticate('google', {
+    failureRedirect: '/auth',
+}),
     (req, res) => {
-        setUserToken(res, req.user);
-        res.redirect('/auth');
+        const token = setUserToken(res, req.user);
+        res.status(201).json({ result: 'ok', token });
     }
+);
+
+// 네이버 간편로그인
+router.get('/naver', passport.authenticate('kakao'));
+router.get('/naver/callback', passport.authenticate('naver', {
+    failureRedirect: '/auth'
+}), (req, res) => {
+    const token = setUserToken(res, req.user);
+    res.status(201).json({ result: 'ok', token });
+}
 );
 
 // 카카오 간편로그인
 router.get('/kakao', passport.authenticate('kakao'));
-router.get(
-    '/kakao/callback',
-    passport.authenticate('kakao', {
-        failureRedirect: '/auth',
-    }),
+router.get('/kakao/callback', passport.authenticate('kakao', {
+    failureRedirect: '/auth',
+}),
     (req, res) => {
-        setUserToken(res, req.user);
-        res.redirect('/auth');
+        const token = setUserToken(res, req.user);
+        res.status(201).json({ result: 'ok', token });
     }
 );
-
-
-//TODO
-// 네이버 간편로그인
 
 
 // 로그아웃 
@@ -100,20 +103,19 @@ router.get('/logout', (req, res) => {
     res.cookie('token', null, {
         maxAge: 0,
     });
-    res.redirect('/auth');
+    res.send('logout');
 });
 
 
-// jwt토큰 발급
-const secret = require('../../config/default').secretOrKey;
+//! jwt토큰 발급
 function setUserToken(res, user) {
     user.type = 'JWT';
     const token = jwt.sign(user.toJSON(), secret, {
         expiresIn: '15m', // 만료시간 15분
         issuer: '토큰발급자',
     });
-    res.cookie('token', token);
+    res.cookie(token);
+    return token;
 }
-
 
 module.exports = router;

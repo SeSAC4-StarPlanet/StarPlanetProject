@@ -8,7 +8,7 @@ module.exports = new GoogleStrategy(
     {
         clientID: googleOAuth.clientID,
         clientSecret: googleOAuth.clientSecret,
-        callbackURL: '/auth/google/callback',
+        callbackURL: googleOAuth.callbackURL,
     },
     async (accessToken, refreshToken, profile, done) => {
         console.info('___new GoogleStrategy()');
@@ -16,7 +16,7 @@ module.exports = new GoogleStrategy(
 
         try {           // DB에서 사용자 검색
             const exUser = await User.findOne({
-                snsID: profile.id, provider: 'google'
+                snsID: profile.id
             });
             // if (exUser.email == (profile._json && profile._json.email)
             if (exUser) {
