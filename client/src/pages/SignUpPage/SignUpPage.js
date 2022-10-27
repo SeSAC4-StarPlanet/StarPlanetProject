@@ -16,6 +16,7 @@ const SignUpPage = memo(() => {
   const [hashedPW, setPW] = useState("");
   const [email, setEmail] = useState("");
   const [username, setusername] = useState("");
+  const navigate = useNavigate();
 
   const handleForm = () => {
     axios({
@@ -32,8 +33,6 @@ const SignUpPage = memo(() => {
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
   };
-
-  const navigate = useNavigate();
 
   return (
     <div>

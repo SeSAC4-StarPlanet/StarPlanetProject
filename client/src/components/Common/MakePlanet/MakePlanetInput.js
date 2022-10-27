@@ -1,7 +1,10 @@
-import React from "react";
 import TextField from "@mui/material/TextField";
+import "./MakePlanetInput.scss";
+export default function MakePlanetInput({ onChange }) {
+  const User = {
+    id: "sesac",
+  };
 
-export default function MakePlanetInput() {
   return (
     <div className="makePlanetInputContainer">
       <TextField
@@ -11,9 +14,16 @@ export default function MakePlanetInput() {
         variant="standard"
         style={{
           width: "100%",
-          marginBottom: 50,
         }}
-      />
+        onChange={onChange}
+      ></TextField>
+      <div className="error">
+        {User.id ? (
+          <div className="MakePlanetInputErrorIcon">{""}</div>
+        ) : (
+          <div className="MakePlanetInputErrorIcon">중복된 행성이름입니다.</div>
+        )}
+      </div>
     </div>
   );
 }

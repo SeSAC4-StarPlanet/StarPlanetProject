@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./MakePlanetPage.scss";
 import Headers from "../../components/Common/Diary/Header/Header";
 import StarMap from "../../components/Common/StarMap/StarMap";
@@ -14,13 +14,20 @@ import MakeMember from "../../components/Common/MakePlanet/MakeMember";
 import MakeMemberBtn from "../../components/Common/MakePlanet/MakeMemberBtn";
 
 export default function MakePlanetPage() {
+  const [userID, setuserId] = useState("");
+
   return (
     <div>
       <StarMap />
       <Headers />
       <div className="makePlanetSection">
         <div className="makePlanetContainer">
-          <MakePlanetInput />
+          <MakePlanetInput
+            onChange={(e) => {
+              setuserId(e.target.value);
+              console.log(e.target.value);
+            }}
+          />
 
           <MakePlanetSelectHeader value={"행성선택"} />
           <div className="planetBox">
@@ -30,9 +37,31 @@ export default function MakePlanetPage() {
             <MakePlanetSelect src={planet4} />
           </div>
           <MakePlanetSelectHeader value={"행성멤버"} />
-          <MakePlanetMember text={"멤버1"} />
-          <MakePlanetMember text={"멤버2"} />
-          <MakePlanetMember text={"멤버3"} />
+          <MakePlanetMember
+            text={"멤버1"}
+            value={userID}
+            onChange={(e) => {
+              setuserId(e.target.value);
+              console.log(e.target.value);
+            }}
+          />
+
+          <MakePlanetMember
+            text={"멤버2"}
+            value={userID}
+            onChange={(e) => {
+              setuserId(e.target.value);
+              console.log(e.target.value);
+            }}
+          />
+          <MakePlanetMember
+            text={"멤버3"}
+            value={userID}
+            onChange={(e) => {
+              setuserId(e.target.value);
+              console.log(e.target.value);
+            }}
+          />
           <MakeMember />
           <MakeMemberBtn />
         </div>
