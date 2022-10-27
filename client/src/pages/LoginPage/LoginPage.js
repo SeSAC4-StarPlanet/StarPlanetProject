@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import FindTxt from "../../components/Common/SignIn/FindTxt";
 import SignInInput from "../../components/Common/SignIn/SignInInput";
 import SignInHeader from "../../components/Common/SignIn/SignInHeader";
@@ -10,14 +11,16 @@ import SocialBtn from "../../components/Common/SignIn/SocialBtn";
 import Naver_Btn from "../../assets/img/LoginBtn/naverBtn.png";
 import Kakao_Btn from "../../assets/img/LoginBtn/kakaoBtn.png";
 import Google_Btn from "../../assets/img/LoginBtn/googleBtn.png";
+import Github_Btn from "../../assets/img/LoginBtn/githubBtn.png";
 import "./LoginPage.scss";
 import axios from "axios";
 
 const SignIn = () => {
   const [userID, setuserId] = useState("");
   const [hashedPW, setPw] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = useCallback(e => {
+  const handleLogin = useCallback((e) => {
     if (userID === "" || hashedPW === "") {
       alert("아이디와 비밀번호를 입력해주세요");
       return;
@@ -26,12 +29,14 @@ const SignIn = () => {
       method: "post",
       url: "http://localhost:8000/api/auth/login",
       header: { withCredentials: true },
-      data: { userID: userID, hashedPW: hashedPW }
+      data: { userID: userID, hashedPW: hashedPW },
     })
       .then((res) => {
+
         console.log("User token", res.data);
+
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("An error occurred:", err.response);
       });
   });
@@ -40,7 +45,12 @@ const SignIn = () => {
     <div>
       <StarMap />
       <div className="signUpLogoWrapper">
-        <img src={Main_Logo} />
+        <img
+          src={Main_Logo}
+          onClick={() => {
+            navigate("/");
+          }}
+        />
       </div>
       <div className="signInWrapper">
         <div className="signInSection">
@@ -73,17 +83,29 @@ const SignIn = () => {
             </a>
 
             <div className="socialBtn">
-              <SocialBtn src={Naver_Btn} />
-              <SocialBtn src={Kakao_Btn} />
-              <SocialBtn src={Google_Btn} />
-              <SocialBtn src={Naver_Btn} />
+              <SocialBtn
+                src={Naver_Btn}
+                href={"http://localhost:8000/auth/naver"}
+              />
+              <SocialBtn
+                src={Kakao_Btn}
+                href={"http://localhost:8000/auth/kakao"}
+              />
+              <SocialBtn
+                src={Google_Btn}
+                href={"http://localhost:8000/auth/google"}
+              />
+              <SocialBtn
+                src={Github_Btn}
+                href={"http://localhost:8000/auth/github"}
+              />
             </div>
           </div>
         </div>
 
         <div className="signInBottom">
           <div>STARPL에 처음이신가요?</div>
-          <span onClick={() => alert("clicked")}>회원가입</span>
+          <span onClick={() => navigate("/Signup")}>회원가입</span>
         </div>
       </div>
     </div>

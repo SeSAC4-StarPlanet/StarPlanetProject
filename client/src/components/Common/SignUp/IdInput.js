@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./SignUp_Input.scss";
 
 const SignUpInput = ({ value, onChange }) => {
   const [userID, setuserID] = useState("");
