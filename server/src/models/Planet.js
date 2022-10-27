@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
-const planetSchema = mongoose.Schema({
+const PlanetSchema = mongoose.Schema({
     name: { type: String },
     meta: {
         planetInfo: { type: String },
@@ -13,7 +13,9 @@ const planetSchema = mongoose.Schema({
         maxNum: { Number }
     },
     category: {
-
+        Album: { type: mongoose.Schema.Types.ObjectId, ref: 'Album' },
+        Bookmark: { type: mongoose.Schema.Types.ObjectId, ref: 'User.Bookmark' },
+        Diary: { type: [mongoose.Schema.Types.ObjectId], ref: 'Diary' },
     },
     member: {
         type: [mongoose.Schema.Types.ObjectId],
@@ -21,6 +23,6 @@ const planetSchema = mongoose.Schema({
     },
 }, { timestamps: true })
 
-const Planet = mongoose.model('Planet', planetSchema)
+const Planet = mongoose.model('Planet', PlanetSchema)
 
 module.exports = { Planet }
