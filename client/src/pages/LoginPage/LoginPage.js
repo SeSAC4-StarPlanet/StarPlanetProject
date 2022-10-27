@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import FindTxt from "../../components/Common/SignIn/FindTxt";
+import React, { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import SignInFindTxt from "../../components/Common/SignIn/SignInFindTxt";
 import SignInInput from "../../components/Common/SignIn/SignInInput";
 import SignInHeader from "../../components/Common/SignIn/SignInHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,7 +15,7 @@ import Github_Btn from "../../assets/img/LoginBtn/githubBtn.png";
 import "./LoginPage.scss";
 import axios from "axios";
 
-const SignIn = () => {
+const LoginPage = () => {
   const [userID, setuserId] = useState("");
   const [hashedPW, setPw] = useState("");
   const navigate = useNavigate();
@@ -32,9 +32,7 @@ const SignIn = () => {
       data: { userID: userID, hashedPW: hashedPW },
     })
       .then((res) => {
-
         console.log("User token", res.data);
-
       })
       .catch((err) => {
         console.log("An error occurred:", err.response);
@@ -71,7 +69,7 @@ const SignIn = () => {
               setData={setPw}
             />
             <div>
-              <FindTxt />
+              <SignInFindTxt />
             </div>
 
             <a className="loginBtn" onClick={handleLogin}>
@@ -85,19 +83,19 @@ const SignIn = () => {
             <div className="socialBtn">
               <SocialBtn
                 src={Naver_Btn}
-                href={"http://localhost:8000/auth/naver"}
+                href={"http://localhost:8000/api/auth/naver"}
               />
               <SocialBtn
                 src={Kakao_Btn}
-                href={"http://localhost:8000/auth/kakao"}
+                href={"http://localhost:8000/api/auth/kakao"}
               />
               <SocialBtn
                 src={Google_Btn}
-                href={"http://localhost:8000/auth/google"}
+                href={"http://localhost:8000/api/auth/google"}
               />
               <SocialBtn
                 src={Github_Btn}
-                href={"http://localhost:8000/auth/github"}
+                href={"http://localhost:8000/api/auth/github"}
               />
             </div>
           </div>
@@ -112,4 +110,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default LoginPage;

@@ -1,6 +1,7 @@
 import SuccessSignUpBtn from "./SuccessSignUpBtn";
 import Main_Logo from "../../../assets/img/LandingPage/logo_main.svg";
 import { useNavigate } from "react-router-dom";
+import "./SuccessSignUp.scss";
 
 const SuccessSignUp = () => {
   const navigate = useNavigate();

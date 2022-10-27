@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import "./SignInInput.scss";
 
 const SignInInput = ({ type, text, placeholder, setData, value }) => {
   const ref1 = useRef();
@@ -16,14 +17,14 @@ const SignInInput = ({ type, text, placeholder, setData, value }) => {
   };
 
   return (
-    <div className="inputSection">
-      <div className="inputContainer">
-        <div className="inputIcon" value={text}>
+    <div className="signInInputContainer">
+      <div className="signInInputSection">
+        <div className="signInInputIcon" value={text}>
           {text}
         </div>
         <input
           type={type}
-          className="Input"
+          className="signInInput"
           ref={ref1}
           onChange={(e) => {
             changeInput(e);
@@ -33,12 +34,12 @@ const SignInInput = ({ type, text, placeholder, setData, value }) => {
           placeholder={placeholder}
         ></input>
         <button
+          className="signInInputIcon"
           ref={ref2}
           onClick={() => {
             handleClick();
             setData("");
           }}
-          className="inputIcon"
           hidden
         >
           <FontAwesomeIcon icon={faCircleXmark} />
