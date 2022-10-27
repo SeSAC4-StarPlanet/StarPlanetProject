@@ -14,14 +14,14 @@ const CommentSchema = new Schema({
 }, { timestamps: true });
 
 const DiarySchema = new Schema({
-    Planet: { type: Schema.Types.ObjectId, ref: 'Planet', required: true },
+    category: { type: Schema.Types.ObjectId, ref: 'Planet', required: true },
     writer: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     title: { type: String, required: true },
     content: { type: String },
     image: { type: String },
     tags: { type: Array },
     Bookmark: {
-        markedBy: { type: [mongoose.Schema.Types.ObjectId], ref: 'User' },
+        markBy: { type: [mongoose.Schema.Types.ObjectId], ref: 'User' },
         markNum: { type: Number }
     },
     Comments: {

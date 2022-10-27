@@ -15,7 +15,10 @@ const UserSchema = new mongoose.Schema({
         userImg: { type: String, default: 'default-profile.jpg' },
     },
     Planet: { type: [mongoose.Schema.Types.ObjectId], ref: 'Planet' },
-    Bookmark: { type: [mongoose.Schema.Types.ObjectId], ref: 'Diary' }
+    Bookmark: {
+        Diary: { type: [mongoose.Schema.Types.ObjectId], ref: 'Diary' },
+        Album: { type: [mongoose.Schema.Types.ObjectId], ref: 'Album' }
+    }
 },
     {
         timestamps: true,
