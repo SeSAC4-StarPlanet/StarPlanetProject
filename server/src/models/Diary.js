@@ -4,52 +4,35 @@ const { Schema } = mongoose;
 
 /* Schema */
 const RecommentSchema = new Schema({
-    writer: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    text: String,
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-});
+    writer: { type: Schema.Types.ObjectId, ref: 'User' },
+    text: String
+}, { timestamps: true });
 
 const CommentSchema = new Schema({
-    writer: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
+    writer: { type: Schema.Types.ObjectId, ref: 'User' },
     text: String,
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-});
+}, { timestamps: true });
 
 const DiarySchema = new Schema({
-    writer: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    title: { type: String },
+    category: { type: Schema.Types.ObjectId, ref: 'Planet', required: true },
+    writer: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    title: { type: String, required: true },
     content: { type: String },
     image: { type: String },
     tags: { type: Array },
-    bookmark: { type: Number },
-    createdAt: {
-        type: Date,
-        default: Date.now,
+    Bookmark: {
+        markBy: { type: [mongoose.Schema.Types.ObjectId], ref: 'User' },
+        markNum: { type: Number }
     },
-    comments: {
+    Comments: {
         type: [CommentSchema],
         default: {
-            recomments: {
+            Recomments: {
                 type: [RecommentSchema]
             }
         }
     }
-});
+}, { timestamps: true });
 
 const Diary = mongoose.model('Diary', DiarySchema);
 

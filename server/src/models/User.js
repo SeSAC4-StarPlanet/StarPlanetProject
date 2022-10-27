@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 /* Schema */
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     userID: { type: String, required: true, unique: true, default: 'socialUser' },
     hashedPW: { type: String, required: true, default: 'socialUser' },
     username: { type: String, required: true },
@@ -14,14 +14,16 @@ const userSchema = new mongoose.Schema({
         userInfo: { type: String },
         userImg: { type: String, default: 'default-profile.jpg' },
     },
-    planet: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Planet'
-    },
-}, {
-    timestamps: true,
-    toObject: { virtuals: true },
-}
+    Planet: { type: [mongoose.Schema.Types.ObjectId], ref: 'Planet' },
+    Bookmark: {
+        Diary: { type: [mongoose.Schema.Types.ObjectId], ref: 'Diary' },
+        Album: { type: [mongoose.Schema.Types.ObjectId], ref: 'Album' }
+    }
+},
+    {
+        timestamps: true,
+        toObject: { virtuals: true },
+    }
 );
 
 
@@ -81,6 +83,8 @@ userSchema.pre('save', async function (next) {
     }
 });
 
+//! 비밀번호 비교 (bcrypt)
+
 // // password validation
 // userSchema.methods.checkPassword = async function (salt, inputPW, callback) {
 //     if ((await decrypt(salt, inputPW)) == this.key) {
@@ -92,7 +96,7 @@ userSchema.pre('save', async function (next) {
 
 
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', UserSchema);
 
 module.exports = { User };
 

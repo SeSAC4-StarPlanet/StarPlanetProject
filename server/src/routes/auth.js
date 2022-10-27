@@ -32,6 +32,15 @@ router.get('/auth', passport.authenticate('jwt', { session: false }),
     }
 );
 
+//! 회원가입
+// router.post('/signup', passport.authenticate('local', {
+//     failureRedirect: '/auth',
+// }),
+//     (req, res) => {
+//         const token = setUserToken(res, req.user);
+//         res.status(201).json({ result: 'ok', token });
+//     }
+// );
 
 //! 로그인
 router.get('/login', (req, res) => {
@@ -42,6 +51,7 @@ router.get('/login', (req, res) => {
 })
 
 router.post('/login', (req, res, next) => {
+    console.log('post: /auth/login');
     passport.authenticate('local', (authError, user, svrError) => {  // 사용자 인증
         // 지정전략(strategy)를 사용해 로그인에 성공/실패할경우 이동할 경로와 메시지 설정
         console.log('passport authenticate');
@@ -103,7 +113,7 @@ router.get('/logout', (req, res) => {
     res.cookie('token', null, {
         maxAge: 0,
     });
-    res.send('logout');
+    res.json({ message: 'logout' });
 });
 
 
