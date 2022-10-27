@@ -1,13 +1,14 @@
 import React from "react";
+import "./SignUpNameInput.scss";
 
-const NameInput = ({ value, onChange }) => {
+const SignUpNameInput = ({ value, onChange }) => {
   return (
     <>
-      <div className="signUpInputContainer">
-        <div className="signUpInputTitle">Name</div>
+      <div className="signUpNameInputContainer">
+        <div className="signUpNameInputTitle">Name</div>
         <input
+          className="signUpNameInput"
           type="text"
-          className="signUpInput"
           placeholder={"홍길동"}
           onChange={onChange}
           value={value}
@@ -20,4 +21,4 @@ const NameInput = ({ value, onChange }) => {
   );
 };
 
-export default NameInput;
+export default SignUpNameInput;

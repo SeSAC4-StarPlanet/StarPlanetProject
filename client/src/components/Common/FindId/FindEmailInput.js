@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import "./FindEmailInput.scss";
 
-const EmailInput = ({ value, onChange }) => {
+const FindEmailInput = () => {
   const [email, setEmail] = useState("");
   const [emailValid, setEmailValid] = useState(false);
 
@@ -17,19 +18,19 @@ const EmailInput = ({ value, onChange }) => {
 
   return (
     <>
-      <div className="signUpInputContainer">
-        <div className="signUpInputTitle">E-mail</div>
+      <div className="findIdEmailInputContainer">
+        <div className="findIdEmailInputTitle">E-mail</div>
         <input
+          className="findIdEmailInput"
           type="text"
           placeholder="test@email.com"
-          value={value}
-          onChange={(handleEmail, onChange)}
-          className="signUpInput"
+          value={email}
+          onChange={handleEmail}
         ></input>
       </div>
       <div>
         {!emailValid && email.length > 0 ? (
-          <div className="errorMessageWrap">올바른 이메일을 입력해주세요.</div>
+          <div className="errorMessageWrap">잘못된 이메일 형식입니다.</div>
         ) : (
           <div className="errorMessageWrap">{""}</div>
         )}
@@ -38,4 +39,4 @@ const EmailInput = ({ value, onChange }) => {
   );
 };
 
-export default EmailInput;
+export default FindEmailInput;

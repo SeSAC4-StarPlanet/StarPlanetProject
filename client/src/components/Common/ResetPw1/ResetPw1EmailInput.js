@@ -1,12 +1,6 @@
-import React, { useEffect, useState } from "react";
-
-const User = {
-  id: "sesac",
-  email: "test@example.com",
-  pw: "test2323@@@",
-};
-
-const EmailInput = () => {
+import React, { useState } from "react";
+import "./ResetPw1EmailInput.scss";
+const ResetEmailInput = ({ value, onChange }) => {
   const [email, setEmail] = useState("");
   const [emailValid, setEmailValid] = useState(false);
 
@@ -23,19 +17,19 @@ const EmailInput = () => {
 
   return (
     <>
-      <div className="signUpInputContainer">
-        <div className="signUpInputTitle">E-mail</div>
+      <div className="resetPw1EmailInputContainer">
+        <div className="emailInputTitle">E-mail</div>
         <input
+          className="emailInput"
           type="text"
           placeholder="test@email.com"
-          value={email}
-          onChange={handleEmail}
-          className="signUpInput"
+          value={value}
+          onChange={onChange}
         ></input>
       </div>
       <div>
         {!emailValid && email.length > 0 ? (
-          <div className="errorMessageWrap">{""}</div>
+          <div className="errorMessageWrap">잘못된 이메일 형식입니다.</div>
         ) : (
           <div className="errorMessageWrap">{""}</div>
         )}
@@ -44,4 +38,4 @@ const EmailInput = () => {
   );
 };
 
-export default EmailInput;
+export default ResetEmailInput;

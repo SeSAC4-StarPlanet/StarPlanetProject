@@ -1,6 +1,7 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import * as React from "react";
 import Button from "@mui/material/Button";
+import "./SignUpBtn.scss";
 
 const theme = createTheme({
   status: {
@@ -18,9 +19,9 @@ const theme = createTheme({
   },
 });
 
-const Btn = ({ text, onClick }) => {
+const SignUpBtn = ({ text, onClick }) => {
   return (
-    <div className="btnBox">
+    <div>
       <ThemeProvider theme={theme}>
         <Button
           variant="contained"
@@ -35,4 +36,4 @@ const Btn = ({ text, onClick }) => {
   );
 };
 
-export default Btn;
+export default SignUpBtn;

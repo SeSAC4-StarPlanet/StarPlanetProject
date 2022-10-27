@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./SignUp_Input.scss";
+import "./SignUpIdInput.scss";
 
-const SignUpInput = ({ value, onChange }) => {
+const SignUpIdInput = ({ value, onChange }) => {
   const [userID, setuserID] = useState("");
   const [idValid, setIdValid] = useState(false);
 
@@ -17,13 +17,13 @@ const SignUpInput = ({ value, onChange }) => {
 
   return (
     <>
-      <div className="signUpInputContainer">
-        <div className="signUpInputTitle">ID</div>
+      <div className="signUpIdInputContainer">
+        <div className="signUpIdInputTitle">ID</div>
         <input
+          className="signUpIdInput"
           placeholder="사용하실 아이디를 입력해주세요"
           value={value}
           onChange={(handleId, onChange)}
-          className="signUpInput"
           type="text"
         ></input>
       </div>
@@ -40,4 +40,4 @@ const SignUpInput = ({ value, onChange }) => {
   );
 };
 
-export default SignUpInput;
+export default SignUpIdInput;
