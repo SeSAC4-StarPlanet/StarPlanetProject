@@ -8,10 +8,12 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import Planet from "../../../../assets/img/WorkSpace/Planets/planet_2.png";
+import NewPlanetBtn from "../NewPlanetBtn/NewPlanetBtn";
 
 const Main = () => {
   return (
     <div className="PlanetSelector">
+      <NewPlanetBtn />
       <Swiper
         slidesPerView={1}
         spaceBetween={30}
