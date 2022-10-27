@@ -8,19 +8,13 @@ const PlanetSchema = mongoose.Schema({
         planetInfo: { type: String },
         planetImg: { type: String, default: 'default-profile.jpg' },
     },
-    payment: {
-        status: { type: Boolean },
-        maxNum: { Number }
-    },
+    payment: { status: { type: Boolean }, maxNum: { Number } },
     category: {
         Album: { type: mongoose.Schema.Types.ObjectId, ref: 'Album' },
         Bookmark: { type: mongoose.Schema.Types.ObjectId, ref: 'User.Bookmark' },
         Diary: { type: [mongoose.Schema.Types.ObjectId], ref: 'Diary' },
     },
-    member: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'User'
-    },
+    member: { type: [mongoose.Schema.Types.ObjectId], ref: 'User' },
 }, { timestamps: true })
 
 const Planet = mongoose.model('Planet', PlanetSchema)

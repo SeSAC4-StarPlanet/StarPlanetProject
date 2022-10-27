@@ -5,20 +5,16 @@ const { Schema } = mongoose;
 /* Schema */
 const RecommentSchema = new Schema({
     writer: { type: Schema.Types.ObjectId, ref: 'User' },
-    text: String,
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-});
+    text: String
+}, { timestamps: true });
 
 const CommentSchema = new Schema({
     writer: { type: Schema.Types.ObjectId, ref: 'User' },
     text: String,
-    createdAt: { type: Date, default: Date.now, },
-});
+}, { timestamps: true });
 
 const DiarySchema = new Schema({
+    Planet: { type: Schema.Types.ObjectId, ref: 'Planet', required: true },
     writer: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     title: { type: String, required: true },
     content: { type: String },
@@ -28,7 +24,6 @@ const DiarySchema = new Schema({
         markedBy: { type: [mongoose.Schema.Types.ObjectId], ref: 'User' },
         markNum: { type: Number }
     },
-    createdAt: { type: Date, default: Date.now },
     Comments: {
         type: [CommentSchema],
         default: {
@@ -37,7 +32,7 @@ const DiarySchema = new Schema({
             }
         }
     }
-});
+}, { timestamps: true });
 
 const Diary = mongoose.model('Diary', DiarySchema);
 
