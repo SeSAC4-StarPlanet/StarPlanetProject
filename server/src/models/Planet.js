@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
-const { Schema } = mongoose.Schema
-const { Types: ObjectId } = Schema;
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+const { ObjectId } = Schema.Types;
 const { Album } = require("./Album");
 const { Diary } = require("./Diary");
 
@@ -15,7 +15,7 @@ const PlanetSchema = mongoose.Schema({
     members: [{ type: ObjectId, ref: 'User' }],
     payment: {
         status: { type: Boolean },
-        maxNum: { Number }
+        maxNum: { type: Number }
     },
     category: {
         Album: { type: Object },
