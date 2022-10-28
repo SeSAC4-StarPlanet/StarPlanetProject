@@ -28,12 +28,14 @@ const LoginPage = () => {
     axios({
       method: "post",
       url: "http://localhost:8000/api/auth/login",
-      header: { withCredentials: true },
+      header: { withCredentials: true, },
       data: { userID: userID, hashedPW: hashedPW }
     })
       .then(res => {
-        console.log(res.data.token);
-        localStorage.setItem("token", res.data.token);
+        let token = res.headers.get("authorization");
+        console.log('token: ', token);
+        console.log('res.data', res.data);
+        localStorage.setItem("token: ", token);
       })
       .then(() => {
         navigate("/workspace/main");

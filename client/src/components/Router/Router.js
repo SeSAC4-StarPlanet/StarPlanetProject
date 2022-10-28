@@ -21,10 +21,11 @@ import JinseTest from "../Test/JinseTest/JinseTest";
 import SionTest from "../Test/SionTest/SionTest";
 import MakePlanetPage from "../../pages/MakePlanetPage/MakePlanetPage";
 
-const authorizedRouter = createBrowserRouter([ 
+const authorizedRouter = createBrowserRouter([
   {
   path: "/",
   element: <LandingPage />,
+
   },
   {
     path: "/login",
@@ -74,18 +75,18 @@ const authorizedRouter = createBrowserRouter([
   {
     path: "/diary/main",
     element: <DiaryMain />,
-  },{
+  }, {
     path: "/diary/Read",
     element: <DiaryRead />,
-  },{
+  }, {
     path: "/workspace/main",
     element: <WorkSpaceMain />,
   },
-  ,{
+  , {
     path: "/album/main",
     element: <AlbumMain />,
   },
-  ,{
+  , {
     path: "/album/individual",
     element: <AlbumIndividual />,
   },
@@ -104,8 +105,8 @@ const unauthorizationRouter = createBrowserRouter([
 ]);
 
 const Router = () => {
-  let token = localStorage.getItem("token") !== null ? localStorage.getItem("token") : "" 
- 
+  let token = localStorage.getItem("token") !== null ? localStorage.getItem("token") : ""
+
   return (
     <>
     {localStorage.getItem("token") !== null ? <RouterProvider router={authorizedRouter} /> : <RouterProvider router={unauthorizationRouter} />}

@@ -9,6 +9,7 @@ const { verifyToken } = require('../middlewares/authorization');
 
 router.use("/auth", require("./authRouter"));
 router.use("/user", require("./userRouter"));
+router.use('/planet', require('./planetRouter'));
 router.use('/diary', verifyToken, require('./diaryRouter'));
 
 module.exports = router;
