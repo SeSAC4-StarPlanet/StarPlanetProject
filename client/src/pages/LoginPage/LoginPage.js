@@ -35,74 +35,80 @@ const LoginPage = () => {
         console.log(res.data.token);
         localStorage.setItem("token", res.data.token);
       })
+      .then(() => {
+        navigate("/workspace/main");
+      })
       .catch(err => console.log(err.response.data));
   });
 
   return (
     <div>
       <StarMap />
-      <div className="signUpLogoWrapper">
-        <img
-          src={Main_Logo}
-          onClick={() => {
-            navigate("/");
-          }}
-        />
-      </div>
-      <div className="signInWrapper">
-        <div className="signInSection">
-          <div className="signIn">
-            <SignInHeader text={"로그인"} />
-            <SignInInput
-              type={"text"}
-              text={<FontAwesomeIcon icon={faUser} />}
-              value={userID}
-              setData={setuserId}
-              placeholder={"아이디"}
-            />
-            <SignInInput
-              type={"password"}
-              text={<FontAwesomeIcon icon={faKey} />}
-              value={hashedPW}
-              placeholder={"비밀번호"}
-              setData={setPw}
-            />
-            <div>
-              <SignInFindTxt />
-            </div>
+      <div>
+        <div className="signUpLogoWrapper">
+          <img
+            src={Main_Logo}
+            onClick={() => {
+              navigate("/");
+            }}
+          />
+        </div>
+        <div className="signInWrapper">
+          <div className="signInSection">
+            <div className="signIn">
+              <SignInHeader text={"로그인"} />
+              <SignInInput
+                type={"text"}
+                text={<FontAwesomeIcon icon={faUser} />}
+                value={userID}
+                setData={setuserId}
+                placeholder={"아이디"}
+              />
+              <SignInInput
+                type={"password"}
+                text={<FontAwesomeIcon icon={faKey} />}
+                value={hashedPW}
+                placeholder={"비밀번호"}
+                setData={setPw}
+              />
+              <div>
+                <SignInFindTxt />
+              </div>
 
-            <a className="loginBtn" onClick={handleLogin}>
-              <span />
-              <span />
-              <span />
-              <span />
-              START
-            </a>
+              <a className="loginBtn" onClick={handleLogin}>
+                <span />
+                <span />
+                <span />
+                <span />
+                START
+              </a>
 
-            <div className="socialBtn">
-              <SocialBtn
-                src={Naver_Btn}
-                href={"http://localhost:8000/api/auth/naver"}
-              />
-              <SocialBtn
-                src={Kakao_Btn}
-                href={"http://localhost:8000/api/auth/kakao"}
-              />
-              <SocialBtn
-                src={Google_Btn}
-                href={"http://localhost:8000/api/auth/google"}
-              />
-              <SocialBtn
-                src={Github_Btn}
-                href={"http://localhost:8000/api/auth/github"}
-              />
+              <div className="socialBtn">
+                <SocialBtn
+                  src={Naver_Btn}
+                  href={"http://localhost:8000/api/auth/naver"}
+                />
+                <SocialBtn
+                  src={Kakao_Btn}
+                  href={"http://localhost:8000/api/auth/kakao"}
+                />
+                <SocialBtn
+                  src={Google_Btn}
+                  href={"http://localhost:8000/api/auth/google"}
+                />
+                <SocialBtn
+                  src={Github_Btn}
+                  href={"http://localhost:8000/api/auth/github"}
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="signInBottom">
-          <div>STARPL에 처음이신가요?</div>
-          <span onClick={() => navigate("/Signup")}>회원가입</span>
+          <div className="signInBottom">
+            <div>STARPL에 처음이신가요?</div>
+            <span onClick={() => navigate("/Signup")}>회원가입</span>
+            <span onClick={() => localStorage.removeItem("token")}>토큰삭제</span>
+          </div>
         </div>
       </div>
     </div>
