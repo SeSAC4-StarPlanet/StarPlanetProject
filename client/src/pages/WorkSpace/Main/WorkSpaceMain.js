@@ -7,6 +7,7 @@ import Header from "../../../components/Common/Diary/Header/Header";
 import Main from "../../../components/Common/WorkSpace/Main/Main";
 import Footer from "../../../components/Common/WorkSpace/Footer/Footer";
 const WorkSpaceMain = () => {
+  console.log(localStorage.getItem("token"));
   return (
     <div>
       <StarMap />

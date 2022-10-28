@@ -20,7 +20,7 @@ const LoginPage = () => {
   const [hashedPW, setPw] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = useCallback((e) => {
+  const handleLogin = useCallback(e => {
     if (userID === "" || hashedPW === "") {
       alert("아이디와 비밀번호를 입력해주세요");
       return;
@@ -29,9 +29,12 @@ const LoginPage = () => {
       method: "post",
       url: "http://localhost:8000/api/auth/login",
       header: { withCredentials: true },
-      data: { userID: userID, hashedPW: hashedPW },
+      data: { userID: userID, hashedPW: hashedPW }
     })
-      .then((res) => console.log(res.data))
+      .then(res => {
+        console.log(res.data.token);
+        localStorage.setItem("token", res.data.token);
+      })
       .catch(err => console.log(err.response.data));
   });
 

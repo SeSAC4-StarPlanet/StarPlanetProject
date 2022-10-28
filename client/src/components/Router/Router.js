@@ -21,15 +21,15 @@ import JinseTest from "../Test/JinseTest/JinseTest";
 import SionTest from "../Test/SionTest/SionTest";
 import MakePlanetPage from "../../pages/MakePlanetPage/MakePlanetPage";
 
-const router = createBrowserRouter([
+const authorizedRouter = createBrowserRouter([ 
   {
-    path: "/",
-    element: <LandingPage />,
-  },
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
+  path: "/",
+  element: <LandingPage />,
+},
+{
+  path: "/login",
+  element: <LoginPage />,
+},
   {
     path: "/signUp",
     element: <SignUpPage />,
@@ -91,16 +91,24 @@ const router = createBrowserRouter([
   },
 ]);
 
+const unauthorizationRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <LandingPage />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  }
+
+]);
+
 const Router = () => {
-  // const callApi = async () => {
-  //   axios.get("/api").then((res) => console.log(res.data.test));
-  // };
-  // useEffect(() => {
-  //   callApi();
-  // }, []);
+  let token = localStorage.getItem("token") !== null ? localStorage.getItem("token") : "" 
+ 
   return (
     <>
-      <RouterProvider router={router} />
+    {token ? <RouterProvider router={authorizedRouter} /> : <RouterProvider router={unauthorizationRouter} />}
     </>
   );
 };
