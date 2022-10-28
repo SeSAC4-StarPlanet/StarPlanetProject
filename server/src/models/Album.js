@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const { Types: ObjectId } = Schema;
+const { ObjectId } = Schema.Types;
 
 
 /* Schema */
 const AlbumSchema = new Schema({
     planet: { type: ObjectId, required: true, ref: 'Planet' },
     user: { type: ObjectId, required: true, ref: 'User' },
-    title: [String],
+    title: { type: String },
     image: [{ type: String, required: true }],
-    tags: [String],
+    tags: [{ type: String }],
     Bookmark: {
         markBy: [{ type: ObjectId, ref: 'User' }],
         markNum: { type: Number, default: 0 }
