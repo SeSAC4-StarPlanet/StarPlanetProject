@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Redirect } from "react-router-dom";
 import axios from "axios";
 // page component
 import LandingPage from "../../pages/LandingPage/LandingPage";
@@ -25,11 +25,11 @@ const authorizedRouter = createBrowserRouter([
   {
   path: "/",
   element: <LandingPage />,
-},
-{
-  path: "/login",
-  element: <LoginPage />,
-},
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
   {
     path: "/signUp",
     element: <SignUpPage />,
@@ -108,7 +108,7 @@ const Router = () => {
  
   return (
     <>
-    {token ? <RouterProvider router={authorizedRouter} /> : <RouterProvider router={unauthorizationRouter} />}
+    {localStorage.getItem("token") !== null ? <RouterProvider router={authorizedRouter} /> : <RouterProvider router={unauthorizationRouter} />}
     </>
   );
 };
