@@ -31,12 +31,8 @@ const LoginPage = () => {
       header: { withCredentials: true },
       data: { userID: userID, hashedPW: hashedPW },
     })
-      .then((res) => {
-        console.log("User token", res.data);
-      })
-      .catch((err) => {
-        console.log("An error occurred:", err.response);
-      });
+      .then((res) => console.log(res.data))
+      .catch(err => console.log(err.response.data));
   });
 
   return (

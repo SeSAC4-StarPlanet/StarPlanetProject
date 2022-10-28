@@ -1,42 +1,59 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
+const { Types: ObjectId } = Schema;
+const { Album } = require("./Album");
+const { Diary, Comment } = require("./Diary");
+
 const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken");
+const secret = require('../../config/default').secretOrKey;
+const { unstable_createCssVarsProvider } = require("@mui/system");
 const saltRounds = 10;
+
 
 /* Schema */
 const UserSchema = new mongoose.Schema({
-    userID: { type: String, required: true, unique: true, default: 'socialUser' },
-    hashedPW: { type: String, required: true, default: 'socialUser' },
-    username: { type: String, required: true },
-    email: { type: String, trim: true },
-    snsID: { type: String },
+    userID: String,
+    hashedPW: String,
+    username: String,
+    email: String,
     provider: { type: String, required: true, default: 'local' },
+    token: String,
+    tokenExp: Number,
     meta: {
         userInfo: { type: String },
         userImg: { type: String, default: 'default-profile.jpg' },
+        userPlanet: [{ type: ObjectId, ref: 'Planet' }],
     },
-    Planet: { type: [mongoose.Schema.Types.ObjectId], ref: 'Planet' },
-    Bookmark: {
-        Diary: { type: [mongoose.Schema.Types.ObjectId], ref: 'Diary' },
-        Album: { type: [mongoose.Schema.Types.ObjectId], ref: 'Album' }
-    }
-},
-    {
-        timestamps: true,
-        toObject: { virtuals: true },
-    }
-);
+    bookmarks: {
+        Album: [{ type: ObjectId, ref: 'Album' }],
+        Diary: [{ type: ObjectId, ref: 'Diary' }],
+    },
+}, { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } });
 
 
-/* virtual */
-// userSchema
-//     .virtual('password')
-//     .set(function (password) {// password를 DB에 저장되지 않는 virtual 속성으로 정의
-//         this.salt = this.makeSalt();
-//         this.hashedPW = this.encryptPassword(password, this.salt);
-//         console.log('hashedPW 저장 : ' + this.hashedPW);
-//     })
 
-// // virtuals
+/* virtual - 객체에 가상필드 생성 */
+
+//TODO - 유저 활동
+UserSchema.virtual('albums', {
+    ref: 'Album',
+    localField: '_id',
+    foreignField: 'user',
+});
+UserSchema.virtual('diarys', {
+    ref: 'Diary',
+    localField: '_id',
+    foreignField: 'user',
+});
+UserSchema.virtual('comments', {
+    ref: 'Diary',
+    localField: 'Comments',
+    foreignField: 'user',
+});
+
+
+
 // userSchema
 //     .virtual("pwConfirm")
 //     .get(function () { return this._pwConfirm; })
@@ -59,44 +76,82 @@ const UserSchema = new mongoose.Schema({
 
 
 
-// /* static */
-// userSchema.static('findById', (user_id, callback) => {
-//     return this.find({ user_id: user_id }, callback);
-// });
-// userSchema.static('findAll', (callback) => {
-//     return this.find({}, callback);
-// });
+
+/* method - 사용자 정의 메소드 */
 
 
-/* Method */
+//! jwt토큰 발급
+UserSchema.methods.setUserToken = async (cb) => {
+    //jsonwebtoken을 이용해 토큰 생성
+    const token = await jwt.sign(this._id.toHexString(), secret, {
+        expiresIn: '15m', // 만료시간 15분
+        issuer: '토큰발급자',
+    });
+    this.token = token;
+    this.save(function (err, user) {
+        if (err) return cb(err);
+        cb(null, user);
+    });
+};
+
+
 //! 비밀번호 암호화 (bcrypt)
-userSchema.pre('save', async function (next) {
-    const user = this;
-    // 비밀번호를 변경(새로 입력 포함)하는 경우
-    if (user.isModified('hashedPW')) {
-        const salt = await bcrypt.genSalt(saltRounds);
-        // 해쉬화된 비밀번호로 변경
-        user.hashedPW = await bcrypt.hash(user.hashedPW, salt, function (err) {
-            if (err) return next(err);
-            next();
-        });
+UserSchema.pre('save', async function (next) {
+
+    // paswsword가 변경(새로 생성)될때만 암호화
+    if (this.isModified('hashedPW')) {
+
+        // 비밀번호의 Plain Text를 hash로 교체
+        console.log('before PW', this.hashedPW);
+        this.hashedPW = await bcrypt.hash(this.hashedPW, saltRounds);
+        console.log('after PW', this.hashedPW);
+        next(); // Hashing이 끝나면 save로 넘어감
+
+    } else {    // password가 변경되지 않을 때
+        next(); // 바로 save로 넘어감
     }
 });
 
-//! 비밀번호 비교 (bcrypt)
 
-// // password validation
-// userSchema.methods.checkPassword = async function (salt, inputPW, callback) {
-//     if ((await decrypt(salt, inputPW)) == this.key) {
-//         callback(null, true);
-//     } else {
-//         callback("비밀번호가 일치하지 않습니다.", false);
-//     }
-// };
+UserSchema.pre('remove', async function (next) {
+    const user = this;
+    try {
+        await Album.deleteMany({ user: user._id });
+        await Diary.deleteMany({ user: user._id });
+        await Comment.deleteMany({ user: user._id });
+        next();
+    } catch (e) {
+        next();
+    }
+});
+
+// 검색 후 
+UserSchema.post('find', function (result) {
+    console.log('find, 저장 완료', result);
+});
 
 
 
-const User = mongoose.model('User', UserSchema);
+/* static  */
+
+// 아이디로 사용자 검색
+UserSchema.static.findById = (userID, callback) => {
+    return this.findOne({ userID }, callback);
+};
+
+// 이름으로 사용자 검색
+UserSchema.static.findByUsername = (username) => {
+    return this.findOne({ username });
+};
+
+// 사용자 전체 조회
+UserSchema.static('findAll', (callback) => {
+    return this.find({}, callback);
+});
+
+
+
+const User = mongoose.model('User', UserSchema, 'User');
 
 module.exports = { User };
 

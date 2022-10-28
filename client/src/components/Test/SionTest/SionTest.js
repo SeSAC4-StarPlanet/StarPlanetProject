@@ -47,11 +47,9 @@ const SionTest = observer(() => {
         <Header />
 
         {/* <NewPlanetBtn/> */}
-
         {/* <Frame planetTitle={"sion"} content={<AlbumMain/>}/> */}
         </div>
         {/* <Footer/> */}
-
       {/* <div className="back">
       </div> */}
     </>

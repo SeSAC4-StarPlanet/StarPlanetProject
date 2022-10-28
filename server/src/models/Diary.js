@@ -1,39 +1,81 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const { Types: ObjectId } = Schema;
 
 
 /* Schema */
-const RecommentSchema = new Schema({
-    writer: { type: Schema.Types.ObjectId, ref: 'User' },
-    text: String
-}, { timestamps: true });
+const DiarySchema = new Schema({
+    planet: { type: ObjectId, required: true, ref: 'Planet' },
+    user: { type: ObjectId, required: true, ref: 'User' },
+    title: { type: String, required: true },
+    text: { type: String, required: true },
+    image: [String],
+    tags: [String],
+    Bookmark: {
+        markBy: [{ type: ObjectId, ref: 'User' }],
+        markNum: { type: Number, default: 0 }
+    },
+}, { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } });
+
 
 const CommentSchema = new Schema({
-    writer: { type: Schema.Types.ObjectId, ref: 'User' },
-    text: String,
-}, { timestamps: true });
+    diary: { type: ObjectId, required: true, ref: 'Diary' },
+    user: { type: ObjectId, required: true, ref: 'User' },
+    parentComment: { type: ObjectId, ref: 'Comment', },     // self referencing relationship
+    text: { type: String, required: true },
+    depth: { type: Number, default: 1, },
+    isDeleted: { type: Boolean, default: false, },  // 하위댓글의 orphaned 방지하기 위해 isDeleted: true로 표시
+}, { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } });
 
-const DiarySchema = new Schema({
-    category: { type: Schema.Types.ObjectId, ref: 'Planet', required: true },
-    writer: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    title: { type: String, required: true },
-    content: { type: String },
-    image: { type: String },
-    tags: { type: Array },
-    Bookmark: {
-        markBy: { type: [mongoose.Schema.Types.ObjectId], ref: 'User' },
-        markNum: { type: Number }
-    },
-    Comments: {
-        type: [CommentSchema],
-        default: {
-            Recomments: {
-                type: [RecommentSchema]
-            }
-        }
+
+
+/* virtual */
+DiarySchema.virtual('comments', {
+    ref: 'Comment',
+    localField: '_id',
+    foreignField: 'diary',
+});
+
+CommentSchema.virtual('comments', {
+    ref: 'Comment',
+    localField: '_id',
+    foreignField: 'parentComment',
+});
+// 부모로부터 자식 찾아 내려가게끔 자식 댓글들의 정보를 가지는 항목을 virtual 항목으로 추가
+CommentSchema.virtual('childComments')
+    .get(function () {
+        return this._childComments;
+    })
+    .set(function (v) {
+        this._childComments = v;
+    });
+
+
+
+/* method */
+// DiarySchema.methods.createDiary = function (title, text) {
+//     const diary = new this({
+//         title: title,
+//         text: text
+//     });
+//     return diary.save();
+// };
+
+DiarySchema.pre('remove', async function (next) {
+    const diary = this;
+    try {
+        await Comment.deleteMany({ diary: diary._id });
+        next();
+    } catch (e) {
+        next();
     }
-}, { timestamps: true });
+});
 
-const Diary = mongoose.model('Diary', DiarySchema);
+/* static */
 
-module.exports = { Diary };
+
+
+const Diary = mongoose.model('Diary', DiarySchema, 'Diary');
+const Comment = mongoose.model('Commnet', CommentSchema, 'Comment');
+
+module.exports = { Diary, Comment };

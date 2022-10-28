@@ -3,29 +3,32 @@ const googleStrategy = require('./passport/googleStrategy');
 const naverStrategy = require('./passport/naverStrategy');
 const kakaoStrategy = require('./passport/kakaoStrategy');
 const localStrategy = require('./passport/localStrategy');
-const jwt = require('./passport/jwtStrategy');
-const { pass } = require('./passport/naverStrategy');
+const jwtStrategy = require('./passport/jwtStrategy');
+
+// const { User } = require("../src/models/User");
 
 
-/* 쿠키/세션 serialize */
 
-// 로그인 성공시 실행 - 서버세션(req.session)에 사용자식별자 저장
+
+
+/* passport 설정 */
+// 로그인 성공시 실행
 passport.serializeUser((user, done) => {
-    done(null, user.userID);
+    done(null, user);
 });
 
-// 로그인 성공 후 클라이언트 요청마다 호출 - 서버세션의 사용자식별자로 실제세션의 회원정보를 복원해 req.user에 저장
-passport.deserializeUser(async (userID, done) => {
-    User.findOne({ userID: userID })      // serializeUser에서 받아온 사용자식별자 기반으로 db에서 검색
-        .then((user) => done(null, user))   //user는 req.user로 들어감, 회원정보가 필요할 때 api에서 사용
-        .catch((err) => done(err));
+// 로그인 성공 후 클라이언트 요청마다 호출
+passport.deserializeUser(async (user, done) => {
+    //사용자식별자로 유저정보를 복원해 req.user에 저장, 회원정보가 필요할 때 api에서 사용
+    done(null, user);
 });
 
 
-passport.use(localStrategy);
-passport.use(googleStrategy);
-passport.use(naverStrategy);
-passport.use(kakaoStrategy);
-passport.use(jwt);
+
+passport.use('google', googleStrategy);
+passport.use('naver', naverStrategy);
+passport.use('kakao', kakaoStrategy);
+passport.use('local', localStrategy);
+passport.use('jwt', jwtStrategy);
 
 module.exports = passport;

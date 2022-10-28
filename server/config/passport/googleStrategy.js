@@ -11,12 +11,12 @@ module.exports = new GoogleStrategy(
         callbackURL: googleOAuth.callbackURL,
     },
     async (accessToken, refreshToken, profile, done) => {
-        console.info('___new GoogleStrategy()');
+        console.info('___new googleStrategy()');
         console.log('___google profile', profile);
 
         try {           // DB에서 사용자 검색
             const exUser = await User.findOne({
-                snsID: profile.id
+                userID: profile.id,
             });
             // if (exUser.email == (profile._json && profile._json.email)
             if (exUser) {
@@ -24,9 +24,9 @@ module.exports = new GoogleStrategy(
                 done(null, exUser);
             } else {    // DB에 사용자가 저장되어 있지 않으면 DB에 새로 저장
                 const newUser = await User.create({
+                    userID: profile.id,
                     username: profile.displayName,
                     email: profile._json && profile._json.email,
-                    snsID: profile.id,
                     provider: 'google',
                 });
                 console.log('___google newUser', newUser);
