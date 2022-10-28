@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Redirect } from "react-router-dom";
 import axios from "axios";
 // page component
 import LandingPage from "../../pages/LandingPage/LandingPage";
@@ -23,8 +23,9 @@ import MakePlanetPage from "../../pages/MakePlanetPage/MakePlanetPage";
 
 const authorizedRouter = createBrowserRouter([
   {
-    path: "/",
-    element: <LandingPage />,
+  path: "/",
+  element: <LandingPage />,
+
   },
   {
     path: "/login",
@@ -108,7 +109,7 @@ const Router = () => {
 
   return (
     <>
-      {token ? <RouterProvider router={authorizedRouter} /> : <RouterProvider router={unauthorizationRouter} />}
+    {localStorage.getItem("token") !== null ? <RouterProvider router={authorizedRouter} /> : <RouterProvider router={unauthorizationRouter} />}
     </>
   );
 };
