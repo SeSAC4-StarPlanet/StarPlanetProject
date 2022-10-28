@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
+const { Types: ObjectId } = Schema;
 
 
 /* Schema */
@@ -9,8 +9,8 @@ const DiarySchema = new Schema({
     user: { type: ObjectId, required: true, ref: 'User' },
     title: { type: String, required: true },
     text: { type: String, required: true },
-    image: { type: [String] },
-    tags: { type: [String] },
+    image: [String],
+    tags: [String],
     Bookmark: {
         markBy: [{ type: ObjectId, ref: 'User' }],
         markNum: { type: Number, default: 0 }
@@ -76,6 +76,6 @@ DiarySchema.pre('remove', async function (next) {
 
 
 const Diary = mongoose.model('Diary', DiarySchema, 'Diary');
-const Comment = mongoose.model('Comment', CommentSchema, 'Comment');
+const Comment = mongoose.model('Commnet', CommentSchema, 'Comment');
 
 module.exports = { Diary, Comment };
