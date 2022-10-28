@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
+const { Types: ObjectId } = Schema;
 const { Album } = require("./Album");
 const { Diary, Comment } = require("./Diary");
 
@@ -13,13 +13,13 @@ const saltRounds = 10;
 
 /* Schema */
 const UserSchema = new mongoose.Schema({
-    userID: { type: String },
-    hashedPW: { type: String },
-    username: { type: String },
-    email: { type: String },
+    userID: String,
+    hashedPW: String,
+    username: String,
+    email: String,
     provider: { type: String, required: true, default: 'local' },
-    token: { type: String },
-    tokenExp: { type: Number },
+    token: String,
+    tokenExp: Number,
     meta: {
         userInfo: { type: String },
         userImg: { type: String, default: 'default-profile.jpg' },
