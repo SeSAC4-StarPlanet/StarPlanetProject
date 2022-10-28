@@ -1,22 +1,21 @@
 const express = require('express');
-const passport = require('../../config/passport');
-const jwt = require("jsonwebtoken");
-
 const router = express.Router();
 
-
+const passport = require('../../config/passport');
+const jwt = require("jsonwebtoken");
 const secret = require('../../config/default').secretOrKey;
 const { verifyToken } = require('../middlewares/authorization');
 
 
-//! jwt토큰 발급
-function setUserToken(user) {
+//* jwt토큰 발급
+function setUserToken(res, user) {
     user.type = 'JWT';
-    const token = jwt.sign(user.toHexString(), secret, {
+    const token = jwt.sign(user.toJSON(), secret, {
         expiresIn: '15m', // 만료시간 15분
         issuer: '토큰발급자',
     });
-    res.cookie('x_auth');
+    // res.cookies('x_auth', token);
+    // res.cookie('x_auth');
     return token;
 }
 
@@ -26,7 +25,9 @@ router.get('/', (req, res) => {
         console.log('path : /auth');
         console.log('req.user : ', req.user);
         console.log('req.cookies : ', req.cookies);
-        res.send("로그인 성공");
+
+        const token = setUserToken(res, req.user);
+        return res.status(201).json({ result: 'ok', token });
     } else {
         res.redirect('/auth/login');
     }
@@ -75,32 +76,33 @@ router.post('/login', async (req, res, next) => {
 });
 
 
+
+//? 간편 로그인 
 // 구글 간편로그인
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-router.get('/google/callback', passport.authenticate('google', {
-    failureRedirect: '/auth',
-}), (req, res) => {
-    const token = setUserToken(res, req.user);
-    res.status(201).json({ result: 'ok', token });
-});
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/auth' }),
+    (req, res) => {
+        const token = setUserToken(res, req.user);
+        res.status(200).json({ result: 'ok', token });
+    });
 
 // 네이버 간편로그인
 router.get('/naver', passport.authenticate('kakao'));
-router.get('/naver/callback', passport.authenticate('naver', {
-    failureRedirect: '/auth'
-}), (req, res) => {
-    const token = setUserToken(res, req.user);
-    res.status(201).json({ result: 'ok', token });
-});
+router.get('/naver/callback', passport.authenticate('naver', { failureRedirect: '/auth' }),
+    (req, res) => {
+        const token = setUserToken(res, req.user);
+        res.status(200).json({ result: 'ok', token });
+    });
 
 // 카카오 간편로그인
-router.get('/kakao', passport.authenticate('kakao'));
-router.get('/kakao/callback', passport.authenticate('kakao', {
-    failureRedirect: '/auth',
-}), (req, res) => {
-    const token = setUserToken(res, req.user);
-    res.status(201).json({ result: 'ok', token });
-});
+router.get('/kakao', passport.authenticate('kakao', { scope: ['', ''] }));
+router.get('/kakao/callback', passport.authenticate('kakao', { failureRedirect: 'http://localhost:3000/login', }),
+    (req, res) => {
+        const token = setUserToken(res, req.user);
+        // res.status(200).json({ result: 'ok', token });
+        res.status(200).redirect("http://localhost:3000/");
+    });
+
 
 
 // 로그아웃 

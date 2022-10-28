@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const { Types: ObjectId } = Schema;
+const { ObjectId } = Schema.Types;
 const { Album } = require("./Album");
 const { Diary, Comment } = require("./Diary");
 
@@ -13,13 +13,13 @@ const saltRounds = 10;
 
 /* Schema */
 const UserSchema = new mongoose.Schema({
-    userID: String,
-    hashedPW: String,
-    username: String,
-    email: String,
+    userID: { type: String, required: true, unique: true },
+    hashedPW: { type: String },
+    username: { type: String },
+    email: { type: String, required: true, index: true, unique: true, sparse: true },
     provider: { type: String, required: true, default: 'local' },
-    token: String,
-    tokenExp: Number,
+    token: { type: String },
+    tokenExp: { type: Number },
     meta: {
         userInfo: { type: String },
         userImg: { type: String, default: 'default-profile.jpg' },
@@ -98,13 +98,13 @@ UserSchema.methods.setUserToken = async (cb) => {
 //! 비밀번호 암호화 (bcrypt)
 UserSchema.pre('save', async function (next) {
 
-    // paswsword가 변경(새로 생성)될때만 암호화
+    // password가 변경(새로 생성)될때만 암호화
     if (this.isModified('hashedPW')) {
 
         // 비밀번호의 Plain Text를 hash로 교체
-        console.log('before PW', this.hashedPW);
+        console.log('before PW:', this.hashedPW);
         this.hashedPW = await bcrypt.hash(this.hashedPW, saltRounds);
-        console.log('after PW', this.hashedPW);
+        console.log(' after PW: ', this.hashedPW);
         next(); // Hashing이 끝나면 save로 넘어감
 
     } else {    // password가 변경되지 않을 때
