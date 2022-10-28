@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./category.scss";
 
 // MUI 라이브러리
@@ -20,11 +20,21 @@ import {
   faBook
 } from "@fortawesome/free-solid-svg-icons";
 import { FaList, FaFolder } from "react-icons/fa";
+// mobx
+import { observer, toJS } from "mobx-react";
+import store from "../../../../store/index";
 
-const Category = ({}) => {
+const Category = observer(({}) => {
+  const { planetClass } = store;
+
   const [open, setOpen] = useState(true);
   const [open_1, setOpen_1] = useState(true);
   const [open_2, setOpen_2] = useState(true);
+
+  useEffect(() => {
+    planetClass.getPlanetData("test", "test");
+    // console.log(toJS(countClass.user));
+  }, []);
 
   const handleClick = () => {
     setOpen(!open);
@@ -227,6 +237,6 @@ const Category = ({}) => {
       </Collapse>
     </List>
   );
-};
+});
 
 export default Category;
