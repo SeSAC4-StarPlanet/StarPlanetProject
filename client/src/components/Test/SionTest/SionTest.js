@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./sionTest.scss";
 
 import StarMap from "../../Common/StarMap/StarMap";
@@ -12,6 +12,7 @@ import Selector from "../../Common/Diary/Selector/Selector";
 import Editor from "../../Common/Editor/Editor";
 import Writer from "../../Common/Diary/Writer/Writer";
 import Read from "../../Common/Diary/Read/Read";
+
 // import AlbumMain from "../../Common/Album/AlbumMain/AlbumMain";
 // 페이지
 import DiaryMain from "../../../pages/Diary/Main/DiaryMain";
@@ -24,7 +25,19 @@ import Main from "../../Common/WorkSpace/Main/Main";
 import Frame from "../../Common/Frame/Frametitle";
 
 
-const SionTest = () => {
+// mobx
+import { observer ,toJS} from "mobx-react";
+import store from "../../../store/index"
+
+const SionTest = observer(() => {
+
+  const {countClass} = store;
+  useEffect(() => {
+    countClass.getUsers()
+    // console.log(toJS(countClass.user));
+  },[])
+
+
   return (
     <>
       {/* <DiaryMain /> */}
@@ -34,13 +47,13 @@ const SionTest = () => {
         <Header />
 
         {/* <NewPlanetBtn/> */}
-        {/* <Frame planetTitle={"sion"} content={<AlbumMain />} /> */}
-      </div>
-      {/* <Footer/> */}
+        {/* <Frame planetTitle={"sion"} content={<AlbumMain/>}/> */}
+        </div>
+        {/* <Footer/> */}
       {/* <div className="back">
       </div> */}
     </>
   );
-};
+});
 
 export default SionTest;

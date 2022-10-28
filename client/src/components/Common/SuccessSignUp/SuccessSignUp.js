@@ -1,7 +1,10 @@
 import SuccessSignUpBtn from "./SuccessSignUpBtn";
 import Main_Logo from "../../../assets/img/LandingPage/logo_main.svg";
+import { useNavigate } from "react-router-dom";
+import "./SuccessSignUp.scss";
 
 const SuccessSignUp = () => {
+  const navigate = useNavigate();
   return (
     <div className="successSignUpWrapper">
       <div className="successSignUpSection">
@@ -17,7 +20,11 @@ const SuccessSignUp = () => {
           <div className="successSignupText2">
             로그인 후 서비스를 이용하세요.
           </div>
-          <SuccessSignUpBtn />
+          <SuccessSignUpBtn
+            onClick={() => {
+              navigate("/login");
+            }}
+          />
         </div>
       </div>
     </div>

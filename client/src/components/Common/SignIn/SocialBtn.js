@@ -1,10 +1,12 @@
 import React from "react";
 import "./SocialBtn.scss";
 
-export default function SocialBtn({ src }) {
+export default function SocialBtn({ src, href }) {
   return (
     <div className="socialBtnBox">
-      <img src={src}></img>
+      <a href={href}>
+        <img src={src}></img>
+      </a>
     </div>
   );
 }
