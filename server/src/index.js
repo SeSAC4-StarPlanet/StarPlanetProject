@@ -9,6 +9,7 @@ const DB = require('./models');
 const app = express();
 DB();
 
+
 /* env */
 const config = require("../config/default");
 const port = config.port || 8000;
@@ -22,7 +23,6 @@ app.set("views", path.join(__dirname, "/views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({ credentials: true, origin: clientUrl }));
-// app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(cookieParser(config.COOKIE_SECRET));
 
 /* Redis */
@@ -51,7 +51,6 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 
 //* routes */

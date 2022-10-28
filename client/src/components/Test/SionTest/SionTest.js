@@ -12,7 +12,7 @@ import Selector from "../../Common/Diary/Selector/Selector";
 import Editor from "../../Common/Editor/Editor";
 import Writer from "../../Common/Diary/Writer/Writer";
 import Read from "../../Common/Diary/Read/Read";
-import AlbumMain from "../../Common/Album/AlbumMain/AlbumMain";
+// import AlbumMain from "../../Common/Album/AlbumMain/AlbumMain";
 // 페이지
 import DiaryMain from "../../../pages/Diary/Main/DiaryMain";
 import DiaryWrite from "../../../pages/Diary/Write/DiaryWrite";
@@ -28,15 +28,15 @@ const SionTest = () => {
   return (
     <>
       {/* <DiaryMain /> */}
-        {/* <AlbumMain /> */}
-        <div className="back">
+      {/* <AlbumMain /> */}
+      <div className="back">
         <StarMap />
         <Header />
 
         {/* <NewPlanetBtn/> */}
-        <Frame planetTitle={"sion"} content={<AlbumMain/>}/>
-        </div>
-        {/* <Footer/> */}
+        {/* <Frame planetTitle={"sion"} content={<AlbumMain />} /> */}
+      </div>
+      {/* <Footer/> */}
       {/* <div className="back">
       </div> */}
     </>

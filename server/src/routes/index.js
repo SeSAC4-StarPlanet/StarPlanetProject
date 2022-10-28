@@ -7,8 +7,8 @@ const { verifyToken } = require('../middlewares/authorization');
 //     res.send("test연결입니다~");
 // });
 
-router.use("/auth", require("./auth"));
-router.use("/user", require("./users"));
-router.use('/diary', verifyToken, require('./diarys'));
+router.use("/auth", require("./authRouter"));
+router.use("/user", require("./userRouter"));
+router.use('/diary', verifyToken, require('./diaryRouter'));
 
 module.exports = router;

@@ -8,7 +8,7 @@ const verifyToken = function (req, res, next) {
     // token에는 JWT가 들어감
     try {
         const token = req.header("x-auth-token");         //토큰 없는지 체크
-        if (!token) { return res.status(401).json({ msg: "No token, authorization denied" }); }
+        if (!token) { return res.status(401).json({ message: "No token, authorization denied" }); }
         const decoded = jwt.verify(token, secret);
 
         if (decoded) {
@@ -19,7 +19,7 @@ const verifyToken = function (req, res, next) {
             res.status(401).json({ error: 'unauthorized' });
         }
     } catch (error) {
-        res.status(401).json({ msg: "token expired" });
+        res.status(401).json({ message: "token expired" });
     }
 };
 

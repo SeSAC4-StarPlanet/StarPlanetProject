@@ -1,11 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/User");
+const { User } = require('../models/User');
 const controller = require("../controllers/user");
-
-// const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const secret = require("../../config/default").secretOrKey;
 
 
 // 모든 회원 조회
@@ -19,44 +15,45 @@ router.get("/", (req, res) => {
     });
 });
 
+//! 회원가입
+// router.post('/', controller.createUser);
+router.post("/", async (req, res) => {
+
+  try {
+    // DB에서 사용자 검색    
+    const exUser = await User.findOne({ userID: req.body.userID });
+
+    // 사용자 있으면 에러메세지
+    if (exUser != null) {
+      console.log("*****User exists*****");
+      return res.status(400).json({ errors: "User already exists" });
+    } else { // 사용자 없으면 회원가입
+      const newUser = await new User(req.body);
+
+      newUser.save((err, userInfo) => {
+        if (err) {
+          console.log("*****Fail to save User***** ", err);
+          return res.status(400).json({ errors: "Fail to save User", err });
+        } else {
+          console.log('*****회원가입!*****', userInfo);
+          res.status(200).json({ success: true, userInfo });
+        }
+      })
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("server Error");
+  }
+});
+
+
+
 // 회원 검색 (url로 넘어온 파라미터를 _id로 저장)
 router.get("/:_id", (req, res) => {
   User.findOne({ _id: req.params._id }, (err, user) => {
     if (err) res.json(err);
     res.json(user);
   });
-});
-
-
-
-//! 회원 가입
-// router.post('/', controller.createUser);
-router.post("/", async (req, res) => {
-
-  try {    // 유저id 비교하여 user가 이미 존재하는지 확인
-    console.log('req.body: ', req.body);
-    let user = await User.findOne({ userID: req.body.userID });
-
-    if (user) {
-      return res.status(400).json({ errors: "User already exists" });
-    } else {
-      user = new User({
-        userID: req.body.userID,
-        hashedPW: req.body.hashedPW,
-        username: req.body.username,
-        email: req.body.email,
-      })
-      // TODO
-      user.save((err, user) => {
-        if (err) return res.json(err);
-        res.json(user);
-      })
-
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("server Error");
-  }
 });
 
 

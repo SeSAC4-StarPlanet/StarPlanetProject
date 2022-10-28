@@ -1,22 +1,47 @@
 import mongoose from 'mongoose'
+const { Schema } = mongoose.Schema
+const { Types: ObjectId } = Schema;
+const { Album } = require("./Album");
+const { Diary } = require("./Diary");
 
-const Schema = mongoose.Schema
 
+/* Schema */
 const PlanetSchema = mongoose.Schema({
     name: { type: String },
     meta: {
         planetInfo: { type: String },
         planetImg: { type: String, default: 'default-profile.jpg' },
     },
-    payment: { status: { type: Boolean }, maxNum: { Number } },
-    member: { type: [mongoose.Schema.Types.ObjectId], ref: 'User' },
-    category: {
-        Album: { type: mongoose.Schema.Types.ObjectId, ref: 'Album' },
-        Bookmark: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-        Diary: { type: [mongoose.Schema.Types.ObjectId], ref: 'Diary' },
+    members: [{ type: ObjectId, ref: 'User' }],
+    payment: {
+        status: { type: Boolean },
+        maxNum: { Number }
     },
-}, { timestamps: true })
+    category: {
+        Album: { type: Object },
+        Diary: { type: Object }
+    },
+}, { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } });
 
-const Planet = mongoose.model('Planet', PlanetSchema)
+
+/* virtual */
+
+
+/* method */
+PlanetSchema.pre('remove', async function (next) {
+    const planet = this;
+    try {
+        await Album.deleteMany({ planet: planet._id });
+        await Diary.deleteMany({ planet: planet._id });
+        next();
+    } catch (e) {
+        next();
+    }
+});
+
+
+/* static */
+
+const Planet = mongoose.model('Planet', PlanetSchema, 'Planet')
 
 module.exports = { Planet }
