@@ -23,7 +23,7 @@ module.exports = new KakaoStrategy(
                 const newUser = await User.create({
                     userID: profile.id,
                     username: profile.displayName,
-                    email: profile._json && profile._json.email,
+                    email: profile._json && profile._json.kakao_account.email,
                     provider: 'kakao',
                 });
                 console.log('___kakao newUser', newUser);
