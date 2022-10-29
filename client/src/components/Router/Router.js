@@ -1,5 +1,9 @@
 import React, { useEffect } from "react";
-import { createBrowserRouter, RouterProvider, Redirect } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Redirect,
+} from "react-router-dom";
 import axios from "axios";
 // page component
 import LandingPage from "../../pages/LandingPage/LandingPage";
@@ -24,9 +28,8 @@ import Page404 from "../../pages/Page404/Page404";
 
 const authorizedRouter = createBrowserRouter([
   {
-  path: "/",
-  element: <LandingPage />,
-
+    path: "/",
+    element: <LandingPage />,
   },
   {
     path: "/login",
@@ -76,18 +79,22 @@ const authorizedRouter = createBrowserRouter([
   {
     path: "/diary/main",
     element: <DiaryMain />,
-  }, {
+  },
+  {
     path: "/diary/Read",
     element: <DiaryRead />,
-  }, {
+  },
+  {
     path: "/workspace/main",
     element: <WorkSpaceMain />,
   },
-  , {
+  ,
+  {
     path: "/album/main",
     element: <AlbumMain />,
   },
-  , {
+  ,
+  {
     path: "/album/individual",
     element: <AlbumIndividual />,
   },
@@ -105,16 +112,20 @@ const unauthorizationRouter = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
-  }
-
+  },
 ]);
 
 const Router = () => {
-  let token = localStorage.getItem("token") !== null ? localStorage.getItem("token") : ""
+  let token =
+    localStorage.getItem("token") !== null ? localStorage.getItem("token") : "";
 
   return (
     <>
-    {localStorage.getItem("token") !== null ? <RouterProvider router={authorizedRouter} /> : <RouterProvider router={unauthorizationRouter} />}
+      {localStorage.getItem("token") !== null ? (
+        <RouterProvider router={authorizedRouter} />
+      ) : (
+        <RouterProvider router={unauthorizationRouter} />
+      )}
     </>
   );
 };
