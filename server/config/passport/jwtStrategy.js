@@ -4,7 +4,8 @@ const { User } = require('../../src/models/User');
 
 
 const JWTConfig = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken('authorization'),    // header의 bearer스키마에 담겨온 토큰 해석
+    // Authorization header의 JWT 기반 Bearer스키마에 담겨온 토큰 해석
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken('authorization'),
     secretOrKey: secret     // 복호화 방식
 };
 

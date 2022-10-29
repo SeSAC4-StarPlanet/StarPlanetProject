@@ -14,8 +14,7 @@ function setUserToken(res, user) {
         expiresIn: '15m', // 만료시간 15분
         issuer: '토큰발급자',
     });
-    // res.cookies('x_auth', token);
-    // res.cookie('x_auth');
+    res.header('authorization', token);
     return token;
 }
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Redirect } from "react-router-dom";
 import axios from "axios";
 // page component
 import LandingPage from "../../pages/LandingPage/LandingPage";
@@ -22,10 +22,11 @@ import SionTest from "../Test/SionTest/SionTest";
 import MakePlanetPage from "../../pages/MakePlanetPage/MakePlanetPage";
 import Page404 from "../../pages/Page404/Page404";
 
-const router = createBrowserRouter([
+const authorizedRouter = createBrowserRouter([
   {
-    path: "/",
-    element: <LandingPage />,
+  path: "/",
+  element: <LandingPage />,
+
   },
   {
     path: "/login",
@@ -75,22 +76,18 @@ const router = createBrowserRouter([
   {
     path: "/diary/main",
     element: <DiaryMain />,
-  },
-  {
+  }, {
     path: "/diary/Read",
     element: <DiaryRead />,
-  },
-  {
+  }, {
     path: "/workspace/main",
     element: <WorkSpaceMain />,
   },
-  ,
-  {
+  , {
     path: "/album/main",
     element: <AlbumMain />,
   },
-  ,
-  {
+  , {
     path: "/album/individual",
     element: <AlbumIndividual />,
   },
@@ -100,16 +97,24 @@ const router = createBrowserRouter([
   },
 ]);
 
+const unauthorizationRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <LandingPage />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  }
+
+]);
+
 const Router = () => {
-  // const callApi = async () => {
-  //   axios.get("/api").then((res) => console.log(res.data.test));
-  // };
-  // useEffect(() => {
-  //   callApi();
-  // }, []);
+  let token = localStorage.getItem("token") !== null ? localStorage.getItem("token") : ""
+
   return (
     <>
-      <RouterProvider router={router} />
+    {localStorage.getItem("token") !== null ? <RouterProvider router={authorizedRouter} /> : <RouterProvider router={unauthorizationRouter} />}
     </>
   );
 };

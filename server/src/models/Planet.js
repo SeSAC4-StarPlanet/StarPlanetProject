@@ -12,14 +12,14 @@ const PlanetSchema = mongoose.Schema({
         planetInfo: { type: String },
         planetImg: { type: String, default: 'default-profile.jpg' },
     },
-    members: [{ type: ObjectId, ref: 'User' }],
+    member: [{ type: ObjectId, ref: 'User' }],
     payment: {
         status: { type: Boolean },
         maxNum: { type: Number }
     },
     category: {
-        Album: { type: Object },
-        Diary: { type: Object }
+        Album: { type: Array },
+        Diary: { type: Array }
     },
 }, { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } });
 

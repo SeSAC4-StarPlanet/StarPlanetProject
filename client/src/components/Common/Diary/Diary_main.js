@@ -55,8 +55,8 @@ const Diary_main = ({ planetTitle }) => {
               <Selector />
             </div>
             <div className="Diary_main_box">
-              {_DATA.currentData().map((e) => {
-                console.log(e);
+              {_DATA.currentData().map(e => {
+                // console.log(e);
                 return <Diary_content title={e.title} />;
               })}
               <div className="dairyPaginationWrapper">
