@@ -5,13 +5,13 @@ import axios from "axios";
 configure({ enforceActions: true });
 
 class Planet {
-  planet = [];
+  planets = [];
   diaryCategory = [];
   albumCategory = [];
 
   constructor() {
     makeObservable(this, {
-      planet: observable,
+      planets: observable,
       diaryCategory: observable,
       albumCategory: observable,
       setPlanet: action,
@@ -19,14 +19,20 @@ class Planet {
     });
   }
 
-  setPlanet = (planet) => {
-    this.planet = [...planet];
+  setPlanet = (planets) => {
+    this.planets = [...planets];
   };
   setDiaryCategory = (diaryCategory) => {
     this.diaryCategory = [...diaryCategory];
   };
   setAlbumCategory = (albumCategory) => {
     this.albumCategory = [...albumCategory];
+  };
+
+  getPlanets = (user) => {
+    axios.get(`/planet/workspace/${user}`).then((res) => {
+      this.setPlanet(res.data.planets);
+    });
   };
 
   getPlanet = (user, planet) => {

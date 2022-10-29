@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./main.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 // import required modules
@@ -16,6 +16,12 @@ import { toJS } from "mobx";
 
 const Main = observer(() => {
   const { planetClass } = store;
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    planetClass.getPlanets("test");
+    setData(toJS(planetClass.planets));
+  }, []);
 
   return (
     <div className="PlanetSelector">
@@ -39,7 +45,6 @@ const Main = observer(() => {
               </div>
             </div>
             <div className="planet" />
-
             <div className="textWrapper">
               <div className="planetName">NAME</div>
               <div className="planetCreatedDate">SINCE 22.10.23</div>
