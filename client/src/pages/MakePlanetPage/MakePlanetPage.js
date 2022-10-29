@@ -17,7 +17,7 @@ export default function MakePlanetPage() {
   const [userID, setuserId] = useState("");
 
   return (
-    <div>
+    <div className="back">
       <StarMap />
       <Headers />
       <div className="makePlanetSection">
@@ -28,7 +28,6 @@ export default function MakePlanetPage() {
               console.log(e.target.value);
             }}
           />
-
           <MakePlanetSelectHeader value={"행성선택"} />
           <div className="planetBox">
             <MakePlanetSelect src={planet1} />

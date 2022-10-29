@@ -60,10 +60,6 @@ const authorizedRouter = createBrowserRouter([
     element: <ModifyPage />,
   },
   {
-    path: "/makePlanet",
-    element: <MakePlanetPage />,
-  },
-  {
     path: "/page404",
     element: <Page404 />,
   },
@@ -91,6 +87,10 @@ const authorizedRouter = createBrowserRouter([
   {
     path: "/workspace/main",
     element: <WorkSpaceMain />,
+  },
+  {
+    path: "/workspace/create",
+    element: <MakePlanetPage />,
   },
   ,
   {

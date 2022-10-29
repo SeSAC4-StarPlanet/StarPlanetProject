@@ -6,7 +6,7 @@ import { Pagination, Navigation } from "swiper";
 import "swiper/css"; //basic
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-
+import { Link } from "react-router-dom";
 import Planet from "../../../../assets/img/WorkSpace/Planets/planet_2.png";
 import NewPlanetBtn from "../NewPlanetBtn/NewPlanetBtn";
 
@@ -43,7 +43,6 @@ const Main = observer(() => {
       >
         {data.map((e) => {
           let date = new Date(e.createdAt);
-          console.log();
           return (
             <SwiperSlide>
               <div className="planetWrapper">
@@ -53,14 +52,16 @@ const Main = observer(() => {
                   </div>
                 </div>
                 <div className="planet" />
-                <div className="textWrapper">
-                  <div className="planetName">{e.name}</div>
-                  <div className="planetCreatedDate">
-                    {`${date.getFullYear()}-${date.getMonth()}-${
-                      date.getDate() + 1
-                    } ~`}
-                  </div>
-                </div>
+                <Link to={`/diary/main`}>
+                  <div className="textWrapper">
+                    <div className="planetName">{e.name}</div>
+                    <div className="planetCreatedDate">
+                      {`${date.getFullYear()}-${date.getMonth()}-${
+                        date.getDate() + 1
+                      } ~`}
+                    </div>
+                  </div>{" "}
+                </Link>
                 <img className="planet" src={Planet} />
               </div>
             </SwiperSlide>

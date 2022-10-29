@@ -35,9 +35,8 @@ class Planet {
     });
   };
 
-  getPlanet = (user, planet) => {
-    axios.get(`/planet/${user}/${planet}`).then((res) => {
-      this.setPlanet(res.data.planet);
+  getPlanet = async (user, planet) => {
+    await axios.get(`/planet/${user}/${planet}`).then((res) => {
       this.setDiaryCategory(res.data.diary);
       this.setAlbumCategory(res.data.album);
     });

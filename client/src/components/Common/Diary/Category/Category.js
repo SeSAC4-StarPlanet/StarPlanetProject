@@ -35,8 +35,12 @@ const Category = observer(({}) => {
   const [diary, setDiary] = useState([]);
 
   useEffect(() => {
-    planetClass.getPlanet("test", "test");
-    setDiary(toJS(planetClass.diaryCategory));
+    async function fetchAndSetDiary() {
+      await planetClass.getPlanet("test", "test");
+      let arr = planetClass.diaryCategory;
+      setDiary(arr);
+    }
+    fetchAndSetDiary();
   }, []);
 
   const handleClick = () => {

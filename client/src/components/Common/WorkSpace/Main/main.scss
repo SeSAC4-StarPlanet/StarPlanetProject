@@ -10,6 +10,7 @@
     margin-top: 150px;
     display: flex;
     justify-content: center;
+    z-index: 5;
 
     .textWrapper {
       position: absolute;
@@ -35,6 +36,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    z-index: 0;
 
     #inner-orbit {
       position: absolute;

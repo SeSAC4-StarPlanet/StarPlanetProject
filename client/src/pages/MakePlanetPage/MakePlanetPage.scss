@@ -4,13 +4,14 @@
   justify-content: center;
   width: 90%;
   height: 90%;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%);
   background-color: #fff;
+  margin: 0 auto;
+  margin-top: 100px;
+
   .makePlanetContainer {
     height: 100%;
   }
+
   .planetBox {
     display: flex;
     flex-direction: row;
