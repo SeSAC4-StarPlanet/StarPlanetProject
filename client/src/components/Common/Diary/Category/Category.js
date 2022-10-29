@@ -26,7 +26,7 @@ import store from "../../../../store/index";
 import { observer } from "mobx-react";
 import { toJS } from "mobx";
 
-const Category = observer(({}) => {
+const Category = observer(({ sx }) => {
   const { planetClass } = store;
 
   const [open, setOpen] = useState(true);
@@ -50,14 +50,7 @@ const Category = observer(({}) => {
   };
 
   return (
-    <List
-      sx={{
-        width: "100%",
-        maxWidth: 360,
-        bgcolor: "background.paper",
-      }}
-      component="nav"
-    >
+    <List sx={sx} component="nav">
       {/* 사진첩 */}
       <ListItemButton>
         <ListItemIcon
