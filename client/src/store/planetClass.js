@@ -29,8 +29,8 @@ class Planet {
     this.albumCategory = [...albumCategory];
   };
 
-  getPlanets = (user) => {
-    axios.get(`/planet/workspace/${user}`).then((res) => {
+  getPlanets = async (user) => {
+    await axios.get(`/planet/workspace/${user}`).then((res) => {
       this.setPlanet(res.data.planets);
     });
   };
