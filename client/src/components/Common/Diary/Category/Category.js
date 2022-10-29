@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./category.scss";
 
 // MUI 라이브러리
@@ -17,12 +17,14 @@ import {
   faImage,
   faCalendarDays,
   faBookmark,
-  faBook
+  faBook,
 } from "@fortawesome/free-solid-svg-icons";
 import { FaList, FaFolder } from "react-icons/fa";
+
 // mobx
-import { observer, toJS } from "mobx-react";
 import store from "../../../../store/index";
+import { observer } from "mobx-react";
+import { toJS } from "mobx";
 
 const Category = observer(({}) => {
   const { planetClass } = store;
@@ -30,17 +32,18 @@ const Category = observer(({}) => {
   const [open, setOpen] = useState(true);
   const [open_1, setOpen_1] = useState(true);
   const [open_2, setOpen_2] = useState(true);
+  const [diary, setDiary] = useState([]);
 
   useEffect(() => {
-    planetClass.getPlanetData("test", "test");
-    // console.log(toJS(countClass.user));
+    planetClass.getPlanet("test", "test");
+    setDiary(toJS(planetClass.diaryCategory));
   }, []);
 
   const handleClick = () => {
     setOpen(!open);
   };
   const handleClick_1 = () => {
-    setOpen_1(!open);
+    setOpen_1(!open_1);
   };
   const handleClick_2 = () => {
     setOpen_2(!open_2);
@@ -51,7 +54,7 @@ const Category = observer(({}) => {
       sx={{
         width: "100%",
         maxWidth: 360,
-        bgcolor: "background.paper"
+        bgcolor: "background.paper",
       }}
       component="nav"
     >
@@ -66,7 +69,7 @@ const Category = observer(({}) => {
           primaryTypographyProps={{
             color: "#0D0783",
             fontSize: "15px",
-            fontWeight: 500
+            fontWeight: 500,
           }}
           primary="사진첩"
         />
@@ -82,7 +85,7 @@ const Category = observer(({}) => {
           primaryTypographyProps={{
             color: "#0D0783",
             fontSize: "15px",
-            fontWeight: 500
+            fontWeight: 500,
           }}
           primary="일정"
         />
@@ -98,7 +101,7 @@ const Category = observer(({}) => {
           primaryTypographyProps={{
             color: "#0D0783",
             fontSize: "15px",
-            fontWeight: 500
+            fontWeight: 500,
           }}
           primary="북마크"
         />
@@ -114,7 +117,7 @@ const Category = observer(({}) => {
           primaryTypographyProps={{
             color: "#0D0783",
             fontSize: "15px",
-            fontWeight: 500
+            fontWeight: 500,
           }}
           primary="다이어리"
         />
@@ -132,7 +135,7 @@ const Category = observer(({}) => {
               primaryTypographyProps={{
                 color: "#0D0783",
                 fontSize: "13px",
-                fontWeight: 500
+                fontWeight: 500,
               }}
               primary="버킷리스트"
             />
@@ -147,7 +150,7 @@ const Category = observer(({}) => {
               primaryTypographyProps={{
                 color: "#0D0783",
                 fontSize: "13px",
-                fontWeight: 500
+                fontWeight: 500,
               }}
               primary="한줄 일기"
             />
@@ -163,7 +166,7 @@ const Category = observer(({}) => {
               primaryTypographyProps={{
                 color: "#0D0783",
                 fontSize: "13px",
-                fontWeight: 500
+                fontWeight: 500,
               }}
               primary="추억 저장소"
             />
@@ -171,66 +174,30 @@ const Category = observer(({}) => {
           </ListItemButton>
           <Collapse in={open_2} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItemButton
-                sx={{
-                  height: "30px",
-                  pl: 7,
-                  fontSize: "11px",
-                  fontWeight: 500
-                }}
-              >
-                <ListItemIcon sx={{ color: "#0D0783", minWidth: "30px" }}>
-                  <FaFolder />
-                </ListItemIcon>
-                <ListItemText
-                  primaryTypographyProps={{
-                    color: "#0D0783",
-                    fontSize: "11px",
-                    fontWeight: 500
-                  }}
-                  primary="2022"
-                />
-              </ListItemButton>
-              <ListItemButton
-                sx={{
-                  height: "30px",
-                  pl: 7,
-                  fontSize: "11px",
-                  fontWeight: 500
-                }}
-              >
-                <ListItemIcon sx={{ color: "#0D0783", minWidth: "30px" }}>
-                  <FaFolder />
-                </ListItemIcon>
-                <ListItemText
-                  primaryTypographyProps={{
-                    color: "#0D0783",
-                    fontSize: "11px",
-                    fontWeight: 500
-                  }}
-                  primary="2019"
-                />
-              </ListItemButton>
-              <ListItemButton
-                sx={{
-                  height: "30px",
-                  pl: 7,
-                  fontSize: "11px",
-                  fontWeight: 500
-                }}
-              >
-                <ListItemIcon sx={{ color: "#0D0783", minWidth: "30px" }}>
-                  <FaFolder />
-                </ListItemIcon>
-                <ListItemText
-                  primaryTypographyProps={{
-                    color: "#0D0783",
-                    fontSize: "11px",
-                    fontWeight: 500
-                  }}
-                  primary="2018"
-                />
-              </ListItemButton>
+              {diary.map((e) => {
+                return (
+                  <ListItemButton
+                    sx={{
+                      height: "30px",
+                      pl: 7,
+                      fontSize: "11px",
+                      fontWeight: 500,
+                    }}
+                  >
+                    <ListItemIcon sx={{ color: "#0D0783", minWidth: "30px" }}>
+                      <FaFolder />
+                    </ListItemIcon>
+                    <ListItemText
+                      primaryTypographyProps={{
+                        color: "#0D0783",
+                        fontSize: "11px",
+                        fontWeight: 500,
+                      }}
+                      primary={e}
+                    />
+                  </ListItemButton>
+                );
+              })}
             </List>
           </Collapse>
         </List>

@@ -20,7 +20,7 @@ const LoginPage = () => {
   const [hashedPW, setPw] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = useCallback(e => {
+  const handleLogin = useCallback((e) => {
     if (userID === "" || hashedPW === "") {
       alert("아이디와 비밀번호를 입력해주세요");
       return;
@@ -28,19 +28,19 @@ const LoginPage = () => {
     axios({
       method: "post",
       url: "http://localhost:8000/api/auth/login",
-      header: { withCredentials: true, },
-      data: { userID: userID, hashedPW: hashedPW }
+      header: { withCredentials: true },
+      data: { userID: userID, hashedPW: hashedPW },
     })
-      .then(res => {
+      .then((res) => {
         let token = res.headers.get("authorization");
-        console.log('token: ', token);
-        console.log('res.data', res.data);
-        localStorage.setItem("token: ", token);
+        console.log("token: ", token);
+        console.log("res.data", res.data);
+        localStorage.setItem("token", token);
       })
       .then(() => {
         navigate("/workspace/main");
       })
-      .catch(err => console.log(err.response.data));
+      .catch((err) => console.log(err.response.data));
   });
 
   return (
@@ -109,7 +109,9 @@ const LoginPage = () => {
           <div className="signInBottom">
             <div>STARPL에 처음이신가요?</div>
             <span onClick={() => navigate("/Signup")}>회원가입</span>
-            <span onClick={() => localStorage.removeItem("token")}>토큰삭제</span>
+            <span onClick={() => localStorage.removeItem("token")}>
+              토큰삭제
+            </span>
           </div>
         </div>
       </div>

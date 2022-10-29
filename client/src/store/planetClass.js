@@ -1,36 +1,44 @@
-import { makeAutoObservable, toJS } from "mobx";
+import { observable, action, computed, configure, makeObservable } from "mobx";
+
 import axios from "axios";
 
+configure({ enforceActions: true });
+
 class Planet {
-  number = 0;
-  arr = [
-    { name: "sion", age: 25, gender: "man" },
-    { name: "yujin", age: 25, gender: "woman" }
-  ];
   planet = [];
+  diaryCategory = [];
+  albumCategory = [];
 
   constructor() {
-    makeAutoObservable(this);
+    makeObservable(this, {
+      planet: observable,
+      diaryCategory: observable,
+      albumCategory: observable,
+      setPlanet: action,
+      getPlanet: action,
+    });
   }
 
-  increase = () => {
-    this.number++;
+  setPlanet = (planet) => {
+    this.planet = [...planet];
   };
-  decrease = () => {
-    this.number--;
+  setDiaryCategory = (diaryCategory) => {
+    this.diaryCategory = [...diaryCategory];
   };
-  setUser = newUser => {
-    this.user = newUser;
+  setAlbumCategory = (albumCategory) => {
+    this.albumCategory = [...albumCategory];
   };
 
-  getPlanetData = (user, planet) => {
-    axios.get(`/planet/${user}/${planet}`).then(res => {
-      console.log(res.data);
+  getPlanet = (user, planet) => {
+    axios.get(`/planet/${user}/${planet}`).then((res) => {
+      this.setPlanet(res.data.planet);
+      this.setDiaryCategory(res.data.diary);
+      this.setAlbumCategory(res.data.album);
     });
-    // .then(data => {
-    //   this.user = data;
-    //   console.log(toJS(this.user));
-    // });
+  };
+
+  getPlanetData = () => {
+    return this.planet;
   };
 }
 
