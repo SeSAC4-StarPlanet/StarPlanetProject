@@ -2,6 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Popper from "@mui/material/Popper";
 import ModifyPlanet from "../ModifyPlanet/ModifyPlanet";
+import Avatar from "@mui/material/Avatar";
 
 export default function SimplePopper() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -21,7 +22,7 @@ export default function SimplePopper() {
         type="button"
         onClick={handleClick}
       >
-        버튼
+        <Avatar />
       </button>
       <Popper id={id} open={open} anchorEl={anchorEl}>
         <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
