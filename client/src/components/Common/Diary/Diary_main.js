@@ -26,6 +26,11 @@ const Diary_main = ({ planetTitle }) => {
     _DATA.jump(p);
   };
 
+  const style = {
+    width: 800,
+    height: 500,
+  };
+
   return (
     <div className="mainBackWrapper">
       <div className="Main_wrapper">
@@ -43,8 +48,14 @@ const Diary_main = ({ planetTitle }) => {
         </div>
         <div className="Main_container">
           <div className="Categorybar_box">
-            <div>
-              <Category />
+            <div className="Categorybar_box_list">
+              <Category
+                sx={{
+                  width: "100%",
+                  maxWidth: "40rem",
+                  bgcolor: "background.paper",
+                }}
+              />
             </div>
             <div>
               <MemberBox />

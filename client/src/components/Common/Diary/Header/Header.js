@@ -6,6 +6,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import SearchBar from "../SearchBar/SearchBar";
 import Avatar from "@mui/material/Avatar";
 import { FaRegComment, FaRegBell } from "react-icons/fa";
+import ModifyToggle from "../../ModifyToggle/ModifyToggle";
 
 const Header = () => {
   return (
@@ -24,9 +25,7 @@ const Header = () => {
           <IconButton className="btn">
             <FaRegBell />
           </IconButton>
-          <IconButton className="btn">
-            <Avatar />
-          </IconButton>
+          <ModifyToggle />
         </div>
       </div>
     </div>
