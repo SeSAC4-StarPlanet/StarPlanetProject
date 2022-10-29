@@ -1,5 +1,9 @@
 import React, { useEffect } from "react";
-import { createBrowserRouter, RouterProvider, Redirect } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Redirect,
+} from "react-router-dom";
 import axios from "axios";
 // page component
 import LandingPage from "../../pages/LandingPage/LandingPage";
@@ -16,6 +20,7 @@ import DiaryMain from "../../pages/Diary/Main/DiaryMain";
 import DiaryRead from "../../pages/Diary/Read/DiaryRead";
 import AlbumIndividual from "../../pages/Album/Individual/AlbumIndividual";
 import AlbumMain from "../../pages/Album/Main/AlbumMain";
+import Page404 from "../../pages/Page404/Page404";
 // test component
 import JinseTest from "../Test/JinseTest/JinseTest";
 import SionTest from "../Test/SionTest/SionTest";
@@ -23,9 +28,8 @@ import MakePlanetPage from "../../pages/MakePlanetPage/MakePlanetPage";
 
 const authorizedRouter = createBrowserRouter([
   {
-  path: "/",
-  element: <LandingPage />,
-
+    path: "/",
+    element: <LandingPage />,
   },
   {
     path: "/login",
@@ -60,6 +64,10 @@ const authorizedRouter = createBrowserRouter([
     element: <MakePlanetPage />,
   },
   {
+    path: "/page404",
+    element: <Page404 />,
+  },
+  {
     path: "/sionTest",
     element: <SionTest />,
   },
@@ -75,18 +83,22 @@ const authorizedRouter = createBrowserRouter([
   {
     path: "/diary/main",
     element: <DiaryMain />,
-  }, {
+  },
+  {
     path: "/diary/Read",
     element: <DiaryRead />,
-  }, {
+  },
+  {
     path: "/workspace/main",
     element: <WorkSpaceMain />,
   },
-  , {
+  ,
+  {
     path: "/album/main",
     element: <AlbumMain />,
   },
-  , {
+  ,
+  {
     path: "/album/individual",
     element: <AlbumIndividual />,
   },
@@ -100,16 +112,20 @@ const unauthorizationRouter = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
-  }
-
+  },
 ]);
 
 const Router = () => {
-  let token = localStorage.getItem("token") !== null ? localStorage.getItem("token") : ""
+  let token =
+    localStorage.getItem("token") !== null ? localStorage.getItem("token") : "";
 
   return (
     <>
-    {localStorage.getItem("token") !== null ? <RouterProvider router={authorizedRouter} /> : <RouterProvider router={unauthorizationRouter} />}
+      {localStorage.getItem("token") !== null ? (
+        <RouterProvider router={authorizedRouter} />
+      ) : (
+        <RouterProvider router={unauthorizationRouter} />
+      )}
     </>
   );
 };
