@@ -1,8 +1,10 @@
 import React from "react";
-import "./jinseTest.scss";
+import ModifyToggle from "../../Common/ModifyToggle/ModifyToggle";
 
-const JinseTest = () => {
-  return <></>;
-};
-
-export default JinseTest;
+export default function JinseTest() {
+  return (
+    <div>
+      <ModifyToggle />
+    </div>
+  );
+}
