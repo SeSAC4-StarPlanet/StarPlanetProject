@@ -33,7 +33,6 @@ const LoginPage = () => {
     })
       .then((res) => {
         let token = res.headers.get("authorization");
-        console.log("token: ", token);
         console.log("res.data", res.data);
         localStorage.setItem("token", token);
       })
