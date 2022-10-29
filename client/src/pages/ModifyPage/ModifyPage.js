@@ -12,7 +12,12 @@ const ModifyPage = () => {
   const [username, setusername] = useState("data.username");
   const [email, setEmail] = useState("data.email");
   const [tel, setTel] = useState("");
-
+  const checkUser = () => {
+    axios({
+      method: "get",
+      url: "http://localhost:8000/api/auth/user/",
+    });
+  };
   const confirmModify = () => {
     axios
       .post("url", {

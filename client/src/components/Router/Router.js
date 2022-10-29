@@ -20,6 +20,7 @@ import AlbumMain from "../../pages/Album/Main/AlbumMain";
 import JinseTest from "../Test/JinseTest/JinseTest";
 import SionTest from "../Test/SionTest/SionTest";
 import MakePlanetPage from "../../pages/MakePlanetPage/MakePlanetPage";
+import Page404 from "../../pages/Page404/Page404";
 
 const router = createBrowserRouter([
   {
@@ -74,20 +75,28 @@ const router = createBrowserRouter([
   {
     path: "/diary/main",
     element: <DiaryMain />,
-  },{
+  },
+  {
     path: "/diary/Read",
     element: <DiaryRead />,
-  },{
+  },
+  {
     path: "/workspace/main",
     element: <WorkSpaceMain />,
   },
-  ,{
+  ,
+  {
     path: "/album/main",
     element: <AlbumMain />,
   },
-  ,{
+  ,
+  {
     path: "/album/individual",
     element: <AlbumIndividual />,
+  },
+  {
+    path: "/page404",
+    element: <Page404 />,
   },
 ]);
 
