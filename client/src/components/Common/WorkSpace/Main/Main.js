@@ -10,7 +10,13 @@ import "swiper/css/pagination";
 import Planet from "../../../../assets/img/WorkSpace/Planets/planet_2.png";
 import NewPlanetBtn from "../NewPlanetBtn/NewPlanetBtn";
 
-const Main = () => {
+import store from "../../../../store/index";
+import { observer } from "mobx-react";
+import { toJS } from "mobx";
+
+const Main = observer(() => {
+  const { planetClass } = store;
+
   return (
     <div className="PlanetSelector">
       <NewPlanetBtn />
@@ -19,7 +25,7 @@ const Main = () => {
         spaceBetween={30}
         loop={true}
         pagination={{
-          clickable: false
+          clickable: false,
         }}
         navigation={true}
         modules={[Navigation]}
@@ -140,6 +146,6 @@ const Main = () => {
       </Swiper>
     </div>
   );
-};
+});
 
 export default Main;
