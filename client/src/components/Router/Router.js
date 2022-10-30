@@ -16,6 +16,7 @@ import ResetPw2Page from "../../pages/ResetPw2Page/ResetPw2Page";
 import ModifyPage from "../../pages/ModifyPage/ModifyPage";
 import DiaryWrite from "../../pages/Diary/Write/DiaryWrite";
 import WorkSpaceMain from "../../pages/WorkSpace/Main/WorkSpaceMain";
+import MakePlanetPage from "../../pages/MakePlanetPage/MakePlanetPage";
 import DiaryMain from "../../pages/Diary/Main/DiaryMain";
 import DiaryRead from "../../pages/Diary/Read/DiaryRead";
 import AlbumIndividual from "../../pages/Album/Individual/AlbumIndividual";
@@ -24,7 +25,7 @@ import Page404 from "../../pages/Page404/Page404";
 // test component
 import JinseTest from "../Test/JinseTest/JinseTest";
 import SionTest from "../Test/SionTest/SionTest";
-import MakePlanetPage from "../../pages/MakePlanetPage/MakePlanetPage";
+axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
 
 const authorizedRouter = createBrowserRouter([
   {
@@ -112,6 +113,26 @@ const unauthorizationRouter = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/signUp",
+    element: <SignUpPage />,
+  },
+  {
+    path: "/successSignUp",
+    element: <SuccessSignUpPage />,
+  },
+  {
+    path: "/findId",
+    element: <FindIdPage />,
+  },
+  {
+    path: "/resetPw1",
+    element: <ResetPw1Page />,
+  },
+  {
+    path: "/resetPw2",
+    element: <ResetPw2Page />,
   },
 ]);
 

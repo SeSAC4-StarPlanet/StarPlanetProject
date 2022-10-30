@@ -1,7 +1,6 @@
-const express = require("express");
-const router = express.Router();
-const { Planet } = require("../models/Planet");
-const { User } = require("../models/User");
+const router = require('express').Router();
+const { Planet } = require("../../models/Planet");
+const { User } = require("../../models/User");
 
 // const controller = require('../controllers/planet');
 
@@ -43,6 +42,33 @@ router.get("/:user/:planet", async (req, res) => {
     res.status(500).send("server Error");
   }
 });
+
+// 행성생성
+router.post('/planet', async (req, res) => {
+  console.log(req.body);
+  try {
+
+    const { name, select, member } = req.body;
+    const exMember = await User.findOne({ userID: member });
+
+    const newPlanet = await new Planet({ name, select, exMember });
+    newPlanet.save((err, planetInfo) => {
+      if (err) {
+        console.log("*****Fail to save Planet***** ", err);
+        res.status(400).json({ errors: "Fail to save Planet", err });
+      } else {
+        console.log('*****행성생성!*****', planetInfo);
+        res.status(201).json({ success: true, planetInfo });
+      }
+    })
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("server Error");
+  }
+})
+
+
+
 
 module.exports = router;
 
