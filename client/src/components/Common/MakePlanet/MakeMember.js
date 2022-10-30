@@ -1,15 +1,16 @@
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import "./MakeMember.scss";
 
-export default function MakeMember() {
+export default function MakeMember({ sx }) {
   return (
-    <div>
+    <div className="memberAdd">
       <Autocomplete
         disablePortal
         id="combo-box-demo"
         options={member}
-        sx={{ width: 500 }}
+        sx={sx}
         renderInput={(params) => <TextField {...params} label="멤버추가" />}
       />
     </div>
