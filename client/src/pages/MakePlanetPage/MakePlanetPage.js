@@ -26,12 +26,13 @@ const MakePlanetPage = () => {
   // const navigate = useNavigate();
 
   const handlePlanet = () => {
-    console.log(planetName, userId);
-
     axios({
       url: "http://localhost:8000/api/planet",
       method: "post",
-      header: { withCredentials: true },
+      header: {
+        withCredentials: true,
+        Authorization: localStorage.getItem('token')
+      },
       data: {
         name: planetName,
         member: userId,

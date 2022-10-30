@@ -5,15 +5,15 @@ const { User } = require('../../src/models/User');
 // const token = req.header("x-auth-token");     
 const JWTConfig = {
     // Authorization header의 JWT 기반 Bearer스키마에 담겨온 토큰 해석
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken('authorization'),
+    jwtFromRequest: ExtractJwt.fromHeader('authorization'),
     secretOrKey: secret     // 복호화 방식
 };
 
 const JWTVerify = async (jwtPayload, done) => {
-    console.info('___new JWTStrategy()');
-    console.log('___jwtPayload', jwtPayload);
-
     try {
+        console.info('___new JWTStrategy()');
+        console.log('___jwtPayload', jwtPayload);
+
         // palyload의 유저id값으로 유저 데이터 조회
         const exUser = await User.findOne({ userID: jwtPayload.userID });
 

@@ -44,7 +44,7 @@ router.get("/:user/:planet", async (req, res) => {
 });
 
 // 행성생성
-router.post('/planet', async (req, res) => {
+router.post('/', async (req, res) => {
   console.log(req.body);
   try {
     console.log(req.body);

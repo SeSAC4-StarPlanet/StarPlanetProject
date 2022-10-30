@@ -8,25 +8,18 @@ router.use("/user", require("./userRouter"));
 
 
 //& JWT verify
-// router.all('*', (req, res, next) => {
-//     passport.authenticate('jwt', { session: false }, (err, user, info) => {
-//         console.log('passport-jwt');
-//         if (err | !user) throw createError(400, { errors: info.message });
-//         res.status(201).json({ result: true });
-//     })(req, res, next); // 미들웨어 내의 미들웨어
-// });
+router.all('*', (req, res, next) => {
+    passport.authenticate('jwt', { session: false }, (err, user, info) => {
+        console.log('passport-jwt');
+        if (err | !user) {
+            console.log(req.headers);
+            console.log(req.user);
+            throw createError(400, { errors: info.message })
+        };
+        res.status(201).json({ result: true });
+    })(req, res, next); // 미들웨어 내의 미들웨어
+});
 
-// router.all('*', passport.authenticate('jwt', { session: false }),
-//     async (req, res, next) => {
-//         console.log("passport-jwt 인증 시도");
-//         try {
-//             res.json({ result: true });
-//         } catch (error) {
-//             console.error(error);
-//             next(error);
-//         }
-//     }
-// );
 
 // TODO 
 router.use('/planet', require('./planetRouter'));
