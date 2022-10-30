@@ -2,7 +2,7 @@ const { ExtractJwt, Strategy: JWTStrategy } = require('passport-jwt');
 const secret = require('../../config/default').secretOrKey;
 const { User } = require('../../src/models/User');
 
-
+// const token = req.header("x-auth-token");     
 const JWTConfig = {
     // Authorization header의 JWT 기반 Bearer스키마에 담겨온 토큰 해석
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken('authorization'),
@@ -22,9 +22,9 @@ const JWTVerify = async (jwtPayload, done) => {
 
         // 유저 데이터 없을 경우 에러 표시
         console.log("*****jwt inValid*****");
-        done(null, false, { message: '올바르지 않은 인증정보입니다.' });
+        done(null, false, { message: 'token expired or unauthorized' });
     } catch (error) {
-        console.error(error);
+        console.error("No token, authorization denied", error);
         done(error);
     }
 };

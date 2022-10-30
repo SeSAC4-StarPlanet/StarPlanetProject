@@ -1,26 +1,15 @@
-const jwt = require("jsonwebtoken");
-const secret = require('../../config/default').secretOrKey;
+const createError = require('http-errors');
+const passport = require('../../config/passport');
 
 
-const verifyToken = function (req, res, next) {
-    // header에서 토큰 가져오기         
-    // header에서 x-auth-token 은 token의 key 값
-    // token에는 JWT가 들어감
-    try {
-        const token = req.header("x-auth-token");         //토큰 없는지 체크
-        if (!token) { return res.status(401).json({ message: "No token, authorization denied" }); }
-        const decoded = jwt.verify(token, secret);
 
-        if (decoded) {
-            req.user = decoded.user; // req에 user 정보 생성
-            next();
-        }
-        else {
-            res.status(401).json({ error: 'unauthorized' });
-        }
-    } catch (error) {
-        res.status(401).json({ message: "token expired" });
-    }
+// JWT 복호화 후 권한 있으면 true를 반환하는 API
+const JWTauth = (req, res, next) => {
+    passport.authenticate('jwt', { session: false }, (err, user, info) => {
+        console.log('passport-jwt');
+        if (err | !user) throw createError(400, { errors: info.message });
+        res.status(201).json({ result: true });
+    })(req, res, next); // 미들웨어 내의 미들웨어
 };
 
-exports.verifyToken = verifyToken;
+exports.JWTauth = JWTauth;

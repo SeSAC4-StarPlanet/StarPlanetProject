@@ -13,10 +13,10 @@ const saltRounds = 10;
 
 /* Schema */
 const UserSchema = new mongoose.Schema({
-    userID: { type: String, required: true, unique: true },
+    userID: { type: String, unique: true, index: true },
     hashedPW: { type: String },
-    username: { type: String },
-    email: { type: String, required: true, index: true, unique: true, sparse: true },
+    username: { type: String, index: true },
+    email: { type: String, required: true, sparse: true },
     provider: { type: String, required: true, default: 'local' },
     token: { type: String },
     tokenExp: { type: Number },

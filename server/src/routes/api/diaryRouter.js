@@ -1,15 +1,14 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 
-const Diary = require("../models/Diary");
-const controller = require('../controllers/diary')
+const { Diary } = require("../../models/Diary");
+// const controller = require('../../controllers/diary');
 
 
 
 
 // 모든 다이어리 조회
 router.get('/', (req, res) => {
-    Diary.find({})
+    Diary.find()
         .sort({ createdAt: 1 })
         .exec((err, diarys) => {
             if (err) return res.json(err);
@@ -26,7 +25,7 @@ router.get('/:_id', (req, res) => {
 });
 
 // 다이어리 작성
-router.post('/', controller.createDiary);
+// router.post('/', controller.createDiary);
 
 
 

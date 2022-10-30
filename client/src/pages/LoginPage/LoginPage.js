@@ -14,6 +14,8 @@ import Google_Btn from "../../assets/img/LoginBtn/googleBtn.png";
 import Github_Btn from "../../assets/img/LoginBtn/githubBtn.png";
 import "./LoginPage.scss";
 import axios from "axios";
+axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+
 
 const LoginPage = () => {
   const [userID, setuserId] = useState("");

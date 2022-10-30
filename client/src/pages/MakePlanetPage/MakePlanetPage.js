@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 import "./MakePlanetPage.scss";
 import Headers from "../../components/Common/Diary/Header/Header";
 import StarMap from "./StarMap";
@@ -12,9 +13,37 @@ import planet4 from "../../assets/img/Planet/planet4.png";
 import MakePlanetMember from "../../components/Common/MakePlanet/MakePlanetMember";
 import MakeMember from "../../components/Common/MakePlanet/MakeMember";
 import MakeMemberBtn from "../../components/Common/MakePlanet/MakeMemberBtn";
+import axios from "axios";
+axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
 
-export default function MakePlanetPage() {
-  const [userID, setuserId] = useState("");
+
+const MakePlanetPage = () => {
+  const [planetName, setplanetName] = useState("");
+  // const [planetSelect, setplanetSelect] = useState(""); //TODO
+  const [userId, setuserId] = useState("");
+  // const [userId2, setuserId2] = useState("");
+  // const [userId3, setuserId3] = useState("");
+  // const navigate = useNavigate();
+
+  const handlePlanet = () => {
+    console.log(planetName, userId);
+
+    axios({
+      method: "post",
+      url: "http://localhot:8000/api/planet",
+      header: { withCredentials: true },
+      data: {
+        name: planetName,
+        member: userId,
+        // select: planetSelect,
+      }
+    })
+      .then((res) => {
+        console.log(res);
+        // navigate('/workspace/main');
+      })
+      .catch((err) => console.log(err.response.data));
+  };
 
   return (
     <div>
@@ -24,7 +53,7 @@ export default function MakePlanetPage() {
         <div className="makePlanetContainer">
           <MakePlanetInput
             onChange={(e) => {
-              setuserId(e.target.value);
+              setplanetName(e.target.value);
               console.log(e.target.value);
             }}
           />
@@ -39,7 +68,7 @@ export default function MakePlanetPage() {
           <MakePlanetSelectHeader value={"행성멤버"} />
           <MakePlanetMember
             text={"멤버1"}
-            value={userID}
+            // value={userID}
             onChange={(e) => {
               setuserId(e.target.value);
               console.log(e.target.value);
@@ -48,24 +77,31 @@ export default function MakePlanetPage() {
 
           <MakePlanetMember
             text={"멤버2"}
-            value={userID}
+            // value={userID}
             onChange={(e) => {
-              setuserId(e.target.value);
+              // setuserId(e.target.value);
               console.log(e.target.value);
             }}
           />
           <MakePlanetMember
             text={"멤버3"}
-            value={userID}
+            // value={userID}
             onChange={(e) => {
-              setuserId(e.target.value);
+              // setuserId(e.target.value);
               console.log(e.target.value);
             }}
           />
+
           <MakeMember sx={{ width: "100%" }} />
-          <MakeMemberBtn />
+          <button onClick={handlePlanet}>등록</button>
+          <MakeMemberBtn>
+          </MakeMemberBtn>
+
+
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default MakePlanetPage;
