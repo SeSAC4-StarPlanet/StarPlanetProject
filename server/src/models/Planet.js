@@ -8,10 +8,7 @@ const { Diary } = require("./Diary");
 /* Schema */
 const PlanetSchema = mongoose.Schema({
     name: { type: String },
-    meta: {
-        planetInfo: { type: String },
-        planetImg: { type: String, default: 'default-profile.jpg' },
-    },
+    select: { type: Number, default: 0 },
     member: [{ type: ObjectId, ref: 'User' }],
     payment: {
         status: { type: Boolean },

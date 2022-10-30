@@ -9,9 +9,7 @@ const { User } = require("../src/models/User");
 
 
 
-
-
-/* passport 설정 */
+/* 쿠키, 세션 - 사용자 직렬화, 비직렬화 */
 // 로그인 성공시 실행
 passport.serializeUser((user, done) => {
     done(null, user);
@@ -24,7 +22,6 @@ passport.deserializeUser(async (user, done) => {
         .then(user => done(null, user))
         .catch(err => done(err));
 });
-
 
 
 passport.use('google', googleStrategy);
