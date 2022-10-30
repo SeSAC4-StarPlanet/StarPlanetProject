@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const createError = require('http-errors');
-const JWTauth = require('../../middlewares/authorization');
+const passport = require('passport');
 const { User } = require('../../models/User');
 
 
@@ -34,10 +34,17 @@ router.post("/", async (req, res) => {
 
 
 //& JWT verify
-router.all('*', function (req, res, next) {
-  JWTauth(req, res, next);
-  next()
-});
+router.all('*', passport.authenticate('jwt', { session: false }),
+  async (req, res, next) => {
+    console.log("passport-jwt 인증 시도");
+    try {
+      res.json({ result: true });
+    } catch (error) {
+      console.error(error);
+      next(error);
+    }
+  }
+);
 
 
 // 모든 회원 조회 (관리자용)

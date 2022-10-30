@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const createError = require('http-errors');
-const JWTauth = require('../../middlewares/authorization');
+const passport = require('passport');
 
 // TODO
 router.use("/auth", require("./authRouter"));
@@ -8,22 +8,17 @@ router.use("/user", require("./userRouter"));
 
 
 //& JWT verify
-router.all('*', function (req, res, next) {
-    console.log(req.headers);
-    console.log(req.headers.authorization);
-
-    JWTauth(req, res, next);
-    next()
+router.all('*', (req, res, next) => {
+    passport.authenticate('jwt', { session: false }, (err, user, info) => {
+        console.log('passport-jwt');
+        if (err | !user) {
+            console.log(req.headers);
+            console.log(req.user);
+            throw createError(400, { errors: info.message })
+        };
+        res.status(201).json({ result: true });
+    })(req, res, next); // 미들웨어 내의 미들웨어
 });
-// router.all('*', (req, res, next) => {
-//     passport.authenticate('jwt', { session: false }, (err, user, info) => {
-//         console.log('passport-jwt');
-//         if (err | !user) throw createError(400, { errors: info.message });
-//         res.status(201).json({ result: true });
-//     })(req, res, next); // 미들웨어 내의 미들웨어
-// });
-
-
 
 
 // TODO 
