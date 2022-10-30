@@ -1,6 +1,5 @@
 .mainBackWrapper {
-  padding-top: 20rem;
-  padding-bottom: 20rem;
+  padding-top: 15rem;
 
   .Main_wrapper {
     width: 70rem;
@@ -67,7 +66,7 @@
 
   .Planet_name_box {
     display: flex;
-    width: 17.8rem;
+    width: 17.9rem;
     border-radius: 15px 0px 0px 0px / 15px 0px 0px 0px;
     justify-content: center;
     align-items: center;
@@ -95,8 +94,7 @@
   .mainBackWrapper {
     display: flex;
     justify-content: center;
-    padding-top: 20rem;
-    padding-bottom: 20rem;
+    padding-top: 15rem;
 
     .Main_wrapper {
       width: 50rem;
@@ -194,8 +192,7 @@
   .mainBackWrapper {
     display: flex;
     justify-content: center;
-    padding-top: 20rem;
-    padding-bottom: 20rem;
+    padding-top: 15rem;
 
     .Main_wrapper {
       width: 40rem;
@@ -244,12 +241,14 @@
     }
 
     .Categorybar_box {
-      justify-content: center;
+      justify-content: start;
       display: flex;
       flex-direction: column;
       width: 40rem;
       margin: 0px;
-      height: 130%;
+      height: 10%;
+      padding-top: 1rem;
+      box-sizing: border-box;
     }
 
     .Main_container_top {

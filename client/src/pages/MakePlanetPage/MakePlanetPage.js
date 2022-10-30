@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import "./MakePlanetPage.scss";
 import Headers from "../../components/Common/Diary/Header/Header";
-import StarMap from "../../components/Common/StarMap/StarMap";
+import StarMap from "./StarMap";
 import MakePlanetInput from "../../components/Common/MakePlanet/MakePlanetInput";
 import MakePlanetSelect from "../../components/Common/MakePlanet/MakePlanetSelect";
 import MakePlanetSelectHeader from "../../components/Common/MakePlanet/MakePlanetSelectHeader";
@@ -91,10 +91,12 @@ const MakePlanetPage = () => {
               console.log(e.target.value);
             }}
           />
-          <MakeMember />
+
+          <MakeMember sx={{ width: "100%" }} />
           <button onClick={handlePlanet}>등록</button>
           <MakeMemberBtn>
           </MakeMemberBtn>
+
 
         </div>
       </div>

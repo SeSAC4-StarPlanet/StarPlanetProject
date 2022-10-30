@@ -4,7 +4,9 @@ import "./MakePlanetMember.scss";
 export default function MakePlanetMember({ text, value, onChange }) {
   return (
     <div className="makePlanetMemberBox">
-      <div className="makePlanetMeberAccount">{text}</div>
+      <div className="makeplanetMemberAccount_Box">
+        <div className="makePlanetMemberAccount">{text}</div>
+      </div>
       <TextField
         id="outlined-search"
         label="유저 아이디를 입력해주세요 "

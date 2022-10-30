@@ -44,19 +44,21 @@ const Writer = () => {
             label="제목"
             variant="standard"
           />
-          <Button
-            sx={{
-              backgroundColor: "#0D0D7E",
-              "&:hover": {
-                backgroundColor: "#fff",
-                color: "#3c52b2",
-              },
-            }}
-            variant="contained"
-            endIcon={<FaPlay />}
-          >
-            작성 완료
-          </Button>
+          <div className="BtnBox">
+            <Button
+              sx={{
+                backgroundColor: "#0D0D7E",
+                "&:hover": {
+                  backgroundColor: "#fff",
+                  color: "#3c52b2",
+                },
+              }}
+              variant="contained"
+              endIcon={<FaPlay />}
+            >
+              작성 완료
+            </Button>
+          </div>
         </div>
         <div className="dairyWriterEditorContainer">
           <Editor />
