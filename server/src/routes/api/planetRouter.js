@@ -47,7 +47,7 @@ router.get("/:user/:planet", async (req, res) => {
 router.post('/planet', async (req, res) => {
   console.log(req.body);
   try {
-
+    console.log(req.body);
     const { name, select, member } = req.body;
     const exMember = await User.findOne({ userID: member });
 
@@ -66,8 +66,6 @@ router.post('/planet', async (req, res) => {
     res.status(500).send("server Error");
   }
 })
-
-
 
 
 module.exports = router;

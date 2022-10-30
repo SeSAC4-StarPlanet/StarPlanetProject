@@ -13,10 +13,13 @@ const ModifyPage = () => {
   const [email, setEmail] = useState("data.email");
   const [tel, setTel] = useState("");
 
+
+
   const confirmModify = () => {
     axios
-      .post("url", {
-        withCredentials: true,
+      .get("http://localhost:8000/api/user/", {
+        headers: { withCredentials: true }
+      }, {
         userID: userID,
         email: email,
         username: username,

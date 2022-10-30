@@ -3,7 +3,6 @@ const createError = require('http-errors');
 const passport = require('../../../config/passport');
 const jwt = require("jsonwebtoken");
 const secret = require('../../../config/default').secretOrKey;
-const JWTauth = require('../../middlewares/authorization');
 
 
 
@@ -72,7 +71,7 @@ router.get('/kakao/callback', passport.authenticate('kakao', { failureRedirect: 
 
 //& JWT verify
 router.all('*', function (req, res, next) {
-    JWTauth(req, res, next);
+
     next()
 });
 

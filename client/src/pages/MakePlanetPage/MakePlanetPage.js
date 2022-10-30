@@ -29,8 +29,8 @@ const MakePlanetPage = () => {
     console.log(planetName, userId);
 
     axios({
+      url: "http://localhost:8000/api/planet",
       method: "post",
-      url: "http://localhot:8000/api/planet",
       header: { withCredentials: true },
       data: {
         name: planetName,
@@ -39,7 +39,7 @@ const MakePlanetPage = () => {
       }
     })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         // navigate('/workspace/main');
       })
       .catch((err) => console.log(err.response.data));

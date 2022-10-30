@@ -24,7 +24,9 @@ router.get('/:_id', (req, res) => {
 });
 
 // 다이어리 작성
+router.post('/', (req, res) => {
 
+})
 
 
 
