@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { verifyToken } = require('../middlewares/authorization');
+const { verifyToken } = require("../middlewares/authorization");
 // const path = require('path');
 
 // router.use("/", function (req, res) {
@@ -9,7 +9,7 @@ const { verifyToken } = require('../middlewares/authorization');
 
 router.use("/auth", require("./authRouter"));
 router.use("/user", require("./userRouter"));
-router.use('/planet', require('./planetRouter'));
-router.use('/diary', verifyToken, require('./diaryRouter'));
+router.use("/planet", require("./planetRouter"));
+router.use("/diary", verifyToken, require("./diaryRouter_sion"));
 
 module.exports = router;
