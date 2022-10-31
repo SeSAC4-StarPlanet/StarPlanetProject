@@ -6,24 +6,25 @@ import ModifyInput from "../../components/Common/ModifyInfo/ModifyInput";
 import ModifyHeader from "../../components/Common/ModifyInfo/ModifyHeader";
 import ModifyButton from "../../components/Common/ModifyInfo/ModifyButton";
 import axios from "axios";
+axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
 
 const ModifyPage = () => {
   const [userID, setuserID] = useState("data.userID");
   const [username, setusername] = useState("data.username");
   const [email, setEmail] = useState("data.email");
-  const [tel, setTel] = useState("");
 
+  //   const ModifyPage = () => {
 
+  // }
 
   const confirmModify = () => {
     axios
-      .get("http://localhost:8000/api/user/", {
+      .post("http://localhost:8000/api/user/", {
         headers: { withCredentials: true }
       }, {
         userID: userID,
         email: email,
-        username: username,
-        tel: tel,
+        username: username
       })
       .then((res) => console.log(res.data));
   };
@@ -69,7 +70,7 @@ const ModifyPage = () => {
                 console.log(e.target.value);
               }}
             />
-            <ModifyInput
+            {/* <ModifyInput
               text={"Tel"}
               type={"tel"}
               value={tel}
@@ -77,7 +78,7 @@ const ModifyPage = () => {
                 setTel(e.target.value);
                 console.log(e.target.value);
               }}
-            />
+            /> */}
             <div className="modifyButtonBox">
               <ModifyButton text={"수정"} onClick={confirmModify} />
               <ModifyButton text={"회원탈퇴"} color={"error"} />

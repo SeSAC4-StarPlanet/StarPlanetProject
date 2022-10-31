@@ -3,6 +3,7 @@ import { observable, action, computed, configure, makeObservable } from "mobx";
 import axios from "axios";
 
 configure({ enforceActions: true });
+axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
 
 class Planet {
   planets = [];
@@ -30,9 +31,23 @@ class Planet {
   };
 
   getPlanets = async (user) => {
-    await axios.get(`/planet/workspace/${user}`).then((res) => {
-      this.setPlanet(res.data.planets);
-    });
+    // await axios.get(`/planet/workspace/${user}`).then((res) => {
+    //   console.log(res.data);
+    // });
+
+    await axios({
+      method: "get",
+      url: `http://localhost:8000/api/planet/workspace/${user}`,
+      header: {
+        withCredentials: true,
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+        this.setPlanet(res.data.planets);
+      })
+      .catch((err) => console.log(err.response.data));
   };
 
   getPlanet = (user, planet) => {

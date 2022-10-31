@@ -18,8 +18,10 @@ axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
 
 const MakePlanetPage = () => {
   const [planetName, setplanetName] = useState("");
+
   const [planetSelect, setplanetSelect] = useState(null);
   const [prevClick, setprevClick] = useState(null);
+
   const [userId, setuserId] = useState("");
 
   //! 버튼 클릭시 눌린 버튼 상태 변화
@@ -144,7 +146,9 @@ const MakePlanetPage = () => {
           />
 
           <MakeMember sx={{ width: "100%" }} />
+
           <MakeMemberBtn onClick={handlePlanet} />
+
         </div>
       </div>
     </div>

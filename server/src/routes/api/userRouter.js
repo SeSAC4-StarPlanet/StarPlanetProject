@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
   try {
     const { userID, hashedPW, username, email } = req.body;
     // DB에서 사용자 검색
-    const exUser = await User.findOne({ userID: userID });
+    const exUser = await User.findOne({ userID: userID }).lean();
     // 사용자 있으면 에러메세지
     if (exUser != null) {
       console.log("*****User exists*****");
@@ -49,12 +49,15 @@ router.all('*', passport.authenticate('jwt', { session: false }),
 
 // 모든 회원 조회 (관리자용)
 router.get("/", (req, res, next) => {
-  User.find()
-    .sort({ createdAt: 1 }) // 가입일 기준으로 정렬 (역순 정렬은 -1)
-    .exec((err, users) => {
-      if (err) return res.json(err);
-      res.json(users);
-    });
+  console.log(req.user);
+  res.json(req.user);
+
+  // User.find()
+  //   .sort({ createdAt: 1 }) // 가입일 기준으로 정렬 (역순 정렬은 -1)
+  //   .exec((err, users) => {
+  //     if (err) return res.json(err);
+  //     res.json(users);
+  //   });
 
   // User.find().then(r => {
   //   res.send({ success: true, users: r })
@@ -66,8 +69,9 @@ router.get("/", (req, res, next) => {
 
 
 
-// 특정 회원 조회 (url로 넘어온 파라미터를 _id로 저장)
+//! 특정 회원 조회 (url로 넘어온 파라미터를 _id로 저장)
 router.get("/:_id", (req, res) => {
+
   User.findOne({ _id: req.params._id }, (err, user) => {
     if (err) res.json(err);
     res.json(user);

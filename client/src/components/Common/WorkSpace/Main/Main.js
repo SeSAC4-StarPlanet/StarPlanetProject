@@ -27,6 +27,7 @@ const Main = observer(() => {
     fetchAndSetUser();
   }, []);
 
+  console.log(toJS(planetClass.planets));
   return (
     <div className="PlanetSelector">
       <NewPlanetBtn />
@@ -41,31 +42,51 @@ const Main = observer(() => {
         modules={[Navigation]}
         className="mySwiper"
       >
-        {data.map((e) => {
-          let date = new Date(e.createdAt);
-          console.log();
-          return (
-            <SwiperSlide>
-              <div className="planetWrapper">
-                <div id="circle-orbit-container">
-                  <div id="inner-orbit">
-                    <div className="inner-orbit-cirlces" />
+        {data.length != 0 ? (
+          data.map((e) => {
+            let date = new Date(e.createdAt);
+            console.log();
+            return (
+              <SwiperSlide>
+                <div className="planetWrapper">
+                  <div id="circle-orbit-container">
+                    <div id="inner-orbit">
+                      <div className="inner-orbit-cirlces" />
+                    </div>
                   </div>
-                </div>
-                <div className="planet" />
-                <div className="textWrapper">
-                  <div className="planetName">{e.name}</div>
-                  <div className="planetCreatedDate">
-                    {`${date.getFullYear()}-${date.getMonth()}-${
-                      date.getDate() + 1
-                    } ~`}
+                  <div className="planet" />
+                  <div className="textWrapper">
+                    <div className="planetName">{e.name}</div>
+                    <div className="planetCreatedDate">
+                      {`${date.getFullYear()}-${date.getMonth()}-${
+                        date.getDate() + 1
+                      } ~`}
+                    </div>
                   </div>
+                  <img className="planet" src={Planet} />
                 </div>
-                <img className="planet" src={Planet} />
+              </SwiperSlide>
+            );
+          })
+        ) : (
+          <SwiperSlide>
+            <div className="planetWrapper">
+              <div id="circle-orbit-container">
+                <div id="inner-orbit">
+                  <div className="inner-orbit-cirlces" />
+                </div>
               </div>
-            </SwiperSlide>
-          );
-        })}
+              <div className="planet" />
+              <div className="textWrapper">
+                <div className="planetName"></div>
+                <div className="planetCreatedDate">
+                  행성이 없습니다. 생성해주세요
+                </div>
+              </div>
+              <img className="planet" src={Planet} />
+            </div>
+          </SwiperSlide>
+        )}
       </Swiper>
     </div>
   );

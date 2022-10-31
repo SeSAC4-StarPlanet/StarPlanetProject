@@ -15,7 +15,7 @@ const JWTVerify = async (jwtPayload, done) => {
         console.log('___jwtPayload', jwtPayload);
 
         // palyload의 유저id값으로 유저 데이터 조회
-        const exUser = await User.findOne({ userID: jwtPayload.userID });
+        const exUser = await User.findOne({ userID: jwtPayload.userID }).lean();
 
         // 유저 데이터 있을 경우 유저 데이터 객체 전송
         if (exUser) return done(null, exUser);
