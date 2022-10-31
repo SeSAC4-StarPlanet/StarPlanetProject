@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const createError = require("http-errors");
+const createError = require('http-errors');
 const passport = require("passport");
 
 // TODO
@@ -26,5 +26,6 @@ router.use("/diary", require("./diaryRouter"));
 router.all("*", (req, res, next) => {
   next(createError(404, e.message));
 });
+
 
 module.exports = router;
