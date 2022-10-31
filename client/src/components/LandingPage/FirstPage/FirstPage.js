@@ -1,5 +1,6 @@
 import React from "react";
 import "./firstPage.scss";
+import { useNavigate } from "react-router-dom";
 
 import { ReactComponent as Header_Logo } from "../../../assets/img/LandingPage/logo_header.svg";
 import Main_Logo from "../../../assets/img/LandingPage/logo_main.svg";

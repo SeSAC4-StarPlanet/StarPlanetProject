@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import "./MakePlanetPage.scss";
 import Headers from "../../components/Common/Diary/Header/Header";
@@ -18,15 +18,46 @@ axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
 
 const MakePlanetPage = () => {
   const [planetName, setplanetName] = useState("");
-  // const [planetSelect, setplanetSelect] = useState("");
 
-  //TODO
+  const [planetSelect, setplanetSelect] = useState(null);
+  const [prevClick, setprevClick] = useState(null);
+
   const [userId, setuserId] = useState("");
+
+  //! 버튼 클릭시 눌린 버튼 상태 변화
+  const GetClick = (e) => {
+    setplanetSelect(e.target.id);
+    console.log("출력값:", planetSelect); //출력값이 늦게뜨는이유 , id값으로 데이터를 보낼 수 있는지
+  };
+
+  useEffect(
+    (e) => {
+      if (planetSelect !== null) {
+        let current = document.getElementById(planetSelect);
+        console.log(current);
+        current.style.border = "5px solid";
+        current.style.borderColor = "red";
+      }
+
+      if (prevClick !== null) {
+        let prev = document.getElementById(prevClick);
+        prev.style.border = "none";
+      }
+      setprevClick(planetSelect);
+    },
+    [planetSelect]
+  );
+  //!
+
   // const [userId2, setuserId2] = useState("");
   // const [userId3, setuserId3] = useState("");
   // const navigate = useNavigate();
 
   const handlePlanet = () => {
+    if (planetName === "") {
+      alert("행성이름은 반드시 입력해주셔야 합니다.");
+      return;
+    }
     axios({
       url: "http://localhost:8000/api/planet",
       method: "post",
@@ -62,10 +93,30 @@ const MakePlanetPage = () => {
 
           <MakePlanetSelectHeader value={"행성선택"} />
           <div className="planetBox">
-            <MakePlanetSelect src={planet1} />
-            <MakePlanetSelect src={planet2} />
-            <MakePlanetSelect src={planet3} />
-            <MakePlanetSelect src={planet4} />
+            <MakePlanetSelect
+              id={1}
+              value={planetSelect}
+              onClick={GetClick}
+              src={planet1}
+            />
+            <MakePlanetSelect
+              id={2}
+              value={planetSelect}
+              onClick={GetClick}
+              src={planet2}
+            />
+            <MakePlanetSelect
+              id={3}
+              value={planetSelect}
+              onClick={GetClick}
+              src={planet3}
+            />
+            <MakePlanetSelect
+              id={4}
+              value={planetSelect}
+              onClick={GetClick}
+              src={planet4}
+            />
           </div>
           <MakePlanetSelectHeader value={"행성멤버"} />
           <MakePlanetMember
@@ -95,8 +146,9 @@ const MakePlanetPage = () => {
           />
 
           <MakeMember sx={{ width: "100%" }} />
-          <button onClick={handlePlanet}>등록</button>
-          <MakeMemberBtn></MakeMemberBtn>
+
+          <MakeMemberBtn onClick={handlePlanet} />
+
         </div>
       </div>
     </div>
