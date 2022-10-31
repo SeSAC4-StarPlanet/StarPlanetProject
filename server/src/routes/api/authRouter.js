@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const createError = require('http-errors');
 const passport = require('../../../config/passport');
 const jwt = require("jsonwebtoken");
 const secret = require('../../../config/default').secretOrKey;
@@ -23,7 +22,7 @@ router.post("/signup", async (req, res) => {
     try {
         const { userID, hashedPW, username, email } = req.body;
         // DB에서 사용자 검색
-        const exUser = await User.findByUserId;
+        const exUser = await User.findByUserID;
         // 사용자 있으면 에러메세지
         if (exUser != null) {
             console.log("*****User exists*****");
@@ -64,7 +63,7 @@ router.post('/login', async (req, res, next) => {    // 지정전략(strategy)�
             // 로그인 성공시 JWT토큰 생성 후 클라이언트에게 반환
             const token = setUserToken(res, req.user);
             const userInfo = req.user;
-            // return res.status(201).json({ result: 'ok', userInfo, token });
+            return res.status(201).json({ result: 'ok', userInfo, token });
         });
     })(req, res, next); // 미들웨어 내의 미들웨어
 });
@@ -162,7 +161,7 @@ router.all('*', function (req, res, next) {
         if (err | !user) {
             console.log(req.headers);
             console.log(req.user);
-            throw createError(400, { errors: info.message });
+            res.status(400).send({ errors: info.message });
         }
         next();
     })(req, res, next); // 미들웨어 내의 미들웨어
