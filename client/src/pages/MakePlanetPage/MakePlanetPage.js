@@ -14,8 +14,7 @@ import MakePlanetMember from "../../components/Common/MakePlanet/MakePlanetMembe
 import MakeMember from "../../components/Common/MakePlanet/MakeMember";
 import MakeMemberBtn from "../../components/Common/MakePlanet/MakeMemberBtn";
 import axios from "axios";
-axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
-
+axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
 
 const MakePlanetPage = () => {
   const [planetName, setplanetName] = useState("");
@@ -31,13 +30,13 @@ const MakePlanetPage = () => {
       method: "post",
       header: {
         withCredentials: true,
-        Authorization: localStorage.getItem('token')
+        Authorization: localStorage.getItem("token"),
       },
       data: {
         name: planetName,
         member: userId,
         // select: planetSelect,
-      }
+      },
     })
       .then((res) => {
         console.log(res.data);
@@ -95,10 +94,7 @@ const MakePlanetPage = () => {
 
           <MakeMember sx={{ width: "100%" }} />
           <button onClick={handlePlanet}>등록</button>
-          <MakeMemberBtn>
-          </MakeMemberBtn>
-
-
+          <MakeMemberBtn></MakeMemberBtn>
         </div>
       </div>
     </div>
