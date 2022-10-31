@@ -22,10 +22,12 @@ import DiaryRead from "../../pages/Diary/Read/DiaryRead";
 import AlbumIndividual from "../../pages/Album/Individual/AlbumIndividual";
 import AlbumMain from "../../pages/Album/Main/AlbumMain";
 import Page404 from "../../pages/Page404/Page404";
+import AboutUs from "../../pages/AboutUs/AboutUs";
+import Contact from "../../pages/Contact/Contact";
 // test component
 import JinseTest from "../Test/JinseTest/JinseTest";
 import SionTest from "../Test/SionTest/SionTest";
-axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
 
 const authorizedRouter = createBrowserRouter([
   {
@@ -102,6 +104,14 @@ const authorizedRouter = createBrowserRouter([
   {
     path: "/album/individual",
     element: <AlbumIndividual />,
+  },
+  {
+    path: "/aboutUs",
+    element: <AboutUs />,
+  },
+  {
+    path: "/contact",
+    element: <Contact />,
   },
 ]);
 
