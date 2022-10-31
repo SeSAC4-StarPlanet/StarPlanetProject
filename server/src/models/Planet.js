@@ -1,26 +1,26 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
 const { Album } = require("./Album");
 const { Diary } = require("./Diary");
 
-
 /* Schema */
-const PlanetSchema = mongoose.Schema({
+const PlanetSchema = mongoose.Schema(
+  {
     name: { type: String },
     select: { type: Number, default: 0 },
-    member: [{ type: ObjectId, ref: 'User' }],
+    member: [{ type: ObjectId, ref: "User" }],
     payment: {
-        status: { type: Boolean },
-        maxNum: { type: Number }
+      status: { type: Boolean, default: 0 },
+      maxNum: { type: Number, default: 0 },
     },
     category: {
-        Album: { type: Array },
-        Diary: { type: Array }
+      Album: { type: Array, default: ["2022"] },
+      Diary: { type: Array, default: ["2022"] },
     },
-}, { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } });
-
-
+  },
+  { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } }
+);
 
 /* method */
 // Planet.findOne()
@@ -33,21 +33,19 @@ const PlanetSchema = mongoose.Schema({
 //     })
 //     .catch(e => console.error(e.message))
 
-
-PlanetSchema.pre('remove', async function (next) {
-    const planet = this;
-    try {
-        await Album.deleteMany({ planet: planet._id });
-        await Diary.deleteMany({ planet: planet._id });
-        next();
-    } catch (e) {
-        next();
-    }
+PlanetSchema.pre("remove", async function (next) {
+  const planet = this;
+  try {
+    await Album.deleteMany({ planet: planet._id });
+    await Diary.deleteMany({ planet: planet._id });
+    next();
+  } catch (e) {
+    next();
+  }
 });
-
 
 /* static */
 
-const Planet = mongoose.model('Planet', PlanetSchema, 'Planet')
+const Planet = mongoose.model("Planet", PlanetSchema, "Planet");
 
-module.exports = { Planet }
+module.exports = { Planet };

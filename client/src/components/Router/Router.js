@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
   Redirect,
+  Route,
+  Routes,
+  BrowserRouter,
 } from "react-router-dom";
 import axios from "axios";
 // css
@@ -64,7 +67,8 @@ const authorizedRouter = createBrowserRouter([
   {
     path: "/modifyInfo",
     element: <ModifyPage />,
-  } , {
+  },
+  {
     path: "/page404",
     element: <Page404 />,
   },
@@ -96,8 +100,7 @@ const authorizedRouter = createBrowserRouter([
   {
     path: "/workspace/create",
     element: <MakePlanetPage />,
-  }
-  ,
+  },
   {
     path: "/album/main",
     element: <AlbumMain />,
@@ -149,16 +152,70 @@ const unauthorizationRouter = createBrowserRouter([
 ]);
 
 const Router = () => {
-  let token =
-    localStorage.getItem("token") !== null ? localStorage.getItem("token") : "";
+  const [token, setToken] = useState(null);
+  useEffect(() => {
+    setToken(
+      localStorage.getItem("token") !== null
+        ? localStorage.getItem("token")
+        : ""
+    );
+  });
 
   return (
     <>
-      {localStorage.getItem("token") !== null ? (
-        <RouterProvider router={authorizedRouter} />
-      ) : (
-        <RouterProvider router={unauthorizationRouter} />
-      )}
+      <BrowserRouter>
+        {localStorage.getItem("token") !== null ? (
+          // <RouterProvider router={authorizedRouter} />
+          // 토큰이 있을 경우
+          <Routes>
+            <Route path="/" element={<LandingPage />}></Route>
+            <Route path="/login" element={<LoginPage />}></Route>
+            <Route path="/register" element={<SignUpPage />}></Route>
+            <Route
+              path="/successSignUp"
+              element={<SuccessSignUpPage />}
+            ></Route>
+            <Route path="/findId" element={<FindIdPage />}></Route>
+            <Route path="/resetPw1" element={<ResetPw1Page />}></Route>
+            <Route path="/resetPw2" element={<ResetPw2Page />}></Route>
+            <Route path="/modifyInfo" element={<ModifyPage />}></Route>
+            <Route path="/sionTest" element={<SionTest />}></Route>
+            <Route path="/jinseTest" element={<JinseTest />}></Route>
+            <Route path="/diary/write" element={<DiaryWrite />}></Route>
+            <Route path="/diary/main" element={<DiaryMain />}>
+              <Route path=":planet/:category" element={<DiaryMain />} />
+            </Route>
+            <Route path="/diary/Read" element={<DiaryRead />}></Route>
+            <Route path="/workspace/main" element={<WorkSpaceMain />}></Route>
+            <Route
+              path="/workspace/create"
+              element={<MakePlanetPage />}
+            ></Route>
+            <Route path="/album/main" element={<AlbumMain />}></Route>
+            <Route
+              path="/album/individual"
+              element={<AlbumIndividual />}
+            ></Route>
+            <Route path="/aboutUs" element={<AboutUs />}></Route>
+            <Route path="/contact" element={<Contact />}></Route>
+          </Routes>
+        ) : (
+          // <RouterProvider router={unauthorizationRouter} />
+          // 토큰이 없을 경우
+          <Routes>
+            <Route path="/" element={<LandingPage />}></Route>
+            <Route path="/login" element={<LoginPage />}></Route>
+            <Route path="/register" element={<SignUpPage />}></Route>
+            <Route
+              path="/successSignUp"
+              element={<SuccessSignUpPage />}
+            ></Route>
+            <Route path="/findId" element={<FindIdPage />}></Route>
+            <Route path="/resetPw1" element={<ResetPw1Page />}></Route>
+            <Route path="/resetPw2" element={<ResetPw2Page />}></Route>
+          </Routes>
+        )}
+      </BrowserRouter>
     </>
   );
 };

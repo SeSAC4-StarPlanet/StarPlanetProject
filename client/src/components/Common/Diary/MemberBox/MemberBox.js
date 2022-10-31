@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./memberBox.scss";
 
 // MUI 라이브러리
@@ -17,12 +17,34 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 // 아이콘
 import Avatar from "@mui/material/Avatar";
 
+import axios from "axios";
+
 const MemberBox = () => {
   const [open, setOpen] = useState(true);
-
+  const [userArr, setUserArr] = useState([]);
   const handleClick = () => {
     setOpen(!open);
   };
+
+  useEffect(() => {
+    async function getMember(planetName) {
+      await axios({
+        // 해당 행성에 대한 해당 카테고리의 다이어리들 불러오기
+        // 행성과 카테고리 파라미터로 전달
+        url: `http://localhost:8000/api/planet/getMembers/${planetName}`,
+        method: "get",
+        header: {
+          withCredentials: true,
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+        .then((res) => {
+          setUserArr(res.data.nameArr);
+        })
+        .catch((err) => console.log(err.response.data));
+    }
+    getMember("새행성");
+  }, []);
 
   return (
     <List
@@ -61,54 +83,16 @@ const MemberBox = () => {
         unmountOnExit
       >
         <List sx={{ marginTop: "5px" }} component="div" disablePadding>
-          <ListItemButton onClick={handleClick}>
-            <ListItemIcon>
-              <Avatar />
-            </ListItemIcon>
-            <ListItemText primary={"시온"}></ListItemText>
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <Avatar />
-            </ListItemIcon>
-            <ListItemText primary={"진세"}></ListItemText>
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <Avatar />
-            </ListItemIcon>
-            <ListItemText primary={"예현"}></ListItemText>
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <Avatar />
-            </ListItemIcon>
-            <ListItemText primary={"지수"}></ListItemText>
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <Avatar />
-            </ListItemIcon>
-            <ListItemText primary={"지수"}></ListItemText>
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <Avatar />
-            </ListItemIcon>
-            <ListItemText primary={"지수"}></ListItemText>
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <Avatar />
-            </ListItemIcon>
-            <ListItemText primary={"지수"}></ListItemText>
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <Avatar />
-            </ListItemIcon>
-            <ListItemText primary={"지수"}></ListItemText>
-          </ListItemButton>
+          {userArr.map((e) => {
+            return (
+              <ListItemButton onClick={handleClick}>
+                <ListItemIcon>
+                  <Avatar />
+                </ListItemIcon>
+                <ListItemText primary={e}></ListItemText>
+              </ListItemButton>
+            );
+          })}
         </List>
       </Collapse>
     </List>

@@ -41,7 +41,7 @@ const Main = observer(() => {
     }
     fetchAndSetUser(arr._id);
   }, []);
-
+  console.log(data);
   return (
     <div className="PlanetSelector">
       <Link to={"/workspace/create"}>
@@ -70,14 +70,16 @@ const Main = observer(() => {
                     </div>
                   </div>
                   <div className="planet" />
-                  <div className="textWrapper">
-                    <div className="planetName">{e.name}</div>
-                    <div className="planetCreatedDate">
-                      {`${date.getFullYear()}-${date.getMonth()}-${
-                        date.getDate() + 1
-                      } ~`}
+                  <Link to={`/diary/main/${e.name}/${e.category.Album[0]}`}>
+                    <div className="textWrapper">
+                      <div className="planetName">{e.name}</div>
+                      <div className="planetCreatedDate">
+                        {`${date.getFullYear()}-${date.getMonth()}-${
+                          date.getDate() + 1
+                        } ~`}
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                   <img className="planet" src={Planet} />
                 </div>
               </SwiperSlide>
@@ -92,12 +94,14 @@ const Main = observer(() => {
                 </div>
               </div>
               <div className="planet" />
-              <div className="textWrapper">
-                <div className="planetName" />
-                <div className="planetCreatedDate">
-                  행성이 없습니다. 생성해주세요
+              <Link to={"/workspace/create"}>
+                <div className="textWrapper">
+                  <div className="planetName" />
+                  <div className="planetCreatedDate">
+                    행성이 없습니다. 생성해주세요
+                  </div>
                 </div>
-              </div>
+              </Link>
               <img className="planet" src={Planet} />
             </div>
           </SwiperSlide>
