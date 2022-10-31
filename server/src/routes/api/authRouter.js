@@ -35,7 +35,8 @@ router.post('/login', async (req, res, next) => {
 
             // 로그인 성공시 JWT토큰 생성 후 클라이언트에게 반환
             const token = setUserToken(res, req.user);
-            return res.status(201).json({ result: 'ok', token });
+            const userInfo = req.user;
+            return res.status(201).json({ result: 'ok', userInfo, token });
         });
     })(req, res, next); // 미들웨어 내의 미들웨어
 });

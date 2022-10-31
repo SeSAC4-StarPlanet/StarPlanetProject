@@ -34,8 +34,9 @@ const LoginPage = () => {
       data: { userID: userID, hashedPW: hashedPW },
     })
       .then((res) => {
-        let token = res.headers.get("authorization");
-        console.log("res.data", res.data);
+        const { result, userInfo, token } = res.data;
+        console.log('result:', result);
+        console.log('userInfo:', userInfo);
         localStorage.setItem("token", token);
       })
       .then(() => {
