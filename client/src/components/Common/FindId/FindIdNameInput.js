@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import "./FindIdIdInput.scss";
+import "./FindIdNameInput.scss";
 
-const FindIdIdInput = ({ value, onChange }) => {
-  const [userID, setUser_id] = useState("");
+const FindIdNameInput = ({ value, onChange }) => {
+  // const [username, setusername] = useState("");
 
   return (
     <>
-      <div className="findIdIdInputContainer">
-        <div className="findIdIdInputTitle">ID</div>
+      <div className="findIdNameInputContainer">
+        <div className="findIdNameInputTitle">Name</div>
         <input
-          className="findIdIdInput"
-          placeholder="아이디를 입력해주세요"
+          className="findIdNameInput"
+          placeholder="이름을 입력해주세요"
           value={value}
           onChange={onChange}
           type="text"
@@ -27,4 +27,4 @@ const FindIdIdInput = ({ value, onChange }) => {
   );
 };
 
-export default FindIdIdInput;
+export default FindIdNameInput;
