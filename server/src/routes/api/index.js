@@ -7,17 +7,17 @@ router.use("/auth", require("./authRouter"));
 router.use("/user", require("./userRouter"));
 
 //& JWT verify
-// router.all("*", (req, res, next) => {
-//   passport.authenticate("jwt", { session: false }, (err, user, info) => {
-//     console.log("passport-jwt");
-//     if (err | !user) {
-//       console.log(req.headers);
-//       console.log(req.user);
-//       throw createError(400, { errors: info.message });
-//     }
-//     res.status(201).json({ result: true });
-//   })(req, res, next); // 미들웨어 내의 미들웨어
-// });
+router.all("*", (req, res, next) => {
+  passport.authenticate("jwt", { session: false }, (err, user, info) => {
+    console.log("passport-jwt");
+    if (err | !user) {
+      console.log(req.headers);
+      console.log(req.user);
+      throw createError(400, { errors: info.message });
+    }
+    next();
+  })(req, res, next); // 미들웨어 내의 미들웨어
+});
 
 // TODO
 router.use("/planet", require("./planetRouter"));
