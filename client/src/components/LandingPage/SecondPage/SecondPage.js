@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./secondPage.scss";
 import { ReactComponent as Logo } from "../../../assets/img/LandingPage/second_page_logo.svg";
 import Button from "../Button/Button";
