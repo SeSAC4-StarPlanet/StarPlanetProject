@@ -64,6 +64,8 @@ app.use("/api", require("./routes/api"));
 // app.get('*', function (req, res) {
 //     res.sendFile(path.join(__dirname, '/client/build/index.html'));
 // });
+
+
 app.use((req, res, next) => {
   res.send(`${req.method} ${req.url} 라우터가 없습니다.`);
 });

@@ -8,13 +8,16 @@ const { User } = require('../../models/User');
 router.post("/", async (req, res) => {
   try {
     const { userID, hashedPW, username, email } = req.body;
+
     // DB에서 사용자 검색
     const exUser = await User.findOne({ userID: userID }).lean();
+
     // 사용자 있으면 에러메세지
     if (exUser != null) {
       console.log("*****User exists*****");
       return res.status(400).json({ errors: "User already exists" });
-    } else {// 사용자 없으면 가입 진행
+    } else {
+      // 사용자 없으면 가입 진행
       const newUser = await new User({ userID, hashedPW, username, email });
       newUser.save((err, userInfo) => {
         if (err) {
@@ -34,42 +37,23 @@ router.post("/", async (req, res) => {
 
 
 //& JWT verify
-router.all('*', passport.authenticate('jwt', { session: false }),
-  async (req, res, next) => {
-    console.log("passport-jwt 인증 시도");
-    try {
-      res.json({ result: true });
-    } catch (error) {
-      console.error(error);
-      next(error);
-    }
-  }
-);
-
-
-// 모든 회원 조회 (관리자용)
-router.get("/", (req, res, next) => {
-  console.log(req.user);
-  res.json(req.user);
-
-  // User.find()
-  //   .sort({ createdAt: 1 }) // 가입일 기준으로 정렬 (역순 정렬은 -1)
-  //   .exec((err, users) => {
-  //     if (err) return res.json(err);
-  //     res.json(users);
-  //   });
-
-  // User.find().then(r => {
-  //   res.send({ success: true, users: r })
-  // })
-  //   .catch(e => {
-  //     res.send({ success: false })
-  //   })
-});
+// router.all('*', passport.authenticate('jwt', { session: false }),
+//   async (req, res, next) => {
+//     console.log("passport-jwt 인증 시도");
+//     try {
+//       res.json({ result: true });
+//     } catch (error) {
+//       console.error(error);
+//       next(error);
+//     }
+//   }
+// );
 
 
 
-//! 특정 회원 조회 (url로 넘어온 파라미터를 _id로 저장)
+
+
+//! 특정 회원 조회 
 router.get("/:_id", (req, res) => {
 
   User.findOne({ _id: req.params._id }, (err, user) => {
@@ -79,35 +63,78 @@ router.get("/:_id", (req, res) => {
 });
 
 
-// 회원 정보수정
-router.put("/:_id", (req, res) => {
-  User.findOne({ userID: req.params._id })
-    .select("hashedPW")
-    .exec((err, user) => {
-      if (err) return res.json(err);
 
-      // 회원 업데이트하기
-      user.originPw = user.hashedPW;
-      user.hashedPW = req.body.newPw ? req.body.newPw : user.hashedPW;
+// 비밀번호재설정
+// router.put("/:_id", (req, res) => {
+//   const _id = req.params._id
+//   User.findOne({ userID: req.params._id })
+//     .select("hashedPW")
+//     .exec((err, user) => {
+//       if (err) return res.json(err);
 
-      for (para in req.body) {
-        user[para] = req.body[para];
-      }
+//       user.originPw = user.hashedPW;
+//       user.hashedPW = req.body.newPw ? req.body.newPw : user.hashedPW;
 
-      user.save((err, user) => {
-        if (err) return res.json(err);
-        res.json(user);
-      });
-    });
+//       for (para in req.body) {
+//         user[para] = req.body[para];
+//       }
+
+//       user.save((err, user) => {
+//         if (err) return res.json(err);
+//         res.json(user);
+//       });
+//     });
+// });
+
+
+
+//~
+
+// 전체 회원조회
+router.get("/", (req, res, next) => {
+  User.find().select('-pwd')
+    .then(r => {
+      res.status(200).send({ success: true, msg: r })
+    })
+    .catch(e => {
+      res.status(500).send({ msg: e.message });
+    })
+
+  // User.find()
+  //   .sort({ createdAt: 1 }) // 가입일 기준으로 정렬 (역순 정렬은 -1)
+  //   .exec((err, users) => {
+  //     if (err) return res.json(err);
+  //     res.json(users);
+  //   });
+
 });
+
+
+// 회원수정
+router.put("/:_id", (req, res) => {
+  const _id = req.params._id
+  User.updateOne({ _id }, { $set: req.body })
+    .then(r => {
+      res.status(200).send({ success: true, msg: r })
+    })
+    .catch(e => {
+      res.status(500).send({ msg: e.message });
+    })
+});
+
+
 
 
 // 회원 탈퇴
 router.delete("/:_id", (req, res) => {
-  User.deleteOne({ _id: req.params._id }, (err) => {
-    if (err) return res.json(err);
-    res.status(204).end();
-  });
+  const _id = req.params._id;
+  User.deleteOne({ _id })
+    .then(r => {
+      res.status(200).send({ success: true, msg: r });
+    })
+    .catch(e => {
+      res.status(500).send({ msg: e.message });
+    })
 });
 
 

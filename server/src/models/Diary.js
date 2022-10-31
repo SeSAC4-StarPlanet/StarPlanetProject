@@ -5,26 +5,24 @@ const { ObjectId } = Schema.Types;
 
 /* Schema */
 const DiarySchema = new Schema({
-    planet: { type: ObjectId, required: true, ref: 'Planet' },
-    user: { type: ObjectId, required: true, ref: 'User' },
-    title: { type: String, required: true },
-    text: { type: String, required: true },
-    image: [{ type: String }],
-    tags: [{ type: String }],
-    Bookmark: {
-        markBy: [{ type: ObjectId, ref: 'User' }],
-        markNum: { type: Number, default: 0 }
+    title: { type: String, default: '', index: true },
+    content: { type: String, default: '' },
+    cnt: {
+        view: { type: Number, default: 0 },
+        like: { type: Number, default: 0 }
     },
+    _user: { type: ObjectId, ref: 'User', index: true },
+    _planet: { type: ObjectId, ref: 'Planet', index: true },
 }, { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } });
 
 
 const CommentSchema = new Schema({
-    diary: { type: ObjectId, required: true, ref: 'Diary' },
-    user: { type: ObjectId, required: true, ref: 'User' },
+    content: { type: String, default: '' },
     parentComment: { type: ObjectId, ref: 'Comment', },     // self referencing relationship
-    text: { type: String, required: true },
     depth: { type: Number, default: 1, },
     isDeleted: { type: Boolean, default: false, },  // 하위댓글의 orphaned 방지하기 위해 isDeleted: true로 표시
+    _user: { type: ObjectId, ref: 'User', index: true },
+    _diary: { type: ObjectId, ref: 'Diary', index: true }
 }, { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } });
 
 
