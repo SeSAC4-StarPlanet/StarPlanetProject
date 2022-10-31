@@ -2,7 +2,6 @@ const router = require('express').Router();
 var createError = require('http-errors');
 // const { User } = require("../../models/User");
 // const { Planet } = require("../../models/Planet");
-const { Category } = require("../../models/Category");
 const { Diary, Comment } = require("../../models/Diary");
 
 // User.findOne()
@@ -80,19 +79,14 @@ router.post('/:_category', (req, res, next) => {
     if (!title) throw createError(400, '제목이 없습니다')
     if (!content) throw createError(400, '내용이 없습니다')
 
-    Category.findById(_category)
-        .then(r => {
-            if (!r) throw createError(400, '잘못된 게시판입니다')
-            // if (r.lv < req.user.lv) throw createError(403, '권한이 없습니다')
-            const dry = {
-                title,
-                content,
-                _category,
-                _user: null
-            }
-            if (req.user._id) dry._user = req.user._id
-            return Diary.create(dry)
-        })
+    const dry = {
+        title,
+        content,
+        _category,
+        _user: null
+    }
+    if (req.user._id) dry._user = req.user._id
+    return Diary.create(dry)
         .then(r => {
             if (!r) throw new Error('게시물이 생성되지 않았습니다')
             res.status(200).send({ success: true, msg: r });

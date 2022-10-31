@@ -1,8 +1,7 @@
 const router = require("express").Router();
 var createError = require("http-errors");
-const { User } = require("../../models/User");
-const { Planet } = require("../../models/Planet");
-const { Category } = require("../../models/Category");
+const User = require("../../models/User");
+const Planet = require("../../models/Planet");
 
 // const controller = require('../controllers/planet');
 
