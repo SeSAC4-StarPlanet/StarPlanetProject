@@ -21,7 +21,6 @@ router.all("*", (req, res, next) => {
 
 // TODO
 router.use("/planet", require("./planetRouter"));
-router.use('/category', require('./categoryRouter'))
 router.use("/diary", require("./diaryRouter"));
 // router.use('/album', require('./albumRouter'));
 // router.use('/payment', require('./paymentRouter'));
