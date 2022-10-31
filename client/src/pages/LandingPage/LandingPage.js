@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // fullpage library 설치
 import "fullpage.js/vendors/scrolloverflow";
@@ -35,7 +36,7 @@ const LandingPage = () => {
         },
       });
     });
-  });
+  }, []);
 
   return (
     <div id="fullpage">

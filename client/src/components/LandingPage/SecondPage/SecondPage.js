@@ -2,7 +2,10 @@ import React from "react";
 import "./secondPage.scss";
 import { ReactComponent as Logo } from "../../../assets/img/LandingPage/second_page_logo.svg";
 import Button from "../Button/Button";
+import { useNavigate } from "react-router-dom";
 const SecondPage = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="second_page_wrapper">
       <div className="second_page_content_wrapper">
@@ -17,8 +20,12 @@ const SecondPage = () => {
           </p>
         </div>
         <div className="second_page_btn_wrapper">
-          <Button text={"로그인"} />
-          <Button text={"회원가입"} mode={"isRegister"} />
+          <Button text={"로그인"} onclick={() => navigate("/login")} />
+          <Button
+            text={"회원가입"}
+            onclick={() => navigate("/signup")}
+            mode={"isRegister"}
+          />
         </div>
       </div>
     </div>
