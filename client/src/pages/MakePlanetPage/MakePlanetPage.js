@@ -25,13 +25,13 @@ const MakePlanetPage = () => {
   const [userId, setuserId] = useState("");
 
   //! 버튼 클릭시 눌린 버튼 상태 변화
-  const GetClick = (e) => {
+  const GetClick = e => {
     setplanetSelect(e.target.id);
     console.log("출력값:", planetSelect); //출력값이 늦게뜨는이유 , id값으로 데이터를 보낼 수 있는지
   };
 
   useEffect(
-    (e) => {
+    e => {
       if (planetSelect !== null) {
         let current = document.getElementById(planetSelect);
         console.log(current);
@@ -63,19 +63,17 @@ const MakePlanetPage = () => {
       method: "post",
       header: {
         withCredentials: true,
-        Authorization: localStorage.getItem("token"),
+        Authorization: localStorage.getItem("token")
       },
       data: {
         name: planetName,
-        member: userId,
-        // select: planetSelect,
-      },
+        member: userId
+      }
     })
-      .then((res) => {
+      .then(res => {
         console.log(res.data);
-        // navigate('/workspace/main');
       })
-      .catch((err) => console.log(err.response.data));
+      .catch(err => console.log(err.response.data));
   };
 
   return (
@@ -85,7 +83,7 @@ const MakePlanetPage = () => {
       <div className="makePlanetSection">
         <div className="makePlanetContainer">
           <MakePlanetInput
-            onChange={(e) => {
+            onChange={e => {
               setplanetName(e.target.value);
               console.log(e.target.value);
             }}
@@ -122,7 +120,7 @@ const MakePlanetPage = () => {
           <MakePlanetMember
             text={"멤버1"}
             // value={userID}
-            onChange={(e) => {
+            onChange={e => {
               setuserId(e.target.value);
               console.log(e.target.value);
             }}
@@ -131,7 +129,7 @@ const MakePlanetPage = () => {
           <MakePlanetMember
             text={"멤버2"}
             // value={userID}
-            onChange={(e) => {
+            onChange={e => {
               // setuserId(e.target.value);
               console.log(e.target.value);
             }}
@@ -139,7 +137,7 @@ const MakePlanetPage = () => {
           <MakePlanetMember
             text={"멤버3"}
             // value={userID}
-            onChange={(e) => {
+            onChange={e => {
               // setuserId(e.target.value);
               console.log(e.target.value);
             }}
@@ -148,7 +146,6 @@ const MakePlanetPage = () => {
           <MakeMember sx={{ width: "100%" }} />
 
           <MakeMemberBtn onClick={handlePlanet} />
-
         </div>
       </div>
     </div>
