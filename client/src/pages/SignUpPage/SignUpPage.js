@@ -21,7 +21,7 @@ const SignUpPage = memo(() => {
   const handleForm = () => {
     axios({
       method: "post",
-      url: "http://localhost:8000/api/user",
+      url: "http://localhost:8000/api/auth/signup",
       header: { withCredentials: true },
       data: {
         userID: userID,

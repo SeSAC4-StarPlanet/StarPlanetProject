@@ -17,8 +17,8 @@ const ResetPw1Page = () => {
 
   const ResetPassword = (e) => {
     axios({
-      method: "post",
-      url: "http://localhost:8000/api/auth/login",
+      method: "get",
+      url: "http://localhost:8000/api/auth/resetPW",
       data: { userID: userID, username: username, email: email },
     })
       .then((res) => console.log(res.data))

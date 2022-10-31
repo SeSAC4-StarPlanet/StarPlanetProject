@@ -25,7 +25,7 @@ const LandingPage = () => {
         // fitToSection: true,
         // fitToSectionDelay: 1200,
         // 화면별 전환
-        afterLoad: function(index, anchorLink) {
+        afterLoad: function (index, anchorLink) {
           if (anchorLink === 1) {
             // 화면별 넣고 싶은 이벤트
           } else if (anchorLink === 2) {
@@ -33,7 +33,7 @@ const LandingPage = () => {
           } else if (anchorLink === 3) {
             // 화면별 넣고 싶은 이벤트
           }
-        }
+        },
       });
     });
   }, []);

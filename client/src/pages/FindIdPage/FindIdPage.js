@@ -14,8 +14,8 @@ const FindIdPage = () => {
   const navigate = useNavigate();
   const findIdhandle = () => {
     axios({
-      method: "post",
-      url: "http://localhost:8000/api/auth/login",
+      method: "get",
+      url: "http://localhost:8000/api/auth/findID",
       data: {
         userID: userID,
         email: email,
