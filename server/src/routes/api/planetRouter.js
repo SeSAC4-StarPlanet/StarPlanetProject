@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const router = require("express").Router();
 const { Planet } = require("../../models/Planet");
 const { User } = require("../../models/User");
 
@@ -44,7 +44,7 @@ router.get("/:user/:planet", async (req, res) => {
 });
 
 // 행성생성
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   console.log(req.body);
   try {
     console.log(req.body);
@@ -57,16 +57,15 @@ router.post('/', async (req, res) => {
         console.log("*****Fail to save Planet***** ", err);
         res.status(400).json({ errors: "Fail to save Planet", err });
       } else {
-        console.log('*****행성생성!*****', planetInfo);
+        console.log("*****행성생성!*****", planetInfo);
         res.status(201).json({ success: true, planetInfo });
       }
-    })
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send("server Error");
   }
-})
-
+});
 
 module.exports = router;
 

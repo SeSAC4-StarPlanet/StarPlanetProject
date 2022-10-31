@@ -35,7 +35,7 @@ const LandingPage = () => {
         },
       });
     });
-  });
+  }, []);
 
   return (
     <div id="fullpage">

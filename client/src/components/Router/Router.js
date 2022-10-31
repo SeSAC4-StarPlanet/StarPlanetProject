@@ -25,7 +25,7 @@ import Page404 from "../../pages/Page404/Page404";
 // test component
 import JinseTest from "../Test/JinseTest/JinseTest";
 import SionTest from "../Test/SionTest/SionTest";
-axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
 
 const authorizedRouter = createBrowserRouter([
   {
@@ -37,7 +37,7 @@ const authorizedRouter = createBrowserRouter([
     element: <LoginPage />,
   },
   {
-    path: "/signUp",
+    path: "/register",
     element: <SignUpPage />,
   },
   {
