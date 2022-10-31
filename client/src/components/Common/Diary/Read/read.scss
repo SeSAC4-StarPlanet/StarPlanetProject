@@ -1,5 +1,6 @@
 .mainBackWrapper {
   padding-top: 15rem;
+  padding-bottom: 15rem;
 
   .mainWrapper {
     width: 70rem;
@@ -44,6 +45,7 @@
         width: 100%;
         .diaryReaderWrapper {
           padding: 57px 77px;
+          overflow: auto;
           .diaryReaderTopContainer {
             .diaryReaderChoiced {
               font-size: 15px;

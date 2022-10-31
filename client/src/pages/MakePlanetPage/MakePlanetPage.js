@@ -18,11 +18,15 @@ axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
 
 const MakePlanetPage = () => {
   const [planetName, setplanetName] = useState("");
-
+  // 멤버 input 관리
+  const [user, setUser] = useState({
+    user_1: "",
+    user_2: "",
+    user_3: "",
+    user_4: ""
+  });
   const [planetSelect, setplanetSelect] = useState(null);
   const [prevClick, setprevClick] = useState(null);
-
-  const [userId, setuserId] = useState("");
 
   //! 버튼 클릭시 눌린 버튼 상태 변화
   const GetClick = e => {
@@ -47,17 +51,13 @@ const MakePlanetPage = () => {
     },
     [planetSelect]
   );
-  //!
-
-  // const [userId2, setuserId2] = useState("");
-  // const [userId3, setuserId3] = useState("");
-  // const navigate = useNavigate();
 
   const handlePlanet = () => {
     if (planetName === "") {
       alert("행성이름은 반드시 입력해주셔야 합니다.");
       return;
     }
+    console.log(user);
     axios({
       url: "http://localhost:8000/api/planet",
       method: "post",
@@ -67,7 +67,8 @@ const MakePlanetPage = () => {
       },
       data: {
         name: planetName,
-        member: userId
+        // 멤버 배열의 형태로 보냄
+        member: [user.user_1, user.user_1, user.user_1, user.user_1]
       }
     })
       .then(res => {
@@ -85,7 +86,6 @@ const MakePlanetPage = () => {
           <MakePlanetInput
             onChange={e => {
               setplanetName(e.target.value);
-              console.log(e.target.value);
             }}
           />
 
@@ -119,31 +119,38 @@ const MakePlanetPage = () => {
           <MakePlanetSelectHeader value={"행성멤버"} />
           <MakePlanetMember
             text={"멤버1"}
-            // value={userID}
+            name={user.user_1}
+            value={user.user_1}
             onChange={e => {
-              setuserId(e.target.value);
-              console.log(e.target.value);
+              setUser({ ...user, user_1: e.target.value });
             }}
           />
 
           <MakePlanetMember
             text={"멤버2"}
-            // value={userID}
+            name={user.user_2}
+            value={user.user_2}
             onChange={e => {
-              // setuserId(e.target.value);
-              console.log(e.target.value);
+              setUser({ ...user, user_2: e.target.value });
+              console.log(user);
             }}
           />
           <MakePlanetMember
             text={"멤버3"}
-            // value={userID}
+            name={user.user_3}
+            value={user.user_3}
             onChange={e => {
-              // setuserId(e.target.value);
-              console.log(e.target.value);
+              setUser({ ...user, user_3: e.target.value });
             }}
           />
-
-          <MakeMember sx={{ width: "100%" }} />
+          <MakePlanetMember
+            text={"멤버4"}
+            name={user.user_4}
+            value={user.user_4}
+            onChange={e => {
+              setUser({ ...user, user_4: e.target.value });
+            }}
+          />
 
           <MakeMemberBtn onClick={handlePlanet} />
         </div>

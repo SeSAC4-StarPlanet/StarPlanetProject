@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Diary_content.scss";
 import { ReactComponent as Logo } from "../../../../assets/img/LandingPage/second_page_logo.svg";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-const Diary_content = ({
-  title,
-  date,
-  writer,
-  content1,
-  content2,
-  content3,
-  content4
-}) => {
+const Diary_content = ({ title, date, writer, content }) => {
+  const [contentArr, setContentArr] = useState([]);
+  let arr = content.split(/<.+?>/);
+  useEffect(() => {
+    let str = "";
+    let arr2 = [];
+    for (var i = 1; i < arr.length; i++) {
+      if (i % 2 == 1) {
+        arr2.push(arr[i]);
+      }
+    }
+    setContentArr(arr2);
+  }, []);
+
   return (
     <div className="diary_section">
       <div className="diary_container">
@@ -29,18 +34,14 @@ const Diary_content = ({
                 {writer}
               </p>
             </div>
-            <p className="diary_content">
-              {content1}
-            </p>
-            <p className="diary_content">
-              {content2}
-            </p>
-            <p className="diary_content">
-              {content3}
-            </p>
-            <p className="diary_content">
-              {content4}
-            </p>
+            {/* 반복문 */}
+            {contentArr.map(e => {
+              return (
+                <p className="diary_content">
+                  {e}
+                </p>
+              );
+            })}
           </div>
           <div className="diary_footer_container">
             <p className="diary_date">
