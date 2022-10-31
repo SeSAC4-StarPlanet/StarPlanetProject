@@ -15,20 +15,33 @@ import { Link } from "react-router-dom";
 import store from "../../../../store/index";
 import { observer } from "mobx-react";
 import { toJS } from "mobx";
+import axios from "axios";
 
 const Main = observer(() => {
-  const { planetClass } = store;
+  const { userClass } = store;
   const [data, setData] = useState([]);
+  let userInfo = localStorage.getItem("userInfo");
+  let arr = JSON.parse(userInfo);
 
   useEffect(() => {
-    async function fetchAndSetUser() {
-      await planetClass.getPlanets("test");
-      let arr = planetClass.planets;
-      setData(toJS(arr));
+    console.log(arr._id);
+    async function fetchAndSetUser(user) {
+      await axios({
+        method: "get",
+        url: `http://localhost:8000/api/planet/workspace/${user}`,
+        header: {
+          withCredentials: true,
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+        .then((res) => {
+          setData(res.data.planets);
+        })
+        .catch((err) => console.log(err.response.data));
     }
-    fetchAndSetUser();
+    fetchAndSetUser(arr._id);
   }, []);
-
+  console.log(data);
   return (
     <div className="PlanetSelector">
       <Link to={"/workspace/create"}>
@@ -39,53 +52,60 @@ const Main = observer(() => {
         spaceBetween={30}
         loop={true}
         pagination={{
-          clickable: false
+          clickable: false,
         }}
         navigation={true}
         modules={[Navigation]}
         className="mySwiper"
       >
-        {data.length != 0
-          ? data.map(e => {
-              let date = new Date(e.createdAt);
-              return (
-                <SwiperSlide>
-                  <div className="planetWrapper">
-                    <div id="circle-orbit-container">
-                      <div id="inner-orbit">
-                        <div className="inner-orbit-cirlces" />
-                      </div>
+        {data?.length != 0 ? (
+          data?.map((e) => {
+            let date = new Date(e.createdAt);
+            return (
+              <SwiperSlide>
+                <div className="planetWrapper">
+                  <div id="circle-orbit-container">
+                    <div id="inner-orbit">
+                      <div className="inner-orbit-cirlces" />
                     </div>
-                    <div className="planet" />
+                  </div>
+                  <div className="planet" />
+                  <Link to={`/diary/main/${e.name}/${e.category.Album[0]}`}>
                     <div className="textWrapper">
-                      <div className="planetName">
-                        {e.name}
-                      </div>
+                      <div className="planetName">{e.name}</div>
                       <div className="planetCreatedDate">
-                        {`${date.getFullYear()}-${date.getMonth()}-${date.getDate() +
-                          1} ~`}
+                        {`${date.getFullYear()}-${date.getMonth()}-${
+                          date.getDate() + 1
+                        } ~`}
                       </div>
                     </div>
-                    <img className="planet" src={Planet} />
-                  </div>
-                </SwiperSlide>
-              );
-            })
-          : <SwiperSlide>
-              <div className="planetWrapper">
-                <div id="circle-orbit-container">
-                  <div id="inner-orbit">
-                    <div className="inner-orbit-cirlces" />
-                  </div>
+                  </Link>
+                  <img className="planet" src={Planet} />
                 </div>
-                <div className="planet" />
+              </SwiperSlide>
+            );
+          })
+        ) : (
+          <SwiperSlide>
+            <div className="planetWrapper">
+              <div id="circle-orbit-container">
+                <div id="inner-orbit">
+                  <div className="inner-orbit-cirlces" />
+                </div>
+              </div>
+              <div className="planet" />
+              <Link to={"/workspace/create"}>
                 <div className="textWrapper">
                   <div className="planetName" />
-                  <div className="planetCreatedDate">행성이 없습니다. 생성해주세요</div>
+                  <div className="planetCreatedDate">
+                    행성이 없습니다. 생성해주세요
+                  </div>
                 </div>
-                <img className="planet" src={Planet} />
-              </div>
-            </SwiperSlide>}
+              </Link>
+              <img className="planet" src={Planet} />
+            </div>
+          </SwiperSlide>
+        )}
       </Swiper>
     </div>
   );

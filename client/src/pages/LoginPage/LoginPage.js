@@ -14,10 +14,16 @@ import Google_Btn from "../../assets/img/LoginBtn/googleBtn.png";
 import Github_Btn from "../../assets/img/LoginBtn/githubBtn.png";
 import "./LoginPage.scss";
 import axios from "axios";
-axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+// mobx
+import { observer } from "mobx-react";
+import { toJS } from "mobx";
+import store from "../../store";
 
+axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
 
-const LoginPage = () => {
+const LoginPage = observer(() => {
+  const { userClass } = store;
+
   const [userID, setuserId] = useState("");
   const [hashedPW, setPw] = useState("");
   const navigate = useNavigate();
@@ -35,8 +41,10 @@ const LoginPage = () => {
     })
       .then((res) => {
         const { result, userInfo, token } = res.data;
-        console.log('result:', result);
-        console.log('userInfo:', userInfo);
+        console.log("result:", result);
+        console.log("userInfo:", userInfo);
+        localStorage.setItem("userInfo", JSON.stringify(userInfo));
+        userClass.setUserInfo(JSON.stringify(userInfo));
         localStorage.setItem("token", token);
       })
       .then(() => {
@@ -44,7 +52,6 @@ const LoginPage = () => {
       })
       .catch((err) => console.log(err.response.data));
   });
-
   return (
     <div>
       <StarMap />
@@ -119,6 +126,6 @@ const LoginPage = () => {
       </div>
     </div>
   );
-};
+});
 
 export default LoginPage;

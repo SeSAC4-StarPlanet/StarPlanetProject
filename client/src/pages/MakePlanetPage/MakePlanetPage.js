@@ -23,22 +23,22 @@ const MakePlanetPage = () => {
     user_1: "",
     user_2: "",
     user_3: "",
-    user_4: ""
+    user_4: "",
   });
   const [planetSelect, setplanetSelect] = useState(null);
   const [prevClick, setprevClick] = useState(null);
 
   //! 버튼 클릭시 눌린 버튼 상태 변화
-  const GetClick = e => {
+  const GetClick = (e) => {
     setplanetSelect(e.target.id);
-    console.log("출력값:", planetSelect); //출력값이 늦게뜨는이유 , id값으로 데이터를 보낼 수 있는지
+    // console.log("출력값:", planetSelect); //출력값이 늦게뜨는이유 , id값으로 데이터를 보낼 수 있는지
   };
 
   useEffect(
-    e => {
+    (e) => {
       if (planetSelect !== null) {
         let current = document.getElementById(planetSelect);
-        console.log(current);
+        // console.log(current);
         current.style.border = "5px solid";
         current.style.borderColor = "red";
       }
@@ -53,28 +53,41 @@ const MakePlanetPage = () => {
   );
 
   const handlePlanet = () => {
+    // 필수 입력 값 if문
     if (planetName === "") {
       alert("행성이름은 반드시 입력해주셔야 합니다.");
       return;
+    } else if (planetSelect === null) {
+      alert("행성 이미지를 선택해주세요.");
+      return;
     }
-    console.log(user);
+    // userArr 빈 값 제거 배열 생성
+    let userArr = [user.user_1, user.user_2, user.user_3, user.user_4].filter(
+      function (item) {
+        return item !== null && item !== undefined && item !== "";
+      }
+    );
+    // axios 행성 생성
     axios({
-      url: "http://localhost:8000/api/planet",
+      url: "http://localhost:8000/api/planet/create",
       method: "post",
       header: {
         withCredentials: true,
-        Authorization: localStorage.getItem("token")
+        Authorization: localStorage.getItem("token"),
       },
       data: {
         name: planetName,
-        // 멤버 배열의 형태로 보냄
-        member: [user.user_1, user.user_1, user.user_1, user.user_1]
-      }
+        // 멤버를 배열의 형태로 보냄
+        member: userArr,
+        select: planetSelect,
+      },
     })
-      .then(res => {
-        console.log(res.data);
+      .then((res) => {
+        if (res.status === 201) {
+          console.log("행성 생성");
+        }
       })
-      .catch(err => console.log(err.response.data));
+      .catch((err) => console.log(err.response.data));
   };
 
   return (
@@ -84,7 +97,7 @@ const MakePlanetPage = () => {
       <div className="makePlanetSection">
         <div className="makePlanetContainer">
           <MakePlanetInput
-            onChange={e => {
+            onChange={(e) => {
               setplanetName(e.target.value);
             }}
           />
@@ -121,7 +134,7 @@ const MakePlanetPage = () => {
             text={"멤버1"}
             name={user.user_1}
             value={user.user_1}
-            onChange={e => {
+            onChange={(e) => {
               setUser({ ...user, user_1: e.target.value });
             }}
           />
@@ -130,7 +143,7 @@ const MakePlanetPage = () => {
             text={"멤버2"}
             name={user.user_2}
             value={user.user_2}
-            onChange={e => {
+            onChange={(e) => {
               setUser({ ...user, user_2: e.target.value });
               console.log(user);
             }}
@@ -139,7 +152,7 @@ const MakePlanetPage = () => {
             text={"멤버3"}
             name={user.user_3}
             value={user.user_3}
-            onChange={e => {
+            onChange={(e) => {
               setUser({ ...user, user_3: e.target.value });
             }}
           />
@@ -147,7 +160,7 @@ const MakePlanetPage = () => {
             text={"멤버4"}
             name={user.user_4}
             value={user.user_4}
-            onChange={e => {
+            onChange={(e) => {
               setUser({ ...user, user_4: e.target.value });
             }}
           />

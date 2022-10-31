@@ -10,7 +10,6 @@ import { FaPen } from "react-icons/fa";
 
 import usePagination from "./Pagination";
 import Pagination from "@mui/material/Pagination";
-import axios from "axios";
 
 // MOCK 데이터
 import DATA from "./data.js";
@@ -31,20 +30,20 @@ const Diary_main = ({ planetTitle }) => {
     _DATA.jump(p);
   };
   useEffect(() => {
-    axios({
-      // 해당 행성에 대한 해당 카테고리의 다이어리들 불러오기
-      // 행성과 카테고리 파라미터로 전달
-      url: `http://localhost:8000/api/diary/getDiaries/${"planet이름"}/${"카테고리명"}`,
-      method: "get",
-      header: {
-        withCredentials: true,
-        Authorization: localStorage.getItem("token")
-      }
-    })
-      .then(res => {
-        setData(res.data);
-      })
-      .catch(err => console.log(err.response.data));
+    // axios({
+    //   // 해당 행성에 대한 해당 카테고리의 다이어리들 불러오기
+    //   // 행성과 카테고리 파라미터로 전달
+    //   url: `http://localhost:8000/api/diary/getDiaries/${"planet이름"}/${"카테고리명"}`,
+    //   method: "get",
+    //   header: {
+    //     withCredentials: true,
+    //     Authorization: localStorage.getItem("token")
+    //   }
+    // })
+    //   .then(res => {
+    //     setData(res.data);
+    //   })
+    //   .catch(err => console.log(err.response.data));
   }, []);
 
   return (
@@ -69,7 +68,7 @@ const Diary_main = ({ planetTitle }) => {
                 sx={{
                   width: "100%",
                   maxWidth: "40rem",
-                  bgcolor: "background.paper"
+                  bgcolor: "background.paper",
                 }}
               />
             </div>

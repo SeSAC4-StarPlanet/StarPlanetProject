@@ -1,4 +1,5 @@
 import countClass from "./countClass";
 import planetClass from "./planetClass";
-const store = { countClass, planetClass };
+import userClass from "./userClass";
+const store = { countClass, planetClass, userClass };
 export default store;

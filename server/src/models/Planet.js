@@ -1,23 +1,27 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
 const User = require('./User');
 const Album = require("./Album");
 const Diary = require("./Diary");
 
-
 /* Schema */
-const PlanetSchema = mongoose.Schema({
+const PlanetSchema = mongoose.Schema(
+  {
     name: { type: String },
     select: { type: Number, default: 0 },
-    member: [{ type: ObjectId, ref: 'User' }],
-    payment: { type: Boolean },
+    member: [{ type: ObjectId, ref: "User" }],
+    payment: {
+      status: { type: Boolean, default: 0 },
+      maxNum: { type: Number, default: 0 },
+    },
     category: {
-        Album: [{ type: ObjectId, ref: 'Album' }],
-        Diary: [{ type: ObjectId, ref: 'Diary' }]
-    }
-}, { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } });
-
+      Album: { type: Array, default: ["2022"] },
+      Diary: { type: Array, default: ["2022"] },
+    },
+  },
+  { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } }
+);
 
 
 /* static : Collection 단위*/
@@ -40,8 +44,6 @@ const PlanetSchema = mongoose.Schema({
 // });
 
 
-
-
 /* method : Document 단위*/
 PlanetSchema.pre('remove', async function (next) {
     const planet = this;
@@ -54,10 +56,10 @@ PlanetSchema.pre('remove', async function (next) {
     }
 });
 
-
 /* static */
 
 
 
 
 module.exports = mongoose.model('Planet', PlanetSchema, 'Planet')
+
