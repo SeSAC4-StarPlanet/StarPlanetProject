@@ -21,10 +21,19 @@ const PlanetSchema = mongoose.Schema({
 }, { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } });
 
 
-/* virtual */
-
 
 /* method */
+// Planet.findOne()
+//     .then(r => {
+//         if (!r) return Planet.create({})
+//         return Promise.resolve(null)
+//     })
+//     .then(r => {
+//         if (r) console.log(`${r.title} Planet is created`)
+//     })
+//     .catch(e => console.error(e.message))
+
+
 PlanetSchema.pre('remove', async function (next) {
     const planet = this;
     try {

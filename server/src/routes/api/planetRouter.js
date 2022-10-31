@@ -1,6 +1,9 @@
 const router = require("express").Router();
-const { Planet } = require("../../models/Planet");
+var createError = require('http-errors');
 const { User } = require("../../models/User");
+const { Planet } = require("../../models/Planet");
+const { Category } = require("../../models/Category");
+
 
 // const controller = require('../controllers/planet');
 
@@ -66,6 +69,53 @@ router.post("/", async (req, res) => {
     res.status(500).send("server Error");
   }
 });
+
+
+
+//~
+
+// 전체 행성조회
+router.get('/', function (req, res, next) {
+  Planet.find()
+    .then(r => {
+      res.status(200).send({ success: true, msg: r });
+    })
+    .catch(e => {
+      res.status(500).send({ msg: e.message });
+    })
+});
+
+
+// 행성수정
+router.put("/:_id", (req, res) => {
+  const _id = req.params._id
+  Planet.updateOne({ _id }, { $set: req.body })
+    .then(r => {
+      res.status(200).send({ success: true, msg: r });
+    })
+    .catch(e => {
+      res.status(500).send({ msg: e.message });
+    })
+});
+
+// 행성 삭제
+router.delete("/:_id", (req, res) => {
+  const _id = req.params._id;
+  Planet.deleteOne({ _id })
+    .then(r => {
+      res.status(200).send({ success: true, msg: r });
+    })
+    .catch(e => {
+      res.status(500).send({ msg: e.message });
+    })
+});
+
+
+// error handler
+router.all('*', function (req, res, next) {
+  next(createError(404, 'no API'));
+});
+
 
 module.exports = router;
 
