@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./read.scss";
 
 import Planet_name from "../Planet_name/Planet_name";
@@ -15,30 +15,79 @@ import { alpha, styled } from "@mui/material/styles";
 // 아이콘
 import Avatar from "@mui/material/Avatar";
 import { FaPlay } from "react-icons/fa";
+import axios from "axios";
+// MOCK 데이터
+import DATA from "./data.js";
+
 const CssTextField = styled(TextField)({
   "& label.Mui-focused": {
-    color: "#3c52b2",
+    color: "#3c52b2"
   },
   "& .MuiInput-underline:after": {
-    borderBottomColor: "#3c52b2",
+    borderBottomColor: "#3c52b2"
   },
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
-      borderColor: "red",
+      borderColor: "red"
     },
     "&:hover fieldset": {
-      borderColor: "yellow",
+      borderColor: "yellow"
     },
     "&.Mui-focused fieldset": {
-      borderColor: "green",
-    },
-  },
+      borderColor: "green"
+    }
+  }
 });
-const Read = ({ planetTitle }) => {
-  const [value, setValue] = useState("");
 
-  const handleChange = (e) => {
-    setValue(e.target.value);
+const Read = ({ planetTitle }) => {
+  const [commentValue, setCommentValue] = useState("");
+  const [post, setPost] = useState([]);
+  // 기본 값 1로 설정
+  const [postNum, setPostNum] = useState(1);
+  const parse = require("html-react-parser");
+
+  useEffect(() => {
+    // todo
+    // url 파라미터에서 다이어리 번호 받아오기
+
+    async function getPost(postNum) {
+      // 글의 ID 번호를 파라미터로 전달하여 카테고리를 받는다.
+      await axios({
+        method: "get",
+        url: `/diary/getPost/${postNum}`,
+        header: {
+          withCredentials: true,
+          Authorization: localStorage.getItem("token")
+        }
+      })
+        .then(res => {
+          // 데이터를 어떻게 받아올지?
+          setPost(res.data);
+        })
+        .catch(err => console.log(err.response.data));
+    }
+    // 함수 실행 및 글 가져오기
+    getPost(1);
+  });
+
+  const handleChange = e => {
+    setCommentValue(e.target.value);
+  };
+
+  const onClickCommentWrite = () => {
+    axios({
+      method: "post",
+      url: `/diary/PostComment/${postNum}`,
+      header: {
+        withCredentials: true,
+        Authorization: localStorage.getItem("token")
+      },
+      data: {
+        // 작성자는 jwt 처리하는지?
+        writer: "",
+        comment: commentValue
+      }
+    });
   };
 
   return (
@@ -68,8 +117,12 @@ const Read = ({ planetTitle }) => {
             <div className="diaryReaderWrapper">
               {/* 맨위 */}
               <div className="diaryReaderTopContainer">
-                <div className="diaryReaderChoiced">2022</div>
-                <div className="diaryReaderTitle">제목</div>
+                <div className="diaryReaderChoiced">
+                  {DATA.post.category}
+                </div>
+                <div className="diaryReaderTitle">
+                  {DATA.post.title}
+                </div>
               </div>
               {/* 작성자 */}
               <div className="diaryReaderWriterWrapper">
@@ -77,25 +130,29 @@ const Read = ({ planetTitle }) => {
                   <ListItemIcon sx={{ minWidth: "40px" }}>
                     <Avatar sx={{ width: 30, height: 30 }} />
                   </ListItemIcon>
-                  <ListItemText primary={"시온"}></ListItemText>
+                  <ListItemText primary={DATA.post.writer} />
                 </ListItem>
               </div>
               <div className="diaryReaderContent">
-                {/* 임시 내용 */}
-                <p>ㅇㄴ</p>
+                {/* string to html */}
+                {parse(DATA.post.content)}
               </div>
               <div className="diaryReaderCommentWrapper">
                 <div className="diaryReaderCommentTitle">수다수다</div>
                 <div className="diaryReaderCommentContainer">
-                  <div className="diaryReaderCommentBox">
-                    <div className="diaryReaderCommentWriter">아이디</div>
-                    <div className="diaryReaderCommentContent">댓글내용</div>
-                  </div>
                   {/* 댓글 */}
-                  <div className="diaryReaderCommentBox">
-                    <div className="diaryReaderCommentWriter">아이디</div>
-                    <div className="diaryReaderCommentContent">댓글내용</div>
-                  </div>
+                  {DATA.comment.map(e => {
+                    return (
+                      <div className="diaryReaderCommentBox">
+                        <div className="diaryReaderCommentWriter">
+                          {e.writer}
+                        </div>
+                        <div className="diaryReaderCommentContent">
+                          {e.comment}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
               {/* 댓글 작성창 */}
@@ -105,7 +162,7 @@ const Read = ({ planetTitle }) => {
                   label="댓글 작성"
                   multiline
                   rows={4}
-                  value={value}
+                  value={commentValue}
                   onChange={handleChange}
                   variant="filled"
                 />
@@ -115,11 +172,12 @@ const Read = ({ planetTitle }) => {
                       backgroundColor: "#0D0D7E",
                       "&:hover": {
                         backgroundColor: "#fff",
-                        color: "#3c52b2",
-                      },
+                        color: "#3c52b2"
+                      }
                     }}
                     variant="contained"
                     endIcon={<FaPlay />}
+                    onClick={onClickCommentWrite}
                   >
                     등록
                   </Button>

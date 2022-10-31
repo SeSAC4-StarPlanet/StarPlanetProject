@@ -5,6 +5,9 @@ import {
   Redirect,
 } from "react-router-dom";
 import axios from "axios";
+// css
+import "../../styles/common.scss";
+
 // page component
 import LandingPage from "../../pages/LandingPage/LandingPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
@@ -61,12 +64,7 @@ const authorizedRouter = createBrowserRouter([
   {
     path: "/modifyInfo",
     element: <ModifyPage />,
-  },
-  {
-    path: "/makePlanet",
-    element: <MakePlanetPage />,
-  },
-  {
+  } , {
     path: "/page404",
     element: <Page404 />,
   },
@@ -95,6 +93,10 @@ const authorizedRouter = createBrowserRouter([
     path: "/workspace/main",
     element: <WorkSpaceMain />,
   },
+  {
+    path: "/workspace/create",
+    element: <MakePlanetPage />,
+  }
   ,
   {
     path: "/album/main",

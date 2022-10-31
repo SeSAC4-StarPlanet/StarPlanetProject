@@ -2,6 +2,7 @@ import React from "react";
 import "./secondPage.scss";
 import { ReactComponent as Logo } from "../../../assets/img/LandingPage/second_page_logo.svg";
 import Button from "../Button/Button";
+import { useNavigate } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 
@@ -22,15 +23,12 @@ const SecondPage = () => {
           </p>
         </div>
         <div className="second_page_btn_wrapper">
-
-
           <Link to={"/login"}>
             <Button text={"로그인"} />
           </Link>
           <Link to={"/register"}>
             <Button text={"회원가입"} mode={"isRegister"} />
           </Link>
-
         </div>
       </div>
     </div>

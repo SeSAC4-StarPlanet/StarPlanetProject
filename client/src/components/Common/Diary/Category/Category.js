@@ -17,9 +17,11 @@ import {
   faImage,
   faCalendarDays,
   faBookmark,
-  faBook,
+  faBook
 } from "@fortawesome/free-solid-svg-icons";
 import { FaList, FaFolder } from "react-icons/fa";
+
+import axios from "axios";
 
 // mobx
 import store from "../../../../store/index";
@@ -35,8 +37,23 @@ const Category = observer(({ sx }) => {
   const [diary, setDiary] = useState([]);
 
   useEffect(() => {
-    planetClass.getPlanet("test", "test");
-    setDiary(toJS(planetClass.diaryCategory));
+    async function getCategory(user, planet) {
+      // 이름과 행성을 파라미터로 전달하여 카테고리를 받는다.
+      await axios({
+        method: "get",
+        url: `/planet/${user}/${planet}`,
+        header: {
+          withCredentials: true,
+          Authorization: localStorage.getItem("token")
+        }
+      })
+        .then(res => {
+          setDiary(res.data.diary);
+        })
+        .catch(err => console.log(err.response.data));
+    }
+    // 함수 실행 및 카테고리 설정
+    getCategory("test","test");
   }, []);
 
   const handleClick = () => {
@@ -62,7 +79,7 @@ const Category = observer(({ sx }) => {
           primaryTypographyProps={{
             color: "#0D0783",
             fontSize: "15px",
-            fontWeight: 500,
+            fontWeight: 500
           }}
           primary="사진첩"
         />
@@ -78,7 +95,7 @@ const Category = observer(({ sx }) => {
           primaryTypographyProps={{
             color: "#0D0783",
             fontSize: "15px",
-            fontWeight: 500,
+            fontWeight: 500
           }}
           primary="일정"
         />
@@ -94,7 +111,7 @@ const Category = observer(({ sx }) => {
           primaryTypographyProps={{
             color: "#0D0783",
             fontSize: "15px",
-            fontWeight: 500,
+            fontWeight: 500
           }}
           primary="북마크"
         />
@@ -110,7 +127,7 @@ const Category = observer(({ sx }) => {
           primaryTypographyProps={{
             color: "#0D0783",
             fontSize: "15px",
-            fontWeight: 500,
+            fontWeight: 500
           }}
           primary="다이어리"
         />
@@ -128,7 +145,7 @@ const Category = observer(({ sx }) => {
               primaryTypographyProps={{
                 color: "#0D0783",
                 fontSize: "13px",
-                fontWeight: 500,
+                fontWeight: 500
               }}
               primary="버킷리스트"
             />
@@ -143,7 +160,7 @@ const Category = observer(({ sx }) => {
               primaryTypographyProps={{
                 color: "#0D0783",
                 fontSize: "13px",
-                fontWeight: 500,
+                fontWeight: 500
               }}
               primary="한줄 일기"
             />
@@ -159,7 +176,7 @@ const Category = observer(({ sx }) => {
               primaryTypographyProps={{
                 color: "#0D0783",
                 fontSize: "13px",
-                fontWeight: 500,
+                fontWeight: 500
               }}
               primary="추억 저장소"
             />
@@ -167,14 +184,14 @@ const Category = observer(({ sx }) => {
           </ListItemButton>
           <Collapse in={open_2} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              {diary.map((e) => {
+              {diary?.map(e => {
                 return (
                   <ListItemButton
                     sx={{
                       height: "30px",
                       pl: 7,
                       fontSize: "11px",
-                      fontWeight: 500,
+                      fontWeight: 500
                     }}
                   >
                     <ListItemIcon sx={{ color: "#0D0783", minWidth: "30px" }}>
@@ -184,7 +201,7 @@ const Category = observer(({ sx }) => {
                       primaryTypographyProps={{
                         color: "#0D0783",
                         fontSize: "11px",
-                        fontWeight: 500,
+                        fontWeight: 500
                       }}
                       primary={e}
                     />

@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
-import "./writer.scss";
-import Editor from "../../Editor/Editor";
+import "./modify.scss";
 // MUI 라이브러리
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { alpha, styled } from "@mui/material/styles";
 // 에디터
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -17,23 +15,48 @@ import axios from "axios";
 const Writer = () => {
   const [titleValue, setTitleValue] = useState("");
   const [contentValue, setContentValue] = useState("");
+  const [post, setPost] = useState([]);
 
   const navigate = Navigate();
   const onChangeValue = e => {
     setTitleValue(e.target.value);
   };
 
-  // 글 작성 함수
-  const onClickPostWrite = async () => {
+  useEffect(() => {
+    // 수정을 위한 불러오기
+    async function getPostContentForModify() {
+      await axios({
+        method: "get",
+        url: `/diary/getPost/${postNum}`,
+        header: {
+          withCredentials: true,
+          Authorization: localStorage.getItem("token")
+        }
+      })
+        .then(res => {
+          // 데이터를 어떻게 받아올지?
+          setPost(res.data);
+          setTitleValue(res.data.title);
+          setContentValue(res.data.content);
+          // title, content,id
+        })
+        .catch(err => console.log(err.response.data));
+    }
+    getPostContentForModify();
+  });
+
+  // 글 수정 함수
+  const onClickPostModify = async id => {
     await axios({
-      method: "post",
-      url: `/diary/writePost`,
+      method: "put",
+      url: `/diary/ModifyPost`,
       header: {
         withCredentials: true,
         Authorization: localStorage.getItem("token")
       },
       data: {
-        // 제목과 글
+        // 글의 Object_id와 제목과 글
+        id: id,
         title: titleValue,
         content: contentValue
       }
@@ -87,7 +110,9 @@ const Writer = () => {
           />
           <div className="BtnBox">
             <Button
-              onClick={onClickPostWrite}
+              onClick={() => {
+                onClickPostModify(post.id);
+              }}
               sx={{
                 backgroundColor: "#0D0D7E",
                 "&:hover": {
@@ -107,7 +132,7 @@ const Writer = () => {
           <div className="writer_wrapper">
             <CKEditor
               editor={ClassicEditor}
-              data=""
+              data={contentValue}
               onReady={editor => {
                 // You can store the "editor" and use when it is needed.
                 // console.log("Editor is ready to use!", editor);
