@@ -1,21 +1,20 @@
 const router = require("express").Router();
-var createError = require('http-errors');
+var createError = require("http-errors");
 const { User } = require("../../models/User");
 const { Planet } = require("../../models/Planet");
 const { Category } = require("../../models/Category");
-
 
 // const controller = require('../controllers/planet');
 
 // workspace 행성 선택창
 // 담당자 : 시온
-router.get("/workspace/:user", async (req, res) => {
-  const { user } = req.params;
-  const _ID = user;
+router.get("/workspace/:userId", async (req, res) => {
+  const { userId } = req.params;
+  const _ID = userId;
 
   try {
-    const user = await User.findOne({ userID: _ID });
-    const planets = await Planet.find({ member: user._id });
+    // user_id를 활용한 planet 탐색
+    const planets = await Planet.find({ member: _ID });
     res.status(200).send({ planets: planets });
   } catch (error) {
     console.error(error);
@@ -70,52 +69,47 @@ router.post("/", async (req, res) => {
   }
 });
 
-
-
 //~
 
 // 전체 행성조회
-router.get('/', function (req, res, next) {
+router.get("/", function (req, res, next) {
   Planet.find()
-    .then(r => {
+    .then((r) => {
       res.status(200).send({ success: true, msg: r });
     })
-    .catch(e => {
+    .catch((e) => {
       res.status(500).send({ msg: e.message });
-    })
+    });
 });
-
 
 // 행성수정
 router.put("/:_id", (req, res) => {
-  const _id = req.params._id
+  const _id = req.params._id;
   Planet.updateOne({ _id }, { $set: req.body })
-    .then(r => {
+    .then((r) => {
       res.status(200).send({ success: true, msg: r });
     })
-    .catch(e => {
+    .catch((e) => {
       res.status(500).send({ msg: e.message });
-    })
+    });
 });
 
 // 행성 삭제
 router.delete("/:_id", (req, res) => {
   const _id = req.params._id;
   Planet.deleteOne({ _id })
-    .then(r => {
+    .then((r) => {
       res.status(200).send({ success: true, msg: r });
     })
-    .catch(e => {
+    .catch((e) => {
       res.status(500).send({ msg: e.message });
-    })
+    });
 });
-
 
 // error handler
-router.all('*', function (req, res, next) {
-  next(createError(404, 'no API'));
+router.all("*", function (req, res, next) {
+  next(createError(404, "no API"));
 });
-
 
 module.exports = router;
 
