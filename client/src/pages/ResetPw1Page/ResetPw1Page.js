@@ -15,7 +15,7 @@ const ResetPw1Page = () => {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
-  const ResetPassword = (e) => {
+  const ResetPW = (e) => {
     axios({
       method: "get",
       url: "http://localhost:8000/api/auth/resetPW",
@@ -63,7 +63,7 @@ const ResetPw1Page = () => {
               console.log(e.target.value);
             }}
           />
-          <ResetPw1Btn text={"비밀번호 재설정"} onClick={ResetPassword} />
+          <ResetPw1Btn text={"비밀번호 재설정"} onClick={ResetPW} />
         </div>
       </div>
     </>

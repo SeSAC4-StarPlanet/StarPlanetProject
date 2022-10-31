@@ -1,6 +1,6 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-const { User } = require('../../src/models/User');
+const User = require('../../src/models/User');
 
 
 const passportConfig = {
@@ -11,11 +11,11 @@ const passportConfig = {
 // UserID, password가 서버에 저장된 정보와 일치하는지 확인 후 로그인 승인
 const passportVerify = async (username, password, done) => {
     console.info('___new localStrategy()');
-    console.log('ID:', username, ' PW:', password);
 
     try {
         // 유저 아이디로 일치하는 유저 데이터 검색
-        const exUser = await User.findOne({ userID: username });
+        const exUser = await User.findByUserID(username);
+        console.log('exUser:', exUser);
 
         // 검색된 유저 데이터가 있다면 유저 해쉬된 비밀번호 비교 
         if (exUser) {
