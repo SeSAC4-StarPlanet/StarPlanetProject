@@ -1,5 +1,7 @@
 const router = require("express").Router();
 var createError = require("http-errors");
+const passport = require("passport");
+
 const User = require("../../models/User");
 const Planet = require("../../models/Planet");
 
@@ -90,6 +92,20 @@ router.get("/:user/:planet", async (req, res) => {
     res.status(500).send("server Error");
   }
 });
+
+
+
+
+//& JWT verify
+router.all("*", (req, res, next) => {
+  passport.authenticate("jwt", { session: false }, (err, user, info) => {
+    console.log("passport-jwt");
+    if (err | !user) res.status(400).json({ errors: info.message });
+    next();
+  })(req, res, next); // 미들웨어 내의 미들웨어
+});
+
+
 
 // 행성 생성
 router.post("/create", async (req, res) => {

@@ -53,8 +53,7 @@ router.post('/login', async (req, res, next) => {    // 지정전략(strategy)�
         console.log('passport-local');
 
         // 인증이 실패했거나 유저 데이터가 없으면 에러 발생
-        // if (err || !user) return res.status(400).json({ errors: info.message });
-        if (err || !user) res.status(400).send({ errors: info.message });
+        if (err || !user) return res.status(400).json({ errors: info.message });
 
         // 유저 데이터로 로그인 진행
         return req.login(user, { session: false }, (loginError) => {    // jwt 토큰 이용시 session 사용 종료
