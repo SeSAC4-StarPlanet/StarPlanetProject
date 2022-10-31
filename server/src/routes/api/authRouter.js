@@ -23,7 +23,7 @@ router.post("/signup", async (req, res) => {
     try {
         const { userID, hashedPW, username, email } = req.body;
         // DB에서 사용자 검색
-        const exUser = await User.findById.lean();
+        const exUser = await User.findByUserId;
         // 사용자 있으면 에러메세지
         if (exUser != null) {
             console.log("*****User exists*****");
@@ -55,7 +55,7 @@ router.post('/login', async (req, res, next) => {    // 지정전략(strategy)�
 
         // 인증이 실패했거나 유저 데이터가 없으면 에러 발생
         // if (err || !user) return res.status(400).json({ errors: info.message });
-        if (err || !user) throw createError(400, { errors: info.message });
+        if (err || !user) res.status(400).send({ errors: info.message });
 
         // 유저 데이터로 로그인 진행
         return req.login(user, { session: false }, (loginError) => {    // jwt 토큰 이용시 session 사용 종료
@@ -64,7 +64,7 @@ router.post('/login', async (req, res, next) => {    // 지정전략(strategy)�
             // 로그인 성공시 JWT토큰 생성 후 클라이언트에게 반환
             const token = setUserToken(res, req.user);
             const userInfo = req.user;
-            return res.status(201).json({ result: 'ok', userInfo, token });
+            // return res.status(201).json({ result: 'ok', userInfo, token });
         });
     })(req, res, next); // 미들웨어 내의 미들웨어
 });

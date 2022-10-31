@@ -26,11 +26,11 @@ const PlanetSchema = mongoose.Schema(
 
 /* static : Collection 단위*/
 //TODO
-// // 아이디로 사용자 검색
+// 행성이름으로 행성 검색
 // UserSchema.statics.findByUserID = function (userID) {
 //     return this.findOne({ userID });
 // };
-// // 이름으로 사용자 검색
+// 멤버로 행성 검색
 // UserSchema.statics.findByName = function (username) {
 //     return this.findOne({ username });
 // };
@@ -46,14 +46,14 @@ const PlanetSchema = mongoose.Schema(
 
 /* method : Document 단위*/
 PlanetSchema.pre('remove', async function (next) {
-    const planet = this;
-    try {
-        await Album.deleteMany({ _planet: planet._id });
-        await Diary.deleteMany({ _planet: planet._id });
-        next();
-    } catch (e) {
-        next();
-    }
+  const planet = this;
+  try {
+    await Album.deleteMany({ _planet: planet._id });
+    await Diary.deleteMany({ _planet: planet._id });
+    next();
+  } catch (e) {
+    next();
+  }
 });
 
 /* static */

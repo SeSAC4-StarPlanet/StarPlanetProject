@@ -10,11 +10,7 @@ router.use("/user", require("./userRouter"));
 router.all("*", (req, res, next) => {
   passport.authenticate("jwt", { session: false }, (err, user, info) => {
     console.log("passport-jwt");
-    if (err | !user) {
-      console.log(req.headers);
-      console.log(req.user);
-      throw createError(400, { errors: info.message });
-    }
+    if (err | !user) res.status(400).send({ errors: info.message });
     next();
   })(req, res, next); // 미들웨어 내의 미들웨어
 });
