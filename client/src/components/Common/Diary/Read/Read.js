@@ -68,8 +68,6 @@ const Read = ({ planetTitle }) => {
     }
     // 함수 실행 및 글 가져오기
     getPost(1);
-    var htmlObject = document.createElement("div");
-    htmlObject.innerHTML = DATA.content;
   });
 
   const handleChange = e => {
@@ -86,7 +84,8 @@ const Read = ({ planetTitle }) => {
       },
       data: {
         // 작성자는 jwt 처리하는지?
-        writer: ""
+        writer: "",
+        comment: commentValue
       }
     });
   };
