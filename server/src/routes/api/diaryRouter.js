@@ -12,6 +12,28 @@ const { Diary, Comment } = require("../../models/Diary");
 //     .then(r => console.log(r.name, r._id))
 
 // 글 불러오기
+router.get("/getPost/:planet/:category", async (req, res) => {
+  const { planet, category } = req.params;
+  //   값 할당
+  const _Planet = planet;
+  const _Category = category;
+
+  try {
+    //   행성 ObjectId 값
+    const planetForId = await Planet.findOne({ name: _Planet });
+    console.log(planetForId.id);
+    // 행성 ObjectId, 카테고리 filter
+    const diaries = await Diary.find({
+      id: planetForId.id,
+      _category: _Category
+    });
+
+    res.status(200).send({ diaries: diaries });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Server Error");
+  }
+});
 
 // 글 작성
 router.post("/writePost", async (req, res) => {
