@@ -65,17 +65,6 @@ router.get("/getMembers/:planetName", async (req, res) => {
   }
 });
 
-// 글
-router.get("/getPosts/:planetName/:category", async (req, res) => {
-  const [planetName, category] = req.params;
-  try {
-    // 행성과 카테고리 활용한 게시글 탐색
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("server Error");
-  }
-});
-
 // planet 테이블 불러오기
 // 담당자 : 시온
 router.get("/:user/:planet", async (req, res) => {
