@@ -1,7 +1,7 @@
 const router = require('express').Router();
 var createError = require('http-errors');
-// const { User } = require("../../models/User");
-// const { Planet } = require("../../models/Planet");
+const User = require("../../models/User");
+const Planet = require("../../models/Planet");
 const { Diary, Comment } = require("../../models/Diary");
 
 // User.findOne()
@@ -58,7 +58,10 @@ router.get('/read/:_id', (req, res, next) => {
             if (!r) throw new Error('잘못된 게시판입니다')
             dry = r
             dry._comments = []
-            return Comment.find({ _diary: dry._id }).populate({ path: '_user', select: 'id name' }).sort({ _id: 1 }).limit(5)
+            return Comment.find({ _diary: dry._id })
+                .populate({ path: '_user', select: 'id name' })
+                .sort({ _id: 1 })
+                .limit(5)
         })
         .then(rs => {
             if (rs) dry._comments = rs
@@ -72,12 +75,8 @@ router.get('/read/:_id', (req, res, next) => {
 
 router.post('/:_category', (req, res, next) => {
     const _category = req.params._category
-    if (!_category) throw createError(400, '게시판이 선택되지 않았습니다')
     const { title, content } = req.body
     console.log(req.body)
-
-    if (!title) throw createError(400, '제목이 없습니다')
-    if (!content) throw createError(400, '내용이 없습니다')
 
     const dry = {
         title,
@@ -96,14 +95,12 @@ router.post('/:_category', (req, res, next) => {
         })
 })
 
+
+
 router.put('/:_id', (req, res, next) => {
     // if (!req.user._id) throw createError(403, '게시물 수정 권한이 없습니다')
     const _id = req.params._id
-
     const { title, content } = req.body
-
-    if (!title) throw createError(400, '제목이 없습니다')
-    if (!content) throw createError(400, '내용이 없습니다')
 
     Diary.findById(_id)
         .then(r => {
@@ -142,42 +139,58 @@ router.delete('/:_id', (req, res, next) => {
 })
 
 
+// Index
+router.get('/', (req, res) => {
+    try {
+        Diary.find()
+            .populate('_user')
+            .populate('_planet')
+            .sort(-createdAt)
+            .exec((err, diaryAll) => {
+                if (err) return res.status(400).json(err);
+                res.status(200).json({ success: true, Index: diaryAll });
+            })
+    } catch (e) {
+        res.status(500).send(e);
+    }
+});
 
-//~
-// 전체 다이어리 조회
-router.get('/', function (req, res, next) {
-    Diary.find()
-        .then(r => {
-            res.status(200).send({ success: true, msg: r });
-        })
-        .catch(e => {
-            res.status(500).send({ msg: e.message });
-        })
+// create
+router.post('/', (req, res) => {
+    req.body._user = req.user._id;
+    Diary.create(req.body, function (err, diary) {
+        if (err) return res.status(400).json(err);
+        return res.status(201).json({ success: true, create: diary });
+    })
 });
 
 
-// 다이어리 수정
+// read
+router.get("/:id", (req, res) => {
+    Diary.findOne({ _id: req.params.id })
+        .populate('_user')
+        .exec((err, diary) => {
+            if (err) return res.status(400).json(err);
+            return res.status(200).json({ success: true, read: diary });
+        })
+})
+
+// update
 router.put("/:_id", (req, res) => {
-    const _id = req.params._id
-    Diary.updateOne({ _id }, { $set: req.body })
-        .then(r => {
-            res.status(200).send({ success: true, msg: r });
-        })
-        .catch(e => {
-            res.status(500).send({ msg: e.message });
-        })
+    req.body.updateAt = Date.now();
+    Diary.findOneAndUpdate({ _id: req.params.id }, req.body,
+        (err, diary) => {
+            if (err) return res.status(400).json(err);
+            return res.status(200).json({ success: true, update: diary });
+        });
 });
 
-// 다이어리  삭제
+// delete
 router.delete("/:_id", (req, res) => {
-    const _id = req.params._id;
-    Diary.deleteOne({ _id })
-        .then(r => {
-            res.status(200).send({ success: true, msg: r });
-        })
-        .catch(e => {
-            res.status(500).send({ msg: e.message });
-        })
+    Diary.deleteOne({ _id: req.params._id }, (err) => {
+        if (err) return res.status(400).json(err);
+        return res.status(200).json({ success: true });
+    })
 });
 
 

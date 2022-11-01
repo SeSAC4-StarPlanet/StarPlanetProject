@@ -25,21 +25,18 @@ const PlanetSchema = mongoose.Schema(
 
 
 /* static : Collection 단위*/
-//TODO
 // 행성이름으로 행성 검색
-// UserSchema.statics.findByUserID = function (userID) {
-//     return this.findOne({ userID });
-// };
-// 멤버로 행성 검색
-// UserSchema.statics.findByName = function (username) {
-//     return this.findOne({ username });
-// };
-// // 이메일로 사용자 검색
-// UserSchema.statics.findByEmail = function (email) {
-//     return this.findOne({ email });
-// };
+PlanetSchema.statics.findByName = function (name) {
+  return this.findOne({ name });
+};
+// 멤버아이디나 이름으로 행성 검색
+PlanetSchema.statics.findByMember = async function (userID, username) {
+  const exMember = await User.find().or([{ userID }, { username }]);
+  return this.find().in('member', [exMember._id]);
+};
+
 // // 사용자 전체 조회
-// UserSchema.static('findAll', (callback) => {
+// PlanetSchema.static('findAll', (callback) => {
 //     return this.find({}, callback);
 // });
 

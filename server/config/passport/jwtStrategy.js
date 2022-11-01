@@ -1,6 +1,6 @@
 const { ExtractJwt, Strategy: JWTStrategy } = require("passport-jwt");
 const secret = require("../../config/default").secretOrKey;
-const { User } = require("../../src/models/User");
+const User = require("../../src/models/User");
 
 // const token = req.header("x-auth-token");
 const JWTConfig = {
@@ -11,11 +11,11 @@ const JWTConfig = {
 
 const JWTVerify = async (jwtPayload, done) => {
   try {
-    // console.info('___new JWTStrategy()');
-    // console.log('___jwtPayload', jwtPayload);
+    console.info('___new JWTStrategy()');
+    console.log('___jwtPayload', jwtPayload);
 
     // palyload의 유저id값으로 유저 데이터 조회
-    const exUser = await User.findByUserID({ userID: jwtPayload.userID });
+    const exUser = await User.findByUserID(jwtPayload.userID);
 
     // 유저 데이터 있을 경우 유저 데이터 객체 전송
     if (exUser) return done(null, exUser);

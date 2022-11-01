@@ -14,7 +14,7 @@ module.exports = new KakaoStrategy(
         console.log('___kakao profile', profile);
 
         try {           // DB에서 사용자 검색
-            const exUser = await User.findOne({ userID: profile.id });
+            const exUser = await User.findByUserID(profile.id);
 
             if (exUser) {
                 console.log('___kakao exUser', exUser);
