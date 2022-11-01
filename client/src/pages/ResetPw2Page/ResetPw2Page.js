@@ -20,7 +20,7 @@ const ResetPw2Page = () => {
       url: `http://localhost:8000/api/auth/resetPW2`,
       header: { withCredentials: true },
       data: {
-        _id: uid,
+        uid: uid,
         hashedPW: hashedPW,
       },
     })
@@ -33,7 +33,7 @@ const ResetPw2Page = () => {
       })
       .catch((err) => {
         console.log("An error occurred:", err);
-        alert("기존 비밀번호입니다!");
+        alert("비밀번호를 수정할 수 없습니다!");
       });
   };
 
