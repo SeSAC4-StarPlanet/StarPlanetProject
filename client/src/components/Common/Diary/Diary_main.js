@@ -87,15 +87,17 @@ const Diary_main = ({ planetTitle }) => {
             </div>
             <div className="Diary_main_box">
               {_DATA.currentData().map((e, i) => {
-                // console.log(e);
+                console.log(e);
                 return (
-                  <Diary_content
-                    key={i}
-                    title={e.title}
-                    date={e.date}
-                    writer={e.timestamp}
-                    content={e.content}
-                  />
+                  <Link to={`/diary/read/${e._id}`}>
+                    <Diary_content
+                      key={i}
+                      title={e.title}
+                      date={e.date}
+                      writer={e.timestamp}
+                      content={e.content}
+                    />
+                  </Link>
                 );
               })}
             </div>{" "}
