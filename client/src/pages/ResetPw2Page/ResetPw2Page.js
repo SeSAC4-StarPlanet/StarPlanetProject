@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./ResetPw2Page.scss";
 import ResetPw2PwInput1 from "../../components/Common/ResetPw2/ResetPw2PwInput1";
 import ResetPw2PwInput2 from "../../components/Common/ResetPw2/ResetPw2PwInput2";
@@ -11,18 +11,30 @@ import axios from "axios";
 const ResetPw2Page = () => {
   const [hashedPW, setPW] = useState("");
   const navigate = useNavigate();
+  const params = useParams();
+  const { uid } = params;
 
   const Reset = () => {
     axios({
       method: "post",
-      url: "http://localhost:8000/api/auth/resetPw",
+      url: `http://localhost:8000/api/auth/resetPW2`,
       header: { withCredentials: true },
       data: {
+        _id: uid,
         hashedPW: hashedPW,
       },
     })
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        console.log(res.data);
+        alert("비밀번호가 수정되었습니다.");
+      })
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.log("An error occurred:", err);
+        alert("기존 비밀번호입니다!");
+      });
   };
 
   return (

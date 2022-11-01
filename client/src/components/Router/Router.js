@@ -178,7 +178,9 @@ const Router = () => {
             ></Route>
             <Route path="/findid" element={<FindIdPage />}></Route>
             <Route path="/resetPw1" element={<ResetPw1Page />}></Route>
-            <Route path="/resetPw2" element={<ResetPw2Page />}></Route>
+            <Route path="/resetPw2" element={<ResetPw2Page />}>
+              <Route path=":uid" element={<ResetPw2Page />} />
+            </Route>
             <Route path="/modifyInfo" element={<ModifyPage />}></Route>
             <Route path="/sionTest" element={<SionTest />}></Route>
             <Route path="/jinseTest" element={<JinseTest />}></Route>

@@ -4,9 +4,9 @@ import "./ResetPw1Page.scss";
 import StarMap from "../../components/Common/StarMap/StarMap";
 import Main_Logo from "../../assets/img/LandingPage/logo_main.svg";
 import ResetPw1Btn from "../../components/Common/ResetPw1/ResetPw1Btn";
-import ResetPw1NameInput from "../../components/Common/ResetPw1/ResetPw1NameInput";
-import ResetPw1EmailInput from "../../components/Common/ResetPw1/ResetPw1EmailInput";
-import ResetPw1IdInput from "../../components/Common/ResetPw1/ResetPw1IdInput";
+import SignUpIdInput from "../../components/Common/SignUp/SignUpIdInput";
+import SignUpNameInput from "../../components/Common/SignUp/SignUpNameInput";
+import SignUpEmailInput from "../../components/Common/SignUp/SignUpEmailInput";
 import axios from "axios";
 
 const ResetPw1Page = () => {
@@ -15,14 +15,29 @@ const ResetPw1Page = () => {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
-  const ResetPW = (e) => {
+  const handleForm = (e) => {
     axios({
-      method: "get",
-      url: "http://localhost:8000/api/auth/resetPW",
-      data: { userID: userID, username: username, email: email },
+      method: "post",
+      url: "http://localhost:8000/api/auth/resetPW1",
+      header: { withCredentials: true },
+      data: {
+        data: {
+          userID: userID,
+          username: username,
+          email: email
+        },
+      }
     })
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        console.log(res.data);
+        alert("비밀번호를 재설정해주세요");
+        const uid = res.data.uid;
+        navigate(`/resetPw2/${uid}`);
+      })
+      .catch((err) => {
+        console.log("An error occurred:", err);
+        alert("사용자를 찾을 수 없습니다");
+      });
   };
   return (
     <>
@@ -44,26 +59,28 @@ const ResetPw1Page = () => {
           <div className="resetPw1Text">
             회원가입시 기재하셨던 정보를 입력해주세요.
           </div>
-          <ResetPw1IdInput
+          <SignUpIdInput
             value={userID}
             onChange={(e) => {
               setuserID(e.target.value);
               console.log(e.target.value);
             }}
           />
-          <ResetPw1NameInput
+          <SignUpNameInput
+            value={username}
             onChange={(e) => {
               setusername(e.target.value);
               console.log(e.target.value);
             }}
           />
-          <ResetPw1EmailInput
+          <SignUpEmailInput
+            value={email}
             onChange={(e) => {
               setEmail(e.target.value);
               console.log(e.target.value);
             }}
           />
-          <ResetPw1Btn text={"비밀번호 재설정"} onClick={ResetPW} />
+          <ResetPw1Btn text={"비밀번호 재설정"} onClick={handleForm} />
         </div>
       </div>
     </>
