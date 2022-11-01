@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: space-between;
   .LogoWrapper {
+    cursor: pointer;
   }
   .OptionWrapper {
     ul {
@@ -15,6 +16,10 @@
         color: #fff;
         font-weight: 500;
       }
+      #selected {
+        color: #e0c75b;
+      }
+
       .myplanet {
         color: #1600ff;
       }
