@@ -13,7 +13,7 @@ const Header = () => {
     <div className="dairyHeaderWrapper">
       <div className="dairyHeaderContainer">
         <div className="dairyHeaderLogoContainer">
-          <Logo onClick={() => navigate("/")} />
+          <Logo onClick={() => navigate("/workspace/main")} />
         </div>
         <div className="dairyHeaderSearchbarContainer">
           <SearchBar />
