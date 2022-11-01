@@ -8,7 +8,7 @@ import { alpha, styled } from "@mui/material/styles";
 // 에디터
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { Navigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 // 아이콘
 import { FaPlay } from "react-icons/fa";
 // MOCK 데이터
@@ -18,33 +18,45 @@ const Writer = () => {
   const [titleValue, setTitleValue] = useState("");
   const [contentValue, setContentValue] = useState("");
 
-  const navigate = Navigate();
+  const navigate = useNavigate();
+  const params = useParams();
+  // 파라미터
+  const { planet, category } = params;
+
   const onChangeValue = e => {
     setTitleValue(e.target.value);
   };
 
+  let userInfo = localStorage.getItem("userInfo");
+  let arr = JSON.parse(userInfo);
   // 글 작성 함수
+
   const onClickPostWrite = async () => {
+    if (!titleValue || !contentValue) {
+      alert("제목과 내용을 모두 작성해주세요!");
+      return;
+    }
+
     await axios({
       method: "post",
-      url: `/diary/writePost`,
+      url: `http://localhost:8000/api/diary/writePost`,
       header: {
         withCredentials: true,
         Authorization: localStorage.getItem("token")
       },
       data: {
         // 제목과 글
+        planet: planet,
+        category: category,
+        writerId: arr._id,
         title: titleValue,
         content: contentValue
       }
     })
       .then(res => {
         // 글 작성 성공시
-        if (res.status === 200) {
+        if (res.status === 201) {
           alert("글이 작성되었습니다.");
-          // todo 성공시 해당 행성의 해당 카테고리 메인 화면으로 이동
-          // navigate(`/diary/main/${category}`);
-          // 임시로 뒤로가기 처리
           navigate(-1);
         }
       })
