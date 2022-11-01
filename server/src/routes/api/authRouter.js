@@ -9,7 +9,7 @@ const User = require('../../models/User');
 function setUserToken(res, user) {
     user.type = 'JWT';
     const token = jwt.sign(user.toJSON(), secret, {
-        expiresIn: '15m', // 만료시간 15분
+        expiresIn: '3h', // 만료시간 3시간
         issuer: 'starplanet',
     });
     res.header('authorization', token);
@@ -90,61 +90,54 @@ router.get('/kakao/callback', passport.authenticate('kakao', { failureRedirect: 
 
 
 
-// 아이디찾기
-router.get("/findID", async (req, res) => {
+// 아이디 찾기
+router.post("/findID", async (req, res) => {
+    console.log('findID!');
     try {
         // DB에서 사용자 검색
-        const { username, email } = req.body;
-        const exName = await User.findByName(username).lean();
-        const exEmail = await User.findByEmail(email).lean();
-
-        // 사용자 있으면 아이디 반환
-        if (exName || exEmail) {
-            console.log("*****User exists*****");
-            return res.status(200).json({ errors: "User already exists" });
-        } else {
-
-        }
-    } catch (error) {
+        User.findOne({ $and: [{ username: req.body.username }, { email: req.body.email }] })
+            .exec((err, r) => {
+                {
+                    if (err) return res.status(400).json(err);
+                    // 사용자 있으면 아이디 반환
+                    console.log('findUser: ', r);
+                    return res.status(200).json({ success: true, userID: r.userID });
+                }
+            })
+    }
+    catch (error) {
         console.error(error);
         res.status(500).send("server Error");
     }
 })
-
 // 비밀번호 재설정
-router.get("/resetPW", async (req, res) => {
+router.post("/resetPW1", async (req, res) => {
+    console.log('resetPW!');
+    const { userID, username, email } = req.body.data;
+
     try {
         // DB에서 사용자 검색
-        const { username, email } = req.body;
-        const exName = await User.findByName(username).lean();
-        const exEmail = await User.findByEmail(email).lean();
-
-        // 사용자 있으면 아이디 반환
-        if (exName || exEmail) {
-            console.log("*****User exists*****");
-            return res.status(200).json({ errors: "User already exists" });
-        } else {
-
-        }
+        User.findOne({ $and: [{ userID }, { username }, { email }] })
+            .exec((err, r) => {
+                if (err) return res.status(400).json(err);
+                // 사용자 있으면 아이디 반환
+                console.log('findUser: ', r);
+                return res.status(200).json({ success: true, uid: r.id });
+            })
     } catch (error) {
         console.error(error);
         res.status(500).send("server Error");
     }
 })
-router.post("/resetPW", async (req, res) => {
+router.post("/resetPW2", async (req, res) => {
+    console.log('updatePW!');
     try {
-        // DB에서 사용자 검색
-        const { username, email } = req.body;
-        const exName = await User.findByName(username).lean();
-        const exEmail = await User.findByEmail(email).lean();
-
-        // 사용자 있으면 아이디 반환
-        if (exName || exEmail) {
-            console.log("*****User exists*****");
-            return res.status(200).json({ errors: "User already exists" });
-        } else {
-
-        }
+        // DB에서 사용자 비밀번호 업데이트
+        User.findByIdAndUpdate(req.body._id, { hashedPW: req.body.hashedPW },
+            function (err, r) {
+                if (err) return res.status(400).json(err);
+                return res.status(200).json({ success: true, user: r });
+            })
     } catch (error) {
         console.error(error);
         res.status(500).send("server Error");

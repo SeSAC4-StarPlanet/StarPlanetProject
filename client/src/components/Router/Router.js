@@ -82,8 +82,12 @@ const authorizedRouter = createBrowserRouter([
     element: <JinseTest />,
   },
   {
-    path: "/diary/write",
-    element: <DiaryWrite />,
+    path: "/workspace/main",
+    element: <WorkSpaceMain />,
+  },
+  {
+    path: "/workspace/create",
+    element: <MakePlanetPage />,
   },
   {
     path: "/diary/main",
@@ -94,13 +98,10 @@ const authorizedRouter = createBrowserRouter([
     element: <DiaryRead />,
   },
   {
-    path: "/workspace/main",
-    element: <WorkSpaceMain />,
+    path: "/diary/write",
+    element: <DiaryWrite />,
   },
-  {
-    path: "/workspace/create",
-    element: <MakePlanetPage />,
-  },
+
   {
     path: "/album/main",
     element: <AlbumMain />,
@@ -130,7 +131,7 @@ const unauthorizationRouter = createBrowserRouter([
     element: <LoginPage />,
   },
   {
-    path: "/signUp",
+    path: "/register",
     element: <SignUpPage />,
   },
   {
@@ -175,9 +176,11 @@ const Router = () => {
               path="/successSignUp"
               element={<SuccessSignUpPage />}
             ></Route>
-            <Route path="/findId" element={<FindIdPage />}></Route>
+            <Route path="/findid" element={<FindIdPage />}></Route>
             <Route path="/resetPw1" element={<ResetPw1Page />}></Route>
-            <Route path="/resetPw2" element={<ResetPw2Page />}></Route>
+            <Route path="/resetPw2" element={<ResetPw2Page />}>
+              <Route path=":uid" element={<ResetPw2Page />} />
+            </Route>
             <Route path="/modifyInfo" element={<ModifyPage />}></Route>
             <Route path="/sionTest" element={<SionTest />}></Route>
             <Route path="/jinseTest" element={<JinseTest />}></Route>
@@ -207,7 +210,7 @@ const Router = () => {
           <Routes>
             <Route path="/" element={<LandingPage />}></Route>
             <Route path="/login" element={<LoginPage />}></Route>
-            <Route path="/register" element={<SignUpPage />}></Route>
+            <Route path="/signup" element={<SignUpPage />}></Route>
             <Route
               path="/successSignUp"
               element={<SuccessSignUpPage />}
