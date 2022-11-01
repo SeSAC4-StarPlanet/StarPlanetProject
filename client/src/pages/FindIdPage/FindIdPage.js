@@ -49,7 +49,7 @@ const FindIdPage = () => {
             회원가입시 기재하셨던 정보를 입력해주세요.
           </div>
           <FindIdNameInput
-            value={userID}
+            value={username}
             onChange={(e) => {
               setusername(e.target.value);
               console.log(e.target.value);

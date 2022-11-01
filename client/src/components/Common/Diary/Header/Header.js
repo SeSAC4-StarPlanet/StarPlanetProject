@@ -1,19 +1,19 @@
 import React from "react";
 import "./header.scss";
+import { useNavigate } from "react-router-dom";
 import { ReactComponent as Logo } from "../../../../assets/img/Dairy/Header/headerLogo.svg";
 import IconButton from "@mui/material/IconButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import SearchBar from "../SearchBar/SearchBar";
-import Avatar from "@mui/material/Avatar";
 import { FaRegComment, FaRegBell } from "react-icons/fa";
 import ModifyToggle from "../../ModifyToggle/ModifyToggle";
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <div className="dairyHeaderWrapper">
       <div className="dairyHeaderContainer">
         <div className="dairyHeaderLogoContainer">
-          <Logo />
+          <Logo onClick={() => navigate("/")} />
         </div>
         <div className="dairyHeaderSearchbarContainer">
           <SearchBar />
