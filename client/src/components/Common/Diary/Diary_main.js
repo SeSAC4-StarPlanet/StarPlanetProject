@@ -35,11 +35,18 @@ const Diary_main = ({ planetTitle }) => {
     _DATA.jump(p);
   };
   useEffect(() => {
-    // axios({
-    //   method: "get",
-    //   url: ""
-    // });
-    console.log(planet, category);
+    axios({
+      method: "get",
+      url: `http://localhost:8000/api/diary/getPost/${planet}/${category}`,
+      header: {
+        withCredentials: true,
+        Authorization: localStorage.getItem("token")
+      }
+    })
+      .then(res => {
+        setData(res.data.diaries);
+      })
+      .catch(err => console.log(err.response.data));
   }, []);
 
   return (
@@ -91,16 +98,19 @@ const Diary_main = ({ planetTitle }) => {
                   />
                 );
               })}
-              <div className="dairyPaginationWrapper">
-                <Pagination
-                  count={count}
-                  size="large"
-                  page={page}
-                  color="secondary"
-                  shape="rounded"
-                  onChange={handleChange}
-                />
-              </div>
+            </div>{" "}
+            <div className="dairyPaginationWrapper">
+              <Pagination
+                count={count}
+                size="large"
+                page={page}
+                color="secondary"
+                shape="rounded"
+                onChange={handleChange}
+                sx={{
+                  ul: { justifyContent: "center" }
+                }}
+              />
             </div>
           </div>
         </div>
