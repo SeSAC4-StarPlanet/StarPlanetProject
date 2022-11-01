@@ -31,14 +31,17 @@ const UserSchema = new mongoose.Schema({
 /* static : Collection 단위, this는 User Collection 전체 */
 // 아이디로 사용자 검색
 UserSchema.statics.findByUserID = function (userID) {
+    console.log('findByUserID: ', userID);
     return this.findOne({ userID });
 };
 // 이름으로 사용자 검색
-UserSchema.statics.findByName = function (username) {
+UserSchema.statics.findByUserName = function (username) {
+    console.log('findByUserName: ', username);
     return this.findOne({ username });
 };
 // 이메일로 사용자 검색
 UserSchema.statics.findByEmail = function (email) {
+    console.log('findByEmail: ', email);
     return this.findOne({ email });
 };
 // 사용자 전체 조회
@@ -61,15 +64,22 @@ UserSchema.pre('save', async function (next) {
         next(); // 바로 save로 넘어감
     }
 });
+// 행성 정보 가져오기
+UserSchema.methods.UserPlanet = async function () {
+    try {
+        return this.find().where('planet').populate('Planet');
+    } catch (e) {
+        next();
+    }
+}
 
 // 사용자 탈퇴시 
 UserSchema.pre('remove', async function (next) {
-    const user = this;
     try {
         //TODO 행성에서 멤버 필드 중 배열 원소 삭제
-        await Album.deleteMany({ _user: user._id });
-        await Diary.deleteMany({ _user: user._id });
-        await Comment.deleteMany({ _user: user._id });
+        await Album.deleteMany({ _user: this._id });
+        await Diary.deleteMany({ _user: this._id });
+        await Comment.deleteMany({ _user: this._id });
         next();
     } catch (e) {
         next();
@@ -94,8 +104,6 @@ UserSchema.virtual('comments', {
     localField: '_id',
     foreignField: '_user',
 });
-
-
 
 
 module.exports = mongoose.model('User', UserSchema, 'User');

@@ -15,7 +15,7 @@ module.exports = new GoogleStrategy(
         console.log('___google profile', profile);
 
         try {           // DB에서 사용자 검색
-            const exUser = await User.findOne({ userID: profile.id });
+            const exUser = await User.findByUserID(profile.id);
             // if (exUser.email == (profile._json && profile._json.email)
             if (exUser) {
                 console.log('___google exUser', exUser);
