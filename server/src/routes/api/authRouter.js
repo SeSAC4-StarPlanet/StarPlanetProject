@@ -1,20 +1,20 @@
 const router = require('express').Router();
 const passport = require('../../../config/passport');
-const jwt = require("jsonwebtoken");
-const secret = require('../../../config/default').secretOrKey;
 const User = require('../../models/User');
+const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 
-//* jwt토큰 발급
-function setUserToken(res, user) {
-    user.type = 'JWT';
-    const token = jwt.sign(user.toJSON(), secret, {
-        expiresIn: '3h', // 만료시간 3시간
-        issuer: 'starplanet',
-    });
-    res.header('authorization', token);
-    return token;
-}
+const config = require("../../../config/default");
+const { success } = require('../../../config/passport/naverStrategy');
+const secret = config.secretOrKey;
+const clientUrl = config.client;
+
+
+router.all('/*', function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+});
+
 
 
 //!회원가입
@@ -42,7 +42,7 @@ router.post("/signup", async (req, res) => {
         }
     } catch (error) {
         console.error(error);
-        res.status(500).send("server Error");
+        res.status(500).json({ error: "server Error" });
     }
 });
 
@@ -62,30 +62,40 @@ router.post('/login', async (req, res, next) => {    // 지정전략(strategy)�
             // 로그인 성공시 JWT토큰 생성 후 클라이언트에게 반환
             const token = setUserToken(res, req.user);
             const userInfo = req.user;
-            return res.status(201).json({ result: 'ok', userInfo, token });
+            return res.status(201).json({ isLogin: true, token: token, userInfo: userInfo });
         });
     })(req, res, next); // 미들웨어 내의 미들웨어
 });
 
 //? 간편 로그인 
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-router.get('/google/callback', passport.authenticate('google', { failureRedirect: 'http://localhost:3000/login' }),
+router.get('/google/callback', passport.authenticate('google', {
+    failureRedirect: clientUrl + "/login",
+    successRedirect: clientUrl
+}),
     (req, res) => {
         const token = setUserToken(res, req.user);
-        res.status(200).json({ result: 'ok', token });
+        res.redirect(`${clientUrl}?token=${token}`);
+        // res.redirect(`${process.env.CLIENT_URL}?token=${setUserToken(req.user)}`);
+        // res.status(200).json({ result: 'ok', token: token });
     });
+
 router.get('/naver', passport.authenticate('naver'));
-router.get('/naver/callback', passport.authenticate('naver', { failureRedirect: 'http://localhost:3000/login' }),
+router.get('/naver/callback', passport.authenticate('naver', {
+    failureRedirect: clientUrl + "/login",
+}),
     (req, res) => {
         const token = setUserToken(res, req.user);
         res.status(200).json({ result: 'ok', token });
     });
-router.get('/kakao', passport.authenticate('kakao', { scope: ['', ''] }));
-router.get('/kakao/callback', passport.authenticate('kakao', { failureRedirect: 'http://localhost:3000/login', }),
+
+router.get('/kakao', passport.authenticate('kakao', { scope: ["profile_nickname", "account_email"] }));
+router.get('/kakao/callback', passport.authenticate('kakao', {
+    failureRedirect: clientUrl + "/login",
+}),
     (req, res) => {
         const token = setUserToken(res, req.user);
-        // res.status(200).json({ result: 'ok', token });
-        res.status(200).redirect("http://localhost:3000/");
+        res.status(200).json({ result: 'ok', token });
     });
 
 
@@ -93,8 +103,7 @@ router.get('/kakao/callback', passport.authenticate('kakao', { failureRedirect: 
 // 아이디 찾기
 router.post("/findID", async (req, res) => {
     console.log('findID!');
-    try {
-        // DB에서 사용자 검색
+    try {        // DB에서 사용자 검색
         User.findOne({ $and: [{ username: req.body.username }, { email: req.body.email }] })
             .exec((err, r) => {
                 {
@@ -107,9 +116,10 @@ router.post("/findID", async (req, res) => {
     }
     catch (error) {
         console.error(error);
-        res.status(500).send("server Error");
+        res.status(500).json({ error: "server Error" });
     }
 })
+
 // 비밀번호 재설정
 router.post("/resetPW1", async (req, res) => {
     console.log('resetPW!');
@@ -126,7 +136,7 @@ router.post("/resetPW1", async (req, res) => {
             })
     } catch (error) {
         console.error(error);
-        res.status(500).send("server Error");
+        res.status(500).json({ error: "server Error" });
     }
 })
 router.post("/resetPW2", async (req, res) => {
@@ -139,15 +149,25 @@ router.post("/resetPW2", async (req, res) => {
         console.log(' after PW: ', newhashedPW);
 
         // DB에서 사용자 비밀번호 업데이트
-        await User.updateOne({ _id: uid }, { $set: { newhashedPW } });
+        await User.updateOne({ _id: uid }, { hashedPW: newhashedPW });
         console.log('PW updated!');
         return res.status(200).json({ success: true, msg: 'PW updated!' });
     } catch (error) {
         console.error(error);
-        res.status(500).send("server Error");
+        res.status(500).json({ error: "server Error" });
     }
 })
 
+
+//& jwt토큰 발급
+function setUserToken(res, user) {
+    user.type = 'JWT';
+    const token = jwt.sign(user.toJSON(), secret, {
+        expiresIn: '3h', // 만료시간 3시간
+        issuer: 'starplanet',
+    });
+    return token;
+}
 
 
 //& JWT verify
@@ -157,7 +177,7 @@ router.all('*', function (req, res, next) {
         if (err | !user) {
             console.log(req.headers);
             console.log(req.user);
-            res.status(400).send({ errors: info.message });
+            res.status(400).json({ errors: info.message });
         }
         next();
     })(req, res, next); // 미들웨어 내의 미들웨어
@@ -166,13 +186,16 @@ router.all('*', function (req, res, next) {
 
 
 // 로그아웃 
-router.get('/logout', (req, res) => {
-    req.logout();
-    req.session.destroy();
-    res.cookie('token', null, {
-        maxAge: 0,
-    });
-    res.status(200).json({ message: 'logout' });
+router.get('/logout', async (req, res) => {
+    console.log("logout");
+    try {
+        req.logout();
+        req.session.destroy();
+        res.status(200).json({ message: 'logout' });
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({ isLogin: true, error: "server Error", });
+    }
 });
 
 

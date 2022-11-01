@@ -12,8 +12,7 @@ const passportConfig = {
 const passportVerify = async (username, password, done) => {
     console.info('___new localStrategy()');
 
-    try {
-        // 유저 아이디로 일치하는 유저 데이터 검색
+    try {        // 유저 아이디로 일치하는 유저 데이터 검색
         const exUser = await User.findByUserID(username);
         console.log('exUser:', exUser);
 

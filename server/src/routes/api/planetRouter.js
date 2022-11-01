@@ -16,10 +16,10 @@ router.get("/workspace/:userId", async (req, res) => {
   try {
     // user_id를 활용한 planet 탐색
     const planets = await Planet.find({ member: _ID });
-    res.status(200).send({ planets: planets });
+    res.status(200).json({ planets: planets });
   } catch (error) {
     console.error(error);
-    res.status(500).send("server Error");
+    res.status(500).json("server Error");
   }
 });
 
@@ -34,13 +34,13 @@ router.get("/getCategory/:planetName", async (req, res) => {
     // 행성 이름을 활용한 카테고리 탐색
     // 하나의 row만 탐색
     const planets = await Planet.findOne({ name: _Name });
-    // 카테고리 res.send에 담아서 전송
+    // 카테고리 res.json에 담아서 전송
     res
       .status(200)
-      .send({ diary: planets.category.Diary, album: planets.category.Album });
+      .json({ diary: planets.category.Diary, album: planets.category.Album });
   } catch (error) {
     console.error(error);
-    res.status(500).send("server Error");
+    res.status(500).json("server Error");
   }
 });
 // 멤버
@@ -57,11 +57,11 @@ router.get("/getMembers/:planetName", async (req, res) => {
     const searchedArr = await User.find({ _id: memberArr });
     // 해당 멤버의 이름 배열로 저장
     const memberNameArr = await searchedArr.map(row => row.username);
-    // 멤버 이름 res.send에 담아서 전송
-    res.status(200).send({ nameArr: memberNameArr });
+    // 멤버 이름 res.json에 담아서 전송
+    res.status(200).json({ nameArr: memberNameArr });
   } catch (error) {
     console.error(error);
-    res.status(500).send("server Error");
+    res.status(500).json("server Error");
   }
 });
 
@@ -77,14 +77,14 @@ router.get("/:user/:planet", async (req, res) => {
     const user = await User.findOne({ userID: _ID });
     const planet = await Planet.findOne({ name: _Planet, member: user.id });
 
-    res.status(200).send({
+    res.status(200).json({
       planet: planet,
       diary: planet.category.Diary,
       album: planet.category.Album
     });
   } catch (error) {
     console.error(error);
-    res.status(500).send("server Error");
+    res.status(500).json("server Error");
   }
 });
 
@@ -123,18 +123,18 @@ router.post("/create", async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).send("server Error");
+    res.status(500).json("server Error");
   }
 });
 
 // 전체 행성조회
-router.get("/", function(req, res, next) {
+router.get("/", function (req, res, next) {
   Planet.find()
     .then(r => {
-      res.status(200).send({ success: true, msg: r });
+      res.status(200).json({ success: true, msg: r });
     })
     .catch(e => {
-      res.status(500).send({ msg: e.message });
+      res.status(500).json({ msg: e.message });
     });
 });
 
@@ -143,10 +143,10 @@ router.put("/:_id", (req, res) => {
   const _id = req.params._id;
   Planet.updateOne({ _id }, { $set: req.body })
     .then(r => {
-      res.status(200).send({ success: true, msg: r });
+      res.status(200).json({ success: true, msg: r });
     })
     .catch(e => {
-      res.status(500).send({ msg: e.message });
+      res.status(500).json({ msg: e.message });
     });
 });
 
@@ -155,15 +155,15 @@ router.delete("/:_id", (req, res) => {
   const _id = req.params._id;
   Planet.deleteOne({ _id })
     .then(r => {
-      res.status(200).send({ success: true, msg: r });
+      res.status(200).json({ success: true, msg: r });
     })
     .catch(e => {
-      res.status(500).send({ msg: e.message });
+      res.status(500).json({ msg: e.message });
     });
 });
 
 // error handler
-router.all("*", function(req, res, next) {
+router.all("*", function (req, res, next) {
   next(createError(404, "no API"));
 });
 

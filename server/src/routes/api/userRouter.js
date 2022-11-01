@@ -4,42 +4,6 @@ const User = require('../../models/User');
 
 
 
-// 회원 조회 
-router.get("/:_id", (req, res) => {
-  User.findOne({ _id: req.params._id }, (err, user) => {
-    if (err) res.json(err);
-    res.json(user);
-  });
-});
-
-
-
-// 비밀번호재설정
-// router.put("/:_id", (req, res) => {
-//   const _id = req.params._id
-//   User.findOne({ userID: req.params._id })
-//     .select("hashedPW")
-//     .exec((err, user) => {
-//       if (err) return res.json(err);
-
-//       user.originPw = user.hashedPW;
-//       user.hashedPW = req.body.newPw ? req.body.newPw : user.hashedPW;
-
-//       for (para in req.body) {
-//         user[para] = req.body[para];
-//       }
-
-//       user.save((err, user) => {
-//         if (err) return res.json(err);
-//         res.json(user);
-//       });
-//     });
-// });
-
-
-
-//~
-
 // 전체 회원조회
 router.get("/", (req, res, next) => {
   User.find().select('-pwd')
@@ -57,6 +21,16 @@ router.get("/", (req, res, next) => {
   //     res.json(users);
   //   });
 });
+
+
+// 회원 조회 
+router.get("/:_id", (req, res) => {
+  User.findOne({ _id: req.params._id }, (err, user) => {
+    if (err) res.json(err);
+    res.json(user);
+  });
+});
+
 
 
 // 회원수정

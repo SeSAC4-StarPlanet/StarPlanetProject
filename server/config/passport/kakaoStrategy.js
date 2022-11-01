@@ -1,8 +1,6 @@
 const KakaoStrategy = require('passport-kakao').Strategy;
-
-const { User } = require('../../src/models/User');
 const kakaoOAuth = require('../default').kakaoOAuth;
-
+const User = require('../../src/models/User');
 
 module.exports = new KakaoStrategy(
     {
@@ -10,7 +8,6 @@ module.exports = new KakaoStrategy(
         callbackURL: kakaoOAuth.callbackURL,
     },
     async (accessToken, refreshToken, profile, done) => {
-        console.info('___new kakaoStrategy()');
         console.log('___kakao profile', profile);
 
         try {           // DB에서 사용자 검색
@@ -22,8 +19,8 @@ module.exports = new KakaoStrategy(
             } else {    // DB에 사용자가 저장되어 있지 않으면 DB에 새로 저장
                 const newUser = await User.create({
                     userID: profile.id,
-                    username: profile.displayName,
-                    email: profile._json && profile._json.kakao_account.email,
+                    username: profile._json.name,
+                    email: profile._json && profile._json.account_email,
                     provider: 'kakao',
                 });
                 console.log('___kakao newUser', newUser);

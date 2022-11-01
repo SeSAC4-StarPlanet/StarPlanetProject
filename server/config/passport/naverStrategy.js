@@ -1,7 +1,6 @@
 var NaverStrategy = require('passport-naver').Strategy;
 const naverOAuth = require('../default').naverOAuth;
-
-const { User } = require('../../src/models/User');
+const User = require('../../src/models/User');
 
 
 module.exports = new NaverStrategy(
@@ -11,13 +10,11 @@ module.exports = new NaverStrategy(
         callbackURL: naverOAuth.callbackURL,
     },
     async (accessToken, refreshToken, profile, done) => {
-        console.info('___new naverStrategy()');
         console.log('___naver profile', profile);
-
 
         try {           // DB에서 사용자 검색
             const exUser = await User.findByUserID(profile.id);
-            // if (exUser.email == (profile._json && profile._json.email)
+
             if (exUser) {
                 console.log('___naver exUser', exUser);
                 done(null, exUser);
