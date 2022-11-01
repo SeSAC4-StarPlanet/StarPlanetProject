@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "./FindIdNameInput.scss";
 
-const FindIdNameInput = ({ value, onChange }) => {
-  // const [username, setusername] = useState("");
+const FindIdNameInput = () => {
+  const [username, setUsername] = useState("");
+  const handleName = (e) => {
+    setUsername(e.target.value);
+  }
 
   return (
     <>
@@ -11,13 +14,13 @@ const FindIdNameInput = ({ value, onChange }) => {
         <input
           className="findIdNameInput"
           placeholder="이름을 입력해주세요"
-          value={value}
-          onChange={onChange}
+          value={username}
+          onChange={handleName}
           type="text"
         ></input>
       </div>
       <div>
-        {value ? (
+        {username ? (
           <div className="errorMessageWrap">{""}</div>
         ) : (
           <div className="errorMessageWrap">{""}</div>

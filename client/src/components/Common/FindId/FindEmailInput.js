@@ -22,10 +22,10 @@ const FindEmailInput = () => {
         <div className="findIdEmailInputTitle">E-mail</div>
         <input
           className="findIdEmailInput"
-          type="text"
           placeholder="test@email.com"
           value={email}
           onChange={handleEmail}
+          type="text"
         ></input>
       </div>
       <div>
