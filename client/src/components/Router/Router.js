@@ -188,7 +188,7 @@ const Router = () => {
               <Route path=":planet/:category" element={<DiaryMain />} />
             </Route>
             <Route path="/diary/read" element={<DiaryRead />}>
-              <Route path=":postId" element={<DiaryMain />} />
+              <Route path=":planet/:category/:postId" element={<DiaryMain />} />
             </Route>
             <Route path="/workspace/main" element={<WorkSpaceMain />}></Route>
             <Route

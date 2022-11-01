@@ -19,6 +19,8 @@ import axios from "axios";
 // MOCK 데이터
 import DATA from "./data.js";
 
+import { useParams, useNavigate } from "react-router-dom";
+
 const CssTextField = styled(TextField)({
   "& label.Mui-focused": {
     color: "#3c52b2"
@@ -40,6 +42,9 @@ const CssTextField = styled(TextField)({
 });
 
 const Read = ({ planetTitle }) => {
+  const params = useParams();
+  const { postId } = params;
+
   const [commentValue, setCommentValue] = useState("");
   const [post, setPost] = useState([]);
   // 기본 값 1로 설정
@@ -47,27 +52,16 @@ const Read = ({ planetTitle }) => {
   const parse = require("html-react-parser");
 
   useEffect(() => {
-    // todo
-    // url 파라미터에서 다이어리 번호 받아오기
-
-    async function getPost(postNum) {
-      // 글의 ID 번호를 파라미터로 전달하여 카테고리를 받는다.
-      await axios({
-        method: "get",
-        url: `/diary/getPost/${postNum}`,
-        header: {
-          withCredentials: true,
-          Authorization: localStorage.getItem("token")
-        }
-      })
-        .then(res => {
-          // 데이터를 어떻게 받아올지?
-          setPost(res.data);
-        })
-        .catch(err => console.log(err.response.data));
-    }
-    // 함수 실행 및 글 가져오기
-    getPost(1);
+    axios({
+      method: "get",
+      url: `http://localhost:8000/api/diary/getPost/${postId}`,
+      header: {
+        withCredentials: true,
+        Authorization: localStorage.getItem("token")
+      }
+    }).then(res => {
+      console.log(res);
+    });
   });
 
   const handleChange = e => {

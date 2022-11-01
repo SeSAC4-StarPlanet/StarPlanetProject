@@ -11,8 +11,14 @@ const { Diary, Comment } = require("../../models/Diary");
 // Category.findOne()
 //     .then(r => console.log(r.name, r._id))
 
-// 글 불러오기
-router.get("/getPost/:planet/:category", async (req, res) => {
+// 게시글 불러오기
+router.get("/getPost/:postId", async (req, res) => {
+  const { postId } = req.params;
+  //   값 할당
+});
+
+// 카테고리에 대한 글들 불러오기
+router.get("/getPosts/:planet/:category", async (req, res) => {
   const { planet, category } = req.params;
   //   값 할당
   const _Planet = planet;
