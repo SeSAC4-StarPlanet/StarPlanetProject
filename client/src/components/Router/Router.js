@@ -160,12 +160,12 @@ const Router = () => {
         ? localStorage.getItem("token")
         : ""
     );
-  });
+  },[token]);
 
   return (
     <>
       <BrowserRouter>
-        {localStorage.getItem("token") !== null ? (
+        {token !== null ? (
           // <RouterProvider router={authorizedRouter} />
           // 토큰이 있을 경우
           <Routes>
@@ -182,7 +182,9 @@ const Router = () => {
             <Route path="/modifyInfo" element={<ModifyPage />}></Route>
             <Route path="/sionTest" element={<SionTest />}></Route>
             <Route path="/jinseTest" element={<JinseTest />}></Route>
-            <Route path="/diary/write" element={<DiaryWrite />}></Route>
+            <Route path="/diary/write" element={<DiaryWrite />}>
+              <Route path=":planet/:category" element={<DiaryWrite />} />
+            </Route>
             <Route path="/diary/main" element={<DiaryMain />}>
               <Route path=":planet/:category" element={<DiaryMain />} />
             </Route>
