@@ -24,11 +24,11 @@ const Diary_main = ({ planetTitle }) => {
   const [data, setData] = useState([]);
   const PER_PAGE = 6;
 
-  const count = Math.ceil(DATA.length / PER_PAGE);
+  const count = Math.ceil(data.length / PER_PAGE);
 
   // data를 못불러오면 mock데이터 활용
   // skeleton 처리 필요
-  const _DATA = usePagination(data.length === 0 ? DATA : data, PER_PAGE);
+  const _DATA = usePagination(data, PER_PAGE);
 
   const handleChange = (e, p) => {
     setPage(p);
