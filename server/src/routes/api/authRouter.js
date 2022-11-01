@@ -3,7 +3,7 @@ const passport = require('../../../config/passport');
 const jwt = require("jsonwebtoken");
 const secret = require('../../../config/default').secretOrKey;
 const User = require('../../models/User');
-
+const bcrypt = require('bcrypt');
 
 //* jwt토큰 발급
 function setUserToken(res, user) {
@@ -131,13 +131,17 @@ router.post("/resetPW1", async (req, res) => {
 })
 router.post("/resetPW2", async (req, res) => {
     console.log('updatePW!');
-    try {
+    const { uid, hashedPW } = req.body;
+
+    try {// 비밀번호의 Plain Text를 hash로 교체
+        console.log('before PW:', hashedPW);
+        const newhashedPW = await bcrypt.hash(hashedPW, 10);
+        console.log(' after PW: ', newhashedPW);
+
         // DB에서 사용자 비밀번호 업데이트
-        User.findByIdAndUpdate(req.body._id, { hashedPW: req.body.hashedPW },
-            function (err, r) {
-                if (err) return res.status(400).json(err);
-                return res.status(200).json({ success: true, user: r });
-            })
+        await User.updateOne({ _id: uid }, { $set: { newhashedPW } });
+        console.log('PW updated!');
+        return res.status(200).json({ success: true, msg: 'PW updated!' });
     } catch (error) {
         console.error(error);
         res.status(500).send("server Error");
