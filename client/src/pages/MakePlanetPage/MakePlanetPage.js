@@ -31,7 +31,6 @@ const MakePlanetPage = () => {
   //! 버튼 클릭시 눌린 버튼 상태 변화
   const GetClick = (e) => {
     setplanetSelect(e.target.id);
-    // console.log("출력값:", planetSelect); //출력값이 늦게뜨는이유 , id값으로 데이터를 보낼 수 있는지
   };
 
   useEffect(
@@ -91,7 +90,7 @@ const MakePlanetPage = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <StarMap />
       <Headers />
       <div className="makePlanetSection">

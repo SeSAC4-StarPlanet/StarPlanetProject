@@ -41,9 +41,9 @@
 
   .Diary_main_box {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: flex-start;
   }
 
   .Categorybar_box {
