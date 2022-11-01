@@ -23,32 +23,38 @@ import { useParams, useNavigate } from "react-router-dom";
 
 const CssTextField = styled(TextField)({
   "& label.Mui-focused": {
-    color: "#3c52b2"
+    color: "#3c52b2",
   },
   "& .MuiInput-underline:after": {
-    borderBottomColor: "#3c52b2"
+    borderBottomColor: "#3c52b2",
   },
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
-      borderColor: "red"
+      borderColor: "red",
     },
     "&:hover fieldset": {
-      borderColor: "yellow"
+      borderColor: "yellow",
     },
     "&.Mui-focused fieldset": {
-      borderColor: "green"
-    }
-  }
+      borderColor: "green",
+    },
+  },
 });
 
-const Read = ({ planetTitle }) => {
+const Read = () => {
   const params = useParams();
-  const { postId } = params;
-
+  // 파라미터
+  const { planet, category, postId } = params;
+  // 댓글 input 값
   const [commentValue, setCommentValue] = useState("");
-  const [post, setPost] = useState([]);
-  // 기본 값 1로 설정
-  const [postNum, setPostNum] = useState(1);
+  // axios 데이터
+  const [data, setData] = useState({
+    post: {},
+    comment: [],
+    writer: "",
+  });
+  let userInfo = localStorage.getItem("userInfo");
+  let arr = JSON.parse(userInfo);
   const parse = require("html-react-parser");
 
   useEffect(() => {
@@ -57,29 +63,37 @@ const Read = ({ planetTitle }) => {
       url: `http://localhost:8000/api/diary/getPost/${postId}`,
       header: {
         withCredentials: true,
-        Authorization: localStorage.getItem("token")
-      }
-    }).then(res => {
-      console.log(res);
+        Authorization: localStorage.getItem("token"),
+      },
+    }).then((res) => {
+      setData({
+        post: res.data.post,
+        comments: res.data.comments,
+      });
+      console.log(data);
     });
-  });
+  }, []);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setCommentValue(e.target.value);
   };
 
   const onClickCommentWrite = () => {
     axios({
       method: "post",
-      url: `/diary/PostComment/${postNum}`,
+      url: `http://localhost:8000/api//diary/PostComment`,
       header: {
         withCredentials: true,
-        Authorization: localStorage.getItem("token")
+        Authorization: localStorage.getItem("token"),
       },
       data: {
-        // 작성자는 jwt 처리하는지?
-        writer: "",
-        comment: commentValue
+        postId: postId,
+        comment: commentValue,
+        writer: arr.username,
+      },
+    }).then((res) => {
+      if (res.status === 201) {
+        window.location.reload();
       }
     });
   };
@@ -90,10 +104,10 @@ const Read = ({ planetTitle }) => {
         <div className="mainArrow" />
         <div className="MainContainerTop">
           <div className="Planet_name_box">
-            <Planet_name title={"2022"} />
+            <Planet_name title={`${planet} 행성`} />
           </div>
           <div className="Modify_title_box">
-            <Planet_name title={"2022"} />
+            <Planet_name title={category} />
           </div>
         </div>
         <div className="Main_container">
@@ -111,12 +125,8 @@ const Read = ({ planetTitle }) => {
             <div className="diaryReaderWrapper">
               {/* 맨위 */}
               <div className="diaryReaderTopContainer">
-                <div className="diaryReaderChoiced">
-                  {DATA.post.category}
-                </div>
-                <div className="diaryReaderTitle">
-                  {DATA.post.title}
-                </div>
+                <div className="diaryReaderChoiced">{category}</div>
+                <div className="diaryReaderTitle">{data.post.title}</div>
               </div>
               {/* 작성자 */}
               <div className="diaryReaderWriterWrapper">
@@ -124,25 +134,26 @@ const Read = ({ planetTitle }) => {
                   <ListItemIcon sx={{ minWidth: "40px" }}>
                     <Avatar sx={{ width: 30, height: 30 }} />
                   </ListItemIcon>
-                  <ListItemText primary={DATA.post.writer} />
+                  <ListItemText primary={data?.post?._user?.username} />
                 </ListItem>
               </div>
               <div className="diaryReaderContent">
                 {/* string to html */}
-                {parse(DATA.post.content)}
+                {parse(data.post.content ? data.post.content : "")}
               </div>
               <div className="diaryReaderCommentWrapper">
                 <div className="diaryReaderCommentTitle">수다수다</div>
                 <div className="diaryReaderCommentContainer">
                   {/* 댓글 */}
-                  {DATA.comment.map(e => {
+                  {/* 댓글 작성 로직 작성 후 수정 */}
+                  {data?.comments?.map((e) => {
                     return (
                       <div className="diaryReaderCommentBox">
                         <div className="diaryReaderCommentWriter">
                           {e.writer}
                         </div>
                         <div className="diaryReaderCommentContent">
-                          {e.comment}
+                          {e.content}
                         </div>
                       </div>
                     );
@@ -166,8 +177,8 @@ const Read = ({ planetTitle }) => {
                       backgroundColor: "#0D0D7E",
                       "&:hover": {
                         backgroundColor: "#fff",
-                        color: "#3c52b2"
-                      }
+                        color: "#3c52b2",
+                      },
                     }}
                     variant="contained"
                     endIcon={<FaPlay />}

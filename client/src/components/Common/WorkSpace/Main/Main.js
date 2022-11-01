@@ -41,7 +41,7 @@ const Main = observer(() => {
     }
     fetchAndSetUser(arr._id);
   }, []);
-  console.log(data);
+
   return (
     <div className="PlanetSelector">
       <Link to={"/workspace/create"}>
@@ -74,9 +74,9 @@ const Main = observer(() => {
                     <div className="textWrapper">
                       <div className="planetName">{e.name}</div>
                       <div className="planetCreatedDate">
-                        {`${date.getFullYear()}-${date.getMonth()}-${
-                          date.getDate() + 1
-                        } ~`}
+                        {`${date.getFullYear()}-${
+                          date.getMonth() + 1
+                        }-${date.getDate()} ~`}
                       </div>
                     </div>
                   </Link>
