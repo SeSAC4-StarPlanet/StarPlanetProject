@@ -1,4 +1,4 @@
-.findIdIdInputContainer {
+.findIdNameInputContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -9,7 +9,7 @@
   padding: 0.5rem;
   box-sizing: border-box;
 
-  .findIdIdInputTitle {
+  .findIdNameInputTitle {
     display: inline-block;
     width: 3rem;
     margin: 0.5rem;
@@ -17,7 +17,7 @@
     font-size: 0.8rem;
   }
 
-  .findIdIdInput {
+  .findIdNameInput {
     border: none;
     width: 16rem;
     height: 2rem;
