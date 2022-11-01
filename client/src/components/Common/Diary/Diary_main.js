@@ -40,13 +40,13 @@ const Diary_main = ({ planetTitle }) => {
       url: `http://localhost:8000/api/diary/getPosts/${planet}/${category}`,
       header: {
         withCredentials: true,
-        Authorization: localStorage.getItem("token")
-      }
+        Authorization: localStorage.getItem("token"),
+      },
     })
-      .then(res => {
+      .then((res) => {
         setData(res.data.diaries);
       })
-      .catch(err => console.log(err.response.data));
+      .catch((err) => console.log(err.response.data));
   }, []);
 
   return (
@@ -73,7 +73,7 @@ const Diary_main = ({ planetTitle }) => {
                 sx={{
                   width: "100%",
                   maxWidth: "40rem",
-                  bgcolor: "background.paper"
+                  bgcolor: "background.paper",
                 }}
               />
             </div>
@@ -92,8 +92,8 @@ const Diary_main = ({ planetTitle }) => {
                     <Diary_content
                       key={i}
                       title={e.title}
-                      date={e.date}
-                      writer={e.timestamp}
+                      date={e.createdAt}
+                      writer={e._user.username}
                       content={e.content}
                     />
                   </Link>
@@ -109,7 +109,7 @@ const Diary_main = ({ planetTitle }) => {
                 shape="rounded"
                 onChange={handleChange}
                 sx={{
-                  ul: { justifyContent: "center" }
+                  ul: { justifyContent: "center" },
                 }}
               />
             </div>
