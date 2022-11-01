@@ -31,6 +31,9 @@ const SignUpPage = memo(() => {
       },
     })
       .then((res) => console.log(res.data))
+      .then(() => {
+        navigate("/login");
+      })
       .catch((err) => console.log(err.response.data));
   };
 

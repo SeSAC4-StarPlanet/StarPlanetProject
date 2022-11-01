@@ -117,7 +117,7 @@ const LoginPage = observer(() => {
 
           <div className="signInBottom">
             <div>STARPL에 처음이신가요?</div>
-            <span onClick={() => navigate("/Signup")}>회원가입</span>
+            <span onClick={() => navigate("/register")}>회원가입</span>
             <span onClick={() => localStorage.removeItem("token")}>
               토큰삭제
             </span>

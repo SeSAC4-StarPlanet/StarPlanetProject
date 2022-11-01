@@ -2,32 +2,39 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import StarMap from "../../components/Common/StarMap/StarMap";
 import Main_Logo from "../../assets/img/LandingPage/logo_main.svg";
-import FindIdEmailInput from "../../components/Common/FindId/FindEmailInput";
+// import FindIdNameInput from "../../components/Common/FindId/FindIdNameInput";
+// import FindIdEmailInput from "../../components/Common/FindId/FindEmailInput";
+import SignUpNameInput from "../../components/Common/SignUp/SignUpNameInput";
+import SignUpEmailInput from "../../components/Common/SignUp/SignUpEmailInput";
 import FindIdBtn from "../../components/Common/FindId/FindIdBtn";
-import FindIdNameInput from "../../components/Common/FindId/FindIdNameInput";
 import "./FindIdPage.scss";
 import axios from "axios";
 
 const FindIdPage = () => {
   const [username, setusername] = useState("");
-  const [email, setemail] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
-  const findID = () => {
+
+  const handleForm = () => {
     axios({
-      method: "get",
-      url: "/auth/findID",
-      data: {
-        username: username,
-        email: email,
-      },
+      method: "post",
+      url: "http://localhost:8000/api/auth/findID",
+      header: { withCredentials: true },
+      data: { username: username, email: email },
     })
       .then((res) => {
         console.log(res.data);
+        alert("아이디는 " + res.data.userID + " 입니다.");
+      })
+      .then(() => {
+        navigate("/login");
       })
       .catch((err) => {
-        console.log("An error occurred:", err.response);
+        console.log("An error occurred:", err);
+        alert("사용자를 찾을 수 없습니다");
       });
   };
+
   return (
     <>
       <StarMap />
@@ -48,7 +55,21 @@ const FindIdPage = () => {
           <div className="findIdtext">
             회원가입시 기재하셨던 정보를 입력해주세요.
           </div>
-          <FindIdNameInput
+          <SignUpNameInput
+            value={username}
+            onChange={(e) => {
+              setusername(e.target.value);
+              console.log(e.target.value);
+            }}
+          />
+          <SignUpEmailInput
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              console.log(e.target.value);
+            }}
+          />
+          {/* <FindIdNameInput
             value={username}
             onChange={(e) => {
               setusername(e.target.value);
@@ -61,8 +82,8 @@ const FindIdPage = () => {
               setemail(e.target.value);
               console.log(e.target.value);
             }}
-          />
-          <FindIdBtn onClick={findID} text={"아이디 찾기"} />
+          /> */}
+          <FindIdBtn onClick={handleForm} text={"아이디 찾기"} />
         </div>
       </div>
     </>
