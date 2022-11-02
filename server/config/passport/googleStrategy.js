@@ -11,24 +11,25 @@ module.exports = new GoogleStrategy(
         callbackURL: googleOAuth.callbackURL,
     },
     async (accessToken, refreshToken, profile, done) => {
-        console.info('___new googleStrategy()');
         console.log('___google profile', profile);
 
         try {           // DB에서 사용자 검색
             const exUser = await User.findByUserID(profile.id);
-            // if (exUser.email == (profile._json && profile._json.email)
             if (exUser) {
                 console.log('___google exUser', exUser);
                 done(null, exUser);
             } else {    // DB에 사용자가 저장되어 있지 않으면 DB에 새로 저장
-                const newUser = await User.create({
+                const newUser = await new User({
                     userID: profile.id,
                     username: profile.displayName,
-                    email: profile._json && profile._json.email,
+                    email: profile._json && profile._json.google_account_email,
                     provider: 'google',
                 });
-                console.log('___google newUser', newUser);
-                done(null, newUser);
+                newUser.save((err, userInfo) => {
+                    if (err) console.log(err);
+                    console.log('___google newUser', userInfo);
+                    return done(null, newUser);
+                });
             }
         } catch (error) {
             console.error(error);

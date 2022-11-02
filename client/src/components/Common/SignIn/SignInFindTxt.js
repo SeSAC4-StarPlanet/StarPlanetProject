@@ -6,21 +6,11 @@ function SignInFindTxt() {
   return (
     <div className="signInFindTxtContainer">
       <div className="signInFindTxtSection">
-        <button
-          className="findTxt"
-          onClick={() => {
-            navigate("/findid");
-          }}
-        >
+        <button className="findTxt" onClick={() => { navigate("/findid"); }} >
           아이디 찾기
         </button>
         <div className="findTxt">｜</div>
-        <button
-          className="findTxt"
-          onClick={() => {
-            navigate("/resetPw1");
-          }}
-        >
+        <button className="findTxt" onClick={() => { navigate("/resetpw1"); }}        >
           비밀번호 재설정
         </button>
       </div>

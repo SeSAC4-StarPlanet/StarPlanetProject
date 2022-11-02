@@ -49,19 +49,19 @@ const authorizedRouter = createBrowserRouter([
     element: <SignUpPage />,
   },
   {
-    path: "/successSignUp",
+    path: "/welcome",
     element: <SuccessSignUpPage />,
   },
   {
-    path: "/findId",
+    path: "/findid",
     element: <FindIdPage />,
   },
   {
-    path: "/resetPw1",
+    path: "/resetpw1",
     element: <ResetPw1Page />,
   },
   {
-    path: "/resetPw2",
+    path: "/resetpw2",
     element: <ResetPw2Page />,
   },
   {
@@ -135,19 +135,19 @@ const unauthorizationRouter = createBrowserRouter([
     element: <SignUpPage />,
   },
   {
-    path: "/successSignUp",
+    path: "/welcome",
     element: <SuccessSignUpPage />,
   },
   {
-    path: "/findId",
+    path: "/findid",
     element: <FindIdPage />,
   },
   {
-    path: "/resetPw1",
+    path: "/resetpw1",
     element: <ResetPw1Page />,
   },
   {
-    path: "/resetPw2",
+    path: "/resetpw2",
     element: <ResetPw2Page />,
   },
 ]);
@@ -160,7 +160,7 @@ const Router = () => {
         ? localStorage.getItem("token")
         : ""
     );
-  },[token]);
+  }, [token]);
 
   return (
     <>
@@ -172,13 +172,10 @@ const Router = () => {
             <Route path="/" element={<LandingPage />}></Route>
             <Route path="/login" element={<LoginPage />}></Route>
             <Route path="/register" element={<SignUpPage />}></Route>
-            <Route
-              path="/successSignUp"
-              element={<SuccessSignUpPage />}
-            ></Route>
+            <Route path="/welcome" element={<SuccessSignUpPage />}></Route>
             <Route path="/findid" element={<FindIdPage />}></Route>
-            <Route path="/resetPw1" element={<ResetPw1Page />}></Route>
-            <Route path="/resetPw2" element={<ResetPw2Page />}>
+            <Route path="/resetpw1" element={<ResetPw1Page />}></Route>
+            <Route path="/resetpw2" element={<ResetPw2Page />}>
               <Route path=":uid" element={<ResetPw2Page />} />
             </Route>
             <Route path="/modifyInfo" element={<ModifyPage />}></Route>
@@ -194,15 +191,9 @@ const Router = () => {
               <Route path=":planet/:category/:postId" element={<DiaryMain />} />
             </Route>
             <Route path="/workspace/main" element={<WorkSpaceMain />}></Route>
-            <Route
-              path="/workspace/create"
-              element={<MakePlanetPage />}
-            ></Route>
+            <Route path="/workspace/create" element={<MakePlanetPage />}></Route>
             <Route path="/album/main" element={<AlbumMain />}></Route>
-            <Route
-              path="/album/individual"
-              element={<AlbumIndividual />}
-            ></Route>
+            <Route path="/album/individual" element={<AlbumIndividual />}></Route>
             <Route path="/aboutUs" element={<AboutUs />}></Route>
             <Route path="/contact" element={<Contact />}></Route>
           </Routes>
@@ -212,14 +203,11 @@ const Router = () => {
           <Routes>
             <Route path="/" element={<LandingPage />}></Route>
             <Route path="/login" element={<LoginPage />}></Route>
-            <Route path="/signup" element={<SignUpPage />}></Route>
-            <Route
-              path="/successSignUp"
-              element={<SuccessSignUpPage />}
-            ></Route>
-            <Route path="/findId" element={<FindIdPage />}></Route>
-            <Route path="/resetPw1" element={<ResetPw1Page />}></Route>
-            <Route path="/resetPw2" element={<ResetPw2Page />}></Route>
+            <Route path="/register" element={<SignUpPage />}></Route>
+            <Route path="/welcome" element={<SuccessSignUpPage />}></Route>
+            <Route path="/findid" element={<FindIdPage />}></Route>
+            <Route path="/resetpw1" element={<ResetPw1Page />}></Route>
+            <Route path="/resetpw2" element={<ResetPw2Page />}></Route>
           </Routes>
         )}
       </BrowserRouter>

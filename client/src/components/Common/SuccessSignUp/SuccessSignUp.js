@@ -20,10 +20,7 @@ const SuccessSignUp = () => {
           <div className="successSignupText2">
             로그인 후 서비스를 이용하세요.
           </div>
-          <SuccessSignUpBtn
-            onClick={() => {
-              navigate("/login");
-            }}
+          <SuccessSignUpBtn onClick={() => { navigate("/login"); }}
           />
         </div>
       </div>
