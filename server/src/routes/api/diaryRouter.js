@@ -14,14 +14,14 @@ router.post("/postComment", async (req, res) => {
   const data = {
     postId: postId,
     comment: comment,
-    writer: writer,
+    writer: writer
   };
   try {
     // 새로운 댓글 스키마 생성
     const newComment = await new Comment({
       _diary: data.postId,
       content: data.comment,
-      writer: data.writer,
+      writer: data.writer
     });
     // 새로운 댓글 생성
     newComment.save((err, commentInfo) => {
@@ -70,7 +70,7 @@ router.get("/getPosts/:planet/:category", async (req, res) => {
     console.log(planetForId.id);
     // 행성 ObjectId, 카테고리 filter
     const diaries = await Diary.find({
-      $and: [{ id: planetForId.id, _category: _Category }],
+      $and: [{ id: planetForId.id, _category: _Category }]
     }).populate("_user");
 
     res.status(200).send({ diaries: diaries });
@@ -98,7 +98,7 @@ router.post("/writePost", async (req, res) => {
       content: _Content,
       _user: _WriterId,
       _planet: planet.id,
-      _category: _Category,
+      _category: _Category
     });
     NewDiary.save((err, diaryInfo) => {
       if (err) {
@@ -116,12 +116,25 @@ router.post("/writePost", async (req, res) => {
 });
 
 // 글 삭제
+router.delete("/deletePost", async (req, res) => {
+  const { postId } = req.body;
+  const data = {
+    id: postId
+  };
+
+  try {
+    Diary.deleteOne({ id: data.id });
+    res.status(200).send("success");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Server Error");
+  }
+});
 
 router.get("/list/:_category", (req, res, next) => {
   const _category = req.params._category;
   let { search, sort, order, skip, limit } = req.query;
-  if (!(sort && order && skip && limit))
-    throw createError(400, "잘못된 요청입니다");
+  if (!(sort && order && skip && limit)) throw createError(400, "잘못된 요청입니다");
   if (!search) search = "";
   order = parseInt(order);
   limit = parseInt(limit);
@@ -136,7 +149,7 @@ router.get("/list/:_category", (req, res, next) => {
   Diary.countDocuments(f)
     .where("title")
     .regex(search)
-    .then((r) => {
+    .then(r => {
       total = r;
       return Diary.find(f)
         .where("title")
@@ -147,10 +160,10 @@ router.get("/list/:_category", (req, res, next) => {
         .select("-content")
         .populate("_user", "-pwd");
     })
-    .then((rs) => {
+    .then(rs => {
       res.send({ success: true, t: total, ds: rs, token: req.token });
     })
-    .catch((e) => {
+    .catch(e => {
       res.status(500).send({ msg: e.message });
     });
 });
@@ -163,7 +176,7 @@ router.get("/read/:_id", (req, res, next) => {
   Diary.findByIdAndUpdate(_id, { $inc: { "cnt.view": 1 } }, { new: true })
     .lean()
     .select("content cnt")
-    .then((r) => {
+    .then(r => {
       if (!r) throw new Error("잘못된 게시판입니다");
       dry = r;
       dry._comments = [];
@@ -172,11 +185,11 @@ router.get("/read/:_id", (req, res, next) => {
         .sort({ _id: 1 })
         .limit(5);
     })
-    .then((rs) => {
+    .then(rs => {
       if (rs) dry._comments = rs;
       res.send({ success: true, d: dry, token: req.token });
     })
-    .catch((e) => {
+    .catch(e => {
       res.status(500).send({ msg: e.message });
     });
 });
@@ -190,15 +203,15 @@ router.post("/:_category", (req, res, next) => {
     title,
     content,
     _category,
-    _user: null,
+    _user: null
   };
   if (req.user._id) dry._user = req.user._id;
   return Diary.create(dry)
-    .then((r) => {
+    .then(r => {
       if (!r) throw new Error("게시물이 생성되지 않았습니다");
       res.status(200).send({ success: true, msg: r });
     })
-    .catch((e) => {
+    .catch(e => {
       res.status(500).send({ msg: e.message });
     });
 });
@@ -209,7 +222,7 @@ router.put("/:_id", (req, res, next) => {
   const { title, content } = req.body;
 
   Diary.findById(_id)
-    .then((r) => {
+    .then(r => {
       if (!r) throw new Error("게시물이 존재하지 않습니다");
       if (!r._user) throw new Error("게시물은 수정이 안됩니다");
       if (r._user.toString() !== req.user._id)
@@ -220,10 +233,10 @@ router.put("/:_id", (req, res, next) => {
         { new: true }
       );
     })
-    .then((r) => {
+    .then(r => {
       res.status(200).send({ success: true, msg: r });
     })
-    .catch((e) => {
+    .catch(e => {
       res.status(500).send({ msg: e.message });
     });
 });
@@ -234,7 +247,7 @@ router.delete("/:_id", (req, res, next) => {
 
   Diary.findById(_id)
     .populate("_user")
-    .then((r) => {
+    .then(r => {
       if (!r) throw new Error("게시물이 존재하지 않습니다");
       else {
         if (r._user._id.toString() !== req.user._id)
@@ -243,10 +256,10 @@ router.delete("/:_id", (req, res, next) => {
 
       return Diary.deleteOne({ _id });
     })
-    .then((r) => {
+    .then(r => {
       res.status(200).send({ success: true, msg: r });
     })
-    .catch((e) => {
+    .catch(e => {
       res.status(500).send({ msg: e.message });
     });
 });
@@ -270,7 +283,7 @@ router.get("/", (req, res) => {
 // create
 router.post("/", (req, res) => {
   req.body._user = req.user._id;
-  Diary.create(req.body, function (err, diary) {
+  Diary.create(req.body, function(err, diary) {
     if (err) return res.status(400).json(err);
     return res.status(201).json({ success: true, create: diary });
   });
@@ -278,12 +291,10 @@ router.post("/", (req, res) => {
 
 // read
 router.get("/:id", (req, res) => {
-  Diary.findOne({ _id: req.params.id })
-    .populate("_user")
-    .exec((err, diary) => {
-      if (err) return res.status(400).json(err);
-      return res.status(200).json({ success: true, read: diary });
-    });
+  Diary.findOne({ _id: req.params.id }).populate("_user").exec((err, diary) => {
+    if (err) return res.status(400).json(err);
+    return res.status(200).json({ success: true, read: diary });
+  });
 });
 
 // update
@@ -297,14 +308,14 @@ router.put("/:_id", (req, res) => {
 
 // delete
 router.delete("/:_id", (req, res) => {
-  Diary.deleteOne({ _id: req.params._id }, (err) => {
+  Diary.deleteOne({ _id: req.params._id }, err => {
     if (err) return res.status(400).json(err);
     return res.status(200).json({ success: true });
   });
 });
 
 // error handler
-router.all("*", function (req, res, next) {
+router.all("*", function(req, res, next) {
   next(createError(404, "no api"));
 });
 

@@ -205,6 +205,7 @@ const Router = () => {
             ></Route>
             <Route path="/aboutUs" element={<AboutUs />}></Route>
             <Route path="/contact" element={<Contact />}></Route>
+            <Route path="*" element={<Page404 />} />
           </Routes>
         ) : (
           // <RouterProvider router={unauthorizationRouter} />

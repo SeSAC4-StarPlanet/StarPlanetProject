@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import "./Page404.scss";
 import Ufo from "../../assets/img/Planet/ufo.png";
-
+import { useNavigate } from "react-router-dom";
 //! body에 class입히는 방법
 const Page404 = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     document.body.classList.add("bg-salmon");
   }, []);
@@ -11,13 +12,18 @@ const Page404 = () => {
   return (
     <div className="page_404">
       <div className="star-field">
-        <div className="stars stars-sm"></div>
-        <div className="stars stars-md"></div>
-        <div className="stars stars-lg"></div>
+        <div className="stars stars-sm" />
+        <div className="stars stars-md" />
+        <div className="stars stars-lg" />
       </div>
       <div className="page_404_main">
-        <div className="page_404_LogoWrapper">
-          <img className="ufoImg" src={Ufo}></img>
+        <div
+          className="page_404_LogoWrapper"
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          <img className="ufoImg" src={Ufo} />
         </div>
         <div className="page_404_Box">
           <div className="page_404_text1">404ERROR</div>

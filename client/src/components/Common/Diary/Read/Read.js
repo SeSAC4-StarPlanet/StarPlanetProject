@@ -11,10 +11,12 @@ import ListItem from "@mui/material/ListItem";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { alpha, styled } from "@mui/material/styles";
+import IconButton from '@mui/material/IconButton';
 
 // 아이콘
 import Avatar from "@mui/material/Avatar";
 import { FaPlay } from "react-icons/fa";
+import { AiTwotoneEdit,AiTwotoneDelete } from "react-icons/ai";
 import axios from "axios";
 // MOCK 데이터
 import DATA from "./data.js";
@@ -98,6 +100,23 @@ const Read = () => {
     });
   };
 
+
+  const onClickPostDelete = () => {
+    axios({
+      method: "delete",
+      url: `http://localhost:8000/api//diary/deletePost`,
+      header: {
+        withCredentials: true,
+        Authorization: localStorage.getItem("token"),
+      },
+      data: {
+        postId: postId,
+      },
+    }).then((res) => {
+      console.log(res);
+    });
+  } 
+
   return (
     <div className="mainBackWrapper">
       <div className="mainWrapper">
@@ -136,6 +155,10 @@ const Read = () => {
                   </ListItemIcon>
                   <ListItemText primary={data?.post?._user?.username} />
                 </ListItem>
+                <span>
+                <IconButton  component="label"><AiTwotoneEdit/></IconButton>
+                <IconButton onClick={onClickPostDelete} component="label"><AiTwotoneDelete/></IconButton>
+                </span>
               </div>
               <div className="diaryReaderContent">
                 {/* string to html */}
