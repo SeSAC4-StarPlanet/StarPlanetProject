@@ -23,7 +23,7 @@ const Writer = () => {
   // 파라미터
   const { planet, category } = params;
 
-  const onChangeValue = e => {
+  const onChangeValue = (e) => {
     setTitleValue(e.target.value);
   };
 
@@ -42,7 +42,7 @@ const Writer = () => {
       url: `http://localhost:8000/api/diary/writePost`,
       header: {
         withCredentials: true,
-        Authorization: localStorage.getItem("token")
+        Authorization: localStorage.getItem("token"),
       },
       data: {
         // 제목과 글
@@ -50,45 +50,44 @@ const Writer = () => {
         category: category,
         writerId: arr._id,
         title: titleValue,
-        content: contentValue
-      }
+        content: contentValue,
+      },
     })
-      .then(res => {
+      .then((res) => {
         // 글 작성 성공시
         if (res.status === 201) {
           alert("글이 작성되었습니다.");
           navigate(-1);
         }
       })
-      .catch(err => console.log(err.response.data));
+      .catch((err) => console.log(err.response.data));
   };
 
   return (
     <div className="dairyWriterBackWrapper">
       <div className="dairyWriterWrapper">
-        <div className="dairyWriterArrow" />
         <div className="dairyWriterTitleContainer">
           <TextField
             sx={{
               width: "900px",
               color: "#3c52b2",
               "& label.Mui-focused": {
-                color: "#3c52b2"
+                color: "#3c52b2",
               },
               "& .MuiInput-underline:after": {
-                borderBottomColor: "#3c52b2"
+                borderBottomColor: "#3c52b2",
               },
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
-                  borderColor: "#3c52b2"
+                  borderColor: "#3c52b2",
                 },
                 "&:hover fieldset": {
-                  borderColor: "#3c52b2"
+                  borderColor: "#3c52b2",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "#3c52b2"
-                }
-              }
+                  borderColor: "#3c52b2",
+                },
+              },
             }}
             rows={1}
             size="small"
@@ -104,8 +103,8 @@ const Writer = () => {
                 backgroundColor: "#0D0D7E",
                 "&:hover": {
                   backgroundColor: "#fff",
-                  color: "#3c52b2"
-                }
+                  color: "#3c52b2",
+                },
               }}
               variant="contained"
               endIcon={<FaPlay />}
@@ -120,7 +119,7 @@ const Writer = () => {
             <CKEditor
               editor={ClassicEditor}
               data=""
-              onReady={editor => {
+              onReady={(editor) => {
                 // You can store the "editor" and use when it is needed.
                 // console.log("Editor is ready to use!", editor);
               }}

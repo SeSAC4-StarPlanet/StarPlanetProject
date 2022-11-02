@@ -13,22 +13,25 @@ const Header = () => {
       <div className="OptionWrapper">
         <ul>
           <li className="myplanet">
-            <a className="myplanetBtn" href="/workspace/main">
+            <a
+              className="myplanetBtn"
+              onClick={() => navigate("/workspace/main")}
+            >
               My planent
             </a>
           </li>
           <li>
-            <a className="aboutusBtn" href="/aboutus">
+            <a className="aboutusBtn" onClick={() => navigate("/aboutus")}>
               About us
             </a>
           </li>
           <li>
-            <a className="contact" href="/contact">
+            <a className="contact" onClick={() => navigate("/contact")}>
               contact
             </a>
           </li>
           <li>
-            <a href="#">+pro</a>
+            <a onClick={() => alert("죄송합니다. 점검중입니다.")}>+pro</a>
           </li>
         </ul>
       </div>

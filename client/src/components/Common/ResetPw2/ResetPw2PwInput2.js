@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ResetPw2PwInput2.scss";
 
 const ResetPw2PwInput2 = ({ value, onChange }) => {

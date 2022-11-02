@@ -12,7 +12,6 @@ const Frame = ({ planetTitle, content }) => {
   return (
     <div className="frameBackWrapper">
       <div className="wrapper">
-        <div className="arrow" />
         <div className="top">
           <div className="planetName">
             <Planet_name title={planetTitle} />
@@ -33,9 +32,7 @@ const Frame = ({ planetTitle, content }) => {
               <MemberBox />
             </div>
           </div>
-          <div className="contentWrapper">
-            {content}
-          </div>
+          <div className="contentWrapper">{content}</div>
         </div>
       </div>
     </div>

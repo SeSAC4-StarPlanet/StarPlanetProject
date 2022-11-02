@@ -52,7 +52,6 @@ const Diary_main = ({ planetTitle }) => {
   return (
     <div className="mainBackWrapper">
       <div className="Main_wrapper">
-        <div className="mainArrow" />
         <div className="Main_container_top">
           <div className="Planet_name_box">
             <Planet_name title={planetTitle} />
