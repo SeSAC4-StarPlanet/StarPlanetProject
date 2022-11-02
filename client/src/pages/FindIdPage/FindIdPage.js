@@ -31,7 +31,7 @@ const FindIdPage = () => {
       })
       .catch((err) => {
         console.log("An error occurred:", err);
-        alert("사용자를 찾을 수 없습니다");
+        alert("사용자를 찾을 수 없습니다!");
       });
   };
 

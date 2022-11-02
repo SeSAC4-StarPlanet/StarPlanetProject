@@ -33,7 +33,6 @@ const Category = observer(({ sx }) => {
   let params = useParams();
   let navigate = useNavigate();
   const { planet, category } = params;
-
   const { planetClass } = store;
 
   const [open, setOpen] = useState(true);
@@ -74,7 +73,7 @@ const Category = observer(({ sx }) => {
   return (
     <List sx={sx} component="nav">
       {/* 사진첩 */}
-      <ListItemButton>
+      <ListItemButton onClick={() => navigate("/album/main")}>
         <ListItemIcon
           sx={{ color: "#0D0783", minWidth: "45px", fontSize: "20px" }}
         >

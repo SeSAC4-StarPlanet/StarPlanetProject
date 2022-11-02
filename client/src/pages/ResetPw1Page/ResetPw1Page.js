@@ -20,19 +20,13 @@ const ResetPw1Page = () => {
       method: "post",
       url: "http://localhost:8000/api/auth/resetPW1",
       header: { withCredentials: true },
-      data: {
-        data: {
-          userID: userID,
-          username: username,
-          email: email
-        },
-      }
+      data: { userID: userID, username: username, email: email }
     })
       .then((res) => {
         console.log(res.data);
         alert("비밀번호를 재설정해주세요");
         const uid = res.data.uid;
-        navigate(`/resetPw2/${uid}`);
+        navigate(`/resetpw2/${uid}`);
       })
       .catch((err) => {
         console.log("An error occurred:", err);

@@ -58,7 +58,7 @@ UserSchema.pre('save', async function (next) {
         // 비밀번호의 Plain Text를 hash로 교체
         console.log('before PW:', this.hashedPW);
         this.hashedPW = await bcrypt.hash(this.hashedPW, 10);
-        console.log(' after PW: ', this.hashedPW);
+        console.log('after PW: ', this.hashedPW);
         next(); // Hashing이 끝나면 save로 넘어감
     } else {    // password가 변경되지 않을 때
         next(); // 바로 save로 넘어감

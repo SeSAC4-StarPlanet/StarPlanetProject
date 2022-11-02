@@ -32,9 +32,12 @@ const SignUpPage = memo(() => {
     })
       .then((res) => console.log(res.data))
       .then(() => {
-        navigate("/login");
+        navigate("/welcome");
       })
-      .catch((err) => console.log(err.response.data));
+      .catch((err) => {
+        console.log("An error occurred:", err);
+        alert("이미 있는 사용자입니다!");
+      });
   };
 
   return (

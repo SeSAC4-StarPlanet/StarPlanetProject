@@ -10,21 +10,17 @@ const JWTConfig = {
 };
 
 const JWTVerify = async (jwtPayload, done) => {
-  try {
-    console.info('___new JWTStrategy()');
-    console.log('___jwtPayload', jwtPayload);
+  console.log('___jwtPayload', jwtPayload);
 
-    // palyload의 유저id값으로 유저 데이터 조회
+  try {    // palyload의 유저id값으로 유저 데이터 검색
     const exUser = await User.findByUserID(jwtPayload.userID);
-
-    // 유저 데이터 있을 경우 유저 데이터 객체 전송
-    if (exUser) return done(null, exUser);
-
-    // 유저 데이터 없을 경우 에러 표시
-    console.log("*****jwt inValid*****");
-    done(null, false, { message: "token expired or unauthorized" });
+    if (exUser) {   // 유저 데이터 있을 경우 유저 데이터 객체 전송
+      done(null, exUser);
+    } else {    // 유저 데이터 없을 경우 에러 표시
+      done(null, false, { message: "token expired or unauthorized" });
+    }
   } catch (error) {
-    console.error("No token, authorization denied", error);
+    console.error(error);
     done(error);
   }
 };

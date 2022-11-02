@@ -13,6 +13,8 @@ const ResetPw2Page = () => {
   const navigate = useNavigate();
   const params = useParams();
   const { uid } = params;
+  const [pwCheck, setPwCheck] = useState("");
+  const [pwError, setPwError] = useState(false);
 
   const Reset = () => {
     axios({
