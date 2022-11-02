@@ -44,15 +44,14 @@ router.post('/login', async (req, res, next) => {    // 지정전략(strategy)�
     passport.authenticate('local', (authErr, user, info) => {
         console.log('passport-local');
         // 인증이 실패했거나 유저 데이터가 없으면 에러 발생
-        if (authErr) return next(authErr);
-        if (user) return res.status(200).json(`${setUserToken(user)}`);
+        if (authErr | !user) return next(authErr);
         // 유저 데이터로 로그인 진행
-        // return req.login(user, { session: false }, (loginError) => { 
-        //     if (loginError) return next(loginError);
-        //     // 로그인 성공시 JWT토큰 생성 후 클라이언트에게 반환
-        //     const token = setUserToken(req.user);
-        //     return res.status(201).json({ result: 'ok', userInfo: req.user, token: token });
-        // });
+        return req.login(user, { session: false }, (loginError) => {
+            if (loginError) return next(loginError);
+            // 로그인 성공시 JWT토큰 생성 후 클라이언트에게 반환
+            // const token = setUserToken(req.user);
+            return res.status(201).json({ result: 'ok', userInfo: req.user, token: `${setUserToken(user)}` });
+        });
     })(req, res, next); // 미들웨어 내의 미들웨어
 });
 
