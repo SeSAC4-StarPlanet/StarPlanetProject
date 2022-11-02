@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d9a17f3c.css",
+    "main.js": "/static/js/main.b269f688.js",
+    "static/js/787.a42b7b02.chunk.js": "/static/js/787.a42b7b02.chunk.js",
+    "static/media/planet4.png": "/static/media/planet4.5a9c71aefa64ecb85695.png",
+    "static/media/fullimage.png": "/static/media/fullimage.41f00f690a5653a9734b.png",
+    "static/media/planet2.png": "/static/media/planet2.8e637d314d2325d99860.png",
+    "static/media/planet3.png": "/static/media/planet3.7a693e148b0c94e09341.png",
+    "static/media/planet1.png": "/static/media/planet1.4e70d95b746bb076a0f8.png",
+    "static/media/second_page_logo.svg": "/static/media/second_page_logo.2e9368e4a3407d248a0c7538fae14f4e.svg",
+    "static/media/headerLogo.svg": "/static/media/headerLogo.0e15106d85cbec1b948378a294c33ebd.svg",
+    "static/media/logo_main.svg": "/static/media/logo_main.191b3d77296f533651906715d639253c.svg",
+    "static/media/logo_header.svg": "/static/media/logo_header.76294f178028e8412ee571d91153ebe7.svg",
+    "static/media/WorkSpaceHeaderLogo.svg": "/static/media/WorkSpaceHeaderLogo.70ce85a865e5508413a1c1a696e5d09a.svg",
+    "static/media/planet_2.png": "/static/media/planet_2.d2dd5606fb21b2ab8da7.png",
+    "static/media/ufo.png": "/static/media/ufo.db31037a26c31f7650bf.png",
+    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/index.html",
+    "main.d9a17f3c.css.map": "/static/css/main.d9a17f3c.css.map",
+    "main.b269f688.js.map": "/static/js/main.b269f688.js.map",
+    "787.a42b7b02.chunk.js.map": "/static/js/787.a42b7b02.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d9a17f3c.css",
+    "static/js/main.b269f688.js"
+  ]
+}
