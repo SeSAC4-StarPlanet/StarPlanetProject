@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import "./MakePlanetPage.scss";
 import Headers from "../../components/Common/Diary/Header/Header";
 import StarMap from "./StarMap";
@@ -19,6 +19,7 @@ axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
 const MakePlanetPage = () => {
   const [planetName, setplanetName] = useState("");
   // 멤버 input 관리
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     user_1: "",
     user_2: "",
@@ -85,6 +86,9 @@ const MakePlanetPage = () => {
         if (res.status === 201) {
           console.log("행성 생성");
         }
+      })
+      .then(() => {
+        navigate("/workspace/main");
       })
       .catch((err) => console.log(err.response.data));
   };
