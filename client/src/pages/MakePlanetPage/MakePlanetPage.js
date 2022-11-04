@@ -69,7 +69,7 @@ const MakePlanetPage = () => {
     );
     // axios 행성 생성
     axios({
-      url: "http://localhost:8000/api/planet/create",
+      url: process.env.REACT_APP_URL + "/api/planet/create",
       method: "post",
       header: {
         withCredentials: true,

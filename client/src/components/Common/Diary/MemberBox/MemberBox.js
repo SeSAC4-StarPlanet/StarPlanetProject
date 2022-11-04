@@ -31,7 +31,7 @@ const MemberBox = () => {
       await axios({
         // 해당 행성에 대한 해당 카테고리의 다이어리들 불러오기
         // 행성과 카테고리 파라미터로 전달
-        url: `http://localhost:8000/api/planet/getMembers/${planetName}`,
+        url: `${process.env.REACT_APP_URL}/api/planet/getMembers/${planetName}`,
         method: "get",
         header: {
           withCredentials: true,

@@ -45,7 +45,7 @@ const Category = observer(({ sx }) => {
       // 이름과 행성을 파라미터로 전달하여 카테고리를 받는다.
       await axios({
         method: "get",
-        url: `http://localhost:8000/api/planet/getCategory/${planetName}`,
+        url: `${process.env.REACT_APP_URL}/api/planet/getCategory/${planetName}`,
         header: {
           withCredentials: true,
           Authorization: localStorage.getItem("token"),

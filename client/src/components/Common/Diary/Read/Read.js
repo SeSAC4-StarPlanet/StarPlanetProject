@@ -62,7 +62,7 @@ const Read = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://localhost:8000/api/diary/getPost/${postId}`,
+      url: `${process.env.REACT_APP_URL}/api/diary/getPost/${postId}`,
       header: {
         withCredentials: true,
         Authorization: localStorage.getItem("token"),
@@ -83,7 +83,7 @@ const Read = () => {
   const onClickCommentWrite = () => {
     axios({
       method: "post",
-      url: `http://localhost:8000/api//diary/PostComment`,
+      url: `${process.env.REACT_APP_URL}/api//diary/PostComment`,
       header: {
         withCredentials: true,
         Authorization: localStorage.getItem("token"),
@@ -103,7 +103,7 @@ const Read = () => {
   const onClickPostDelete = () => {
     axios({
       method: "delete",
-      url: `http://localhost:8000/api//diary/deletePost`,
+      url: `${process.env.REACT_APP_URL}/api//diary/deletePost`,
       header: {
         withCredentials: true,
         Authorization: localStorage.getItem("token"),

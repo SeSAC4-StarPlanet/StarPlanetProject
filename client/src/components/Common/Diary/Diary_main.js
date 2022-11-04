@@ -37,7 +37,7 @@ const Diary_main = ({ planetTitle }) => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://localhost:8000/api/diary/getPosts/${planet}/${category}`,
+      url: `${process.env.REACT_APP_URL}/api/diary/getPosts/${planet}/${category}`,
       header: {
         withCredentials: true,
         Authorization: localStorage.getItem("token"),
