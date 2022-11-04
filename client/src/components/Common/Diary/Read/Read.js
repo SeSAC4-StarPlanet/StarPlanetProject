@@ -11,12 +11,12 @@ import ListItem from "@mui/material/ListItem";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { alpha, styled } from "@mui/material/styles";
-import IconButton from '@mui/material/IconButton';
+import IconButton from "@mui/material/IconButton";
 
 // 아이콘
 import Avatar from "@mui/material/Avatar";
 import { FaPlay } from "react-icons/fa";
-import { AiTwotoneEdit,AiTwotoneDelete } from "react-icons/ai";
+import { AiTwotoneEdit, AiTwotoneDelete } from "react-icons/ai";
 import axios from "axios";
 // MOCK 데이터
 import DATA from "./data.js";
@@ -100,7 +100,6 @@ const Read = () => {
     });
   };
 
-
   const onClickPostDelete = () => {
     axios({
       method: "delete",
@@ -115,12 +114,11 @@ const Read = () => {
     }).then((res) => {
       console.log(res);
     });
-  } 
+  };
 
   return (
     <div className="mainBackWrapper">
       <div className="mainWrapper">
-        <div className="mainArrow" />
         <div className="MainContainerTop">
           <div className="Planet_name_box">
             <Planet_name title={`${planet} 행성`} />
@@ -156,8 +154,12 @@ const Read = () => {
                   <ListItemText primary={data?.post?._user?.username} />
                 </ListItem>
                 <span>
-                <IconButton  component="label"><AiTwotoneEdit/></IconButton>
-                <IconButton onClick={onClickPostDelete} component="label"><AiTwotoneDelete/></IconButton>
+                  <IconButton component="label">
+                    <AiTwotoneEdit />
+                  </IconButton>
+                  <IconButton onClick={onClickPostDelete} component="label">
+                    <AiTwotoneDelete />
+                  </IconButton>
                 </span>
               </div>
               <div className="diaryReaderContent">
